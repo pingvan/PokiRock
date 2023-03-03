@@ -16,7 +16,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -Wall -Wextra -Werror")
 find_package(Threads REQUIRED)
 find_package(Qt6 COMPONENTS Widgets REQUIRED)
 
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} main.cpp ../server/server.cpp ../client/client.cpp)
 
 target_link_libraries(${PROJECT_NAME}
         Qt6::Widgets
