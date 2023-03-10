@@ -1,31 +1,35 @@
 #include "server.h"
+#include "../client/client.h"
 
 namespace server {
-    std::string server::receive_input() {
-        std::string name;
-        std::cin >> name;
-        return name;
+
+    void server::add(const client::client& client) {
+        players.push(client);
     }
 
-    bool server::login() {
-        std::string user_name = receive_input();
-        if (data_base.find(user_name) != data_base.end()) {
-            std::cout << "SUCCESSFUL LOGIN IN"; //here will be widget to swap to another window - gui - main_page
-            return true;
-        } else {
-            std::cout << "UNCORRECT LOGIN OR USER NOT EXIST"; //back to login page and offer to registration
-
-            return false;
+    void server::start_game(){
+        std::vector<client::client> lobbi(5);
+        for (int i = 0; i < 5; i++){
+            auto player = this->players.front();
+            this->players.pop();
+            lobbi[i] = player;
         }
+        game new_game(lobbi);
+        this->games.push_back(new_game);
     }
 
-    void server::registration() {
-        std::string user_name = receive_input();
-        if (data_base.find(user_name) == data_base.end()) {
-            data_base.insert({user_name, client::client(user_name)});
-            std::cout << "SUCCESSFUL REGISTRATION";   //gui - main_page
-        } else {
-            std::cout << "NAME ALREADY EXIST, PLEASE, CHOOSE ANOTHER NAME";
+    game::game(std::vector<client::client> lobbi) : players(std::move(lobbi)){
+        for (int i = 0; i < 52; i++){
+            availible_cards.push_back(i);
+        }
+        for (const client::client& player : players){
+            size_t index1 = rand() % availible_cards.size();
+            int first_card = availible_cards[index1];
+            availible_cards.erase(availible_cards.begin() +index1);
+            size_t index2 = rand() % availible_cards.size();
+            int second_card = availible_cards[index2];
+            availible_cards.erase(availible_cards.begin() +index2);
+            cards[player]  = {first_card, second_card};
         }
     }
 }
