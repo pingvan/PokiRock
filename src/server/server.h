@@ -5,6 +5,7 @@
 #include <iostream>
 #include <unordered_set> //I hope it will be DB in next versions
 #include <map>
+#include <set>
 #include <vector>
 #include <queue>
 
@@ -14,11 +15,23 @@ namespace client {
 namespace server {
     struct game{
     private:
-        std::vector<client::client> players;
+        std::set<client::client> players;
         std::map<client::client, std::pair<int, int>> cards;
-        std::vector<int> availible_cards;
+        std::map<client::client, int> balance;
+        std::vector<int> available_cards;
+        std::vector<int> board_cards;
+        int total_of_bets;
+
     public:
-        game(std::vector<client::client> lobbi);
+        game(std::set<client::client> lobbi);
+        void preflop();
+        void bets();
+        void flop();
+        void turn();
+        void river();
+        int get_card();
+        void print_cards();
+        void who_won();
     };
 
     struct server{

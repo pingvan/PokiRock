@@ -13,8 +13,14 @@ namespace client {
         std::string nickname;
     public:
         void login();
-        void callback_name(std::string name);
-        void connect(server::server Server);
+        bool operator<(const client & client) const{
+            return nickname < client.nickname;
+        }
+        void callback_name(const std::string &name);
+        std::string name() const;
+        void connect(server::server &Server) const;
+        std::string move(int balance) const;
+        std::string optional_move() const;
     };
 
 }
