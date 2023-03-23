@@ -31,7 +31,7 @@ enum Value {
     Ace
 };
 
-enum Suit { diamonds, hearts, clubs, spades };
+enum Suit { DIAMONDS, HEARTS, CLUBS, SPADES };
 
 struct Card {
 private:
