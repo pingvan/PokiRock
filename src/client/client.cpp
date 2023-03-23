@@ -1,18 +1,19 @@
 #include "client.h"
-#include "../server/server.h"
 
 namespace client {
 
     void client::login() {
-            std::cout << "Enter your name:\n";
-            receive_name(*this);
+        std::cout << "Enter your name:\n";
+        receive_name(*this);
     }
+
     void client::callback_name(const std::string &name) {
         nickname = name;
     }
-    void receive_name(client& pl){
+
+    void receive_name(client &pl) {
         std::string name;
-        std::cin>>name;
+        std::cin >> name;
         pl.callback_name(name);
     }
 
@@ -20,7 +21,7 @@ namespace client {
         Server.add(*this);
     }
 
-    std::string client::name() const{
+    std::string client::name() const {
         return nickname;
     }
 
