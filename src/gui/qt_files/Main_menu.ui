@@ -16,9 +16,9 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>820</x>
-     <y>220</y>
-     <width>301</width>
+     <x>800</x>
+     <y>190</y>
+     <width>331</width>
      <height>131</height>
     </rect>
    </property>
@@ -37,10 +37,10 @@
   <widget class="QLabel" name="image">
    <property name="geometry">
     <rect>
-     <x>740</x>
-     <y>150</y>
-     <width>661</width>
-     <height>201</height>
+     <x>690</x>
+     <y>90</y>
+     <width>781</width>
+     <height>241</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -56,7 +56,7 @@
     <pixmap>Poker-Transparent-Images-Clip-Art.png</pixmap>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>720</x>
@@ -168,9 +168,9 @@
     </item>
    </layout>
   </widget>
+  <zorder>layoutWidget</zorder>
   <zorder>image</zorder>
   <zorder>label</zorder>
-  <zorder>verticalLayoutWidget</zorder>
  </widget>
  <resources/>
  <connections/>
