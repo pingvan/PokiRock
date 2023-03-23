@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>images(png)/Poker-Transparent-Images-Clip-Art.png</file>
+    </qresource>
+</RCC>
