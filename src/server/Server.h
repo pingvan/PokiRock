@@ -9,18 +9,15 @@
 #include <string>
 #include <vector>
 #include "Game.h"
-
-namespace client {
-    struct Client;
-}
+#include "../client/Client.h"
 
 namespace server {
     struct Game;
 
 struct Server {
 private:
-    std::queue<client::Client> players;
-    std::vector<server::Game> games;
+    std::queue<client::Client> players{};
+    std::vector<server::Game> games{};
 
 public:
     void add(const client::Client &client);

@@ -9,5 +9,5 @@ TEST_CASE("test_straight_flush") {
         suits[i] = combination[i] % 4;
         values[i] = combination[i] / 4;
     }
-    CHECK(server::win_check::is_straight_flush(suits, values));
+    CHECK(server::Win_check::is_straight_flush(suits, values));
 }

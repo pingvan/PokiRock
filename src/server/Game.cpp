@@ -122,9 +122,10 @@ namespace server {
     }
 
     Card Game::get_enum_card() {
-        std::mt19937 mt_rand(std::chrono::steady_clock::now().time_since_epoch().count());
-//        std::random_device rand; //of course we can use this
-        std::uniform_int_distribution<int> range(0, static_cast<int>(available_cards.size()));
+        std::random_device rand;
+        std::mt19937 mt_rand(rand());
+        int size = static_cast<int>(available_cards.size());
+        std::uniform_int_distribution<int> range(0, size);
         auto index = range(mt_rand);
         auto card = available_cards[index];
         available_cards.erase(available_cards.begin() + index);
