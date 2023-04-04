@@ -3,7 +3,6 @@
 #include <array>
 #include <functional>
 #include <random>
-#include "../client/client.h"
 #include "win_check.h"
 
 namespace server {
@@ -27,15 +26,19 @@ std::string num2card(int num) {
 }
 
 void server::add(const client::client &client) {
-    players.push(client);
+    //    players.push(client);
+    players.emplace_back(client);  // TODO
+    //    players.
 }
 
 void server::start_game() {
     std::vector<client::client> lobby;
     for (int i = 0; i < 5; i++) {
         if (!players.empty()) {
-            auto player = players.front();
-            players.pop();
+            //            auto player = *(players.front());
+            auto player = (players.front());
+            //            players.pop();
+            players.erase(players.begin());
             lobby.emplace_back(player);
         }
     }
@@ -68,7 +71,7 @@ game::game(std::vector<client::client> lobby)
 void game::preflop() {
     std::cout << "Preflop\n";
     for (const auto &player : players) {
-        std::string optional_move = player.optional_move();
+        std::string const optional_move = player.optional_move();
         if (optional_move == "balance") {
             std::cout << "Your balance is: " << balance[player] << "\n";
         } else if (optional_move == "cards") {
@@ -152,7 +155,7 @@ void game::bets() {
                 }
                 std::cout << "Incorrect input, try again\n";
             }
-            if (some_counter == players.size()) {
+            if (some_counter == static_cast<int>(players.size())) {
                 state = false;
                 break;
             }
@@ -161,7 +164,7 @@ void game::bets() {
 }
 
 int game::get_card() {
-    std::mt19937 mt_rand(time(nullptr));
+    std::mt19937 mt_rand(time(nullptr));  // TODO
     auto index = mt_rand() % available_cards.size();
     auto card = available_cards[index];
     available_cards.erase(available_cards.begin() + index);

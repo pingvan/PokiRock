@@ -5,7 +5,6 @@
 #include <random>
 #include "../client/client.h"
 
-
 namespace server {
 std::string num2card(int num) {
     static constexpr std::array<const char *, 13> values_of_cards = {
@@ -24,6 +23,7 @@ std::string num2card(int num) {
     }
     return card;
 }
+
 game::game(std::vector<client::client> lobby)
     : players(std::move(lobby)), total_of_bets(0) {
     for (int i = 0; i < 52; i++) {
@@ -134,8 +134,9 @@ void game::bets() {
 }
 
 int game::get_card() {
-    std::mt19937 mt_rand(time(nullptr)); // TODO std::random_device
-    auto index = mt_rand() % available_cards.size(); // TODO std::uniform_int_distribution
+    std::mt19937 mt_rand(time(nullptr));  // TODO std::random_device
+    auto index = mt_rand() %
+                 available_cards.size();  // TODO std::uniform_int_distribution
     auto card = available_cards[index];
     available_cards.erase(available_cards.begin() + index);
     return card;

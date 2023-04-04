@@ -23,7 +23,7 @@ public:
 
     void callback_name(const std::string &name);
     [[nodiscard]] std::string name() const;
-    void connect(server::server &Server) const;
+//    void connect(server::server &Server) const;
     [[nodiscard]] std::string move(int balance) const;
     [[nodiscard]] std::string optional_move() const;
 };

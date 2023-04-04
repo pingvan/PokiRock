@@ -8,10 +8,12 @@
 #include <string>
 #include <unordered_set>  //I hope it will be DB in next versions
 #include <vector>
+
 namespace client {
 struct client;
 }
-namespace server{
+
+namespace server {
 struct game {
 private:
     std::vector<client::client> players;
@@ -33,9 +35,11 @@ public:
     int get_card();
     void print_cards();
     void who_won();
-    static std::pair<int, int> rank_combination(const std::vector<int> &combination);
+    static std::pair<int, int> rank_combination(
+        const std::vector<int> &combination
+    );
 };
 
-}
+}  // namespace server
 
 #endif  // POKIROCK_GAME_H

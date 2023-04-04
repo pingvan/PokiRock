@@ -3,19 +3,20 @@
 
 #include <iostream>
 #include <map>
+#include <memory>
 #include <queue>
 #include <set>
 #include <string>
 #include <unordered_set>  //I hope it will be DB in next versions
 #include <vector>
+#include "../client/client.h"
 
 namespace client {
 struct client;
 }
 
 namespace server {
-/*
-enum Value {
+enum class Value {
     Two,
     Three,
     Four,
@@ -31,7 +32,7 @@ enum Value {
     Ace
 };
 
-enum Suit { DIAMONDS, HEARTS, CLUBS, SPADES };
+enum class Suit { DIAMONDS, HEARTS, CLUBS, SPADES };
 
 struct Card {
 private:
@@ -40,23 +41,26 @@ private:
 
 public:
     explicit Card(int num) {
-        static constexpr std::array<Value, 13> values_of_cards = {
-            Two,  Three, Four, Five,  Six,  Seven, Eight,
-            Nine, Ten,   Jack, Queen, King, Ace};
-        static constexpr std::array<Suit, 4> suits_of_cards = {
-            hearts, diamonds, spades, clubs};
+        static const std::vector<Value> values_of_cards = {
+            Value::Two,   Value::Three, Value::Four, Value::Five, Value::Six,
+            Value::Seven, Value::Eight, Value::Nine, Value::Ten,  Value::Jack,
+            Value::Queen, Value::King,  Value::Ace};
+        static const std::vector<Suit> suits_of_cards = {
+            Suit::HEARTS, Suit::DIAMONDS, Suit::SPADES, Suit::CLUBS};
         auto num_of_value = num / 4;
         value = values_of_cards[num_of_value];
-        suit = suits_of_cards[num%4];
+        suit = suits_of_cards[num % 4];
     }
+
     bool operator<(const Card &card) const {
         return value < card.value;
     }
 };
-*/
+
 struct game {
 private:
     std::vector<client::client> players;
+
     std::map<client::client, std::pair<int, int>>
         cards;  // TODO make enum class Value, Suit & struct Card
     std::map<client::client, int> balance;
@@ -75,13 +79,16 @@ public:
     int get_card();
     void print_cards();
     void who_won();
-    static std::pair<int, int> rank_combination(const std::vector<int> &combination);
+    static std::pair<int, int> rank_combination(
+        const std::vector<int> &combination
+    );
 };
 
-struct game;
 struct server {
 private:
-    std::queue<client::client> players;
+    //    std::queue<std::unique_ptr<client::client>> players;
+    //    std::queue<const client::client> players;
+    std::vector<client::client> players; //TODO
     std::vector<game> games;
 
 public:

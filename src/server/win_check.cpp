@@ -4,7 +4,10 @@
 #include <vector>
 
 namespace server {
-bool win_check::is_straight_flush(const std::vector<int> &suits, const std::vector<int> &values) {
+bool win_check::is_straight_flush(
+    const std::vector<int> &suits,
+    const std::vector<int> &values
+) {
     bool result = true;
     for (int i = 2; i < 5; i++) {
         if (suits[i - 1] != suits[i] || (values[i] != values[i - 1] - 1)) {
@@ -13,8 +16,8 @@ bool win_check::is_straight_flush(const std::vector<int> &suits, const std::vect
         }
     }
     result *= static_cast<int>(
-        suits[0] == suits[1] && ((values[1] == values[0] - 1) ||
-                                 (values[0] == 12 && values[4] == 0))
+        suits[0] == suits[1] &&
+        ((values[1] == values[0] - 1) || (values[0] == 12 && values[4] == 0))
     );
     return result;
 }

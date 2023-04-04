@@ -17,9 +17,9 @@ namespace client {
         pl.callback_name(name);
     }
 
-    void client::connect(server::server &Server) const {
-        Server.add(*this);
-    }
+//    void client::connect(server::server &Server) const {
+//        Server.add(*this);
+//    }
 
     std::string client::name() const {
         return nickname;
