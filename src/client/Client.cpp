@@ -11,15 +11,15 @@ namespace client {
         nickname = name;
     }
 
-    void receive_name(Client &pl) {
+    void Client::receive_name(Client &pl) {
         std::string name;
         std::cin >> name;
         pl.callback_name(name);
     }
 
-//    void Client::connect(Server::Server &Server) const {
-//        Server.add(*this);
-//    }
+    void Client::connect(server::Server &Server) const {
+        Server.add(*this);
+    }
 
     std::string Client::name() const {
         return nickname;

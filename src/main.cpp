@@ -2,11 +2,10 @@
 #include "client/Client.h"
 
 int main(){
-    srand(time(nullptr));
-    server::server S1;
-    client::client p1;
-    client::client p2;
-    client::client p3;
+    server::Server S1;
+    client::Client p1;
+    client::Client p2;
+    client::Client p3;
     p2.login();
     p1.login();
     p3.login();

@@ -8,10 +8,15 @@
 #include <set>
 #include <string>
 #include <vector>
-#include "../client/Client.h"
 #include "Game.h"
 
+namespace client {
+    struct Client;
+}
+
 namespace server {
+    struct Game;
+
 struct Server {
 private:
     std::queue<client::Client> players;

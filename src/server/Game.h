@@ -1,5 +1,5 @@
-#ifndef POKIROCK_GAME_H
-#define POKIROCK_GAME_H
+#ifndef GAME_H
+#define GAME_H
 
 #include <iostream>
 #include <map>
@@ -9,18 +9,22 @@
 #include <vector>
 #include "../client/Client.h"
 
+namespace client {
+    struct Client;
+}
+
 struct Card {
 private:
     enum class Value {
-        Two,Three,Four,Five,Six,
+        Two, Three,Four,Five,Six,
         Seven,Eight,Nine,Ten,Jack,Queen,King,Ace
     };
     enum class Suit { DIAMONDS, HEARTS, CLUBS, SPADES };
     Suit suit;
     Value value;
-
+    int index;
 public:
-    explicit Card(int num) {
+    explicit Card(int num) : index(num) {
         static const std::vector<Value> values_of_cards = {
                 Value::Two,   Value::Three, Value::Four, Value::Five, Value::Six,
                 Value::Seven, Value::Eight, Value::Nine, Value::Ten,  Value::Jack,
@@ -32,9 +36,48 @@ public:
         suit = suits_of_cards[num % 4];
     }
 
+    int get_index() const {
+        return index;
+    }
+
+    std::string ValueToString() noexcept
+    {
+        auto e = this->value;
+        switch (e)
+        {
+            case Value::Two : return "Two";
+             case Value::Three : return "Three";
+             case Value::Four : return "Four";
+             case Value::Five : return "Five";
+             case Value::Six : return "Six";
+              case  Value::Seven : return "Seven";
+              case Value::Eight : return "Eight";
+              case Value::Nine : return "Nine";
+              case Value::Ten : return "Ten";
+              case  Value::Jack : return "Jack";
+              case  Value::Queen : return "Queen";
+              case Value::King : return "King";
+              case  Value::Ace : return "Ace";
+        }
+    }
+
+    std::string SuitToString() noexcept
+    {
+        auto e = this->suit;
+        switch (e)
+        {
+            case Suit::HEARTS : return "of HEARTS";
+            case Suit::DIAMONDS : return "of DIAMONDS";
+            case Suit::SPADES : return "of SPADES";
+            case Suit::CLUBS : return "of CLUBS";
+        }
+    }
+
     bool operator<(const Card &card) const {
         return value < card.value;
     }
+
+    void print_cards_card();
 };
 
 namespace server {
@@ -45,7 +88,7 @@ private:
     //std::map<client::Client, std::pair<int, int>> cards;  // TODO make enum class Value, Suit & struct Card
     std::map<client::Client, int> balance;
     std::vector<int> available_cards;
-    std::vector<int> board_cards;
+    std::vector<Card> board_cards;
     int total_of_bets;
 
 public:
@@ -64,4 +107,4 @@ public:
 
 }  // namespace server
 
-#endif  // POKIROCK_GAME_H
+#endif  // GAME_H

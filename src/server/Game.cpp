@@ -7,24 +7,11 @@
 #include "Game.h"
 #include "Win_check.h"
 
+void Card::print_cards_card() {
+    std::cout << ValueToString() << ' ' << SuitToString() << '\n';
+}
+
 namespace server {
-    std::string num2card(int num) {
-        static constexpr std::array<const char *, 13> values_of_cards = {
-                "2", "3", "4", "5", "6", "7", "8",
-                "9", "10", "Jack", "Queen", "King", "Ace"};
-        std::string card;
-        card += values_of_cards[num / 4];
-        if (num % 4 == 0) {
-            card += "_of_hearts";
-        } else if (num % 4 == 1) {
-            card += "_of_diamonds";
-        } else if (num % 4 == 2) {
-            card += "_of_spades";
-        } else if (num % 4 == 3) {
-            card += "_of_clubs";
-        }
-        return card;
-    }
 
     Game::Game(std::vector<client::Client> lobby)
             : players(std::move(lobby)), total_of_bets(0), available_cards(52) {
@@ -46,8 +33,8 @@ namespace server {
             if (optional_move == "balance") {
                 std::cout << "Your balance is: " << balance[player] << "\n";
             } else if (optional_move == "cards") {
-                std::cout << num2card(cards[player].first) << " "
-                          << num2card(cards[player].second) << "\n";
+                cards_enum.at(player).first.print_cards_card();
+                cards_enum.at(player).second.print_cards_card();
             }
         }
         bets();
@@ -57,7 +44,7 @@ namespace server {
         if (players.size() > 1) {
             std::cout << "Flop\n";
             for (int i = 0; i < 3; i++) {
-                board_cards.push_back(get_card());
+                board_cards.push_back(get_enum_card());
             }
             print_cards();
             bets();
@@ -67,7 +54,7 @@ namespace server {
     void Game::turn() {
         if (players.size() > 1) {
             std::cout << "Turn\n";
-            board_cards.push_back(get_card());
+            board_cards.push_back(get_enum_card());
             print_cards();
             bets();
         }
@@ -76,7 +63,7 @@ namespace server {
     void Game::river() {
         if (players.size() > 1) {
             std::cout << "River\n";
-            board_cards.push_back(get_card());
+            board_cards.push_back(get_enum_card());
             print_cards();
             bets();
         }
@@ -146,7 +133,7 @@ namespace server {
 
     void Game::print_cards() {
         for (auto num_of_card: board_cards) {
-            std::cout << num2card(num_of_card) << " ";
+            std::cout << num_of_card.ValueToString() << " " << num_of_card.SuitToString() << " ";
         }
         std::cout << "\n";
     }
@@ -171,11 +158,11 @@ namespace server {
                         std::vector<int> combination_cards;
                         for (int q = 1; q < 6; q++) {
                             if (q == i) {
-                                combination_cards.push_back(cards[player].first);
+                                combination_cards.push_back(cards_enum.at(player).first.get_index());
                             } else if (q == j) {
-                                combination_cards.push_back(cards[player].second);
+                                combination_cards.push_back(cards_enum.at(player).second.get_index());
                             } else {
-                                combination_cards.push_back(board_cards[q - 1]);
+                                combination_cards.push_back(board_cards[q - 1].get_index());
                             }
                         }
                         std::sort(
@@ -199,7 +186,8 @@ namespace server {
             std::cout << "Player " << winner->name() << " have won!!!\n";
             std::cout << "Winning combination is:";
             for (int card_num: winning_combination_cards) {
-                std::cout << " " << num2card(card_num);
+                auto c = Card(card_num);
+                std::cout << " " << c.ValueToString() << ' ' << c.SuitToString();
             }
         }
     }

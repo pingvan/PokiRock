@@ -1,5 +1,5 @@
-#ifndef POKIROCK_WIN_CHECK_H
-#define POKIROCK_WIN_CHECK_H
+#ifndef WIN_CHECK_H
+#define WIN_CHECK_H
 
 #include <utility>
 #include <vector>
@@ -14,4 +14,4 @@ struct Win_check {
 };
 }  // namespace Server
 
-#endif  // POKIROCK_WIN_CHECK_H
+#endif  // WIN_CHECK_H

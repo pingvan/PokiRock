@@ -6,10 +6,11 @@
 #include <vector>
 #include "../server/Server.h"
 
-namespace client {
-struct Client;
-void receive_name(Client &pl);
+namespace server {
+    struct Server;
+}
 
+namespace client {
 struct Client {
 private:
     std::string nickname;
@@ -22,8 +23,9 @@ public:
     }
 
     void callback_name(const std::string &name);
+    void receive_name(Client &pl);
     [[nodiscard]] std::string name() const;
-//    void connect(Server::Server &Server) const;
+    void connect(server::Server &server) const;
     [[nodiscard]] std::string move(int balance) const;
     [[nodiscard]] std::string optional_move() const;
 };
