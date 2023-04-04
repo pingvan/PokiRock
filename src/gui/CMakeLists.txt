@@ -34,6 +34,6 @@ find_package(PkgConfig REQUIRED)
 
 
 #add_executable(PokiRock  qt_files/Main_menu.cpp  qt_files/First_window.cpp qt_files/Authorization_window.cpp  qt_files/main.cpp)
-add_executable(PokiRock ../client/client.cpp ../server/server.cpp ../server/win_check.cpp   main.cpp)
+add_executable(PokiRock ../client/Client.cpp ../server/Server.cpp ../server/Game.cpp ../server/Win_check.cpp main.cpp)
 target_link_libraries(PokiRock Qt${QT_VERSION}::Widgets)
 target_link_libraries(PokiRock ${LIBPQXX_LIB})

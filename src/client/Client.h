@@ -4,30 +4,30 @@
 #include <string>
 #include <utility>
 #include <vector>
-#include "../server/server.h"
+#include "../server/Server.h"
 
 namespace client {
-struct client;
-void receive_name(client &pl);
+struct Client;
+void receive_name(Client &pl);
 
-struct client {
+struct Client {
 private:
     std::string nickname;
 
 public:
     void login();
 
-    bool operator<(const client &client) const {
+    bool operator<(const Client &client) const {
         return nickname < client.nickname;
     }
 
     void callback_name(const std::string &name);
     [[nodiscard]] std::string name() const;
-//    void connect(server::server &Server) const;
+//    void connect(Server::Server &Server) const;
     [[nodiscard]] std::string move(int balance) const;
     [[nodiscard]] std::string optional_move() const;
 };
 
-}  // namespace client
+}  // namespace Client
 
 #endif  // CLIENT_H

@@ -5,13 +5,13 @@
 #include <vector>
 
 namespace server {
-struct win_check {
+struct Win_check {
     static bool is_straight_flush(
         const std::vector<int> &suits,
         const std::vector<int> &values
     );
     static std::pair<int, int> check(const std::vector<int> &combination);
 };
-}  // namespace server
+}  // namespace Server
 
 #endif  // POKIROCK_WIN_CHECK_H

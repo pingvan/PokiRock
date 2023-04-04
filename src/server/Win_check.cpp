@@ -1,10 +1,10 @@
-#include "win_check.h"
+#include "Win_check.h"
 #include <map>
 #include <utility>
 #include <vector>
 
 namespace server {
-bool win_check::is_straight_flush(
+bool Win_check::is_straight_flush(
     const std::vector<int> &suits,
     const std::vector<int> &values
 ) {
@@ -22,7 +22,7 @@ bool win_check::is_straight_flush(
     return result;
 }
 
-std::pair<int, int> win_check::check(const std::vector<int> &combination) {
+std::pair<int, int> Win_check::check(const std::vector<int> &combination) {
     std::vector<int> suits(5);
     std::vector<int> values(5);
     for (int i = 0; i < 5; i++) {
@@ -184,4 +184,4 @@ std::pair<int, int> win_check::check(const std::vector<int> &combination) {
         return {0, secondary_comparator};
     }  // high_card end
 }
-}  // namespace server
+}  // namespace Server

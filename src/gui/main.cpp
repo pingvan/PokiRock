@@ -1,5 +1,5 @@
-#include "../client/client.h"
-#include "../server/server.h"
+#include "../client/Client.h"
+#include "../server/Server.h"
 #include <pqxx/pqxx>
 //TODO::include graphic lib
 

@@ -1,4 +1,4 @@
-#include "../../src/server/win_check.h"
+#include "../../src/server/Win_check.h"
 #include "../doctest.h"
 
 TEST_CASE("test_straight_flush") {

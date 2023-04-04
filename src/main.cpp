@@ -1,5 +1,5 @@
-#include "server/server.h"
-#include "client/client.h"
+#include "server/Server.h"
+#include "client/Client.h"
 
 int main(){
     srand(time(nullptr));
