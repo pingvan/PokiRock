@@ -1,13 +1,7 @@
 #ifndef SERVER_H
 #define SERVER_H
 
-#include <iostream>
-#include <map>
-#include <memory>
-#include <queue>
-#include <set>
-#include <string>
-#include <vector>
+#include "../rename_later.h"
 #include "Game.h"
 #include "../client/Client.h"
 

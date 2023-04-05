@@ -15,11 +15,9 @@ namespace client {
         std::string name;
         std::cin >> name;
         pl.callback_name(name);
+        DataBase_connector connect;
+        connect.insert_new_client(name);
     }
-
-//    void Client::connect(server::Server &Server) const {
-//        Server.add(*this);
-//    }
 
     std::string Client::name() const {
         return nickname;

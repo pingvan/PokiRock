@@ -1,7 +1,4 @@
 #include "Win_check.h"
-#include <map>
-#include <utility>
-#include <vector>
 
 namespace server {
 bool Win_check::is_straight_flush(
