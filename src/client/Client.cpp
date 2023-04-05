@@ -24,6 +24,10 @@ namespace client {
         nickname = name;
     }
 
+    int Client::get_balance() const {
+        return balance;
+    }
+
     std::string Client::receive_name(Client &pl) {
         std::string name;
         std::cin >> name;
@@ -35,9 +39,9 @@ namespace client {
         return nickname;
     }
 
-    std::string Client::move(int balance) const {
+    std::string Client::move(int balance_a) const {
         std::cout << "Player " << nickname << " make your turn\n";
-        std::cout << "Your balance is: " << balance << "\n";
+        std::cout << "Your balance is: " << balance_a << "\n";
         std::string move;
         std::cin >> move;
         return move;

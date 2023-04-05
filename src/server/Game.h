@@ -81,7 +81,6 @@ struct Game {
 private:
     std::vector<client::Client> players;
     std::map<client::Client, std::pair<Card, Card>> cards_enum;
-    //std::map<client::Client, std::pair<int, int>> cards;  // TODO make enum class Value, Suit & struct Card
     std::map<client::Client, int> balance;
     std::vector<int> available_cards;
     std::vector<Card> board_cards;

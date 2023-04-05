@@ -9,23 +9,29 @@ namespace server {
 }
 
 namespace client {
-struct Client {
-private:
-    std::string nickname{};
-public:
-void login();
-void registeration();
+    struct Client {
+    private:
+        std::string nickname;
+        int balance;
+    public:
+        void login();
 
-bool operator<(const Client &client) const {
-    return nickname < client.nickname;
-}
+        void registeration();
 
-void callback_name(const std::string &name);
-std::string receive_name(Client &pl);
-[[nodiscard]] std::string name() const;
-[[nodiscard]] std::string move(int balance) const;
-[[nodiscard]] std::string optional_move() const;
-};
+        bool operator<(const Client &client) const {
+            return nickname < client.nickname;
+        }
+
+        void callback_name(const std::string &name);
+        [[nodiscard]] int get_balance() const;
+        std::string receive_name(Client &pl);
+
+        [[nodiscard]] std::string name() const;
+
+        [[nodiscard]] std::string move(int balance) const;
+
+        [[nodiscard]] std::string optional_move() const;
+    };
 
 }  // namespace Client
 

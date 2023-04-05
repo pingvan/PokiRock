@@ -181,9 +181,14 @@ namespace server {
                     winner = &player;
                 }
             }
+            data::DataBase_connector connect;
             balance[*winner] += total_of_bets;
             std::cout << "Player " << winner->name() << " have won!!!\n";
+            connect.insert_win(winner->name());
             std::cout << "Winning combination is:";
+            for (const auto& c : balance) {
+                connect.update_balance(c.first.name(), (c.first.get_balance() - c.second));
+            }
             for (int card_num: winning_combination_cards) {
                 auto c = Card(card_num);
                 std::cout << " " << c.ValueToString() << ' ' << c.SuitToString();

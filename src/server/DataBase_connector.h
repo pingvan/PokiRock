@@ -2,7 +2,6 @@
 #define DATABASE_CONNECTOR_H
 
 #include "../rename_later.h"
-//#include "../client/Client.h"
 
 namespace data {
 
@@ -16,7 +15,7 @@ namespace data {
         bool log_in_client(const std::string &client_login, const std::string &pass_entered);
         void insert_games(const std::string &client_login);
         void insert_win(const std::string &client_login);
-        void update_balance(const std::string &client_login);
+        void update_balance(const std::string &client_login, const int &balance_delta);
     private:
         std::string connection_message = "postgres://postgres:stillloveher@localhost:5432/clients";
     };

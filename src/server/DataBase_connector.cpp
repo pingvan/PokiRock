@@ -108,6 +108,32 @@ namespace data {
         }
     }
 
+    void DataBase_connector::insert_win(const std::string &client_login) {
+        try {
+            pqxx::connection con{connection_message};
+            pqxx::work txn{con};
+            txn.exec("UPDATE clients "
+                     "SET client_wins = client_wins+1 "
+                     "WHERE client_login = " + txn.quote(client_login));
+            txn.commit();
+            con.close();
+        } catch (std::exception &e) {
+            std::cout << e.what() << '\n';
+        }
+    }
 
+    void DataBase_connector::update_balance(const std::string &client_login, const int &balance_delta) {
+        try {
+            pqxx::connection con{connection_message};
+            pqxx::work txn{con};
+            txn.exec_params("UPDATE clients "
+                     "SET client_balance = client_balance + $1"
+                     "WHERE client_login = $2", balance_delta, client_login);
+            txn.commit();
+            con.close();
+        } catch (std::exception &e) {
+            std::cout << e.what() << '\n';
+        }
+    }
 }
 
