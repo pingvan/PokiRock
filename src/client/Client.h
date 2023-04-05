@@ -14,13 +14,14 @@ private:
     std::string nickname{};
 public:
 void login();
+void registeration();
 
 bool operator<(const Client &client) const {
     return nickname < client.nickname;
 }
 
 void callback_name(const std::string &name);
-void receive_name(Client &pl);
+std::string receive_name(Client &pl);
 [[nodiscard]] std::string name() const;
 [[nodiscard]] std::string move(int balance) const;
 [[nodiscard]] std::string optional_move() const;

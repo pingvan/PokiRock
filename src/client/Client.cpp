@@ -4,19 +4,29 @@ namespace client {
 
     void Client::login() {
         std::cout << "Enter your name:\n";
-        receive_name(*this);
+        std::string log = receive_name(*this);
+        DataBase_connector connect;
+        if (!connect.log_in_client(log)) {
+            login();
+        }
+    }
+
+    void Client::registeration() {
+        std::cout << "Enter your name:\n";
+        std::string login = receive_name(*this);
+        DataBase_connector connect;
+        connect.insert_new_client(login);
     }
 
     void Client::callback_name(const std::string &name) {
         nickname = name;
     }
 
-    void Client::receive_name(Client &pl) {
+    std::string Client::receive_name(Client &pl) {
         std::string name;
         std::cin >> name;
         pl.callback_name(name);
-        DataBase_connector connect;
-        connect.insert_new_client(name);
+        return name;
     }
 
     std::string Client::name() const {

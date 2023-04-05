@@ -23,7 +23,7 @@ std::string DataBase_connector::generate_salt(int length) {
     return ss.str();
 }
 
-void DataBase_connector::insert_new_client(const std::string &name) {
+void DataBase_connector::insert_new_client(const std::string &client_login) {
     bool id_generated = false;
     uint32_t client_id = 0;
     while (!id_generated) {
@@ -55,13 +55,47 @@ void DataBase_connector::insert_new_client(const std::string &name) {
         }
         std::string salt = generate_salt(static_cast<int>(pass.size()));
         std::string hashed = sha_hash(salt + pass);
-        txn.exec("INSERT INTO id_to_password (client_id, client_password_hashe, password_salt)"
-                 "VALUES" + txn.quote(client_id) + ',' + txn.quote(hashed) + ',' + txn.quote(salt));
-        txn.exec("INSERT INTO clients (client_id, client_login, client_games, client_wins, client_balance)"
-                 "VALUES" + txn.quote(client_id) + ',' + txn.quote(name) + ',' + txn.quote(0) + ',' + txn.quote(0) + ',' + txn.quote(1000));
+        txn.exec_params("INSERT INTO clients (client_id, client_login, client_games, client_wins, client_balance)"
+                        "VALUES ($1, $2, $3, $4, $5)", client_id, client_login, 0, 0, 1000);
+        txn.exec_params("INSERT INTO id_to_password (client_id, client_password_hashe, password_salt)"
+                        "VALUES ($1, $2, $3)", client_id, hashed, salt);
         txn.commit();
         con.close();
     } catch(std::exception &e) {
         std::cout << e.what() << '\n';
     }
 }
+
+bool DataBase_connector::log_in_client(const std::string &client_login) {
+    try {
+        pqxx::connection con{connection_message};
+        pqxx::work txn{con};
+        uint32_t client_id = txn.query_value<uint32_t>("SELECT client_id "
+                                                       "FROM clients "
+                                                       "WHERE client_login =" + txn.quote(client_login));
+        pqxx::result row = txn.exec_params("SELECT client_password_hashe, password_salt "
+                                           "FROM id_to_password "
+                                           "WHERE client_id = $1",
+                                           client_id);
+        std::string hase_tab, salt_tab;
+        for (auto r : row) {
+            hase_tab = r[0].as<std::string>();
+            salt_tab = r[1].as<std::string>();
+        }
+        std::cout << "Enter password:\n";
+        std::string pass_eneterd;
+        std::cin >> pass_eneterd;
+        std::string hashed_for_cin = sha_hash(salt_tab+pass_eneterd);
+        if (hase_tab == hashed_for_cin) {
+            std::cout << "You successfully logged in!\n";
+            return true;
+        } else {
+            std::cout << "Uncorrect login or password! Try again:\n";
+            return false;
+        }
+    } catch(std::exception &e) {
+        std::cout << e.what() << '\n';
+        return false;
+    }
+}
+
