@@ -5,8 +5,10 @@ namespace client {
     void Client::login() {
         std::cout << "Enter your name:\n";
         std::string log = receive_name(*this);
-        DataBase_connector connect;
-        if (!connect.log_in_client(log)) {
+        data::DataBase_connector connect;
+        std::string n;
+        std::cin >> n;
+        if (!connect.log_in_client(log, n)) {
             login();
         }
     }
@@ -14,7 +16,7 @@ namespace client {
     void Client::registeration() {
         std::cout << "Enter your name:\n";
         std::string login = receive_name(*this);
-        DataBase_connector connect;
+        data::DataBase_connector connect;
         connect.insert_new_client(login);
     }
 

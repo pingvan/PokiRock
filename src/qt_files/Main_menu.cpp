@@ -6,7 +6,7 @@ main_menu::main_menu(QWidget *parent) :
     ui(new Ui::main_menu)
 {
     ui->setupUi(this);
-    QPixmap image(":/img/images(png)/Poker-Transparent-Images-Clip-Art.png");
+    QPixmap image("/Users/user/PokiRock/src/qt_files/images_png/Poker-Transparent-Images-Clip-Art.png");
     int width = ui->image->width() + 1000;
     int height = ui->image->height();
 

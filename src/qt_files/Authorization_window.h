@@ -3,6 +3,9 @@
 
 #include <QDialog>
 #include "Main_menu.h"
+#include "../client/Client.h"
+#include "../server/Server.h"
+#include "../server/DataBase_connector.h"
 
 namespace Ui {
 class authorization_window;

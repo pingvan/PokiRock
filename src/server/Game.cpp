@@ -1,9 +1,3 @@
-#include <algorithm>
-#include <array>
-#include <functional>
-#include <random>
-#include <chrono>
-#include <numeric>
 #include "Game.h"
 #include "Win_check.h"
 
@@ -41,6 +35,10 @@ namespace server {
     }
 
     void Game::flop() {
+        for (const auto& c : players) {
+            data::DataBase_connector connect;
+            connect.insert_games(c.name());
+        }
         if (players.size() > 1) {
             std::cout << "Flop\n";
             for (int i = 0; i < 3; i++) {

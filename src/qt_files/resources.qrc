@@ -1,4 +1,4 @@
 <RCC>
-    <qresource prefix="/images"/>
-    <qresource prefix="/kartinochki"/>
+    <qresource prefix="/images_png"/>
+<!--    <qresource prefix="/kartinochki"/>-->
 </RCC>

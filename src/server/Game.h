@@ -1,13 +1,9 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <iostream>
-#include <map>
-#include <queue>
-#include <set>
-#include <string>
-#include <vector>
+#include "../rename_later.h"
 #include "../client/Client.h"
+#include "DataBase_connector.h"
 
 namespace client {
     struct Client;
