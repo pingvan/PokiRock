@@ -1,7 +1,7 @@
-
 #ifndef MAIN_MENU_H
 #define MAIN_MENU_H
 
+#include "game.h"
 #include <QDialog>
 
 namespace Ui {
@@ -17,10 +17,13 @@ public:
     ~main_menu();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_exit_clicked();
+
+    void on_play_clicked();
 
 private:
     Ui::main_menu *ui;
+    game* game_window;
 };
 
 #endif // MAIN_MENU_H

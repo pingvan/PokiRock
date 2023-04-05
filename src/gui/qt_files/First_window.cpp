@@ -18,6 +18,6 @@ void first_window::on_pushButton_clicked()
 {
     hide();
     second_window = new authorization_window(this);
-    second_window->showFullScreen();
+    second_window->show();
 }
 

@@ -14,7 +14,7 @@ authorization_window::~authorization_window()
     delete ui;
 }
 
-void authorization_window::on_pushButton_clicked()
+void authorization_window::on_authorizate_clicked()
 {
     QString user_login = ui->Login->text();
     QString user_password = ui->Password->text();
@@ -26,5 +26,11 @@ void authorization_window::on_pushButton_clicked()
     } else {
         QMessageBox::warning(this, "Некорректное имя пользователя или пароль", "Вероятна очепятка");
     }
+}
+
+void authorization_window::on_registrate_clicked()
+{
+    registration = new registration_window(this);
+    registration->showFullScreen();
 }
 

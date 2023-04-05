@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/cards">
+        <file>images/cards/Clubs/2.png</file>
+        <file>images/cards/Clubs/3.png</file>
+        <file>images/cards/Clubs/4.png</file>
+        <file>images/cards/Clubs/5.png</file>
+        <file>images/cards/Clubs/6.png</file>
+        <file>images/cards/Clubs/7.png</file>
+        <file>images/cards/Clubs/8.png</file>
+        <file>images/cards/Clubs/9.png</file>
+        <file>images/cards/Clubs/10.png</file>
+        <file>images/cards/Clubs/A.png</file>
+        <file>images/cards/Clubs/J.png</file>
+        <file>images/cards/Clubs/K.png</file>
+        <file>images/cards/Clubs/Q.png</file>
+    </qresource>
+</RCC>

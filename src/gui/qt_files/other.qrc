@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/main_menu">
+        <file>images/Poker-Transparent-Images-Clip-Art.png</file>
+        <file>images/pngegg (2).png</file>
+        <file>images/Снимок экрана 2023-04-05 234448-PhotoRoom.png-PhotoRoom.png</file>
+        <file>images/Снимок_экрана_2023-04-05_234448_(1)-transformed (1).png</file>
+        <file>images/Снимок экрана 2023-04-05 234448 (1).png</file>
+    </qresource>
+</RCC>

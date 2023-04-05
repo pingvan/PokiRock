@@ -6,41 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1308</width>
-    <height>580</height>
+    <width>1876</width>
+    <height>895</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>PokiRock</string>
   </property>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>800</x>
-     <y>190</y>
-     <width>331</width>
-     <height>131</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Forte</family>
-    </font>
-   </property>
-   <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:24pt; font-weight:600;&quot;&gt;PokiRock&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-   <property name="wordWrap">
-    <bool>true</bool>
-   </property>
-  </widget>
   <widget class="QLabel" name="image">
    <property name="geometry">
     <rect>
-     <x>690</x>
-     <y>90</y>
-     <width>781</width>
-     <height>241</height>
+     <x>200</x>
+     <y>0</y>
+     <width>801</width>
+     <height>291</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -59,15 +38,15 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>720</x>
-     <y>490</y>
+     <x>330</x>
+     <y>140</y>
      <width>531</width>
      <height>321</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="play">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
         <horstretch>0</horstretch>
@@ -96,7 +75,7 @@
      </spacer>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_3">
+     <widget class="QPushButton" name="profile">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
         <horstretch>0</horstretch>
@@ -125,7 +104,7 @@
      </spacer>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_4">
+     <widget class="QPushButton" name="settings">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
         <horstretch>0</horstretch>
@@ -154,7 +133,7 @@
      </spacer>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="exit">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
         <horstretch>0</horstretch>
@@ -168,9 +147,6 @@
     </item>
    </layout>
   </widget>
-  <zorder>layoutWidget</zorder>
-  <zorder>image</zorder>
-  <zorder>label</zorder>
  </widget>
  <resources/>
  <connections/>
