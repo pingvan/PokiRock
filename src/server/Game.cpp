@@ -14,7 +14,7 @@ void Card::print_cards_card() {
 namespace server {
 
     Game::Game(std::vector<client::Client> lobby)
-            : players(std::move(lobby)), total_of_bets(0), available_cards(52) {
+            : players(std::move(lobby)), available_cards(52), total_of_bets(0) {
         std::iota(available_cards.begin(), available_cards.end(), 0);
         std::cout << "Starting game with: ";
         for (const client::Client &player: players) {
@@ -113,7 +113,7 @@ namespace server {
                     }
                     std::cout << "Incorrect input, try again\n";
                 }
-                if (some_counter == players.size()) {
+                if (some_counter == static_cast<int>(players.size())) {
                     state = false;
                     break;
                 }
