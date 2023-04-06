@@ -13,10 +13,10 @@ int Game::next_position(int position) {
 Game::Game(std::vector<client::Client> lobby)
     : players(std::move(lobby)),
       round_players(players),
-      available_cards(52),
-      total_of_bets(0),
       button(static_cast<int>(lobby.size()) - 1),
-      last_player(button) {
+      last_player(button),
+      available_cards(52),
+        total_of_bets(0) {
     std::iota(available_cards.begin(), available_cards.end(), 0);
     std::cout << "Starting game with: ";
     for (const client::Client &player : players) {
@@ -101,13 +101,13 @@ void Game::bets() {
             if (current_turn == Which_turn::Preflop) {
                 if (!small_blind_flag) {
                     make_a_bet(player, blinds.small_blind);
-                    have_betted[player] = blinds.small_blind;
+                    have_beted[player] = blinds.small_blind;
                     small_blind_flag = true;
                     increase_iterator(it);
                     continue;
                 } else if (!big_blind_flag) {
                     make_a_bet(player, blinds.big_blind);
-                    have_betted[player] = blinds.big_blind;
+                    have_beted[player] = blinds.big_blind;
                     big_blind_flag = true;
                     increase_iterator(it);
                     continue;
@@ -116,7 +116,7 @@ void Game::bets() {
             if (balance[player] == 0) {
                 some_counter += 1;
                 increase_iterator(it);
-                if (some_counter == round_players.size()) {
+                if (some_counter == static_cast<int>(round_players.size())) {
                     state = false;
                     break;
                 }
@@ -166,7 +166,7 @@ void Game::bets() {
                         must_bet = bet;
                     }
                     make_a_bet(player, bet);
-                    have_betted[player] += bet;
+                    have_beted[player] += bet;
                     increase_iterator(it);
                 } else if (move == "fold") {
                     if (it - round_players.begin() <= last_player) {
@@ -179,7 +179,7 @@ void Game::bets() {
                     it = round_players.erase(it);
                     break;
                 } else if (move == "check") {
-                    if (must_bet > have_betted[player]) {
+                    if (must_bet > have_beted[player]) {
                         std::cout
                             << "You can not check here, operation denied.\n";
                     } else {
@@ -190,7 +190,7 @@ void Game::bets() {
                 }
                 std::cout << "Incorrect input, try again\n";
             }
-            if (some_counter == round_players.size()) {
+            if (some_counter == static_cast<int>(round_players.size())) {
                 state = false;
                 break;
             }

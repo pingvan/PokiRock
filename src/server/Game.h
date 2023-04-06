@@ -113,7 +113,7 @@ struct Game {
 private:
     Which_turn current_turn = Which_turn::Preflop;
     std::vector<client::Client> players;
-    std::vector<client::client> round_players;
+    std::vector<client::Client> round_players;
     int button;
     int last_player;
     Blinds blinds;
