@@ -17,7 +17,8 @@ namespace client {
         std::cout << "Enter your name:\n";
         std::string login = receive_name(*this);
         data::DataBase_connector connect;
-        connect.insert_new_client(login);
+        std::string tmp = " "; //TODO
+        connect.insert_new_client(login, tmp);
     }
 
     void Client::callback_name(const std::string &name) {

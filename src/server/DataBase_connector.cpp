@@ -24,24 +24,10 @@ namespace data {
         return ss.str();
     }
 
-    void DataBase_connector::insert_new_client(const std::string &client_login) {
+    void DataBase_connector::insert_new_client(const std::string &client_login, const std::string &pass) {
         try {
             pqxx::connection con{connection_message};
             pqxx::work txn{con};
-            bool complete = false;
-            std::string pass;
-            std::string repeated_pass;
-            while (!complete) {
-                std::cout << "Choose password:\n";
-                std::cin >> pass;
-                std::cout << "Repeate your password:\n";
-                std::cin >> repeated_pass;
-                if (pass == repeated_pass) {
-                    complete = true;
-                } else {
-                    std::cout << "Passwords doesn't match! Try again:\n";
-                }
-            }
             std::string salt = generate_salt(static_cast<int>(pass.size()));
             std::string hashed = sha_hash(salt + pass);
             txn.exec_params("INSERT INTO clients (client_login, client_games, client_wins, client_balance)"

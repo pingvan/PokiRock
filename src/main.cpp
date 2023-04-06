@@ -18,13 +18,15 @@ void clear_db() {
 
 int main([[maybe_unused]] int argc, [[maybe_unused]] char *argv[]) {
 
-    std::cout << "FINALLY";
+    std::cout << "FINALLY\n";
 //    server::Server s1;
     client::Client p1;
     client::Client p2;
     client::Client p3;
-    p1.login();
-    p2.login();
+//    p1.login();
+//    p2.login();
+    data::DataBase_connector connect;
+    std::cout << (connect.sha_hash("") == "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855");
 //    p1.registeration();
 //    p2.registeration();
 //    clear_db();

@@ -10,7 +10,7 @@ namespace data {
 
         static std::string generate_salt(int length);
 
-        void insert_new_client(const std::string &client_login);
+        void insert_new_client(const std::string &client_login, const std::string &pass);
 
         bool log_in_client(const std::string &client_login, const std::string &pass_entered);
         void insert_games(const std::string &client_login);
