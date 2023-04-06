@@ -1,4 +1,5 @@
 #include "Authorization_window.h"
+#include "First_window.h"
 #include "ui_Authorization_window.h"
 #include <QMessageBox>
 
@@ -19,8 +20,9 @@ void authorization_window::on_authorizate_clicked()
     QString user_login = ui->Login->text();
     QString user_password = ui->Password->text();
     if (user_login == "admin" && user_password == "abobakva"){
-        hide();
-        QMessageBox::information(this, "Добро пожаловать, ...", "Вы успешно авторизовались!");
+        QMessageBox::information(this, "Добро пожаловать в PokiRock!", "Вы успешно авторизовались");
+        start_window->close();
+        close();
         main_window = new main_menu(this);
         main_window->showFullScreen();
     } else {
@@ -30,7 +32,9 @@ void authorization_window::on_authorizate_clicked()
 
 void authorization_window::on_registrate_clicked()
 {
+    hide();
     registration = new registration_window(this);
-    registration->showFullScreen();
+    registration->second_window = this;
+    registration->show();
 }
 

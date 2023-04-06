@@ -4,6 +4,9 @@
 #include <QDialog>
 #include "Main_menu.h"
 #include "Registration_window.h"
+
+class first_window;
+
 namespace Ui {
 class authorization_window;
 }
@@ -15,6 +18,7 @@ class authorization_window : public QDialog
 public:
     explicit authorization_window(QWidget *parent = nullptr);
     ~authorization_window();
+    first_window* start_window;
 
 private slots:
     void on_authorizate_clicked();

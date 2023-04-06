@@ -1,5 +1,6 @@
 #include "First_window.h"
 #include "ui_First_window.h"
+#include "Authorization_window.h"
 
 first_window::first_window(QWidget *parent)
     : QMainWindow(parent)
@@ -16,8 +17,8 @@ first_window::~first_window()
 
 void first_window::on_pushButton_clicked()
 {
-    hide();
     second_window = new authorization_window(this);
+    second_window->start_window = this;
     second_window->show();
 }
 
