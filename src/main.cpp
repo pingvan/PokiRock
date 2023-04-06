@@ -1,6 +1,7 @@
 //#include "server/Server.h"
 //#include "client/Client.h"
-//#include "../rename_later.h"
+#include "../rename_later.h"
+//#include <iostream>
 
 //void clear_db() {
 //    try {
@@ -18,6 +19,7 @@
 
 int main([[maybe_unused]] int argc, [[maybe_unused]] char *argv[]) {
 
+    std::cout << "FINALLY";
 //    server::Server s1;
 //    client::Client p1;
 //    client::Client p2;
