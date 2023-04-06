@@ -54,9 +54,19 @@ public:
     }
 };
 */
+enum Which_turn { Preflop, Flop, Turn, River };
+struct Blinds {
+    int big_blind=10;
+    int small_blind=5;
+};
 struct game {
 private:
+    Which_turn current_turn=Which_turn::Preflop;
     std::vector<client::client> players;
+    std::vector<client::client> round_players;
+    int button;
+    int last_player;
+    Blinds blinds;
     std::map<client::client, std::pair<int, int>>
         cards;  // TODO make enum class Value, Suit & struct Card
     std::map<client::client, int> balance;
@@ -67,6 +77,7 @@ private:
 public:
     explicit game(std::vector<client::client> lobby);
     void bets();
+    int next_position(int position);
     void preflop();
     void flop();
     void make_a_bet(const client::client &player, int bet_amount);
@@ -75,10 +86,22 @@ public:
     int get_card();
     void print_cards();
     void who_won();
-    static std::pair<int, int> rank_combination(const std::vector<int> &combination);
+    void new_round();
+    static std::pair<int, int> rank_combination(
+        const std::vector<int> &combination
+    );
+
+    template <typename T>
+    void increase_iterator(T &iterator) {
+        iterator++;
+        if (iterator == round_players.end()) {
+            iterator = round_players.begin();
+        }
+    }
 };
 
 struct game;
+
 struct server {
 private:
     std::queue<client::client> players;

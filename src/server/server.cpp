@@ -42,23 +42,23 @@ void server::start_game() {
     games.emplace_back(lobby);
     auto &our_game = games.back();
     our_game.preflop();
-    our_game.flop();
-    our_game.turn();
-    our_game.river();
+}
+
+int game::next_position(int position) {
+    return (position + 1) % static_cast<int>(round_players.size());
 }
 
 game::game(std::vector<client::client> lobby)
-    : players(std::move(lobby)), total_of_bets(0) {
+    : players(std::move(lobby)),
+      round_players(players),
+      total_of_bets(0),
+      button(static_cast<int>(lobby.size()) - 1),
+      last_player(button) {
     for (int i = 0; i < 52; i++) {
         available_cards.push_back(i);
     }
     std::cout << "Starting game with: ";
     for (const client::client &player : players) {
-        /*cards.emplace(
-            std::piecewise_construct, std::forward_as_tuple(player),
-            std::forward_as_tuple(get_card(), get_card())
-        );*/
-        cards[player] = {get_card(), get_card()};  // demand to preflop
         balance[player] = 100;
         std::cout << player.name() << " ";
     }
@@ -67,7 +67,8 @@ game::game(std::vector<client::client> lobby)
 
 void game::preflop() {
     std::cout << "Preflop\n";
-    for (const auto &player : players) {
+    for (const auto &player : round_players) {
+        cards[player] = {get_card(), get_card()};
         std::string optional_move = player.optional_move();
         if (optional_move == "balance") {
             std::cout << "Your balance is: " << balance[player] << "\n";
@@ -77,30 +78,36 @@ void game::preflop() {
         }
     }
     bets();
+    flop();
 }
 
 void game::flop() {
-    if (players.size() > 1) {
+    current_turn = Flop;
+    if (round_players.size() > 1) {
         std::cout << "Flop\n";
         for (int i = 0; i < 3; i++) {
             board_cards.push_back(get_card());
         }
         print_cards();
         bets();
-        board_cards.push_back(get_card());
-        print_cards();
     }
+    turn();
 }
 
 void game::turn() {
-    if (players.size() > 1) {
+    current_turn = Turn;
+    if (round_players.size() > 1) {
         std::cout << "Turn\n";
+        board_cards.push_back(get_card());
+        print_cards();
         bets();
     }
+    river();
 }
 
 void game::river() {
-    if (players.size() > 1) {
+    current_turn = Which_turn::River;
+    if (round_players.size() > 1) {
         std::cout << "River\n";
         board_cards.push_back(get_card());
         print_cards();
@@ -111,12 +118,44 @@ void game::river() {
 
 void game::bets() {
     int must_bet = 0;
+    if (current_turn == Preflop) {
+        must_bet = blinds.big_blind;
+    }
+    bool big_blind_flag = false;
+    bool small_blind_flag = false;
     std::map<client::client, int> have_betted;
     bool state = true;
     int some_counter = 0;
     while (state) {
-        for (auto it = players.begin(); it != players.end();) {
+        for (auto it = round_players.begin() + next_position(last_player);;) {
             const auto &player = *it;
+            if (current_turn == Which_turn::Preflop) {
+                if (!small_blind_flag) {
+                    make_a_bet(player, blinds.small_blind);
+                    have_betted[player] = blinds.small_blind;
+                    small_blind_flag = true;
+                    increase_iterator(it);
+                    continue;
+                } else if (!big_blind_flag) {
+                    make_a_bet(player, blinds.big_blind);
+                    have_betted[player] = blinds.big_blind;
+                    big_blind_flag = true;
+                    increase_iterator(it);
+                    continue;
+                }
+            }
+            if (balance[player] == 0) {
+                some_counter += 1;
+                increase_iterator(it);
+                if (some_counter == round_players.size()) {
+                    state = false;
+                    break;
+                }
+                if (it == round_players.begin() + next_position(last_player)) {
+                    break;
+                }
+                continue;
+            }
             while (true) {
                 std::string move = player.move(balance[player]);
                 if (move == "call") {
@@ -124,36 +163,62 @@ void game::bets() {
                     make_a_bet(player, bet_amount);
                     have_betted[player] = must_bet;
                     some_counter += 1;
-                    it++;
+                    increase_iterator(it);
                     break;
                 } else if (move == "raise") {
                     std::cout << "How much would you like to bet?\n";
                     int bet = 0;
                     std::cin >> bet;
-                    // must_bet += bet;
-                    if (bet < must_bet) {
-                        bet = must_bet;
+                    if (bet > balance[player]) {
+                        std::cout << "A lack of money, operation denied.\n";
                     } else {
-                        some_counter = 1;
+                        if (bet < must_bet) {
+                            bet = must_bet;
+                        } else {
+                            some_counter = 1;
+                        }
+                        must_bet = bet;
+                        auto bet_amount = must_bet - have_betted[player];
+                        make_a_bet(player, bet_amount);
+                        have_betted[player] = must_bet;
+                        increase_iterator(it);
+                        break;
                     }
-                    must_bet = bet;
-                    auto bet_amount = must_bet - have_betted[player];
-                    make_a_bet(player, bet_amount);
-                    have_betted[player] = must_bet;
-                    it++;
+                } else if (move == "all-in") {
+                    int bet = balance[player];
+                    if (must_bet < bet) {
+                        must_bet = bet;
+                    }
+                    make_a_bet(player, bet);
+                    have_betted[player] += bet;
+                    increase_iterator(it);
                     break;
                 } else if (move == "fold") {
-                    it = players.erase(it);
+                    if (it - round_players.begin() <= last_player) {
+                        last_player--;
+                        if (last_player < 0) {
+                            last_player = static_cast<int>(round_players.size());
+                        }
+                    }
+                    it = round_players.erase(it);
                     break;
                 } else if (move == "check") {
-                    some_counter += 1;
-                    it++;
-                    break;
+                    if (must_bet > have_betted[player]) {
+                        std::cout
+                            << "You can not check here, operation denied.\n";
+                    } else {
+                        some_counter += 1;
+                        increase_iterator(it);
+                        break;
+                    }
                 }
                 std::cout << "Incorrect input, try again\n";
             }
-            if (some_counter == players.size()) {
+            if (some_counter == round_players.size()) {
                 state = false;
+                break;
+            }
+            if (it == round_players.begin() + next_position(last_player)) {
                 break;
             }
         }
@@ -240,6 +305,36 @@ void game::who_won() {
             std::cout << " " << num2card(card_num);
         }
     }
+    new_round();
+}
+
+void game::new_round() {
+    current_turn = Preflop;
+    button = next_position(button);
+    for (auto it = players.begin(); it != players.end();) {
+        if (balance[*it] == 0) {
+            if (it - players.begin() <= button) {
+                button--;
+                if (button < 0) {
+                    button = static_cast<int>(players.size());
+                }
+                it = players.erase(it);
+            } else {
+                it++;
+            }
+        } else {
+            it++;
+        }
+    }
+    available_cards.clear();
+    for (int i = 0; i < 52; i++) {
+        available_cards.push_back(i);
+    }
+    board_cards.clear();
+    round_players = players;
+    last_player = button;
+    total_of_bets = 0;
+    preflop();
 }
 
 void game::make_a_bet(const client::client &player, int bet_amount) {
