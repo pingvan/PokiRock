@@ -1,7 +1,9 @@
 #ifndef WIN_CHECK_H
 #define WIN_CHECK_H
 
-#include "../sources.h"
+#include "Card.hpp"
+#include <utility>
+#include <vector>
 
 namespace server {
 struct Win_check {

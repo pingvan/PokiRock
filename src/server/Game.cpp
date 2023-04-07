@@ -1,10 +1,6 @@
 #include "Game.h"
 #include "Win_check.h"
 
-void Card::print_cards_card() {
-    std::cout << ValueToString() << ' ' << SuitToString() << '\n';
-}
-
 namespace server {
 int Game::next_position(int position) {
     return (position + 1) % static_cast<int>(round_players.size());
@@ -94,7 +90,7 @@ void Game::bets() {
     std::map<client::Client, int> have_betted;
 //    std::unordered_map<client::Client, int, client::Client> have_beted;
     bool state = true;
-    int some_counter = 0;
+    std::size_t some_counter = 0;
     while (state) {
         for (auto it = round_players.begin() + next_position(last_player);;) {
             const auto &player = *it;
@@ -116,7 +112,7 @@ void Game::bets() {
             if (balance[player] == 0) {
                 some_counter += 1;
                 increase_iterator(it);
-                if (some_counter == static_cast<int>(round_players.size())) {
+                if (some_counter == round_players.size()) {
                     state = false;
                     break;
                 }
@@ -190,7 +186,7 @@ void Game::bets() {
                 }
                 std::cout << "Incorrect input, try again\n";
             }
-            if (some_counter == static_cast<int>(round_players.size())) {
+            if (some_counter == round_players.size()) {
                 state = false;
                 break;
             }
@@ -204,9 +200,8 @@ void Game::bets() {
 Card Game::get_enum_card() {
     std::random_device rand;
     std::mt19937 mt_rand(rand());
-    int const size = static_cast<int>(available_cards.size());
-    std::uniform_int_distribution<int> range(0, size);
-    auto index = range(mt_rand);
+    std::uniform_int_distribution<std::size_t> range(0, available_cards.size()-1);
+    auto index = static_cast<std::ptrdiff_t>(range(mt_rand));
     auto card = available_cards[index];
     available_cards.erase(available_cards.begin() + index);
     return Card(card);

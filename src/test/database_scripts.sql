@@ -1,7 +1,7 @@
 create table id_to_password
 (
     client_id int references clients (client_id),
-    client_password_hashe text
+    client_password_hash text
 )
 
 
