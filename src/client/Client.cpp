@@ -4,13 +4,14 @@ namespace client {
 
     void Client::login_ONLY_TESTING() {
         std::cout << "Enter your name:\n";
-        std::string const log = receive_name(*this);
+        auto log = receive_name(*this);
         std::cout << "Enter password:\n";
         std::string n;
         std::cin >> n;
         if (!data::DataBase_connector::log_in_client(log, n)) {
             login_ONLY_TESTING();
         }
+        callback_name(log);
     }
 
     void Client::registration_ONLY_TESTING() {

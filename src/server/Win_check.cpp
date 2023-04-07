@@ -37,7 +37,7 @@ std::pair<int, int> Win_check::check(const std::vector<int> &combination) {
 
     {  // quads checking
         bool is_quad = true;
-        std::unordered_map<int, int> values_counter;
+        std::map<int, int> values_counter;
         for (int i = 0; i < 5; i++) {
             values_counter[values[i]]++;
         }
@@ -72,7 +72,7 @@ std::pair<int, int> Win_check::check(const std::vector<int> &combination) {
     }  // full_house checking_end
     {  // flush checking
         bool is_flush = true;
-        std::unordered_map<int, int> values_counter;
+        std::map<int, int> values_counter;
         for (int i = 1; i < 5; i++) {
             if (suits[i] != suits[0]) {
                 is_flush = false;
@@ -91,7 +91,7 @@ std::pair<int, int> Win_check::check(const std::vector<int> &combination) {
     }  // flush checking_end
     {  // straight checking
         bool is_straight = true;
-        std::unordered_map<int, int> values_counter;
+        std::map<int, int> values_counter;
         for (int i = 2; i < 5; i++) {
             if (values[i] != values[i - 1] - 1) {
                 is_straight = false;

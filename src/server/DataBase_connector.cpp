@@ -4,7 +4,7 @@ namespace data {
 
     std::string DataBase_connector::sha_hash(const std::string &phrase) {
         unsigned char hash[SHA256_DIGEST_LENGTH];
-        SHA256((unsigned char *) phrase.c_str(), phrase.length(), hash);
+        SHA256(reinterpret_cast<const unsigned char *>(phrase.data()), phrase.length(), hash);
         std::stringstream ss;
         for (unsigned char const i: hash) {
             ss << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(i);
@@ -28,8 +28,8 @@ namespace data {
         try {
             pqxx::connection con{conn_msg()};
             pqxx::work txn{con};
-            std::string salt = generate_salt(static_cast<int>(pass.size()));
-            std::string hashed = sha_hash(salt + pass);
+            const std::string salt = generate_salt(static_cast<int>(pass.size()));
+            const std::string hashed = sha_hash(salt + pass);
             txn.exec_params("INSERT INTO clients (client_login, client_games, client_wins, client_balance)"
                             "VALUES ($1, $2, $3, $4)", client_login, 0, 0, 1000);
             auto client_id = txn.query_value<uint32_t>("SELECT client_id "
@@ -51,10 +51,9 @@ namespace data {
             auto client_id = txn.query_value<uint32_t>("SELECT client_id "
                                                        "FROM clients "
                                                        "WHERE client_login =" + txn.quote(client_login));
-            pqxx::result const row = txn.exec_params("SELECT client_password_hashe, password_salt "
+            pqxx::result const row = txn.exec("SELECT client_password_hashe, password_salt "
                                                      "FROM id_to_password "
-                                                     "WHERE client_id = $1",
-                                                     client_id);
+                                                     "WHERE client_id = " + txn.quote(client_id));
             std::string hase_tab;
             std::string salt_tab;
             for (auto r: row) {
@@ -110,8 +109,8 @@ namespace data {
             pqxx::connection con{conn_msg()};
             pqxx::work txn{con};
             txn.exec_params("UPDATE clients "
-                     "SET client_balance = client_balance + $1"
-                     "WHERE client_login = $2", balance_delta, client_login);
+                     "SET client_balance = client_balance + $1 "
+                     "WHERE client_login = $2 ", balance_delta, client_login);
             txn.commit();
             con.close();
         } catch (std::exception &e) {

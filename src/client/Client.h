@@ -19,9 +19,9 @@ namespace client {
 
         void registration_ONLY_TESTING();
 
-        /*bool operator<(const Client &client) const {
+        bool operator<(const Client &client) const {
             return nickname < client.nickname;
-        }*/
+        }
 
         void callback_name(const std::string &name);
         [[nodiscard]] int get_balance() const;
@@ -37,13 +37,12 @@ namespace client {
             return balance == other.balance && nickname == other.nickname;
         }
 
-        std::size_t operator()(const Client& obj) const {
-            std::size_t const h1 = std::hash<std::string>()(obj.nickname);
-            std::size_t const h2 = std::hash<int>()(obj.balance);
-            return h1 ^ (h2 << 1);
-        }
+//        std::size_t operator()(const Client& obj) const {
+//            std::size_t const h1 = std::hash<std::string>()(obj.nickname);
+//            std::size_t const h2 = std::hash<int>()(obj.balance);
+//            return h1 ^ (h2 << 1);
+//        }
     };
-
 
 }  // namespace Client
 

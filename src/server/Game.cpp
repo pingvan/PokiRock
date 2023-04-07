@@ -30,16 +30,16 @@ Game::Game(std::vector<client::Client> lobby)
 void Game::preflop() {
     std::cout << "Preflop\n";
     for (const auto &player : players) {
-        cards_enum.emplace(
+        auto [iter, created] = cards_enum.emplace(
             std::piecewise_construct, std::forward_as_tuple(player),
             std::forward_as_tuple(get_enum_card(), get_enum_card())
         );
-        std::string optional_move = player.optional_move();
+        auto optional_move = player.optional_move();
         if (optional_move == "balance") {
             std::cout << "Your balance is: " << balance[player] << "\n";
         } else if (optional_move == "cards") {
-            cards_enum.at(player).first.print_cards_card();
-            cards_enum.at(player).second.print_cards_card();
+            iter->second.first.print_cards_card();
+            iter->second.second.print_cards_card();
         }
     }
     bets();
@@ -91,8 +91,8 @@ void Game::bets() {
     }
     bool big_blind_flag = false;
     bool small_blind_flag = false;
-//    std::map<client::Client, int> have_beted;
-    std::unordered_map<client::Client, int, client::Client> have_beted;
+    std::map<client::Client, int> have_betted;
+//    std::unordered_map<client::Client, int, client::Client> have_beted;
     bool state = true;
     int some_counter = 0;
     while (state) {
@@ -101,13 +101,13 @@ void Game::bets() {
             if (current_turn == Which_turn::Preflop) {
                 if (!small_blind_flag) {
                     make_a_bet(player, blinds.small_blind);
-                    have_beted[player] = blinds.small_blind;
+                    have_betted[player] = blinds.small_blind;
                     small_blind_flag = true;
                     increase_iterator(it);
                     continue;
                 } else if (!big_blind_flag) {
                     make_a_bet(player, blinds.big_blind);
-                    have_beted[player] = blinds.big_blind;
+                    have_betted[player] = blinds.big_blind;
                     big_blind_flag = true;
                     increase_iterator(it);
                     continue;
@@ -126,12 +126,11 @@ void Game::bets() {
                 continue;
             }
             while (true) {
-                std::string move = player.move(balance[player]);
+                auto move = player.move(balance[player]);
                 if (move == "call") {
-                    const int bet_amount = must_bet - have_beted[player];
+                    const int bet_amount = must_bet - have_betted[player];
                     make_a_bet(player, bet_amount);
-                    balance[player] -= must_bet - have_beted[player];
-                    have_beted[player] = must_bet;
+                    have_betted[player] = must_bet;
                     some_counter += 1;
                     increase_iterator(it);
                     break;
@@ -147,39 +146,40 @@ void Game::bets() {
 
                         if (bet < must_bet) {
                             bet = must_bet;
+                            some_counter++;
                         } else {
                             some_counter = 1;
                         }
                         must_bet = bet;
                         const int bet_amount =
-                            must_bet -
-                            have_beted[player];  // TODO::if balance <
+                            must_bet - have_betted[player];
                         make_a_bet(player, bet_amount);
-                        have_beted[player] = must_bet;
+                        have_betted[player] = must_bet;
                         increase_iterator(it);
                         break;
                     }
                 } else if (move == "all-in") {
-                    int bet = balance[player];
+                    auto bet = balance[player];
                     if (must_bet < bet) {
                         some_counter = 1;
                         must_bet = bet;
                     }
                     make_a_bet(player, bet);
-                    have_beted[player] += bet;
+                    have_betted[player] += bet;
                     increase_iterator(it);
+                    break;
                 } else if (move == "fold") {
                     if (it - round_players.begin() <= last_player) {
                         last_player--;
                         if (last_player < 0) {
                             last_player =
-                                static_cast<int>(round_players.size());
+                                static_cast<int>(round_players.size())-2;
                         }
                     }
                     it = round_players.erase(it);
                     break;
                 } else if (move == "check") {
-                    if (must_bet > have_beted[player]) {
+                    if (must_bet > have_betted[player]) {
                         std::cout
                             << "You can not check here, operation denied.\n";
                     } else {
@@ -221,15 +221,15 @@ void Game::print_cards() {
 }
 
 void Game::who_won() {
-    if (players.size() == 1) {
-        const auto &player = *players.begin();
+    if (round_players.size() == 1) {
+        const auto &player = *round_players.begin();
         balance[player] += total_of_bets;
         std::cout << "Player " << player.name() << " have won!!!\n";
     } else {
         const client::Client *winner = nullptr;
         std::pair<int, int> winning_combination;
         std::vector<int> winning_combination_cards;
-        for (const auto &player : players) {
+        for (const auto &player : round_players) {
             std::pair<int, int> best_combination;
             std::vector<int> best_combination_cards;
             for (int i = 0; i < 6; i++) {
@@ -261,6 +261,9 @@ void Game::who_won() {
                     if (best_combination < combination) {
                         best_combination = combination;
                         best_combination_cards = combination_cards;
+                    }
+                    if (j == 0){
+                        j = i;
                     }
                 }
             }

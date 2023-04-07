@@ -56,8 +56,7 @@ public:
     }
 
     std::string ValueToString() noexcept {
-        auto e = this->value;
-        switch (e) {
+        switch (value) {
             case Value::Two:
                 return "Two";
             case Value::Three:
@@ -88,8 +87,7 @@ public:
     }
 
     std::string SuitToString() noexcept {
-        auto e = this->suit;
-        switch (e) {
+        switch (suit) {
             case Suit::HEARTS:
                 return "of HEARTS";
             case Suit::DIAMONDS:
@@ -117,8 +115,10 @@ private:
     int button;
     int last_player;
     Blinds blinds;
-    std::unordered_map<client::Client, std::pair<Card, Card>, client::Client> cards_enum;
-    std::unordered_map<client::Client, int, client::Client> balance;
+//    std::unordered_map<client::Client, std::pair<Card, Card>, client::Client> cards_enum;
+    std::map<client::Client, std::pair<Card, Card>> cards_enum;
+//    std::unordered_map<client::Client, int, client::Client> balance;
+    std::map<client::Client, int> balance;
     std::vector<int> available_cards;
     std::vector<Card> board_cards;
     int total_of_bets;

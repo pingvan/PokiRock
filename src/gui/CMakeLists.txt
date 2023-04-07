@@ -10,27 +10,27 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -Wall -Wextra -Werror")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -Wall -Wextra -Werror")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -v")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DQT_NO_FOREACH")
 set(OPENSSL_ROOT_DIR /opt/homebrew/Cellar/openssl@3/3.1.0)
 
 
 add_link_options(-fsanitize=address,undefined)
-add_compile_options(-fsanitize=address,undefined)
-
-#TODO::downloading libs for client (if not installed)
-#TODO::ask about it today
-include_directories(${Qt6Widgets_INCLUDE_DIRS})
-include_directories(${PQXX_INCLUDE_DIRS})
-include_directories(${OPENSSL_CRYPTO_LIBRARY})
-include_directories(${OPENSSL_INCLUDE_DIR})
+add_compile_options(-g -fsanitize=address,undefined)
 
 
 find_package(Threads REQUIRED)
 find_package(Qt6 COMPONENTS Widgets REQUIRED)
 find_package(PkgConfig REQUIRED)
 find_package(OpenSSL REQUIRED)
+
+include_directories(${Qt6Widgets_INCLUDE_DIRS})
+include_directories(${PQXX_INCLUDE_DIRS})
+include_directories(${OPENSSL_CRYPTO_LIBRARY})
+include_directories(${OPENSSL_INCLUDE_DIR})
+
 
 #for LIMA
 #add_executable(PokiRock client.cpp server.cpp game.cpp win_check.cpp ../main.cpp)
