@@ -1,23 +1,29 @@
 #ifndef DATABASE_CONNECTOR_H
 #define DATABASE_CONNECTOR_H
 
-#include "../rename_later.h"
+#include "../sources.h"
 
 namespace data {
 
     struct DataBase_connector {
-        std::string sha_hash(const std::string &phrase);
+
+        static std::string sha_hash(const std::string &phrase);
 
         static std::string generate_salt(int length);
 
-        void insert_new_client(const std::string &client_login, const std::string &pass);
+        static void insert_new_client(const std::string &client_login, const std::string &pass);
 
-        bool log_in_client(const std::string &client_login, const std::string &pass_entered);
-        void insert_games(const std::string &client_login);
-        void insert_win(const std::string &client_login);
-        void update_balance(const std::string &client_login, const int &balance_delta);
+        static bool log_in_client(const std::string &client_login, const std::string &pass_entered);
+        static void insert_games(const std::string &client_login);
+        static void insert_win(const std::string &client_login);
+        static void update_balance(const std::string &client_login, const int &balance_delta);
     private:
-        std::string connection_message = "postgres://postgres:stillloveher@localhost:5432/clients";
+        //const std::string connection_message = "postgres://postgres:stillloveher@localhost:5432/clients";
+        //mutable std::mutex m_data_mutex; ??????????????????
+        static std::string& conn_msg() {
+            static std::string mm = "postgres://postgres:stillloveher@localhost:5432/clients";
+            return mm;
+        }
     };
 }
 

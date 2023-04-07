@@ -1,7 +1,7 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
-#include "../rename_later.h"
+#include "../sources.h"
 #include "../server/DataBase_connector.h"
 
 namespace server {
@@ -14,13 +14,14 @@ namespace client {
         std::string nickname;
         int balance;
     public:
-        void login();
+        friend struct ClientHash;
+        void login_ONLY_TESTING();
 
-        void registeration();
+        void registration_ONLY_TESTING();
 
-        bool operator<(const Client &client) const {
+        /*bool operator<(const Client &client) const {
             return nickname < client.nickname;
-        }
+        }*/
 
         void callback_name(const std::string &name);
         [[nodiscard]] int get_balance() const;
@@ -31,7 +32,18 @@ namespace client {
         [[nodiscard]] std::string move(int balance) const;
 
         [[nodiscard]] std::string optional_move() const;
+
+        bool operator==(const Client& other) const {
+            return balance == other.balance && nickname == other.nickname;
+        }
+
+        std::size_t operator()(const Client& obj) const {
+            std::size_t const h1 = std::hash<std::string>()(obj.nickname);
+            std::size_t const h2 = std::hash<int>()(obj.balance);
+            return h1 ^ (h2 << 1);
+        }
     };
+
 
 }  // namespace Client
 

@@ -1,7 +1,7 @@
 #ifndef SERVER_H
 #define SERVER_H
 
-#include "../rename_later.h"
+#include "../sources.h"
 #include "../client/Client.h"
 #include "Game.h"
 

@@ -1,6 +1,6 @@
 #include "server/Server.h"
 #include "client/Client.h"
-#include "../rename_later.h"
+#include "../sources.h"
 
 void clear_db() {
     try {
@@ -25,10 +25,9 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char *argv[]) {
     client::Client p3;
 //    p1.login();
 //    p2.login();
-    data::DataBase_connector connect;
-    std::cout << (connect.sha_hash("") == "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855");
 //    p1.registeration();
 //    p2.registeration();
+    std::cout << std::filesystem::current_path().string() << '\n';
 //    clear_db();
 
 }

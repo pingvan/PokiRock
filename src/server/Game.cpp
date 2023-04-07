@@ -49,8 +49,7 @@ void Game::preflop() {
 void Game::flop() {
     current_turn = Flop;
     for (const auto &c : players) {
-        data::DataBase_connector connect;
-        connect.insert_games(c.name());
+        data::DataBase_connector::insert_games(c.name());
     }
     if (players.size() > 1) {
         std::cout << "Flop\n";
@@ -92,7 +91,8 @@ void Game::bets() {
     }
     bool big_blind_flag = false;
     bool small_blind_flag = false;
-    std::map<client::Client, int> have_beted;
+//    std::map<client::Client, int> have_beted;
+    std::unordered_map<client::Client, int, client::Client> have_beted;
     bool state = true;
     int some_counter = 0;
     while (state) {
@@ -204,7 +204,7 @@ void Game::bets() {
 Card Game::get_enum_card() {
     std::random_device rand;
     std::mt19937 mt_rand(rand());
-    int size = static_cast<int>(available_cards.size());
+    int const size = static_cast<int>(available_cards.size());
     std::uniform_int_distribution<int> range(0, size);
     auto index = range(mt_rand);
     auto card = available_cards[index];
@@ -270,17 +270,16 @@ void Game::who_won() {
                 winner = &player;
             }
         }
-        data::DataBase_connector connect;
         balance[*winner] += total_of_bets;
         std::cout << "Player " << winner->name() << " have won!!!\n";
-        connect.insert_win(winner->name());
+        data::DataBase_connector::insert_win(winner->name());
         std::cout << "Winning combination is:";
         for (const auto &c : balance) {
-            connect.update_balance(
+            data::DataBase_connector::update_balance(
                 c.first.name(), (c.first.get_balance() - c.second)
             );
         }
-        for (int card_num : winning_combination_cards) {
+        for (int const card_num : winning_combination_cards) {
             auto c = Card(card_num);
             std::cout << " " << c.ValueToString() << ' ' << c.SuitToString();
         }

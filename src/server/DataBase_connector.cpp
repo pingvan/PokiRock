@@ -26,7 +26,7 @@ namespace data {
 
     void DataBase_connector::insert_new_client(const std::string &client_login, const std::string &pass) {
         try {
-            pqxx::connection con{connection_message};
+            pqxx::connection con{conn_msg()};
             pqxx::work txn{con};
             std::string salt = generate_salt(static_cast<int>(pass.size()));
             std::string hashed = sha_hash(salt + pass);
@@ -46,7 +46,7 @@ namespace data {
 
     bool DataBase_connector::log_in_client(const std::string &client_login, const std::string &pass_entered) {
         try {
-            pqxx::connection con{connection_message};
+            pqxx::connection con{conn_msg()};
             pqxx::work txn{con};
             auto client_id = txn.query_value<uint32_t>("SELECT client_id "
                                                        "FROM clients "
@@ -61,9 +61,6 @@ namespace data {
                 hase_tab = r[0].as<std::string>();
                 salt_tab = r[1].as<std::string>();
             }
-            std::cout << "Enter password:\n";
-//        std::string pass_eneterd;
-//        std::cin >> pass_eneterd;
             std::string const hashed_for_cin = sha_hash(salt_tab + pass_entered);
             txn.commit();
             con.close();
@@ -71,7 +68,7 @@ namespace data {
                 std::cout << "You successfully logged in!\n";
                 return true;
             } else {
-                std::cout << "Uncorrect login or password! Try again:\n";
+                std::cout << "Uncorrect login_ONLY_TESTING or password! Try again:\n";
                 return false;
             }
         } catch (std::exception &e) {
@@ -82,7 +79,7 @@ namespace data {
 
     void DataBase_connector::insert_games(const std::string &client_login) {
         try {
-            pqxx::connection con{connection_message};
+            pqxx::connection con{conn_msg()};
             pqxx::work txn{con};
             txn.exec("UPDATE clients "
                      "SET client_games = client_games+1 "
@@ -96,7 +93,7 @@ namespace data {
 
     void DataBase_connector::insert_win(const std::string &client_login) {
         try {
-            pqxx::connection con{connection_message};
+            pqxx::connection con{conn_msg()};
             pqxx::work txn{con};
             txn.exec("UPDATE clients "
                      "SET client_wins = client_wins+1 "
@@ -110,7 +107,7 @@ namespace data {
 
     void DataBase_connector::update_balance(const std::string &client_login, const int &balance_delta) {
         try {
-            pqxx::connection con{connection_message};
+            pqxx::connection con{conn_msg()};
             pqxx::work txn{con};
             txn.exec_params("UPDATE clients "
                      "SET client_balance = client_balance + $1"

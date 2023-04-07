@@ -2,31 +2,39 @@
 
 namespace client {
 
-    void Client::login() {
+    void Client::login_ONLY_TESTING() {
         std::cout << "Enter your name:\n";
-        std::string log = receive_name(*this);
-        data::DataBase_connector connect;
+        std::string const log = receive_name(*this);
+        std::cout << "Enter password:\n";
         std::string n;
         std::cin >> n;
-        if (!connect.log_in_client(log, n)) {
-            login();
+        if (!data::DataBase_connector::log_in_client(log, n)) {
+            login_ONLY_TESTING();
         }
     }
 
-    void Client::registeration() {
+    void Client::registration_ONLY_TESTING() {
         std::cout << "Enter your name:\n";
-        std::string login = receive_name(*this);
-        data::DataBase_connector connect;
-        std::string tmp = " "; //TODO
-        connect.insert_new_client(login, tmp);
+        std::string const login = receive_name(*this);
+//        data::DataBase_connector connect;
+        std::string pass;
+        std::string pass_repeated;
+        bool completed = false;
+        while (!completed) {
+            std::cout << "Create password:\n";
+            std::cin >> pass;
+            std::cout << "Repeate your password:\n";
+            std::cin >> pass_repeated;
+            if (pass == pass_repeated) {
+                completed = true;
+            }
+        }
+        data::DataBase_connector::insert_new_client(login, pass);
+        std::cout << "You successfully registered!\n";
     }
 
     void Client::callback_name(const std::string &name) {
         nickname = name;
-    }
-
-    int Client::get_balance() const {
-        return balance;
     }
 
     std::string Client::receive_name(Client &pl) {
@@ -34,6 +42,12 @@ namespace client {
         std::cin >> name;
         pl.callback_name(name);
         return name;
+    }
+
+
+    //above here only testing methods (for console)
+    int Client::get_balance() const {
+        return balance;
     }
 
     std::string Client::name() const {

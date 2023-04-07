@@ -32,12 +32,20 @@ find_package(Qt6 COMPONENTS Widgets REQUIRED)
 find_package(PkgConfig REQUIRED)
 find_package(OpenSSL REQUIRED)
 
-#add_executable(PokiRock client.cpp server.cpp game.cpp win_check.cpp ../main.cpp) #for my Linux
+#for LIMA
+#add_executable(PokiRock client.cpp server.cpp game.cpp win_check.cpp ../main.cpp)
 
+#all project with graphic
 #add_executable(PokiRock  ../server/DataBase_connector.cpp ../client/Client.cpp ../server/Server.cpp ../server/Game.cpp ../server/Win_check.cpp ../qt_files/Registration_window.cpp ../qt_files/game.cpp  ../qt_files/Main_menu.cpp  ../qt_files/First_window.cpp ../qt_files/Authorization_window.cpp  ../qt_files/main.cpp)
-#add_executable(PokiRock  ../rename_later.cpp ../server/DataBase_connector.cpp ../client/Client.cpp ../server/Game.cpp ../server/Server.cpp ../server/Win_check.cpp ../main.cpp)
+
+#only logic
+add_executable(PokiRock  ../server/DataBase_connector.cpp ../client/Client.cpp ../server/Game.cpp ../server/Server.cpp ../server/Win_check.cpp ../main.cpp)
+
+#only graphic
 #add_executable(PokiRock  ../qt_files/Main_menu.cpp  ../qt_files/First_window.cpp ../qt_files/Authorization_window.cpp  ../qt_files/main.cpp)
-add_executable(PokiRock  ../server/DataBase_connector.cpp ../main.cpp)
+
+#only main
+#add_executable(PokiRock  ../server/DataBase_connector.cpp ../main.cpp)
 target_link_libraries(PokiRock Qt${QT_VERSION}::Widgets)
 target_link_libraries(PokiRock ${PQXX_LIB})
 target_link_libraries(PokiRock OpenSSL::Crypto)

@@ -2,7 +2,7 @@
 #define GAME_H
 
 #include "../client/Client.h"
-#include "../rename_later.h"
+#include "../sources.h"
 #include "DataBase_connector.h"
 
 namespace client {
@@ -51,7 +51,7 @@ public:
         suit = suits_of_cards[num % 4];
     }
 
-    int get_index() const {
+    [[nodiscard]] int get_index() const {
         return index;
     }
 
@@ -101,9 +101,9 @@ public:
         }
     }
 
-    bool operator<(const Card &card) const {
-        return value < card.value;
-    }
+//    bool operator<(const Card &card) const {
+//        return value < card.value;
+//    }
 
     void print_cards_card();
 };
@@ -117,8 +117,8 @@ private:
     int button;
     int last_player;
     Blinds blinds;
-    std::map<client::Client, std::pair<Card, Card>> cards_enum;
-    std::map<client::Client, int> balance;
+    std::unordered_map<client::Client, std::pair<Card, Card>, client::Client> cards_enum;
+    std::unordered_map<client::Client, int, client::Client> balance;
     std::vector<int> available_cards;
     std::vector<Card> board_cards;
     int total_of_bets;
