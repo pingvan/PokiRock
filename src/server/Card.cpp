@@ -2,18 +2,32 @@
 #include <iostream>
 #include <stdexcept>
 
-Card::Card(int num)
-    : suit(static_cast<Suit>(num % 4)),
-      value(static_cast<Value>(num / 4)),
-      index(num) {
-    if (num > static_cast<int>(Suit::SUIT_SIZE) *
-                  static_cast<int>(Value::VALUE_SIZE)) {
+Card::Card(Suit suit, Value value) : suit(suit), value(value) {
+    if (get_index() > static_cast<int>(Suit::SUIT_SIZE) *
+                          static_cast<int>(Value::VALUE_SIZE)) {
         throw std::runtime_error("too big card number");
     }
 }
 
-[[nodiscard]] int Card::get_index() const {
-    return index;
+Card::Card(int num)
+    : suit(static_cast<Suit>(num % 4)), value(static_cast<Value>(num / 4)) {
+    if (get_index() > static_cast<int>(Suit::SUIT_SIZE) *
+                          static_cast<int>(Value::VALUE_SIZE)) {
+        throw std::runtime_error("too big card number");
+    }
+}
+
+int Card::get_index() const {
+    return static_cast<int>(value) * static_cast<int>(Suit::SUIT_SIZE) +
+           static_cast<int>(suit);
+}
+
+Suit Card::get_suit() const {
+    return suit;
+}
+
+Value Card::get_value() const {
+    return value;
 }
 
 std::string_view Card::value_to_string() const {
@@ -62,6 +76,10 @@ std::string_view Card::suit_to_string() const {
         default:
             throw std::runtime_error("too big card number");
     }
+}
+
+bool Card::operator<(const Card &card) const {
+    return value < card.value;
 }
 
 std::ostream &operator<<(std::ostream &os, const Card &card) {

@@ -20,6 +20,21 @@ bool Win_check::is_straight_flush(
     return result;
 }
 
+bool Win_check::is_straight_flush(const std::vector<Card> &cards) {
+    bool result = true;
+    for (std::size_t i = 1; i + 1 < cards.size(); ++i) {
+        result &= cards[i - 1].get_suit() == cards[i].get_suit() &&
+                  static_cast<int>(cards[i - 1].get_value()) ==
+                      static_cast<int>(cards[i].get_value()) - 1;
+    }
+    result &= cards[3].get_suit() == cards[4].get_suit() &&
+              (static_cast<int>(cards[3].get_value()) ==
+                   static_cast<int>(cards[4].get_value()) - 1 ||
+               (cards[0].get_value() == Value::TWO &&
+                cards[4].get_value() == Value::ACE));
+    return result;
+}
+
 std::pair<int, int> Win_check::check(const std::vector<int> &combination) {
     std::vector<int> suits(5);
     std::vector<int> values(5);
@@ -182,4 +197,4 @@ std::pair<int, int> Win_check::check(const std::vector<int> &combination) {
         return {0, secondary_comparator};
     }  // high_card end
 }
-}  // namespace Server
+}  // namespace server

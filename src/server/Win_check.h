@@ -1,9 +1,9 @@
 #ifndef WIN_CHECK_H
 #define WIN_CHECK_H
 
-#include "Card.hpp"
 #include <utility>
 #include <vector>
+#include "Card.hpp"
 
 namespace server {
 struct Win_check {
@@ -11,8 +11,9 @@ struct Win_check {
         const std::vector<int> &suits,
         const std::vector<int> &values
     );
+    static bool is_straight_flush(const std::vector<Card> &cards);
     static std::pair<int, int> check(const std::vector<int> &combination);
 };
-}  // namespace Server
+}  // namespace server
 
 #endif  // WIN_CHECK_H
