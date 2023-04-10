@@ -17,10 +17,6 @@ registration_window::~registration_window()
     delete ui;
 }
 
-//bool add_new_user(const std::string& login, const std::string& password){
-//    return true;
-//}
-
 void registration_window::on_pushButton_clicked()
 {
     QString user_login = ui->name->text();

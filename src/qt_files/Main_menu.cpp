@@ -8,7 +8,7 @@ main_menu::main_menu(QWidget *parent) :
     ui(new Ui::main_menu)
 {
     ui->setupUi(this);
-    QPixmap image(":/main_menu/images/Снимок_экрана_2023-04-05_234448_(1)-transformed (1).png");
+    QPixmap image(":/main_menu/images/pngegg (10).png");
     int width = ui->image->width() + 1000;
     int height = ui->image->height();
 

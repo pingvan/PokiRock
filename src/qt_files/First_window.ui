@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>926</width>
-    <height>570</height>
+    <width>1424</width>
+    <height>1100</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,11 +23,11 @@
          <enum>Qt::Horizontal</enum>
         </property>
         <property name="sizeType">
-         <enum>QSizePolicy::Expanding</enum>
+         <enum>QSizePolicy::Fixed</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>100</width>
+          <width>80</width>
           <height>20</height>
          </size>
         </property>
@@ -38,12 +38,9 @@
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Fixed</enum>
-        </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>65</width>
+          <width>40</width>
           <height>20</height>
          </size>
         </property>
@@ -51,14 +48,32 @@
       </item>
       <item>
        <widget class="QLabel" name="label">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>900</width>
+          <height>900</height>
+         </size>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="cursor">
+         <cursorShape>ArrowCursor</cursorShape>
+        </property>
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
         </property>
         <property name="text">
          <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="other.qrc">:/main_menu/images/Снимок экрана 2023-04-05 234448-PhotoRoom.png-PhotoRoom.png</pixmap>
         </property>
        </widget>
       </item>
@@ -67,12 +82,9 @@
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Expanding</enum>
-        </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>30</width>
+          <width>40</width>
           <height>20</height>
          </size>
         </property>
@@ -226,7 +238,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>926</width>
+     <width>1424</width>
      <height>25</height>
     </rect>
    </property>
@@ -243,8 +255,6 @@
    </attribute>
   </widget>
  </widget>
- <resources>
-  <include location="other.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
