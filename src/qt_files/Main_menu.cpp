@@ -8,7 +8,7 @@ main_menu::main_menu(QWidget *parent) :
     ui(new Ui::main_menu)
 {
     ui->setupUi(this);
-    QPixmap image(":/main_menu/images/pngegg (10).png");
+    QPixmap image("D:/PokiRock/src/qt_files/images/people.png");
     int width = ui->image->width() + 1000;
     int height = ui->image->height();
 

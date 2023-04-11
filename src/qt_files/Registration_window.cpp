@@ -1,6 +1,6 @@
 #include "Registration_window.h"
 #include "ui_Registration_window.h"
-#include "../server/DataBase_connector.h"
+//#include "../server/DataBase_connector.h"
 #include <QMessageBox>
 #include <string>
 #include "Authorization_window.h"
@@ -25,8 +25,8 @@ void registration_window::on_pushButton_clicked()
     if (user_password != user_password2) {
         QMessageBox::warning(this, "", "Пароли не совпадают");
     } else {
-        data::DataBase_connector connect;
-        connect.insert_new_client(user_login.toStdString(), user_password.toStdString());
+//        data::DataBase_connector connect;
+//        connect.insert_new_client(user_login.toStdString(), user_password.toStdString());
         second_window->show();
         close();
     }

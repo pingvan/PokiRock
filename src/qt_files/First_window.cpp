@@ -7,7 +7,7 @@ first_window::first_window(QWidget *parent)
     , ui(new Ui::first_window)
 {
     ui->setupUi(this);
-    QPixmap image(":/main_menu/images/Снимок экрана 2023-04-05 234448-PhotoRoom.png-PhotoRoom.png");
+    QPixmap image("C:/Users/iliaa/Downloads/not bad");
     int width = ui->label->width();
     int height = ui->label->height();
 //    ui->label->setScaledContents(true);

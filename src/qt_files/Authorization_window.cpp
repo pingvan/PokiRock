@@ -1,7 +1,7 @@
 #include "Authorization_window.h"
 #include "First_window.h"
 #include "ui_Authorization_window.h"
-#include "../server/DataBase_connector.h"
+//#include "../server/DataBase_connector.h"
 #include <QMessageBox>
 
 authorization_window::authorization_window(QWidget *parent) :
@@ -20,8 +20,8 @@ void authorization_window::on_authorizate_clicked()
 {
     QString user_login = ui->Login->text();
     QString user_password = ui->Password->text();
-    data::DataBase_connector connect;
-    if (connect.log_in_client(user_login.toStdString(), user_password.toStdString())){
+//    data::DataBase_connector connect;
+    if (/*connect.log_in_client(user_login.toStdString(), user_password.toStdString())*/true){
         QMessageBox::information(this, "Добро пожаловать в PokiRock!", "Вы успешно авторизовались");
         start_window->close();
         close();
