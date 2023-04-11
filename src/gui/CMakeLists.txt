@@ -29,7 +29,7 @@ find_package(OpenSSL REQUIRED)
 #add_executable(PokiRock client.cpp server.cpp game.cpp win_check.cpp ../main.cpp)
 
 #all project with graphic
-add_executable(PokiRock  ../server/DataBase_connector.cpp ../client/Client.cpp ../server/Server.cpp ../server/Game.cpp ../server/Win_check.cpp ../qt_files/Registration_window.cpp ../qt_files/game.cpp  ../qt_files/Main_menu.cpp  ../qt_files/First_window.cpp ../qt_files/Authorization_window.cpp  ../qt_files/main.cpp)
+add_executable(PokiRock  ../server/DataBase_connector.cpp ../server/Card.cpp ../client/Client.cpp ../server/Server.cpp ../server/Game.cpp ../server/Win_check.cpp ../qt_files/Registration_window.cpp ../qt_files/game.cpp  ../qt_files/Main_menu.cpp  ../qt_files/First_window.cpp ../qt_files/Authorization_window.cpp  ../qt_files/main.cpp)
 
 #only logic
 #add_executable(PokiRock  ../server/DataBase_connector.cpp ../client/Client.cpp ../server/Game.cpp ../server/Server.cpp ../server/Win_check.cpp ../main.cpp)

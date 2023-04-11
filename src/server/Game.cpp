@@ -34,8 +34,8 @@ void Game::preflop() {
         if (optional_move == "balance") {
             std::cout << "Your balance is: " << balance[player] << "\n";
         } else if (optional_move == "cards") {
-            iter->second.first.print_cards_card();
-            iter->second.second.print_cards_card();
+            std::cout << iter->second.first << ' ' <<
+            iter->second.second << '\n';
         }
     }
     bets();
@@ -209,8 +209,7 @@ Card Game::get_enum_card() {
 
 void Game::print_cards() {
     for (auto num_of_card : board_cards) {
-        std::cout << num_of_card.ValueToString() << " "
-                  << num_of_card.SuitToString() << " ";
+        std::cout << num_of_card << '\n';
     }
     std::cout << "\n";
 }
@@ -279,7 +278,7 @@ void Game::who_won() {
         }
         for (int const card_num : winning_combination_cards) {
             auto c = Card(card_num);
-            std::cout << " " << c.ValueToString() << ' ' << c.SuitToString();
+            std::cout << " " << c;
         }
     }
     new_round();
