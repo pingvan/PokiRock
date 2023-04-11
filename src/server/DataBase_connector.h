@@ -1,7 +1,11 @@
 #ifndef DATABASE_CONNECTOR_H
 #define DATABASE_CONNECTOR_H
 
-#include "../sources.h"
+#include <pqxx/pqxx>
+#include <string>
+#include <openssl/sha.h>
+#include <random>
+#include <iostream>
 
 namespace data {
 
@@ -12,8 +16,7 @@ namespace data {
         static std::string generate_salt(int length);
 
         static void insert_new_client(const std::string &client_login, const std::string &pass);
-
-        static bool log_in_client(const std::string &client_login, const std::string &pass_entered);
+        static std::pair<std::string, std::string> log_in_client(const std::string &client_login);
         static void insert_games(const std::string &client_login);
         static void insert_win(const std::string &client_login);
         static void update_balance(const std::string &client_login, const int &balance_delta);

@@ -17,10 +17,6 @@ registration_window::~registration_window()
     delete ui;
 }
 
-//bool add_new_user(const std::string& login, const std::string& password){
-//    return true;
-//}
-
 void registration_window::on_pushButton_clicked()
 {
     QString user_login = ui->name->text();
@@ -29,8 +25,7 @@ void registration_window::on_pushButton_clicked()
     if (user_password != user_password2) {
         QMessageBox::warning(this, "", "Пароли не совпадают");
     } else {
-        data::DataBase_connector connect;
-        connect.insert_new_client(user_login.toStdString(), user_password.toStdString());
+        //
         second_window->show();
         close();
     }

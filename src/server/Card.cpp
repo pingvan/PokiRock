@@ -83,6 +83,6 @@ bool Card::operator<(const Card &card) const {
 }
 
 std::ostream &operator<<(std::ostream &os, const Card &card) {
-    os << card.value_to_string() << " of " << card.suit_to_string();
+    os << card.value_to_string() << "_of_" << card.suit_to_string();
     return os;
 }
