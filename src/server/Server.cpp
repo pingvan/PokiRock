@@ -19,7 +19,7 @@ std::pair<std::string, std::string> Server::get_salt_and_hash(std::string &clien
         return hash_salt;
     } catch(pqxx::unexpected_rows &e) {
         std::cerr << e.what() << '\n';
-        return
+        return {"", ""};
     }
 }
 

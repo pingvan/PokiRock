@@ -5,6 +5,17 @@ namespace client {
 Client::Client() : m_socket(m_context) {
     m_context_thread = std::thread([this] { m_context.run(); });
 }
+Client::~Client() {
+    disconnect();
+}
+
+void Client::disconnect() {
+    m_context.stop();
+    m_socket.close();
+    if (m_context_thread.joinable()) {
+        m_context_thread.join();
+    }
+}
 
 void Client::login_console() {
     std::cout << "Enter your name:\n";

@@ -16,6 +16,7 @@ private:
     std::thread m_context_thread;
 public:
     Client();
+    ~Client();
 
     friend struct ClientHash;
 
@@ -32,6 +33,7 @@ public:
     void callback_name(const std::string &name);
 
     void client_try_to_connect(); //TODO
+    void disconnect();
 
 
     [[nodiscard]] int get_balance() const;

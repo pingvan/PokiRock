@@ -5,15 +5,15 @@
 
 namespace message {
 
-template<typename T>
+enum class message_types {LOGIN, REGISTRATION};
+
 struct Message_header {
-    T id;
+    message_types id;
     long long size;
 };
 
-template<typename T>
 struct Message {
-    Message_header<T> header;
+    Message_header header;
     std::vector<unsigned int> message;
 };
 
