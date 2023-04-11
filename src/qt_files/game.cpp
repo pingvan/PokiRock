@@ -55,7 +55,7 @@ game::game(QWidget *parent) :
     ui->player3_card_2->setPixmap(image7.scaled(width_7, height_7, Qt::KeepAspectRatio));
 
 
-    QPixmap image8("D:/PokiRock/src/qt_files/images/cards/Cover/main_cover.png");
+    QPixmap image8("/Users/user/PokiRock/src/qt_files/images/cards/Cover/main_cover.png");
     int width_8 = ui->player2_card_1->width();
     int height_8 = ui->player2_card_1->height();
     ui->player4_card_1->setPixmap(image8.scaled(width_8, height_8, Qt::KeepAspectRatio));
