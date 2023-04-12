@@ -9,6 +9,7 @@ authorization_window::authorization_window(QWidget *parent) :
     ui(new Ui::authorization_window)
 {
     ui->setupUi(this);
+    ui->Password->setEchoMode(QLineEdit::Password);
 }
 
 authorization_window::~authorization_window()

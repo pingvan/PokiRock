@@ -10,6 +10,8 @@ registration_window::registration_window(QWidget *parent) :
     ui(new Ui::registration_window)
 {
     ui->setupUi(this);
+    ui->password->setEchoMode(QLineEdit::Password);
+    ui->password2->setEchoMode(QLineEdit::Password);
 }
 
 registration_window::~registration_window()
