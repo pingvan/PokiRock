@@ -7,7 +7,7 @@ first_window::first_window(QWidget *parent)
     , ui(new Ui::first_window)
 {
     ui->setupUi(this);
-    QPixmap image("/Users/user/PokiRock/src/qt_files/images/main_label.png");
+    QPixmap image(":/labels/images/labels/main_label.png");
     int width = ui->label->width();
     int height = ui->label->height();
 //    ui->label->setScaledContents(true);

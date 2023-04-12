@@ -44,5 +44,6 @@ RESOURCES += \
     clubs.qrc \
     diamonds.qrc \
     hearts.qrc \
-#    other.qrc \
+    labels.qrc \
+    other.qrc \
     spades.qrc

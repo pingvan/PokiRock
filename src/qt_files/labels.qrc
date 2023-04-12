@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/labels">
+        <file>images/labels/last_label.png</file>
+        <file>images/labels/main_label.png</file>
+        <file>images/labels/not_bad_but_green.png</file>
+        <file>images/labels/template.png</file>
+    </qresource>
+</RCC>
