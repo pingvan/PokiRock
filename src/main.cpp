@@ -1,5 +1,6 @@
+#include <boost/asio.hpp>
 #include "../sources.h"
-#include "client/Client.h"
+#include "client/client.h"
 #include "server/Server.h"
 
 void clear_db() {
@@ -21,9 +22,9 @@ int main(/*[[maybe_unused]] int argc, [[maybe_unused]] char *argv[]*/) {
     client::Client p1;
     client::Client p2;
     client::Client p3;
-    p1.login_ONLY_TESTING();
-    p2.login_ONLY_TESTING();
-    p3.login_ONLY_TESTING();
+    p1.login_console();
+    p2.login_console();
+    p3.login_console();
     s1.add(p1);
     s1.add(p2);
     s1.add(p3);

@@ -1,14 +1,10 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "../client/Client.h"
+#include <unordered_map>
+#include "../client/client.h"
 #include "Card.hpp"
-#include "../sources.h"
 #include "DataBase_connector.h"
-
-namespace client {
-struct Client;
-}
 
 enum Which_turn { Preflop, Flop, Turn, River };
 
@@ -26,10 +22,10 @@ private:
     int button;
     int last_player;
     Blinds blinds;
-//    std::unordered_map<client::Client, std::pair<Card, Card>, client::Client> cards_enum;
-    std::map<client::Client, std::pair<Card, Card>> cards_enum;
-//    std::unordered_map<client::Client, int, client::Client> balance;
-    std::map<client::Client, int> balance;
+    std::unordered_map<client::Client, std::pair<Card, Card>, client::ClientHash> cards_enum;
+    //std::map<client::Client, std::pair<Card, Card>> cards_enum;
+    std::unordered_map<client::Client, int, client::ClientHash> balance;
+//    std::map<client::Client, int> balance;
     std::vector<int> available_cards;
     std::vector<Card> board_cards;
     int total_of_bets;

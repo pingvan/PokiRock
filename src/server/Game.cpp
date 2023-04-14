@@ -34,8 +34,7 @@ void Game::preflop() {
         if (optional_move == "balance") {
             std::cout << "Your balance is: " << balance[player] << "\n";
         } else if (optional_move == "cards") {
-            std::cout << iter->second.first << ' ' <<
-            iter->second.second << '\n';
+            std::cout << iter->second.first << " " << iter->second.second << '\n';
         }
     }
     bets();
@@ -87,8 +86,8 @@ void Game::bets() {
     }
     bool big_blind_flag = false;
     bool small_blind_flag = false;
-    std::map<client::Client, int> have_betted;
-//    std::unordered_map<client::Client, int, client::Client> have_beted;
+//    std::map<client::Client, int> have_betted;
+    std::unordered_map<client::Client, int, client::ClientHash> have_betted;
     bool state = true;
     std::size_t some_counter = 0;
     while (state) {
@@ -209,7 +208,7 @@ Card Game::get_enum_card() {
 
 void Game::print_cards() {
     for (auto num_of_card : board_cards) {
-        std::cout << num_of_card << '\n';
+        std::cout << num_of_card << " " << num_of_card << " ";
     }
     std::cout << "\n";
 }

@@ -40,12 +40,11 @@ namespace data {
             txn.commit();
             con.close();
         } catch (std::exception &e) {
-            std::cout << e.what() << '\n';
+            std::cerr << e.what() << '\n';
         }
     }
 
-    bool DataBase_connector::log_in_client(const std::string &client_login, const std::string &pass_entered) {
-        try {
+    std::pair<std::string, std::string> DataBase_connector::log_in_client(const std::string &client_login) {
             pqxx::connection con{conn_msg()};
             pqxx::work txn{con};
             auto client_id = txn.query_value<uint32_t>("SELECT client_id "
@@ -60,20 +59,9 @@ namespace data {
                 hase_tab = r[0].as<std::string>();
                 salt_tab = r[1].as<std::string>();
             }
-            std::string const hashed_for_cin = sha_hash(salt_tab + pass_entered);
             txn.commit();
             con.close();
-            if (hase_tab == hashed_for_cin) {
-                std::cout << "You successfully logged in!\n";
-                return true;
-            } else {
-                std::cout << "Uncorrect login_ONLY_TESTING or password! Try again:\n";
-                return false;
-            }
-        } catch (std::exception &e) {
-            std::cout << e.what() << '\n';
-            return false;
-        }
+            return std::make_pair(hase_tab, salt_tab);
     }
 
     void DataBase_connector::insert_games(const std::string &client_login) {
@@ -86,7 +74,7 @@ namespace data {
             txn.commit();
             con.close();
         } catch (std::exception &e) {
-            std::cout << e.what() << '\n';
+            std::cerr << e.what() << '\n';
         }
     }
 
@@ -100,7 +88,7 @@ namespace data {
             txn.commit();
             con.close();
         } catch (std::exception &e) {
-            std::cout << e.what() << '\n';
+            std::cerr << e.what() << '\n';
         }
     }
 
@@ -114,7 +102,7 @@ namespace data {
             txn.commit();
             con.close();
         } catch (std::exception &e) {
-            std::cout << e.what() << '\n';
+            std::cerr << e.what() << '\n';
         }
     }
 }
