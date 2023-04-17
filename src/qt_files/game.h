@@ -20,6 +20,11 @@ private:
     const char* path(const char c, const std::string& card);
     const char* path_to_cover_T();
     const char* path_to_cover();
+    void setDillerCards();
+    void setPlayer1Cards();
+    void setPlayer2Cards();
+    void setPlayer3Cards();
+    void setPlayer4Cards();
 };
 
 #endif // GAME_H

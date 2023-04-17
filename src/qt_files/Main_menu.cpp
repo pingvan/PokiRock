@@ -26,8 +26,8 @@ void main_menu::on_exit_clicked()
 
 void main_menu::on_play_clicked()
 {
-    hide();
     QMessageBox::information(this, "Подключение...", "Игра найдена!");
+    hide();
     game_window = new game(this);
     game_window->showFullScreen();
 }

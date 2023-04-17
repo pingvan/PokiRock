@@ -7,11 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>1239</width>
-    <height>853</height>
+    <height>953</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget[objectName=&quot;game&quot;]{ background-image: url(&quot;:/other/images/other/sukno.png&quot;) no-repeat right bottom; } </string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

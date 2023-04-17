@@ -23,7 +23,7 @@ void authorization_window::on_authorizate_clicked()
     QString user_login = ui->Login->text();
     QString user_password = ui->Password->text();
 
-    if (/*registration->flag && user_login == "admin" && user_password == "aboba"*/ true){
+    if (registration->flag && user_login == "admin" && user_password == "aboba"){
         QMessageBox::information(this, "Добро пожаловать в PokiRock!", "Вы успешно авторизовались");
         start_window->close();
         close();

@@ -48,3 +48,12 @@ RESOURCES += \
     labels.qrc \
     other.qrc \
     spades.qrc
+
+DISTFILES += \
+    images/labels/Prob-transformed.png \
+    images/labels/label_1.png \
+    images/labels/last_label.png \
+    images/labels/main_label.png \
+    images/labels/not_bad.png \
+    images/labels/not_bad_but_green.png \
+    images/labels/template.png
