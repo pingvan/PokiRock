@@ -10,7 +10,6 @@ first_window::first_window(QWidget *parent)
     QPixmap image(":/labels/images/labels/main_label.png");
     int width = ui->label->width();
     int height = ui->label->height();
-//    ui->label->setScaledContents(true);
     ui->label->setPixmap(image.scaled(width, height, Qt::KeepAspectRatio));
 }
 

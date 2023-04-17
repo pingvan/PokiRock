@@ -11,7 +11,6 @@ main_menu::main_menu(QWidget *parent) :
     QPixmap image(":/other/images/other/people.png");
     int width = ui->image->width() + 1000;
     int height = ui->image->height();
-
     ui->image->setPixmap(image.scaled(width, height, Qt::KeepAspectRatio));
 }
 

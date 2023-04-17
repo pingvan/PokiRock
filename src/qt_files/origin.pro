@@ -42,6 +42,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     clubs.qrc \
+    cover.qrc \
     diamonds.qrc \
     hearts.qrc \
     labels.qrc \

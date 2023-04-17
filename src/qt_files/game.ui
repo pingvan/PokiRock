@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1239</width>
-    <height>757</height>
+    <height>853</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -343,8 +343,8 @@
         <widget class="QLabel" name="player1_card_1">
          <property name="minimumSize">
           <size>
-           <width>150</width>
-           <height>200</height>
+           <width>200</width>
+           <height>300</height>
           </size>
          </property>
          <property name="text">
@@ -356,8 +356,8 @@
         <widget class="QLabel" name="player1_card_2">
          <property name="minimumSize">
           <size>
-           <width>150</width>
-           <height>200</height>
+           <width>200</width>
+           <height>300</height>
           </size>
          </property>
          <property name="text">

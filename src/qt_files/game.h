@@ -17,6 +17,9 @@ public:
 
 private:
     Ui::game *ui;
+    const char* path(const char c, const std::string& card);
+    const char* path_to_cover_T();
+    const char* path_to_cover();
 };
 
 #endif // GAME_H

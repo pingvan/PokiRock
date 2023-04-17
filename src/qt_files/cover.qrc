@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/cover">
+        <file>images/cards/Cover/black_cover.png</file>
+        <file>images/cards/Cover/black_cover_T.png</file>
+        <file>images/cards/Cover/main_cover.png</file>
+        <file>images/cards/Cover/main_cover_T.png</file>
+    </qresource>
+</RCC>

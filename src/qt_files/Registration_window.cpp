@@ -1,6 +1,6 @@
 #include "Registration_window.h"
 #include "ui_Registration_window.h"
-#include "../server/DataBase_connector.h"
+//#include "../server/DataBase_connector.h"
 #include <QMessageBox>
 #include <string>
 #include "Authorization_window.h"
@@ -10,6 +10,8 @@ registration_window::registration_window(QWidget *parent) :
     ui(new Ui::registration_window)
 {
     ui->setupUi(this);
+    ui->password->setEchoMode(QLineEdit::Password);
+    ui->password2->setEchoMode(QLineEdit::Password);
 }
 
 registration_window::~registration_window()
@@ -25,7 +27,7 @@ void registration_window::on_pushButton_clicked()
     if (user_password != user_password2) {
         QMessageBox::warning(this, "", "Пароли не совпадают");
     } else {
-        //
+        flag = true;
         second_window->show();
         close();
     }
