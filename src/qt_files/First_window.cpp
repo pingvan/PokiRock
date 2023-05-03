@@ -19,7 +19,7 @@ first_window::~first_window()
 }
 
 
-void first_window::on_pushButton_clicked()
+void first_window::on_start_clicked()
 {
     second_window = new authorization_window(this);
     second_window->start_window = this;

@@ -8,5 +8,6 @@
         <file>images/other/people.png</file>
         <file>images/other/token.png</file>
         <file>images/other/sukno.png</file>
+        <file>images/other/user_icon.png</file>
     </qresource>
 </RCC>

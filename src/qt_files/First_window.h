@@ -17,7 +17,7 @@ public:
     ~first_window();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_start_clicked();
 
 private:
     Ui::first_window *ui;

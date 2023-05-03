@@ -19,17 +19,27 @@ registration_window::~registration_window()
     delete ui;
 }
 
-void registration_window::on_pushButton_clicked()
+bool addUser(const std::string& name, const std::string& password) {
+    //add user
+    return true;
+}
+
+void registration_window::on_registration_clicked()
 {
     QString user_login = ui->name->text();
     QString user_password = ui->password->text();
     QString user_password2 = ui->password2->text();
     if (user_password != user_password2) {
-        QMessageBox::warning(this, "", "Пароли не совпадают");
+        QMessageBox::warning(this, "Ошибка", "Пароли не совпадают");
     } else {
-        flag = true;
-        second_window->show();
-        close();
+        bool isUserCorrect = addUser(user_login.toStdString(), user_password.toStdString());
+        if (isUserCorrect) {
+            QMessageBox::information(this, "Успех", "Вы успешно зарегистрировались!");
+            second_window->show();
+            close();
+        } else {
+            QMessageBox::warning(this, "Ошибка", "Некорректное имя пользователя или пароль");
+        }
     }
 }
 

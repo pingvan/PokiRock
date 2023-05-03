@@ -17,10 +17,9 @@ public:
     explicit registration_window(QWidget *parent = nullptr);
     ~registration_window();
     authorization_window* second_window;
-    bool flag = false;;
 
 private slots:
-    void on_pushButton_clicked();
+    void on_registration_clicked();
 
 private:
     Ui::registration_window *ui;

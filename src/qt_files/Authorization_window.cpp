@@ -5,11 +5,11 @@
 #include <QMessageBox>
 
 authorization_window::authorization_window(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::authorization_window)
+    QDialog(parent), ui(new Ui::authorization_window)
 {
     ui->setupUi(this);
     registration = new registration_window(this);
+    registration->second_window = this;
     ui->Password->setEchoMode(QLineEdit::Password);
 }
 
@@ -18,27 +18,31 @@ authorization_window::~authorization_window()
     delete ui;
 }
 
+bool findUser(const std::string& login, const std::string& password)
+{
+    //check user
+    return true;
+}
+
 void authorization_window::on_authorizate_clicked()
 {
     QString user_login = ui->Login->text();
     QString user_password = ui->Password->text();
-
-    if (registration->flag && user_login == "admin" && user_password == "aboba"){
+    bool isUserCorrect = findUser(user_login.toStdString(), user_password.toStdString());
+    if (isUserCorrect) {
         QMessageBox::information(this, "Добро пожаловать в PokiRock!", "Вы успешно авторизовались");
-        start_window->close();
-        close();
         main_window = new main_menu(this);
+        start_window->close();
+        this->close();
         main_window->showFullScreen();
     } else {
-        QMessageBox::warning(this, "Некорректное имя пользователя или пароль", "Вероятна очепятка");
+        QMessageBox::warning(this, "Ошибка", "Некорректное имя пользователя или пароль");
     }
 }
 
 void authorization_window::on_registrate_clicked()
 {
     hide();
-//    registration = new registration_window(this);
-    registration->second_window = this;
     registration->show();
 }
 
