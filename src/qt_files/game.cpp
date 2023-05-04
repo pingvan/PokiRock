@@ -21,14 +21,14 @@ const char* game::path(const char c, const std::string& card) {
 }
 
 const char* game::path_to_cover() {
-    return ":/cover/images/cards/Cover/main_cover.png";
+    return ":/cover/images/cards/Cover/black_cover.png";
 }
 
 const char* game::path_to_cover_T() {
-    return ":/cover/images/cards/Cover/main_cover_T.png";
+    return ":/cover/images/cards/Cover/black_cover_T.png";
 }
 
-void game::setDillerCards(){
+void game::initDillerCards(){
     QPixmap diller_card_1(path_to_cover());
     int width = ui->diller_card_1->width();
     int height = ui->diller_card_1->height();
@@ -44,7 +44,7 @@ void game::setDillerCards(){
     ui->diller_card_4->setPixmap(diller_card_4.scaled(width, height, Qt::KeepAspectRatio));
 }
 
-void game::setPlayer1Cards(){
+void game::initPlayer1Cards(){
     QPixmap player1_card_1(path('s', "7"));
     int width = ui->player1_card_1->width();
     int height = ui->player1_card_1->height();
@@ -54,7 +54,7 @@ void game::setPlayer1Cards(){
     ui->player1_card_2->setPixmap(player1_card_2.scaled(width, height, Qt::KeepAspectRatio));
 }
 
-void game::setPlayer2Cards(){
+void game::initPlayer2Cards(){
     QPixmap cover_T(path_to_cover_T());
     int width = ui->player2_card_1->width();
     int height = ui->player2_card_1->height();
@@ -63,7 +63,7 @@ void game::setPlayer2Cards(){
     ui->player2_card_2->setPixmap(cover_T.scaled(width, height, Qt::KeepAspectRatio));
 }
 
-void game::setPlayer3Cards(){
+void game::initPlayer3Cards(){
     QPixmap cover_T(path_to_cover_T());
     int width = ui->player2_card_1->width();
     int height = ui->player2_card_1->height();
@@ -71,25 +71,30 @@ void game::setPlayer3Cards(){
     ui->player3_card_2->setPixmap(cover_T.scaled(width, height, Qt::KeepAspectRatio));
 }
 
-void game::setPlayer4Cards(){
+void game::initPlayer4Cards(){
     QPixmap cover(path_to_cover());
     int width = ui->player4_card_1->width();
     int height = ui->player4_card_2->height();
     ui->player4_card_1->setPixmap(cover.scaled(width, height, Qt::KeepAspectRatio));
     ui->player4_card_2->setPixmap(cover.scaled(width, height, Qt::KeepAspectRatio));
 }
-game::game(QWidget *parent) :
-    QDialog(parent),
+
+game::game(QWidget *parent, User person) :
+    QDialog(parent), user(person),
     ui(new Ui::game)
 {
     ui->setupUi(this);
 
-    setDillerCards();
-    setPlayer1Cards();
-    setPlayer2Cards();
-    setPlayer3Cards();
-    setPlayer4Cards();
+    initDillerCards();
+    initPlayer1Cards();
+    initPlayer2Cards();
+    initPlayer3Cards();
+    initPlayer4Cards();
 
+    ui->verticalSlider->setRange(1, user.balance);
+    ui->setValue->hide();
+    ui->verticalSlider->hide();
+    ui->value->hide();
 }
 
 
@@ -97,3 +102,25 @@ game::~game()
 {
     delete ui;
 }
+
+void game::on_verticalSlider_valueChanged(int value)
+{
+    ui->value->setText(QString(std::to_string(value).c_str()));
+}
+
+
+void game::on_raise_clicked()
+{
+    ui->value->show();
+    ui->verticalSlider->show();
+    ui->setValue->show();
+}
+
+
+void game::on_setValue_clicked()
+{
+    ui->setValue->hide();
+    ui->verticalSlider->hide();
+    ui->value->hide();
+}
+

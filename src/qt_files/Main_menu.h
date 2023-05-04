@@ -2,7 +2,14 @@
 #define MAIN_MENU_H
 
 #include "game.h"
+#include "user.h"
 #include <QDialog>
+#include <QPixmap>
+#include <string>
+#include <QIcon>
+#include <QString>
+#include <QMessageBox>
+
 
 namespace Ui {
 class main_menu;
@@ -13,7 +20,8 @@ class main_menu : public QDialog
     Q_OBJECT
 
 public:
-    explicit main_menu(QWidget *parent = nullptr);
+    main_menu(QWidget *parent = nullptr, User person = User());
+    User user;
     ~main_menu();
 
 private slots:
@@ -24,6 +32,7 @@ private slots:
 private:
     Ui::main_menu *ui;
     game* game_window;
+
 };
 
 #endif // MAIN_MENU_H

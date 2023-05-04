@@ -31,7 +31,7 @@ void authorization_window::on_authorizate_clicked()
     bool isUserCorrect = findUser(user_login.toStdString(), user_password.toStdString());
     if (isUserCorrect) {
         QMessageBox::information(this, "Добро пожаловать в PokiRock!", "Вы успешно авторизовались");
-        main_window = new main_menu(this);
+        main_window = new main_menu(this, User(user_login.toStdString()));
         start_window->close();
         this->close();
         main_window->showFullScreen();

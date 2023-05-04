@@ -21,7 +21,8 @@ HEADERS += \
     First_window.h \
     Main_menu.h \
     Registration_window.h \
-    game.h
+    game.h \
+    user.h
 
 FORMS += \
     Authorization_window.ui \
