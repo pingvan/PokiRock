@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <string>
 #include "user.h"
+#include <QLabel>
 
 namespace Ui {
 class game;
@@ -30,6 +31,8 @@ private:
     const char* path(const char c, const std::string& card);
     const char* path_to_cover_T();
     const char* path_to_cover();
+    void setCoverCard(QLabel* place);
+    void setCoverCard_T(QLabel* place);
     void initDillerCards();
     void initPlayer1Cards();
     void initPlayer2Cards();

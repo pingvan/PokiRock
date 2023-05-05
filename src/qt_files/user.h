@@ -9,7 +9,7 @@ struct User {
     std::string name;
     unsigned long long balance;
     void updateBalane(){
-        balance = 10000;
+        balance = 100;
     }
 };
 

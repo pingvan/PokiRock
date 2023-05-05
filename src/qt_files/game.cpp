@@ -2,21 +2,21 @@
 #include "ui_game.h"
 
 const char* game::path(const char c, const std::string& card) {
-    std::string suit, usuit;
+    std::string suit, upperSuit;
     if (c == 'd'){
         suit = "diamonds";
-        usuit = "Diamonds";
+        upperSuit = "Diamonds";
     }else if (c == 'h'){
         suit = "hearts";
-        usuit = "Hearts";
+        upperSuit = "Hearts";
     }else if (c == 'c'){
         suit = "clubs";
-        usuit = "Clubs";
+        upperSuit = "Clubs";
     }else if (c == 's'){
         suit = "spades";
-        usuit = "Spades";
+        upperSuit = "Spades";
     }
-    const std::string& ans = ":/" + suit + "/images/cards/" + usuit + "/" + card+ ".png";
+    const std::string& ans = ":/" + suit + "/images/cards/" + upperSuit + "/" + card+ ".png";
     return ans.c_str();
 }
 
@@ -28,55 +28,45 @@ const char* game::path_to_cover_T() {
     return ":/cover/images/cards/Cover/black_cover_T.png";
 }
 
+void game::setCoverCard(QLabel* place) {
+    QPixmap cover(path_to_cover());
+    int width = place->width();
+    int height = place->height();
+    place->setPixmap(cover.scaled(width, height, Qt::KeepAspectRatio));
+}
+
+void game::setCoverCard_T(QLabel* place) {
+    QPixmap cover(path_to_cover_T());
+    int width = place->width();
+    int height = place->height();
+    place->setPixmap(cover.scaled(width, height, Qt::KeepAspectRatio));
+}
+
 void game::initDillerCards(){
-    QPixmap diller_card_1(path_to_cover());
-    int width = ui->diller_card_1->width();
-    int height = ui->diller_card_1->height();
-    ui->diller_card_1->setPixmap(diller_card_1.scaled(width, height, Qt::KeepAspectRatio));
-
-    QPixmap diller_card_2(path_to_cover());
-    ui->diller_card_2->setPixmap(diller_card_2.scaled(width, height, Qt::KeepAspectRatio));
-
-    QPixmap diller_card_3(path_to_cover());
-    ui->diller_card_3->setPixmap(diller_card_3.scaled(width, height, Qt::KeepAspectRatio));
-
-    QPixmap diller_card_4(path_to_cover());
-    ui->diller_card_4->setPixmap(diller_card_4.scaled(width, height, Qt::KeepAspectRatio));
+    setCoverCard(ui->diller_card_1);
+    setCoverCard(ui->diller_card_2);
+    setCoverCard(ui->diller_card_3);
+    setCoverCard(ui->diller_card_4);
 }
 
 void game::initPlayer1Cards(){
-    QPixmap player1_card_1(path('s', "7"));
-    int width = ui->player1_card_1->width();
-    int height = ui->player1_card_1->height();
-    ui->player1_card_1->setPixmap(player1_card_1.scaled(width, height, Qt::KeepAspectRatio));
-
-    QPixmap player1_card_2(path('d', "A"));
-    ui->player1_card_2->setPixmap(player1_card_2.scaled(width, height, Qt::KeepAspectRatio));
+    setCoverCard(ui->player1_card_1);
+    setCoverCard(ui->player1_card_2);
 }
 
 void game::initPlayer2Cards(){
-    QPixmap cover_T(path_to_cover_T());
-    int width = ui->player2_card_1->width();
-    int height = ui->player2_card_1->height();
-    ui->player2_card_1->setPixmap(cover_T.scaled(width, height, Qt::KeepAspectRatio));
-
-    ui->player2_card_2->setPixmap(cover_T.scaled(width, height, Qt::KeepAspectRatio));
+    setCoverCard_T(ui->player2_card_1);
+    setCoverCard_T(ui->player2_card_2);
 }
 
 void game::initPlayer3Cards(){
-    QPixmap cover_T(path_to_cover_T());
-    int width = ui->player2_card_1->width();
-    int height = ui->player2_card_1->height();
-    ui->player3_card_1->setPixmap(cover_T.scaled(width, height, Qt::KeepAspectRatio));
-    ui->player3_card_2->setPixmap(cover_T.scaled(width, height, Qt::KeepAspectRatio));
+    setCoverCard_T(ui->player3_card_1);
+    setCoverCard_T(ui->player3_card_2);
 }
 
 void game::initPlayer4Cards(){
-    QPixmap cover(path_to_cover());
-    int width = ui->player4_card_1->width();
-    int height = ui->player4_card_2->height();
-    ui->player4_card_1->setPixmap(cover.scaled(width, height, Qt::KeepAspectRatio));
-    ui->player4_card_2->setPixmap(cover.scaled(width, height, Qt::KeepAspectRatio));
+    setCoverCard(ui->player4_card_1);
+    setCoverCard(ui->player4_card_2);
 }
 
 game::game(QWidget *parent, User person) :
