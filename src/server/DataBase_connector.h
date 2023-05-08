@@ -2,6 +2,8 @@
 #define DATABASE_CONNECTOR_H
 
 #include <pqxx/pqxx>
+#include <pqxx/connection>
+
 #include <string>
 #include <openssl/sha.h>
 #include <random>
@@ -15,7 +17,9 @@ namespace data {
 
         static std::string generate_salt(int length);
 
-        static void insert_new_client(const std::string &client_login, const std::string &pass);
+        static bool check_login_correctness(const std::string &client_login);
+
+        static void insert_new_client(const std::string &client_login, const std::string &salt, const std::string &hash);
         static std::pair<std::string, std::string> log_in_client(const std::string &client_login);
         static void insert_games(const std::string &client_login);
         static void insert_win(const std::string &client_login);

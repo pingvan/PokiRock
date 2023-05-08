@@ -24,6 +24,8 @@ find_package(Threads REQUIRED)
 find_package(Qt6 COMPONENTS Widgets REQUIRED)
 find_package(PkgConfig REQUIRED)
 find_package(OpenSSL REQUIRED)
+find_package(protobuf CONFIG REQUIRED)
+find_package(gRPC CONFIG REQUIRED)
 
 #for LIMA
 #add_executable(PokiRock client.cpp server.cpp game.cpp win_check.cpp ../main.cpp)
@@ -40,15 +42,16 @@ find_package(OpenSSL REQUIRED)
 #only main
 #add_executable(PokiRock  ../server/DataBase_connector.cpp ../main.cpp)
 
-#testing file
-add_executable(PokiRock ../TEMPORARY_TEMP_FILE.cpp)
+add_executable(PokiRock ../server/grpc_server.cpp ../server/grpc_server_main.cpp ../server/DataBase_connector.cpp ../server/Game.cpp)
 
 target_include_directories(PokiRock PRIVATE
         ${BOOST_INCLUDE_DIRS}
         ${Qt6Widgets_INCLUDE_DIRS}
-        ${PQXX_INCLUDE_DIRS}
+        ${PQ_INCLUDE_DIRS}
         ${OPENSSL_CRYPTO_LIBRARY}
         ${OPENSSL_INCLUDE_DIR}
+        ${PROTOBUF_INCLUDE_DIR}
+        ${CMAKE_CURRENT_BINARY_DIR}
 )
 
 target_link_libraries(PokiRock
@@ -57,4 +60,7 @@ target_link_libraries(PokiRock
         Qt${QT_VERSION}::Widgets
         ${PQXX_LIB}
         OpenSSL::Crypto
+        protobuf::libprotobuf
+        gRPC::grpc
+        gRPC::grpc++
 )

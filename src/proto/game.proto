@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package game;
+
+service lobby {
+    rpc Login(login_request) returns (login_response);
+    rpc Register(register_request) returns (register_response);
+    rpc FindGame(search_a_game_request) returns (search_a_game_response);
+}
+
+service game {
+    rpc MakeMove(make_move_request) returns (make_move_response);
+}
+
+message login_request {
+    oneof login_events_request {
+        client_name name = 1;
+        bool after_compare = 2;
+    }
+}
+
+message login_response {
+    oneof login_events_response {
+        salt_hash salt_hash = 1;
+        status_message status_message = 2;
+    }
+}
+
+message register_request {
+    client_name name = 1;
+    salt_hash salt_hash = 2;
+}
+
+message register_response {
+    status_message status_message = 1;
+}
+
+message client_name {
+    string name = 1;
+}
+
+message salt_hash {
+    string salt = 1;
+    string hash = 2;
+}
+
+message search_a_game_request {
+    int32 number_of_players = 1;
+    int32 minimal_bet = 2;
+}
+
+message search_a_game_response {
+    status_message status_message = 1;
+}
+
+message make_move_request {
+    client_name client_name = 1;
+    int32 make_blind = 2;
+    bool fold = 3;
+}
+
+message make_move_response {
+    repeated player players = 1;
+}
+
+message player {
+    client_name name = 1;
+    player_status status = 2;
+    int32 balance = 3;
+}
+
+message status_message {
+    bool status = 1;
+    string message = 2;
+}
+
+enum player_status {
+    fold = 0;
+    playing = 1;
+    win = 2;
+}

@@ -1,7 +1,8 @@
 #include "DataBase_connector.h"
+#include <future>
+#include <pqxx/connection>
 
 namespace data {
-
     std::string DataBase_connector::sha_hash(const std::string &phrase) {
         unsigned char hash[SHA256_DIGEST_LENGTH];
         SHA256(reinterpret_cast<const unsigned char *>(phrase.data()), phrase.length(), hash);
@@ -13,30 +14,30 @@ namespace data {
     }
 
     std::string DataBase_connector::generate_salt(int length) {
-        static const std::string av = {"0123456789!@#$%^&*ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"};
+        static const std::string symbols = {"0123456789!@#$%^&*ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"};
         std::random_device rd;
         std::mt19937 gen(rd());
-        std::uniform_int_distribution<> distrib(0, static_cast<int>(av.size()));
-        std::stringstream ss;
+        std::uniform_int_distribution<> distrib(0, static_cast<int>(symbols.size()));
+        std::stringstream random_symbols;
         for (int i = 0; i < length; i++) {
-            ss << av[distrib(gen)];
+            random_symbols << symbols[distrib(gen)];
         }
-        return ss.str();
+        return random_symbols.str();
     }
 
-    void DataBase_connector::insert_new_client(const std::string &client_login, const std::string &pass) {
+    void DataBase_connector::insert_new_client(const std::string &client_login, const std::string &salt, const std::string &hash) {
         try {
             pqxx::connection con{conn_msg()};
             pqxx::work txn{con};
-            const std::string salt = generate_salt(static_cast<int>(pass.size()));
-            const std::string hashed = sha_hash(salt + pass);
+//            const std::string salt = generate_salt(static_cast<int>(pass.size()));
+//            const std::string hashed = sha_hash(salt + pass);
             txn.exec_params("INSERT INTO clients (client_login, client_games, client_wins, client_balance)"
                             "VALUES ($1, $2, $3, $4)", client_login, 0, 0, 1000);
             auto client_id = txn.query_value<uint32_t>("SELECT client_id "
                                                        "FROM clients "
                                                        "WHERE client_login =" + txn.quote(client_login));
             txn.exec_params("INSERT INTO id_to_password (client_id, client_password_hashe, password_salt)"
-                            "VALUES ($1, $2, $3)", client_id, hashed, salt);
+                            "VALUES ($1, $2, $3)", client_id, hash, salt);
             txn.commit();
             con.close();
         } catch (std::exception &e) {
@@ -73,7 +74,8 @@ namespace data {
                      "WHERE client_login = " + txn.quote(client_login));
             txn.commit();
             con.close();
-        } catch (std::exception &e) {
+        }
+        catch (std::exception &e) {
             std::cerr << e.what() << '\n';
         }
     }
@@ -104,6 +106,29 @@ namespace data {
         } catch (std::exception &e) {
             std::cerr << e.what() << '\n';
         }
+    }
+
+    bool DataBase_connector::check_login_correctness(const std::string &client_login) {
+        bool already_registered = false;
+        try {
+            pqxx::connection con{conn_msg()};
+            pqxx::work txn{con};
+
+            auto result = txn.exec_params("SELECT client_id "
+                "FROM clients "
+                "WHERE client_login = $1 ", client_login);
+
+            if (!result.empty()) {already_registered = true;}
+
+            txn.commit();
+            con.close();
+        } catch (pqxx::plpgsql_no_data_found &ee) {
+            std::cerr << ee.what() << '\n';
+            std::cerr << "NO DATA WITH THIS PARAMS" << '\n';
+        } catch (std::exception &e) {
+            std::cerr << e.what() << '\n';
+        }
+        return already_registered;
     }
 }
 
