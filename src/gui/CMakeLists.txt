@@ -11,13 +11,13 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -v")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DQT_NO_FOREACH")
 
 
-add_link_options(-fsanitize=address,undefined)
-add_compile_options(-g -fsanitize=address,undefined)
+#add_link_options(-fsanitize=address,undefined)
+#add_compile_options(-g -fsanitize=address,undefined)
 
 find_package(Boost REQUIRED)
 find_package(Threads REQUIRED)
@@ -42,7 +42,11 @@ find_package(gRPC CONFIG REQUIRED)
 #only main
 #add_executable(PokiRock  ../server/DataBase_connector.cpp ../main.cpp)
 
-add_executable(PokiRock ../server/grpc_server.cpp ../server/grpc_server_main.cpp ../server/DataBase_connector.cpp ../server/Game.cpp)
+#add_executable(PokiRock ../server/grpc_server.cpp ../server/grpc_server_main.cpp ../server/DataBase_connector.cpp ../server/Game.cpp ../server/grpc_client.cpp)
+
+add_executable(ser ../server/grpc_server.cpp ../server/DataBase_connector.cpp ../proto/game.grpc.pb.cc ../proto/game.pb.cc)
+
+add_executable(PokiRock ../server/grpc_client.cpp ../proto/game.grpc.pb.cc ../proto/game.pb.cc)
 
 target_include_directories(PokiRock PRIVATE
         ${BOOST_INCLUDE_DIRS}
@@ -64,3 +68,25 @@ target_link_libraries(PokiRock
         gRPC::grpc
         gRPC::grpc++
 )
+
+
+target_include_directories(ser PRIVATE
+        ${BOOST_INCLUDE_DIRS}
+        ${Qt6Widgets_INCLUDE_DIRS}
+        ${PQ_INCLUDE_DIRS}
+        ${OPENSSL_CRYPTO_LIBRARY}
+        ${OPENSSL_INCLUDE_DIR}
+        ${PROTOBUF_INCLUDE_DIR}
+        ${CMAKE_CURRENT_BINARY_DIR}
+        )
+
+target_link_libraries(ser
+        ${Boost_LIBRARIES}
+        Threads::Threads
+        Qt${QT_VERSION}::Widgets
+        ${PQXX_LIB}
+        OpenSSL::Crypto
+        protobuf::libprotobuf
+        gRPC::grpc
+        gRPC::grpc++
+        )

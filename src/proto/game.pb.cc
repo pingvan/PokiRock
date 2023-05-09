@@ -51,7 +51,7 @@ struct login_responseDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 login_responseDefaultTypeInternal _login_response_default_instance_;
 PROTOBUF_CONSTEXPR register_request::register_request(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.name_)*/nullptr
+    /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.salt_hash_)*/nullptr
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct register_requestDefaultTypeInternal {
@@ -76,19 +76,6 @@ struct register_responseDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 register_responseDefaultTypeInternal _register_response_default_instance_;
-PROTOBUF_CONSTEXPR client_name::client_name(
-    ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_._cached_size_)*/{}} {}
-struct client_nameDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR client_nameDefaultTypeInternal()
-      : _instance(::_pbi::ConstantInitialized{}) {}
-  ~client_nameDefaultTypeInternal() {}
-  union {
-    client_name _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 client_nameDefaultTypeInternal _client_name_default_instance_;
 PROTOBUF_CONSTEXPR salt_hash::salt_hash(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.salt_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
@@ -132,7 +119,7 @@ struct search_a_game_responseDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 search_a_game_responseDefaultTypeInternal _search_a_game_response_default_instance_;
 PROTOBUF_CONSTEXPR make_move_request::make_move_request(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.client_name_)*/nullptr
+    /*decltype(_impl_.client_name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.make_blind_)*/0
   , /*decltype(_impl_.fold_)*/false
   , /*decltype(_impl_._cached_size_)*/{}} {}
@@ -160,7 +147,7 @@ struct make_move_responseDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 make_move_responseDefaultTypeInternal _make_move_response_default_instance_;
 PROTOBUF_CONSTEXPR player::player(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.name_)*/nullptr
+    /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.status_)*/0
   , /*decltype(_impl_.balance_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
@@ -188,7 +175,7 @@ struct status_messageDefaultTypeInternal {
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 status_messageDefaultTypeInternal _status_message_default_instance_;
 }  // namespace game
-static ::_pb::Metadata file_level_metadata_game_2eproto[12];
+static ::_pb::Metadata file_level_metadata_game_2eproto[11];
 static const ::_pb::EnumDescriptor* file_level_enum_descriptors_game_2eproto[1];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_game_2eproto = nullptr;
 
@@ -226,13 +213,6 @@ const uint32_t TableStruct_game_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::game::register_response, _impl_.status_message_),
-  ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::game::client_name, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::game::client_name, _impl_.name_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::game::salt_hash, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -295,14 +275,13 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 9, -1, -1, sizeof(::game::login_response)},
   { 18, -1, -1, sizeof(::game::register_request)},
   { 26, -1, -1, sizeof(::game::register_response)},
-  { 33, -1, -1, sizeof(::game::client_name)},
-  { 40, -1, -1, sizeof(::game::salt_hash)},
-  { 48, -1, -1, sizeof(::game::search_a_game_request)},
-  { 56, -1, -1, sizeof(::game::search_a_game_response)},
-  { 63, -1, -1, sizeof(::game::make_move_request)},
-  { 72, -1, -1, sizeof(::game::make_move_response)},
-  { 79, -1, -1, sizeof(::game::player)},
-  { 88, -1, -1, sizeof(::game::status_message)},
+  { 33, -1, -1, sizeof(::game::salt_hash)},
+  { 41, -1, -1, sizeof(::game::search_a_game_request)},
+  { 49, -1, -1, sizeof(::game::search_a_game_response)},
+  { 56, -1, -1, sizeof(::game::make_move_request)},
+  { 65, -1, -1, sizeof(::game::make_move_response)},
+  { 72, -1, -1, sizeof(::game::player)},
+  { 81, -1, -1, sizeof(::game::status_message)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -310,7 +289,6 @@ static const ::_pb::Message* const file_default_instances[] = {
   &::game::_login_response_default_instance_._instance,
   &::game::_register_request_default_instance_._instance,
   &::game::_register_response_default_instance_._instance,
-  &::game::_client_name_default_instance_._instance,
   &::game::_salt_hash_default_instance_._instance,
   &::game::_search_a_game_request_default_instance_._instance,
   &::game::_search_a_game_response_default_instance_._instance,
@@ -321,43 +299,41 @@ static const ::_pb::Message* const file_default_instances[] = {
 };
 
 const char descriptor_table_protodef_game_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\ngame.proto\022\004game\"c\n\rlogin_request\022!\n\004n"
-  "ame\030\001 \001(\0132\021.game.client_nameH\000\022\027\n\rafter_"
-  "compare\030\002 \001(\010H\000B\026\n\024login_events_request\""
-  "\177\n\016login_response\022$\n\tsalt_hash\030\001 \001(\0132\017.g"
-  "ame.salt_hashH\000\022.\n\016status_message\030\002 \001(\0132"
-  "\024.game.status_messageH\000B\027\n\025login_events_"
-  "response\"W\n\020register_request\022\037\n\004name\030\001 \001"
-  "(\0132\021.game.client_name\022\"\n\tsalt_hash\030\002 \001(\013"
-  "2\017.game.salt_hash\"A\n\021register_response\022,"
-  "\n\016status_message\030\001 \001(\0132\024.game.status_mes"
-  "sage\"\033\n\013client_name\022\014\n\004name\030\001 \001(\t\"\'\n\tsal"
-  "t_hash\022\014\n\004salt\030\001 \001(\t\022\014\n\004hash\030\002 \001(\t\"G\n\025se"
-  "arch_a_game_request\022\031\n\021number_of_players"
-  "\030\001 \001(\005\022\023\n\013minimal_bet\030\002 \001(\005\"F\n\026search_a_"
-  "game_response\022,\n\016status_message\030\001 \001(\0132\024."
-  "game.status_message\"]\n\021make_move_request"
-  "\022&\n\013client_name\030\001 \001(\0132\021.game.client_name"
-  "\022\022\n\nmake_blind\030\002 \001(\005\022\014\n\004fold\030\003 \001(\010\"3\n\022ma"
-  "ke_move_response\022\035\n\007players\030\001 \003(\0132\014.game"
-  ".player\"_\n\006player\022\037\n\004name\030\001 \001(\0132\021.game.c"
-  "lient_name\022#\n\006status\030\002 \001(\0162\023.game.player"
-  "_status\022\017\n\007balance\030\003 \001(\005\"1\n\016status_messa"
-  "ge\022\016\n\006status\030\001 \001(\010\022\017\n\007message\030\002 \001(\t*/\n\rp"
-  "layer_status\022\010\n\004fold\020\000\022\013\n\007playing\020\001\022\007\n\003w"
-  "in\020\0022\277\001\n\005lobby\0222\n\005Login\022\023.game.login_req"
-  "uest\032\024.game.login_response\022;\n\010Register\022\026"
-  ".game.register_request\032\027.game.register_r"
-  "esponse\022E\n\010FindGame\022\033.game.search_a_game"
-  "_request\032\034.game.search_a_game_response2E"
-  "\n\004game\022=\n\010MakeMove\022\027.game.make_move_requ"
-  "est\032\030.game.make_move_responseb\006proto3"
+  "\n\ngame.proto\022\004game\"P\n\rlogin_request\022\016\n\004n"
+  "ame\030\001 \001(\tH\000\022\027\n\rafter_compare\030\002 \001(\010H\000B\026\n\024"
+  "login_events_request\"\177\n\016login_response\022$"
+  "\n\tsalt_hash\030\001 \001(\0132\017.game.salt_hashH\000\022.\n\016"
+  "status_message\030\002 \001(\0132\024.game.status_messa"
+  "geH\000B\027\n\025login_events_response\"D\n\020registe"
+  "r_request\022\014\n\004name\030\001 \001(\t\022\"\n\tsalt_hash\030\002 \001"
+  "(\0132\017.game.salt_hash\"A\n\021register_response"
+  "\022,\n\016status_message\030\001 \001(\0132\024.game.status_m"
+  "essage\"\'\n\tsalt_hash\022\014\n\004salt\030\001 \001(\t\022\014\n\004has"
+  "h\030\002 \001(\t\"G\n\025search_a_game_request\022\031\n\021numb"
+  "er_of_players\030\001 \001(\005\022\023\n\013minimal_bet\030\002 \001(\005"
+  "\"F\n\026search_a_game_response\022,\n\016status_mes"
+  "sage\030\001 \001(\0132\024.game.status_message\"J\n\021make"
+  "_move_request\022\023\n\013client_name\030\001 \001(\t\022\022\n\nma"
+  "ke_blind\030\002 \001(\005\022\014\n\004fold\030\003 \001(\010\"3\n\022make_mov"
+  "e_response\022\035\n\007players\030\001 \003(\0132\014.game.playe"
+  "r\"L\n\006player\022\014\n\004name\030\001 \001(\t\022#\n\006status\030\002 \001("
+  "\0162\023.game.player_status\022\017\n\007balance\030\003 \001(\005\""
+  "1\n\016status_message\022\016\n\006status\030\001 \001(\010\022\017\n\007mes"
+  "sage\030\002 \001(\t*/\n\rplayer_status\022\010\n\004fold\020\000\022\013\n"
+  "\007playing\020\001\022\007\n\003win\020\0022\277\001\n\005lobby\0222\n\005Login\022\023"
+  ".game.login_request\032\024.game.login_respons"
+  "e\022;\n\010Register\022\026.game.register_request\032\027."
+  "game.register_response\022E\n\010FindGame\022\033.gam"
+  "e.search_a_game_request\032\034.game.search_a_"
+  "game_response2E\n\004game\022=\n\010MakeMove\022\027.game"
+  ".make_move_request\032\030.game.make_move_resp"
+  "onseb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_game_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_game_2eproto = {
-    false, false, 1237, descriptor_table_protodef_game_2eproto,
+    false, false, 1132, descriptor_table_protodef_game_2eproto,
     "game.proto",
-    &descriptor_table_game_2eproto_once, nullptr, 0, 12,
+    &descriptor_table_game_2eproto_once, nullptr, 0, 11,
     schemas, file_default_instances, TableStruct_game_2eproto::offsets,
     file_level_metadata_game_2eproto, file_level_enum_descriptors_game_2eproto,
     file_level_service_descriptors_game_2eproto,
@@ -389,28 +365,8 @@ bool player_status_IsValid(int value) {
 
 class login_request::_Internal {
  public:
-  static const ::game::client_name& name(const login_request* msg);
 };
 
-const ::game::client_name&
-login_request::_Internal::name(const login_request* msg) {
-  return *msg->_impl_.login_events_request_.name_;
-}
-void login_request::set_allocated_name(::game::client_name* name) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
-  clear_login_events_request();
-  if (name) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-      ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(name);
-    if (message_arena != submessage_arena) {
-      name = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, name, submessage_arena);
-    }
-    set_has_name();
-    _impl_.login_events_request_.name_ = name;
-  }
-  // @@protoc_insertion_point(field_set_allocated:game.login_request.name)
-}
 login_request::login_request(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
@@ -429,8 +385,7 @@ login_request::login_request(const login_request& from)
   clear_has_login_events_request();
   switch (from.login_events_request_case()) {
     case kName: {
-      _this->_internal_mutable_name()->::game::client_name::MergeFrom(
-          from._internal_name());
+      _this->_internal_set_name(from._internal_name());
       break;
     }
     case kAfterCompare: {
@@ -480,9 +435,7 @@ void login_request::clear_login_events_request() {
 // @@protoc_insertion_point(one_of_clear_start:game.login_request)
   switch (login_events_request_case()) {
     case kName: {
-      if (GetArenaForAllocation() == nullptr) {
-        delete _impl_.login_events_request_.name_;
-      }
+      _impl_.login_events_request_.name_.Destroy();
       break;
     }
     case kAfterCompare: {
@@ -513,11 +466,13 @@ const char* login_request::_InternalParse(const char* ptr, ::_pbi::ParseContext*
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .game.client_name name = 1;
+      // string name = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          ptr = ctx->ParseMessage(_internal_mutable_name(), ptr);
+          auto str = _internal_mutable_name();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "game.login_request.name"));
         } else
           goto handle_unusual;
         continue;
@@ -558,11 +513,14 @@ uint8_t* login_request::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .game.client_name name = 1;
+  // string name = 1;
   if (_internal_has_name()) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(1, _Internal::name(this),
-        _Internal::name(this).GetCachedSize(), target, stream);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "game.login_request.name");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_name(), target);
   }
 
   // bool after_compare = 2;
@@ -588,11 +546,11 @@ size_t login_request::ByteSizeLong() const {
   (void) cached_has_bits;
 
   switch (login_events_request_case()) {
-    // .game.client_name name = 1;
+    // string name = 1;
     case kName: {
       total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-          *_impl_.login_events_request_.name_);
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+          this->_internal_name());
       break;
     }
     // bool after_compare = 2;
@@ -624,8 +582,7 @@ void login_request::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::
 
   switch (from.login_events_request_case()) {
     case kName: {
-      _this->_internal_mutable_name()->::game::client_name::MergeFrom(
-          from._internal_name());
+      _this->_internal_set_name(from._internal_name());
       break;
     }
     case kAfterCompare: {
@@ -972,14 +929,9 @@ void login_response::InternalSwap(login_response* other) {
 
 class register_request::_Internal {
  public:
-  static const ::game::client_name& name(const register_request* msg);
   static const ::game::salt_hash& salt_hash(const register_request* msg);
 };
 
-const ::game::client_name&
-register_request::_Internal::name(const register_request* msg) {
-  return *msg->_impl_.name_;
-}
 const ::game::salt_hash&
 register_request::_Internal::salt_hash(const register_request* msg) {
   return *msg->_impl_.salt_hash_;
@@ -994,13 +946,18 @@ register_request::register_request(const register_request& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   register_request* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.name_){nullptr}
+      decltype(_impl_.name_){}
     , decltype(_impl_.salt_hash_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  if (from._internal_has_name()) {
-    _this->_impl_.name_ = new ::game::client_name(*from._impl_.name_);
+  _impl_.name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_name().empty()) {
+    _this->_impl_.name_.Set(from._internal_name(), 
+      _this->GetArenaForAllocation());
   }
   if (from._internal_has_salt_hash()) {
     _this->_impl_.salt_hash_ = new ::game::salt_hash(*from._impl_.salt_hash_);
@@ -1013,10 +970,14 @@ inline void register_request::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.name_){nullptr}
+      decltype(_impl_.name_){}
     , decltype(_impl_.salt_hash_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}
   };
+  _impl_.name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
 register_request::~register_request() {
@@ -1030,7 +991,7 @@ register_request::~register_request() {
 
 inline void register_request::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  if (this != internal_default_instance()) delete _impl_.name_;
+  _impl_.name_.Destroy();
   if (this != internal_default_instance()) delete _impl_.salt_hash_;
 }
 
@@ -1044,10 +1005,7 @@ void register_request::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaForAllocation() == nullptr && _impl_.name_ != nullptr) {
-    delete _impl_.name_;
-  }
-  _impl_.name_ = nullptr;
+  _impl_.name_.ClearToEmpty();
   if (GetArenaForAllocation() == nullptr && _impl_.salt_hash_ != nullptr) {
     delete _impl_.salt_hash_;
   }
@@ -1061,11 +1019,13 @@ const char* register_request::_InternalParse(const char* ptr, ::_pbi::ParseConte
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .game.client_name name = 1;
+      // string name = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          ptr = ctx->ParseMessage(_internal_mutable_name(), ptr);
+          auto str = _internal_mutable_name();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "game.register_request.name"));
         } else
           goto handle_unusual;
         continue;
@@ -1106,11 +1066,14 @@ uint8_t* register_request::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .game.client_name name = 1;
-  if (this->_internal_has_name()) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(1, _Internal::name(this),
-        _Internal::name(this).GetCachedSize(), target, stream);
+  // string name = 1;
+  if (!this->_internal_name().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "game.register_request.name");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_name(), target);
   }
 
   // .game.salt_hash salt_hash = 2;
@@ -1136,11 +1099,11 @@ size_t register_request::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .game.client_name name = 1;
-  if (this->_internal_has_name()) {
+  // string name = 1;
+  if (!this->_internal_name().empty()) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.name_);
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_name());
   }
 
   // .game.salt_hash salt_hash = 2;
@@ -1168,9 +1131,8 @@ void register_request::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_has_name()) {
-    _this->_internal_mutable_name()->::game::client_name::MergeFrom(
-        from._internal_name());
+  if (!from._internal_name().empty()) {
+    _this->_internal_set_name(from._internal_name());
   }
   if (from._internal_has_salt_hash()) {
     _this->_internal_mutable_salt_hash()->::game::salt_hash::MergeFrom(
@@ -1192,13 +1154,14 @@ bool register_request::IsInitialized() const {
 
 void register_request::InternalSwap(register_request* other) {
   using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(register_request, _impl_.salt_hash_)
-      + sizeof(register_request::_impl_.salt_hash_)
-      - PROTOBUF_FIELD_OFFSET(register_request, _impl_.name_)>(
-          reinterpret_cast<char*>(&_impl_.name_),
-          reinterpret_cast<char*>(&other->_impl_.name_));
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.name_, lhs_arena,
+      &other->_impl_.name_, rhs_arena
+  );
+  swap(_impl_.salt_hash_, other->_impl_.salt_hash_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata register_request::GetMetadata() const {
@@ -1398,209 +1361,6 @@ void register_response::InternalSwap(register_response* other) {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_game_2eproto_getter, &descriptor_table_game_2eproto_once,
       file_level_metadata_game_2eproto[3]);
-}
-
-// ===================================================================
-
-class client_name::_Internal {
- public:
-};
-
-client_name::client_name(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                         bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
-  SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:game.client_name)
-}
-client_name::client_name(const client_name& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
-  client_name* const _this = this; (void)_this;
-  new (&_impl_) Impl_{
-      decltype(_impl_.name_){}
-    , /*decltype(_impl_._cached_size_)*/{}};
-
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.name_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.name_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_name().empty()) {
-    _this->_impl_.name_.Set(from._internal_name(), 
-      _this->GetArenaForAllocation());
-  }
-  // @@protoc_insertion_point(copy_constructor:game.client_name)
-}
-
-inline void client_name::SharedCtor(
-    ::_pb::Arena* arena, bool is_message_owned) {
-  (void)arena;
-  (void)is_message_owned;
-  new (&_impl_) Impl_{
-      decltype(_impl_.name_){}
-    , /*decltype(_impl_._cached_size_)*/{}
-  };
-  _impl_.name_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.name_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-}
-
-client_name::~client_name() {
-  // @@protoc_insertion_point(destructor:game.client_name)
-  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
-  (void)arena;
-    return;
-  }
-  SharedDtor();
-}
-
-inline void client_name::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.name_.Destroy();
-}
-
-void client_name::SetCachedSize(int size) const {
-  _impl_._cached_size_.Set(size);
-}
-
-void client_name::Clear() {
-// @@protoc_insertion_point(message_clear_start:game.client_name)
-  uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _impl_.name_.ClearToEmpty();
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-}
-
-const char* client_name::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  while (!ctx->Done(&ptr)) {
-    uint32_t tag;
-    ptr = ::_pbi::ReadTag(ptr, &tag);
-    switch (tag >> 3) {
-      // string name = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          auto str = _internal_mutable_name();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "game.client_name.name"));
-        } else
-          goto handle_unusual;
-        continue;
-      default:
-        goto handle_unusual;
-    }  // switch
-  handle_unusual:
-    if ((tag == 0) || ((tag & 7) == 4)) {
-      CHK_(ptr);
-      ctx->SetLastTag(tag);
-      goto message_done;
-    }
-    ptr = UnknownFieldParse(
-        tag,
-        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-        ptr, ctx);
-    CHK_(ptr != nullptr);
-  }  // while
-message_done:
-  return ptr;
-failure:
-  ptr = nullptr;
-  goto message_done;
-#undef CHK_
-}
-
-uint8_t* client_name::_InternalSerialize(
-    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:game.client_name)
-  uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // string name = 1;
-  if (!this->_internal_name().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "game.client_name.name");
-    target = stream->WriteStringMaybeAliased(
-        1, this->_internal_name(), target);
-  }
-
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:game.client_name)
-  return target;
-}
-
-size_t client_name::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:game.client_name)
-  size_t total_size = 0;
-
-  uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  // string name = 1;
-  if (!this->_internal_name().empty()) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_name());
-  }
-
-  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
-}
-
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData client_name::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    client_name::MergeImpl
-};
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*client_name::GetClassData() const { return &_class_data_; }
-
-
-void client_name::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<client_name*>(&to_msg);
-  auto& from = static_cast<const client_name&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:game.client_name)
-  GOOGLE_DCHECK_NE(&from, _this);
-  uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (!from._internal_name().empty()) {
-    _this->_internal_set_name(from._internal_name());
-  }
-  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void client_name::CopyFrom(const client_name& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:game.client_name)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool client_name::IsInitialized() const {
-  return true;
-}
-
-void client_name::InternalSwap(client_name* other) {
-  using std::swap;
-  auto* lhs_arena = GetArenaForAllocation();
-  auto* rhs_arena = other->GetArenaForAllocation();
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.name_, lhs_arena,
-      &other->_impl_.name_, rhs_arena
-  );
-}
-
-::PROTOBUF_NAMESPACE_ID::Metadata client_name::GetMetadata() const {
-  return ::_pbi::AssignDescriptors(
-      &descriptor_table_game_2eproto_getter, &descriptor_table_game_2eproto_once,
-      file_level_metadata_game_2eproto[4]);
 }
 
 // ===================================================================
@@ -1853,7 +1613,7 @@ void salt_hash::InternalSwap(salt_hash* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata salt_hash::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_game_2eproto_getter, &descriptor_table_game_2eproto_once,
-      file_level_metadata_game_2eproto[5]);
+      file_level_metadata_game_2eproto[4]);
 }
 
 // ===================================================================
@@ -2064,7 +1824,7 @@ void search_a_game_request::InternalSwap(search_a_game_request* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata search_a_game_request::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_game_2eproto_getter, &descriptor_table_game_2eproto_once,
-      file_level_metadata_game_2eproto[6]);
+      file_level_metadata_game_2eproto[5]);
 }
 
 // ===================================================================
@@ -2257,20 +2017,15 @@ void search_a_game_response::InternalSwap(search_a_game_response* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata search_a_game_response::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_game_2eproto_getter, &descriptor_table_game_2eproto_once,
-      file_level_metadata_game_2eproto[7]);
+      file_level_metadata_game_2eproto[6]);
 }
 
 // ===================================================================
 
 class make_move_request::_Internal {
  public:
-  static const ::game::client_name& client_name(const make_move_request* msg);
 };
 
-const ::game::client_name&
-make_move_request::_Internal::client_name(const make_move_request* msg) {
-  return *msg->_impl_.client_name_;
-}
 make_move_request::make_move_request(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
@@ -2281,14 +2036,19 @@ make_move_request::make_move_request(const make_move_request& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   make_move_request* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.client_name_){nullptr}
+      decltype(_impl_.client_name_){}
     , decltype(_impl_.make_blind_){}
     , decltype(_impl_.fold_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  if (from._internal_has_client_name()) {
-    _this->_impl_.client_name_ = new ::game::client_name(*from._impl_.client_name_);
+  _impl_.client_name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.client_name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_client_name().empty()) {
+    _this->_impl_.client_name_.Set(from._internal_client_name(), 
+      _this->GetArenaForAllocation());
   }
   ::memcpy(&_impl_.make_blind_, &from._impl_.make_blind_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.fold_) -
@@ -2301,11 +2061,15 @@ inline void make_move_request::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.client_name_){nullptr}
+      decltype(_impl_.client_name_){}
     , decltype(_impl_.make_blind_){0}
     , decltype(_impl_.fold_){false}
     , /*decltype(_impl_._cached_size_)*/{}
   };
+  _impl_.client_name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.client_name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
 make_move_request::~make_move_request() {
@@ -2319,7 +2083,7 @@ make_move_request::~make_move_request() {
 
 inline void make_move_request::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  if (this != internal_default_instance()) delete _impl_.client_name_;
+  _impl_.client_name_.Destroy();
 }
 
 void make_move_request::SetCachedSize(int size) const {
@@ -2332,10 +2096,7 @@ void make_move_request::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaForAllocation() == nullptr && _impl_.client_name_ != nullptr) {
-    delete _impl_.client_name_;
-  }
-  _impl_.client_name_ = nullptr;
+  _impl_.client_name_.ClearToEmpty();
   ::memset(&_impl_.make_blind_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&_impl_.fold_) -
       reinterpret_cast<char*>(&_impl_.make_blind_)) + sizeof(_impl_.fold_));
@@ -2348,11 +2109,13 @@ const char* make_move_request::_InternalParse(const char* ptr, ::_pbi::ParseCont
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .game.client_name client_name = 1;
+      // string client_name = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          ptr = ctx->ParseMessage(_internal_mutable_client_name(), ptr);
+          auto str = _internal_mutable_client_name();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "game.make_move_request.client_name"));
         } else
           goto handle_unusual;
         continue;
@@ -2401,11 +2164,14 @@ uint8_t* make_move_request::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .game.client_name client_name = 1;
-  if (this->_internal_has_client_name()) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(1, _Internal::client_name(this),
-        _Internal::client_name(this).GetCachedSize(), target, stream);
+  // string client_name = 1;
+  if (!this->_internal_client_name().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_client_name().data(), static_cast<int>(this->_internal_client_name().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "game.make_move_request.client_name");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_client_name(), target);
   }
 
   // int32 make_blind = 2;
@@ -2436,11 +2202,11 @@ size_t make_move_request::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .game.client_name client_name = 1;
-  if (this->_internal_has_client_name()) {
+  // string client_name = 1;
+  if (!this->_internal_client_name().empty()) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.client_name_);
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_client_name());
   }
 
   // int32 make_blind = 2;
@@ -2471,9 +2237,8 @@ void make_move_request::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, cons
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_has_client_name()) {
-    _this->_internal_mutable_client_name()->::game::client_name::MergeFrom(
-        from._internal_client_name());
+  if (!from._internal_client_name().empty()) {
+    _this->_internal_set_client_name(from._internal_client_name());
   }
   if (from._internal_make_blind() != 0) {
     _this->_internal_set_make_blind(from._internal_make_blind());
@@ -2497,19 +2262,25 @@ bool make_move_request::IsInitialized() const {
 
 void make_move_request::InternalSwap(make_move_request* other) {
   using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.client_name_, lhs_arena,
+      &other->_impl_.client_name_, rhs_arena
+  );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(make_move_request, _impl_.fold_)
       + sizeof(make_move_request::_impl_.fold_)
-      - PROTOBUF_FIELD_OFFSET(make_move_request, _impl_.client_name_)>(
-          reinterpret_cast<char*>(&_impl_.client_name_),
-          reinterpret_cast<char*>(&other->_impl_.client_name_));
+      - PROTOBUF_FIELD_OFFSET(make_move_request, _impl_.make_blind_)>(
+          reinterpret_cast<char*>(&_impl_.make_blind_),
+          reinterpret_cast<char*>(&other->_impl_.make_blind_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata make_move_request::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_game_2eproto_getter, &descriptor_table_game_2eproto_once,
-      file_level_metadata_game_2eproto[8]);
+      file_level_metadata_game_2eproto[7]);
 }
 
 // ===================================================================
@@ -2694,20 +2465,15 @@ void make_move_response::InternalSwap(make_move_response* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata make_move_response::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_game_2eproto_getter, &descriptor_table_game_2eproto_once,
-      file_level_metadata_game_2eproto[9]);
+      file_level_metadata_game_2eproto[8]);
 }
 
 // ===================================================================
 
 class player::_Internal {
  public:
-  static const ::game::client_name& name(const player* msg);
 };
 
-const ::game::client_name&
-player::_Internal::name(const player* msg) {
-  return *msg->_impl_.name_;
-}
 player::player(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
@@ -2718,14 +2484,19 @@ player::player(const player& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   player* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.name_){nullptr}
+      decltype(_impl_.name_){}
     , decltype(_impl_.status_){}
     , decltype(_impl_.balance_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  if (from._internal_has_name()) {
-    _this->_impl_.name_ = new ::game::client_name(*from._impl_.name_);
+  _impl_.name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_name().empty()) {
+    _this->_impl_.name_.Set(from._internal_name(), 
+      _this->GetArenaForAllocation());
   }
   ::memcpy(&_impl_.status_, &from._impl_.status_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.balance_) -
@@ -2738,11 +2509,15 @@ inline void player::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.name_){nullptr}
+      decltype(_impl_.name_){}
     , decltype(_impl_.status_){0}
     , decltype(_impl_.balance_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
+  _impl_.name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
 player::~player() {
@@ -2756,7 +2531,7 @@ player::~player() {
 
 inline void player::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  if (this != internal_default_instance()) delete _impl_.name_;
+  _impl_.name_.Destroy();
 }
 
 void player::SetCachedSize(int size) const {
@@ -2769,10 +2544,7 @@ void player::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaForAllocation() == nullptr && _impl_.name_ != nullptr) {
-    delete _impl_.name_;
-  }
-  _impl_.name_ = nullptr;
+  _impl_.name_.ClearToEmpty();
   ::memset(&_impl_.status_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&_impl_.balance_) -
       reinterpret_cast<char*>(&_impl_.status_)) + sizeof(_impl_.balance_));
@@ -2785,11 +2557,13 @@ const char* player::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .game.client_name name = 1;
+      // string name = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          ptr = ctx->ParseMessage(_internal_mutable_name(), ptr);
+          auto str = _internal_mutable_name();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "game.player.name"));
         } else
           goto handle_unusual;
         continue;
@@ -2839,11 +2613,14 @@ uint8_t* player::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .game.client_name name = 1;
-  if (this->_internal_has_name()) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(1, _Internal::name(this),
-        _Internal::name(this).GetCachedSize(), target, stream);
+  // string name = 1;
+  if (!this->_internal_name().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "game.player.name");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_name(), target);
   }
 
   // .game.player_status status = 2;
@@ -2875,11 +2652,11 @@ size_t player::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .game.client_name name = 1;
-  if (this->_internal_has_name()) {
+  // string name = 1;
+  if (!this->_internal_name().empty()) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.name_);
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_name());
   }
 
   // .game.player_status status = 2;
@@ -2911,9 +2688,8 @@ void player::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBU
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_has_name()) {
-    _this->_internal_mutable_name()->::game::client_name::MergeFrom(
-        from._internal_name());
+  if (!from._internal_name().empty()) {
+    _this->_internal_set_name(from._internal_name());
   }
   if (from._internal_status() != 0) {
     _this->_internal_set_status(from._internal_status());
@@ -2937,19 +2713,25 @@ bool player::IsInitialized() const {
 
 void player::InternalSwap(player* other) {
   using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.name_, lhs_arena,
+      &other->_impl_.name_, rhs_arena
+  );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(player, _impl_.balance_)
       + sizeof(player::_impl_.balance_)
-      - PROTOBUF_FIELD_OFFSET(player, _impl_.name_)>(
-          reinterpret_cast<char*>(&_impl_.name_),
-          reinterpret_cast<char*>(&other->_impl_.name_));
+      - PROTOBUF_FIELD_OFFSET(player, _impl_.status_)>(
+          reinterpret_cast<char*>(&_impl_.status_),
+          reinterpret_cast<char*>(&other->_impl_.status_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata player::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_game_2eproto_getter, &descriptor_table_game_2eproto_once,
-      file_level_metadata_game_2eproto[10]);
+      file_level_metadata_game_2eproto[9]);
 }
 
 // ===================================================================
@@ -3179,7 +2961,7 @@ void status_message::InternalSwap(status_message* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata status_message::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_game_2eproto_getter, &descriptor_table_game_2eproto_once,
-      file_level_metadata_game_2eproto[11]);
+      file_level_metadata_game_2eproto[10]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
@@ -3200,10 +2982,6 @@ Arena::CreateMaybeMessage< ::game::register_request >(Arena* arena) {
 template<> PROTOBUF_NOINLINE ::game::register_response*
 Arena::CreateMaybeMessage< ::game::register_response >(Arena* arena) {
   return Arena::CreateMessageInternal< ::game::register_response >(arena);
-}
-template<> PROTOBUF_NOINLINE ::game::client_name*
-Arena::CreateMaybeMessage< ::game::client_name >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::game::client_name >(arena);
 }
 template<> PROTOBUF_NOINLINE ::game::salt_hash*
 Arena::CreateMaybeMessage< ::game::salt_hash >(Arena* arena) {

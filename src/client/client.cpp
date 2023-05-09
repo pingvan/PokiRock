@@ -90,7 +90,7 @@ void Client::login_with_graphic(
 ) {
     // we get hash + salt from server
     // then check
-    m_socket.async_send()
+//    m_socket.async_send()
 }
 
 void Client::registration_with_graphic(

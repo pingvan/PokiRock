@@ -46,9 +46,6 @@ struct TableStruct_game_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_game_2eproto;
 namespace game {
-class client_name;
-struct client_nameDefaultTypeInternal;
-extern client_nameDefaultTypeInternal _client_name_default_instance_;
 class login_request;
 struct login_requestDefaultTypeInternal;
 extern login_requestDefaultTypeInternal _login_request_default_instance_;
@@ -84,7 +81,6 @@ struct status_messageDefaultTypeInternal;
 extern status_messageDefaultTypeInternal _status_message_default_instance_;
 }  // namespace game
 PROTOBUF_NAMESPACE_OPEN
-template<> ::game::client_name* Arena::CreateMaybeMessage<::game::client_name>(Arena*);
 template<> ::game::login_request* Arena::CreateMaybeMessage<::game::login_request>(Arena*);
 template<> ::game::login_response* Arena::CreateMaybeMessage<::game::login_response>(Arena*);
 template<> ::game::make_move_request* Arena::CreateMaybeMessage<::game::make_move_request>(Arena*);
@@ -257,23 +253,23 @@ class login_request final :
     kNameFieldNumber = 1,
     kAfterCompareFieldNumber = 2,
   };
-  // .game.client_name name = 1;
+  // string name = 1;
   bool has_name() const;
   private:
   bool _internal_has_name() const;
   public:
   void clear_name();
-  const ::game::client_name& name() const;
-  PROTOBUF_NODISCARD ::game::client_name* release_name();
-  ::game::client_name* mutable_name();
-  void set_allocated_name(::game::client_name* name);
+  const std::string& name() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_name(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_name();
+  PROTOBUF_NODISCARD std::string* release_name();
+  void set_allocated_name(std::string* name);
   private:
-  const ::game::client_name& _internal_name() const;
-  ::game::client_name* _internal_mutable_name();
+  const std::string& _internal_name() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_name(const std::string& value);
+  std::string* _internal_mutable_name();
   public:
-  void unsafe_arena_set_allocated_name(
-      ::game::client_name* name);
-  ::game::client_name* unsafe_arena_release_name();
 
   // bool after_compare = 2;
   bool has_after_compare() const;
@@ -306,7 +302,7 @@ class login_request final :
     union LoginEventsRequestUnion {
       constexpr LoginEventsRequestUnion() : _constinit_{} {}
         ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized _constinit_;
-      ::game::client_name* name_;
+      ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
       bool after_compare_;
     } login_events_request_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -638,23 +634,19 @@ class register_request final :
     kNameFieldNumber = 1,
     kSaltHashFieldNumber = 2,
   };
-  // .game.client_name name = 1;
-  bool has_name() const;
-  private:
-  bool _internal_has_name() const;
-  public:
+  // string name = 1;
   void clear_name();
-  const ::game::client_name& name() const;
-  PROTOBUF_NODISCARD ::game::client_name* release_name();
-  ::game::client_name* mutable_name();
-  void set_allocated_name(::game::client_name* name);
+  const std::string& name() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_name(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_name();
+  PROTOBUF_NODISCARD std::string* release_name();
+  void set_allocated_name(std::string* name);
   private:
-  const ::game::client_name& _internal_name() const;
-  ::game::client_name* _internal_mutable_name();
+  const std::string& _internal_name() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_name(const std::string& value);
+  std::string* _internal_mutable_name();
   public:
-  void unsafe_arena_set_allocated_name(
-      ::game::client_name* name);
-  ::game::client_name* unsafe_arena_release_name();
 
   // .game.salt_hash salt_hash = 2;
   bool has_salt_hash() const;
@@ -682,7 +674,7 @@ class register_request final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::game::client_name* name_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
     ::game::salt_hash* salt_hash_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -848,159 +840,6 @@ class register_response final :
 };
 // -------------------------------------------------------------------
 
-class client_name final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:game.client_name) */ {
- public:
-  inline client_name() : client_name(nullptr) {}
-  ~client_name() override;
-  explicit PROTOBUF_CONSTEXPR client_name(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-  client_name(const client_name& from);
-  client_name(client_name&& from) noexcept
-    : client_name() {
-    *this = ::std::move(from);
-  }
-
-  inline client_name& operator=(const client_name& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline client_name& operator=(client_name&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const client_name& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const client_name* internal_default_instance() {
-    return reinterpret_cast<const client_name*>(
-               &_client_name_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    4;
-
-  friend void swap(client_name& a, client_name& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(client_name* other) {
-    if (other == this) return;
-  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
-      InternalSwap(other);
-    } else {
-      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(client_name* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  client_name* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<client_name>(arena);
-  }
-  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const client_name& from);
-  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const client_name& from) {
-    client_name::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
-  public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(client_name* other);
-
-  private:
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "game.client_name";
-  }
-  protected:
-  explicit client_name(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
-
-  static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kNameFieldNumber = 1,
-  };
-  // string name = 1;
-  void clear_name();
-  const std::string& name() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_name(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_name();
-  PROTOBUF_NODISCARD std::string* release_name();
-  void set_allocated_name(std::string* name);
-  private:
-  const std::string& _internal_name() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_name(const std::string& value);
-  std::string* _internal_mutable_name();
-  public:
-
-  // @@protoc_insertion_point(class_scope:game.client_name)
- private:
-  class _Internal;
-
-  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_game_2eproto;
-};
-// -------------------------------------------------------------------
-
 class salt_hash final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:game.salt_hash) */ {
  public:
@@ -1049,7 +888,7 @@ class salt_hash final :
                &_salt_hash_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    4;
 
   friend void swap(salt_hash& a, salt_hash& b) {
     a.Swap(&b);
@@ -1218,7 +1057,7 @@ class search_a_game_request final :
                &_search_a_game_request_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    5;
 
   friend void swap(search_a_game_request& a, search_a_game_request& b) {
     a.Swap(&b);
@@ -1377,7 +1216,7 @@ class search_a_game_response final :
                &_search_a_game_response_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    6;
 
   friend void swap(search_a_game_response& a, search_a_game_response& b) {
     a.Swap(&b);
@@ -1534,7 +1373,7 @@ class make_move_request final :
                &_make_move_request_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    7;
 
   friend void swap(make_move_request& a, make_move_request& b) {
     a.Swap(&b);
@@ -1611,23 +1450,19 @@ class make_move_request final :
     kMakeBlindFieldNumber = 2,
     kFoldFieldNumber = 3,
   };
-  // .game.client_name client_name = 1;
-  bool has_client_name() const;
-  private:
-  bool _internal_has_client_name() const;
-  public:
+  // string client_name = 1;
   void clear_client_name();
-  const ::game::client_name& client_name() const;
-  PROTOBUF_NODISCARD ::game::client_name* release_client_name();
-  ::game::client_name* mutable_client_name();
-  void set_allocated_client_name(::game::client_name* client_name);
+  const std::string& client_name() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_client_name(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_client_name();
+  PROTOBUF_NODISCARD std::string* release_client_name();
+  void set_allocated_client_name(std::string* client_name);
   private:
-  const ::game::client_name& _internal_client_name() const;
-  ::game::client_name* _internal_mutable_client_name();
+  const std::string& _internal_client_name() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_client_name(const std::string& value);
+  std::string* _internal_mutable_client_name();
   public:
-  void unsafe_arena_set_allocated_client_name(
-      ::game::client_name* client_name);
-  ::game::client_name* unsafe_arena_release_client_name();
 
   // int32 make_blind = 2;
   void clear_make_blind();
@@ -1655,7 +1490,7 @@ class make_move_request final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::game::client_name* client_name_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr client_name_;
     int32_t make_blind_;
     bool fold_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -1713,7 +1548,7 @@ class make_move_response final :
                &_make_move_response_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    9;
+    8;
 
   friend void swap(make_move_response& a, make_move_response& b) {
     a.Swap(&b);
@@ -1870,7 +1705,7 @@ class player final :
                &_player_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    9;
 
   friend void swap(player& a, player& b) {
     a.Swap(&b);
@@ -1947,23 +1782,19 @@ class player final :
     kStatusFieldNumber = 2,
     kBalanceFieldNumber = 3,
   };
-  // .game.client_name name = 1;
-  bool has_name() const;
-  private:
-  bool _internal_has_name() const;
-  public:
+  // string name = 1;
   void clear_name();
-  const ::game::client_name& name() const;
-  PROTOBUF_NODISCARD ::game::client_name* release_name();
-  ::game::client_name* mutable_name();
-  void set_allocated_name(::game::client_name* name);
+  const std::string& name() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_name(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_name();
+  PROTOBUF_NODISCARD std::string* release_name();
+  void set_allocated_name(std::string* name);
   private:
-  const ::game::client_name& _internal_name() const;
-  ::game::client_name* _internal_mutable_name();
+  const std::string& _internal_name() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_name(const std::string& value);
+  std::string* _internal_mutable_name();
   public:
-  void unsafe_arena_set_allocated_name(
-      ::game::client_name* name);
-  ::game::client_name* unsafe_arena_release_name();
 
   // .game.player_status status = 2;
   void clear_status();
@@ -1991,7 +1822,7 @@ class player final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::game::client_name* name_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
     int status_;
     int32_t balance_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -2049,7 +1880,7 @@ class status_message final :
                &_status_message_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    10;
 
   friend void swap(status_message& a, status_message& b) {
     a.Swap(&b);
@@ -2174,7 +2005,7 @@ class status_message final :
 #endif  // __GNUC__
 // login_request
 
-// .game.client_name name = 1;
+// string name = 1;
 inline bool login_request::_internal_has_name() const {
   return login_events_request_case() == kName;
 }
@@ -2186,66 +2017,69 @@ inline void login_request::set_has_name() {
 }
 inline void login_request::clear_name() {
   if (_internal_has_name()) {
-    if (GetArenaForAllocation() == nullptr) {
-      delete _impl_.login_events_request_.name_;
-    }
+    _impl_.login_events_request_.name_.Destroy();
     clear_has_login_events_request();
   }
 }
-inline ::game::client_name* login_request::release_name() {
-  // @@protoc_insertion_point(field_release:game.login_request.name)
-  if (_internal_has_name()) {
-    clear_has_login_events_request();
-    ::game::client_name* temp = _impl_.login_events_request_.name_;
-    if (GetArenaForAllocation() != nullptr) {
-      temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-    }
-    _impl_.login_events_request_.name_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline const ::game::client_name& login_request::_internal_name() const {
-  return _internal_has_name()
-      ? *_impl_.login_events_request_.name_
-      : reinterpret_cast< ::game::client_name&>(::game::_client_name_default_instance_);
-}
-inline const ::game::client_name& login_request::name() const {
+inline const std::string& login_request::name() const {
   // @@protoc_insertion_point(field_get:game.login_request.name)
   return _internal_name();
 }
-inline ::game::client_name* login_request::unsafe_arena_release_name() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:game.login_request.name)
+template <typename ArgT0, typename... ArgT>
+inline void login_request::set_name(ArgT0&& arg0, ArgT... args) {
+  if (!_internal_has_name()) {
+    clear_login_events_request();
+    set_has_name();
+    _impl_.login_events_request_.name_.InitDefault();
+  }
+  _impl_.login_events_request_.name_.Set( static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:game.login_request.name)
+}
+inline std::string* login_request::mutable_name() {
+  std::string* _s = _internal_mutable_name();
+  // @@protoc_insertion_point(field_mutable:game.login_request.name)
+  return _s;
+}
+inline const std::string& login_request::_internal_name() const {
+  if (_internal_has_name()) {
+    return _impl_.login_events_request_.name_.Get();
+  }
+  return ::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited();
+}
+inline void login_request::_internal_set_name(const std::string& value) {
+  if (!_internal_has_name()) {
+    clear_login_events_request();
+    set_has_name();
+    _impl_.login_events_request_.name_.InitDefault();
+  }
+  _impl_.login_events_request_.name_.Set(value, GetArenaForAllocation());
+}
+inline std::string* login_request::_internal_mutable_name() {
+  if (!_internal_has_name()) {
+    clear_login_events_request();
+    set_has_name();
+    _impl_.login_events_request_.name_.InitDefault();
+  }
+  return _impl_.login_events_request_.name_.Mutable(      GetArenaForAllocation());
+}
+inline std::string* login_request::release_name() {
+  // @@protoc_insertion_point(field_release:game.login_request.name)
   if (_internal_has_name()) {
     clear_has_login_events_request();
-    ::game::client_name* temp = _impl_.login_events_request_.name_;
-    _impl_.login_events_request_.name_ = nullptr;
-    return temp;
+    return _impl_.login_events_request_.name_.Release();
   } else {
     return nullptr;
   }
 }
-inline void login_request::unsafe_arena_set_allocated_name(::game::client_name* name) {
-  clear_login_events_request();
-  if (name) {
-    set_has_name();
-    _impl_.login_events_request_.name_ = name;
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:game.login_request.name)
-}
-inline ::game::client_name* login_request::_internal_mutable_name() {
-  if (!_internal_has_name()) {
+inline void login_request::set_allocated_name(std::string* name) {
+  if (has_login_events_request()) {
     clear_login_events_request();
-    set_has_name();
-    _impl_.login_events_request_.name_ = CreateMaybeMessage< ::game::client_name >(GetArenaForAllocation());
   }
-  return _impl_.login_events_request_.name_;
-}
-inline ::game::client_name* login_request::mutable_name() {
-  ::game::client_name* _msg = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:game.login_request.name)
-  return _msg;
+  if (name != nullptr) {
+    set_has_name();
+    _impl_.login_events_request_.name_.InitAllocated(name, GetArenaForAllocation());
+  }
+  // @@protoc_insertion_point(field_set_allocated:game.login_request.name)
 }
 
 // bool after_compare = 2;
@@ -2460,93 +2294,53 @@ inline login_response::LoginEventsResponseCase login_response::login_events_resp
 
 // register_request
 
-// .game.client_name name = 1;
-inline bool register_request::_internal_has_name() const {
-  return this != internal_default_instance() && _impl_.name_ != nullptr;
-}
-inline bool register_request::has_name() const {
-  return _internal_has_name();
-}
+// string name = 1;
 inline void register_request::clear_name() {
-  if (GetArenaForAllocation() == nullptr && _impl_.name_ != nullptr) {
-    delete _impl_.name_;
-  }
-  _impl_.name_ = nullptr;
+  _impl_.name_.ClearToEmpty();
 }
-inline const ::game::client_name& register_request::_internal_name() const {
-  const ::game::client_name* p = _impl_.name_;
-  return p != nullptr ? *p : reinterpret_cast<const ::game::client_name&>(
-      ::game::_client_name_default_instance_);
-}
-inline const ::game::client_name& register_request::name() const {
+inline const std::string& register_request::name() const {
   // @@protoc_insertion_point(field_get:game.register_request.name)
   return _internal_name();
 }
-inline void register_request::unsafe_arena_set_allocated_name(
-    ::game::client_name* name) {
-  if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.name_);
-  }
-  _impl_.name_ = name;
-  if (name) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:game.register_request.name)
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void register_request::set_name(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:game.register_request.name)
 }
-inline ::game::client_name* register_request::release_name() {
-  
-  ::game::client_name* temp = _impl_.name_;
-  _impl_.name_ = nullptr;
-#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
-  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
-  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  if (GetArenaForAllocation() == nullptr) { delete old; }
-#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
-  if (GetArenaForAllocation() != nullptr) {
-    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  }
-#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
-  return temp;
-}
-inline ::game::client_name* register_request::unsafe_arena_release_name() {
-  // @@protoc_insertion_point(field_release:game.register_request.name)
-  
-  ::game::client_name* temp = _impl_.name_;
-  _impl_.name_ = nullptr;
-  return temp;
-}
-inline ::game::client_name* register_request::_internal_mutable_name() {
-  
-  if (_impl_.name_ == nullptr) {
-    auto* p = CreateMaybeMessage<::game::client_name>(GetArenaForAllocation());
-    _impl_.name_ = p;
-  }
-  return _impl_.name_;
-}
-inline ::game::client_name* register_request::mutable_name() {
-  ::game::client_name* _msg = _internal_mutable_name();
+inline std::string* register_request::mutable_name() {
+  std::string* _s = _internal_mutable_name();
   // @@protoc_insertion_point(field_mutable:game.register_request.name)
-  return _msg;
+  return _s;
 }
-inline void register_request::set_allocated_name(::game::client_name* name) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
-  if (message_arena == nullptr) {
-    delete _impl_.name_;
-  }
-  if (name) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(name);
-    if (message_arena != submessage_arena) {
-      name = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, name, submessage_arena);
-    }
+inline const std::string& register_request::_internal_name() const {
+  return _impl_.name_.Get();
+}
+inline void register_request::_internal_set_name(const std::string& value) {
+  
+  _impl_.name_.Set(value, GetArenaForAllocation());
+}
+inline std::string* register_request::_internal_mutable_name() {
+  
+  return _impl_.name_.Mutable(GetArenaForAllocation());
+}
+inline std::string* register_request::release_name() {
+  // @@protoc_insertion_point(field_release:game.register_request.name)
+  return _impl_.name_.Release();
+}
+inline void register_request::set_allocated_name(std::string* name) {
+  if (name != nullptr) {
     
   } else {
     
   }
-  _impl_.name_ = name;
+  _impl_.name_.SetAllocated(name, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.name_.IsDefault()) {
+    _impl_.name_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:game.register_request.name)
 }
 
@@ -2732,60 +2526,6 @@ inline void register_response::set_allocated_status_message(::game::status_messa
   }
   _impl_.status_message_ = status_message;
   // @@protoc_insertion_point(field_set_allocated:game.register_response.status_message)
-}
-
-// -------------------------------------------------------------------
-
-// client_name
-
-// string name = 1;
-inline void client_name::clear_name() {
-  _impl_.name_.ClearToEmpty();
-}
-inline const std::string& client_name::name() const {
-  // @@protoc_insertion_point(field_get:game.client_name.name)
-  return _internal_name();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void client_name::set_name(ArgT0&& arg0, ArgT... args) {
- 
- _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:game.client_name.name)
-}
-inline std::string* client_name::mutable_name() {
-  std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:game.client_name.name)
-  return _s;
-}
-inline const std::string& client_name::_internal_name() const {
-  return _impl_.name_.Get();
-}
-inline void client_name::_internal_set_name(const std::string& value) {
-  
-  _impl_.name_.Set(value, GetArenaForAllocation());
-}
-inline std::string* client_name::_internal_mutable_name() {
-  
-  return _impl_.name_.Mutable(GetArenaForAllocation());
-}
-inline std::string* client_name::release_name() {
-  // @@protoc_insertion_point(field_release:game.client_name.name)
-  return _impl_.name_.Release();
-}
-inline void client_name::set_allocated_name(std::string* name) {
-  if (name != nullptr) {
-    
-  } else {
-    
-  }
-  _impl_.name_.SetAllocated(name, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.name_.IsDefault()) {
-    _impl_.name_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:game.client_name.name)
 }
 
 // -------------------------------------------------------------------
@@ -3034,93 +2774,53 @@ inline void search_a_game_response::set_allocated_status_message(::game::status_
 
 // make_move_request
 
-// .game.client_name client_name = 1;
-inline bool make_move_request::_internal_has_client_name() const {
-  return this != internal_default_instance() && _impl_.client_name_ != nullptr;
-}
-inline bool make_move_request::has_client_name() const {
-  return _internal_has_client_name();
-}
+// string client_name = 1;
 inline void make_move_request::clear_client_name() {
-  if (GetArenaForAllocation() == nullptr && _impl_.client_name_ != nullptr) {
-    delete _impl_.client_name_;
-  }
-  _impl_.client_name_ = nullptr;
+  _impl_.client_name_.ClearToEmpty();
 }
-inline const ::game::client_name& make_move_request::_internal_client_name() const {
-  const ::game::client_name* p = _impl_.client_name_;
-  return p != nullptr ? *p : reinterpret_cast<const ::game::client_name&>(
-      ::game::_client_name_default_instance_);
-}
-inline const ::game::client_name& make_move_request::client_name() const {
+inline const std::string& make_move_request::client_name() const {
   // @@protoc_insertion_point(field_get:game.make_move_request.client_name)
   return _internal_client_name();
 }
-inline void make_move_request::unsafe_arena_set_allocated_client_name(
-    ::game::client_name* client_name) {
-  if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.client_name_);
-  }
-  _impl_.client_name_ = client_name;
-  if (client_name) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:game.make_move_request.client_name)
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void make_move_request::set_client_name(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.client_name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:game.make_move_request.client_name)
 }
-inline ::game::client_name* make_move_request::release_client_name() {
-  
-  ::game::client_name* temp = _impl_.client_name_;
-  _impl_.client_name_ = nullptr;
-#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
-  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
-  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  if (GetArenaForAllocation() == nullptr) { delete old; }
-#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
-  if (GetArenaForAllocation() != nullptr) {
-    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  }
-#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
-  return temp;
-}
-inline ::game::client_name* make_move_request::unsafe_arena_release_client_name() {
-  // @@protoc_insertion_point(field_release:game.make_move_request.client_name)
-  
-  ::game::client_name* temp = _impl_.client_name_;
-  _impl_.client_name_ = nullptr;
-  return temp;
-}
-inline ::game::client_name* make_move_request::_internal_mutable_client_name() {
-  
-  if (_impl_.client_name_ == nullptr) {
-    auto* p = CreateMaybeMessage<::game::client_name>(GetArenaForAllocation());
-    _impl_.client_name_ = p;
-  }
-  return _impl_.client_name_;
-}
-inline ::game::client_name* make_move_request::mutable_client_name() {
-  ::game::client_name* _msg = _internal_mutable_client_name();
+inline std::string* make_move_request::mutable_client_name() {
+  std::string* _s = _internal_mutable_client_name();
   // @@protoc_insertion_point(field_mutable:game.make_move_request.client_name)
-  return _msg;
+  return _s;
 }
-inline void make_move_request::set_allocated_client_name(::game::client_name* client_name) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
-  if (message_arena == nullptr) {
-    delete _impl_.client_name_;
-  }
-  if (client_name) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(client_name);
-    if (message_arena != submessage_arena) {
-      client_name = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, client_name, submessage_arena);
-    }
+inline const std::string& make_move_request::_internal_client_name() const {
+  return _impl_.client_name_.Get();
+}
+inline void make_move_request::_internal_set_client_name(const std::string& value) {
+  
+  _impl_.client_name_.Set(value, GetArenaForAllocation());
+}
+inline std::string* make_move_request::_internal_mutable_client_name() {
+  
+  return _impl_.client_name_.Mutable(GetArenaForAllocation());
+}
+inline std::string* make_move_request::release_client_name() {
+  // @@protoc_insertion_point(field_release:game.make_move_request.client_name)
+  return _impl_.client_name_.Release();
+}
+inline void make_move_request::set_allocated_client_name(std::string* client_name) {
+  if (client_name != nullptr) {
     
   } else {
     
   }
-  _impl_.client_name_ = client_name;
+  _impl_.client_name_.SetAllocated(client_name, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.client_name_.IsDefault()) {
+    _impl_.client_name_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:game.make_move_request.client_name)
 }
 
@@ -3212,93 +2912,53 @@ make_move_response::players() const {
 
 // player
 
-// .game.client_name name = 1;
-inline bool player::_internal_has_name() const {
-  return this != internal_default_instance() && _impl_.name_ != nullptr;
-}
-inline bool player::has_name() const {
-  return _internal_has_name();
-}
+// string name = 1;
 inline void player::clear_name() {
-  if (GetArenaForAllocation() == nullptr && _impl_.name_ != nullptr) {
-    delete _impl_.name_;
-  }
-  _impl_.name_ = nullptr;
+  _impl_.name_.ClearToEmpty();
 }
-inline const ::game::client_name& player::_internal_name() const {
-  const ::game::client_name* p = _impl_.name_;
-  return p != nullptr ? *p : reinterpret_cast<const ::game::client_name&>(
-      ::game::_client_name_default_instance_);
-}
-inline const ::game::client_name& player::name() const {
+inline const std::string& player::name() const {
   // @@protoc_insertion_point(field_get:game.player.name)
   return _internal_name();
 }
-inline void player::unsafe_arena_set_allocated_name(
-    ::game::client_name* name) {
-  if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.name_);
-  }
-  _impl_.name_ = name;
-  if (name) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:game.player.name)
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void player::set_name(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:game.player.name)
 }
-inline ::game::client_name* player::release_name() {
-  
-  ::game::client_name* temp = _impl_.name_;
-  _impl_.name_ = nullptr;
-#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
-  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
-  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  if (GetArenaForAllocation() == nullptr) { delete old; }
-#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
-  if (GetArenaForAllocation() != nullptr) {
-    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  }
-#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
-  return temp;
-}
-inline ::game::client_name* player::unsafe_arena_release_name() {
-  // @@protoc_insertion_point(field_release:game.player.name)
-  
-  ::game::client_name* temp = _impl_.name_;
-  _impl_.name_ = nullptr;
-  return temp;
-}
-inline ::game::client_name* player::_internal_mutable_name() {
-  
-  if (_impl_.name_ == nullptr) {
-    auto* p = CreateMaybeMessage<::game::client_name>(GetArenaForAllocation());
-    _impl_.name_ = p;
-  }
-  return _impl_.name_;
-}
-inline ::game::client_name* player::mutable_name() {
-  ::game::client_name* _msg = _internal_mutable_name();
+inline std::string* player::mutable_name() {
+  std::string* _s = _internal_mutable_name();
   // @@protoc_insertion_point(field_mutable:game.player.name)
-  return _msg;
+  return _s;
 }
-inline void player::set_allocated_name(::game::client_name* name) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
-  if (message_arena == nullptr) {
-    delete _impl_.name_;
-  }
-  if (name) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(name);
-    if (message_arena != submessage_arena) {
-      name = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, name, submessage_arena);
-    }
+inline const std::string& player::_internal_name() const {
+  return _impl_.name_.Get();
+}
+inline void player::_internal_set_name(const std::string& value) {
+  
+  _impl_.name_.Set(value, GetArenaForAllocation());
+}
+inline std::string* player::_internal_mutable_name() {
+  
+  return _impl_.name_.Mutable(GetArenaForAllocation());
+}
+inline std::string* player::release_name() {
+  // @@protoc_insertion_point(field_release:game.player.name)
+  return _impl_.name_.Release();
+}
+inline void player::set_allocated_name(std::string* name) {
+  if (name != nullptr) {
     
   } else {
     
   }
-  _impl_.name_ = name;
+  _impl_.name_.SetAllocated(name, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.name_.IsDefault()) {
+    _impl_.name_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:game.player.name)
 }
 
@@ -3419,8 +3079,6 @@ inline void status_message::set_allocated_message(std::string* message) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

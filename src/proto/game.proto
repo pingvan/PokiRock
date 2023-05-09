@@ -14,7 +14,7 @@ service game {
 
 message login_request {
     oneof login_events_request {
-        client_name name = 1;
+        string name = 1;
         bool after_compare = 2;
     }
 }
@@ -27,7 +27,7 @@ message login_response {
 }
 
 message register_request {
-    client_name name = 1;
+    string name = 1;
     salt_hash salt_hash = 2;
 }
 
@@ -35,9 +35,6 @@ message register_response {
     status_message status_message = 1;
 }
 
-message client_name {
-    string name = 1;
-}
 
 message salt_hash {
     string salt = 1;
@@ -54,7 +51,7 @@ message search_a_game_response {
 }
 
 message make_move_request {
-    client_name client_name = 1;
+    string client_name = 1;
     int32 make_blind = 2;
     bool fold = 3;
 }
@@ -64,7 +61,7 @@ message make_move_response {
 }
 
 message player {
-    client_name name = 1;
+    string name = 1;
     player_status status = 2;
     int32 balance = 3;
 }

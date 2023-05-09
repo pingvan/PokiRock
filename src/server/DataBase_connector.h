@@ -5,8 +5,6 @@
 #include <pqxx/connection>
 
 #include <string>
-#include <openssl/sha.h>
-#include <random>
 #include <iostream>
 
 namespace data {

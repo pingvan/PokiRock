@@ -3,40 +3,17 @@
 #include <pqxx/connection>
 
 namespace data {
-    std::string DataBase_connector::sha_hash(const std::string &phrase) {
-        unsigned char hash[SHA256_DIGEST_LENGTH];
-        SHA256(reinterpret_cast<const unsigned char *>(phrase.data()), phrase.length(), hash);
-        std::stringstream ss;
-        for (unsigned char const i: hash) {
-            ss << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(i);
-        }
-        return ss.str();
-    }
-
-    std::string DataBase_connector::generate_salt(int length) {
-        static const std::string symbols = {"0123456789!@#$%^&*ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"};
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        std::uniform_int_distribution<> distrib(0, static_cast<int>(symbols.size()));
-        std::stringstream random_symbols;
-        for (int i = 0; i < length; i++) {
-            random_symbols << symbols[distrib(gen)];
-        }
-        return random_symbols.str();
-    }
 
     void DataBase_connector::insert_new_client(const std::string &client_login, const std::string &salt, const std::string &hash) {
         try {
             pqxx::connection con{conn_msg()};
             pqxx::work txn{con};
-//            const std::string salt = generate_salt(static_cast<int>(pass.size()));
-//            const std::string hashed = sha_hash(salt + pass);
             txn.exec_params("INSERT INTO clients (client_login, client_games, client_wins, client_balance)"
                             "VALUES ($1, $2, $3, $4)", client_login, 0, 0, 1000);
             auto client_id = txn.query_value<uint32_t>("SELECT client_id "
                                                        "FROM clients "
                                                        "WHERE client_login =" + txn.quote(client_login));
-            txn.exec_params("INSERT INTO id_to_password (client_id, client_password_hashe, password_salt)"
+            txn.exec_params("INSERT INTO id_to_password (client_id, password_hashe, password_salt)"
                             "VALUES ($1, $2, $3)", client_id, hash, salt);
             txn.commit();
             con.close();
@@ -51,7 +28,7 @@ namespace data {
             auto client_id = txn.query_value<uint32_t>("SELECT client_id "
                                                        "FROM clients "
                                                        "WHERE client_login =" + txn.quote(client_login));
-            pqxx::result const row = txn.exec("SELECT client_password_hashe, password_salt "
+            pqxx::result const row = txn.exec("SELECT password_hashe, password_salt "
                                                      "FROM id_to_password "
                                                      "WHERE client_id = " + txn.quote(client_id));
             std::string hase_tab;
@@ -122,9 +99,6 @@ namespace data {
 
             txn.commit();
             con.close();
-        } catch (pqxx::plpgsql_no_data_found &ee) {
-            std::cerr << ee.what() << '\n';
-            std::cerr << "NO DATA WITH THIS PARAMS" << '\n';
         } catch (std::exception &e) {
             std::cerr << e.what() << '\n';
         }
