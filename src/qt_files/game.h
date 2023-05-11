@@ -3,20 +3,20 @@
 
 #include <QDialog>
 #include <string>
-#include "user.h"
 #include <QLabel>
 
 namespace Ui {
 class game;
 }
 
+class WindowManager;
+
 class game : public QDialog
 {
     Q_OBJECT
 
 public:
-    game(QWidget *parent = nullptr, User person = User());
-    User user;
+    game(QWidget *parent = nullptr, WindowManager* manager = nullptr);
     ~game();
 
 private slots:
@@ -28,11 +28,12 @@ private slots:
 
 private:
     Ui::game *ui;
-    const char* path(const char c, const std::string& card);
-    const char* path_to_cover_T();
-    const char* path_to_cover();
-    void setCoverCard(QLabel* place);
-    void setCoverCard_T(QLabel* place);
+    WindowManager* manager;
+    static const char* path(char c, const std::string& card);
+    static const char* path_to_cover_T();
+    static const char* path_to_cover();
+    static void setCoverCard(QLabel* place);
+    static void setCoverCard_T(QLabel* place);
     void initDillerCards();
     void initPlayer1Cards();
     void initPlayer2Cards();

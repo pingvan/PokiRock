@@ -1,8 +1,9 @@
 #ifndef USER_H
 #define USER_H
 #include <string>
+#include <utility>
 struct User {
-    User(std::string login) : name(login) {
+    User(std::string  login) : name(std::move(login)) {
         updateBalane();
     }
     User() {};

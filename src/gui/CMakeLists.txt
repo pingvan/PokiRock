@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.22.1)
 project(PokiRock LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -11,7 +11,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -v")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DQT_NO_FOREACH")
 
@@ -21,7 +21,7 @@ add_compile_options(-g -fsanitize=address,undefined)
 
 find_package(Boost REQUIRED)
 find_package(Threads REQUIRED)
-find_package(Qt6 COMPONENTS Widgets REQUIRED)
+find_package(Qt5 COMPONENTS Widgets REQUIRED)
 find_package(PkgConfig REQUIRED)
 find_package(OpenSSL REQUIRED)
 
@@ -29,23 +29,23 @@ find_package(OpenSSL REQUIRED)
 #add_executable(PokiRock client.cpp server.cpp game.cpp win_check.cpp ../main.cpp)
 
 #all project with graphic
-#add_executable(PokiRock  ../server/DataBase_connector.cpp ../client/Client.cpp ../server/Server.cpp ../server/Game.cpp ../server/Win_check.cpp ../qt_files/Registration_window.cpp ../qt_files/game.cpp  ../qt_files/Main_menu.cpp  ../qt_files/First_window.cpp ../qt_files/Authorization_window.cpp  ../qt_files/main.cpp)
+#add_executable(PokiRock  ../server/DataBase_connector.cpp ../client/Client.cpp ../server/Server.cpp ../server/Game.cpp ../server/Win_check.cpp ../qt_files/Registration_window.cpp ../qt_files/Game.cpp  ../qt_files/Main_menu.cpp  ../qt_files/First_window.cpp ../qt_files/Authorization_window.cpp  ../qt_files/main.cpp)
 
 #only logic
 #add_executable(PokiRock  ../server/DataBase_connector.cpp ../client/client.cpp ../server/Game.cpp ../server/Server.cpp ../server/Win_check.cpp  ../server/Card.cpp ../main.cpp)
 
 #only graphic
-#add_executable(PokiRock  ../qt_files/Main_menu.cpp  ../qt_files/First_window.cpp ../qt_files/Authorization_window.cpp  ../qt_files/main.cpp)
+add_executable(PokiRock ../qt_files/Main_menu.cpp  ../qt_files/First_window.cpp ../qt_files/Authorization_window.cpp ../qt_files/Registration_window.cpp ../qt_files/game.cpp ../qt_files/main.cpp ../qt_files/labels.qrc ../qt_files/other.qrc ../qt_files/cover.qrc ../qt_files/clubs.qrc ../qt_files/spades.qrc  ../qt_files/diamonds.qrc ../qt_files/hearts.qrc)
 
 #only main
 #add_executable(PokiRock  ../server/DataBase_connector.cpp ../main.cpp)
 
 #testing file
-add_executable(PokiRock ../TEMPORARY_TEMP_FILE.cpp)
+#add_executable(PokiRock ../TEMPORARY_TEMP_FILE.cpp)
 
 target_include_directories(PokiRock PRIVATE
         ${BOOST_INCLUDE_DIRS}
-        ${Qt6Widgets_INCLUDE_DIRS}
+        ${Qt5Widgets_INCLUDE_DIRS}
         ${PQXX_INCLUDE_DIRS}
         ${OPENSSL_CRYPTO_LIBRARY}
         ${OPENSSL_INCLUDE_DIR}

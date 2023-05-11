@@ -1,8 +1,7 @@
-#include "First_window.h"
-
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
+#include "Window_manager.h"
 
 void magic_with_translator(QApplication* a) {
     QTranslator translator;
@@ -15,12 +14,14 @@ void magic_with_translator(QApplication* a) {
         }
     }
 }
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     magic_with_translator(&a);
 
-    first_window w;
-    w.showFullScreen();
+    WindowManager manager;
+    manager.start();
+
     return a.exec();
 }

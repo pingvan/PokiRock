@@ -1,12 +1,12 @@
+#include <QMessageBox>
+#include <string>
 #include "Registration_window.h"
 #include "ui_Registration_window.h"
 //#include "../server/DataBase_connector.h"
-#include <QMessageBox>
-#include <string>
-#include "Authorization_window.h"
+#include "Window_manager.h"
 
-registration_window::registration_window(QWidget *parent) :
-    QDialog(parent),
+registration_window::registration_window(QWidget *parent, WindowManager* manager_m) :
+    QDialog(parent), manager(manager_m),
     ui(new Ui::registration_window)
 {
     ui->setupUi(this);
@@ -20,8 +20,7 @@ registration_window::~registration_window()
 }
 
 bool addUser(const std::string& name, const std::string& password) {
-    //add user
-    return true;
+    return name.empty() && password.empty();
 }
 
 void registration_window::on_registration_clicked()
@@ -35,8 +34,8 @@ void registration_window::on_registration_clicked()
         bool isUserCorrect = addUser(user_login.toStdString(), user_password.toStdString());
         if (isUserCorrect) {
             QMessageBox::information(this, "Успех", "Вы успешно зарегистрировались!");
-            second_window->show();
-            close();
+            manager->setClient(user_login.toStdString());
+            manager->show_main_menu();
         } else {
             QMessageBox::warning(this, "Ошибка", "Некорректное имя пользователя или пароль");
         }

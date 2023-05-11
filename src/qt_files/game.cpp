@@ -1,8 +1,11 @@
-#include "game.h"
+#include "Game.h"
+
 #include "ui_game.h"
+#include "Window_manager.h"
 
 const char* game::path(const char c, const std::string& card) {
-    std::string suit, upperSuit;
+    std::string suit;
+    std::string upperSuit;
     if (c == 'd'){
         suit = "diamonds";
         upperSuit = "Diamonds";
@@ -69,8 +72,8 @@ void game::initPlayer4Cards(){
     setCoverCard(ui->player4_card_2);
 }
 
-game::game(QWidget *parent, User person) :
-    QDialog(parent), user(person),
+game::game(QWidget *parent, WindowManager* manager_m) :
+    QDialog(parent), manager(manager_m),
     ui(new Ui::game)
 {
     ui->setupUi(this);
@@ -81,7 +84,7 @@ game::game(QWidget *parent, User person) :
     initPlayer3Cards();
     initPlayer4Cards();
 
-    ui->verticalSlider->setRange(1, user.balance);
+    ui->verticalSlider->setRange(1, static_cast<int>(manager->user.balance));
     ui->setValue->hide();
     ui->verticalSlider->hide();
     ui->value->hide();

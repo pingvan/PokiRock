@@ -1,9 +1,9 @@
 #include "First_window.h"
 #include "ui_First_window.h"
-#include "Authorization_window.h"
+#include "Window_manager.h"
 
-first_window::first_window(QWidget *parent)
-    : QMainWindow(parent)
+first_window::first_window(QWidget *parent, WindowManager* manager_m)
+    : QMainWindow(parent), manager(manager_m)
     , ui(new Ui::first_window)
 {
     ui->setupUi(this);
@@ -19,10 +19,8 @@ first_window::~first_window()
 }
 
 
-void first_window::on_start_clicked()
+void first_window::on_start_clicked() const
 {
-    second_window = new authorization_window(this);
-    second_window->start_window = this;
-    second_window->show();
+    manager->show_authorization_window();
 }
 

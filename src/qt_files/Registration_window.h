@@ -9,15 +9,16 @@ namespace Ui {
 class registration_window;
 }
 
+class WindowManager;
+
 class registration_window : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit registration_window(QWidget *parent = nullptr);
+    registration_window(QWidget *parent = nullptr, WindowManager* manager = nullptr);
     ~registration_window();
-    authorization_window* second_window;
-
+    WindowManager* manager;
 private slots:
     void on_registration_clicked();
 
