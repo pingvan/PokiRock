@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/spades">
+        <file>images/cards/Spades/2.png</file>
+        <file>images/cards/Spades/3.png</file>
+        <file>images/cards/Spades/4.png</file>
+        <file>images/cards/Spades/5.png</file>
+        <file>images/cards/Spades/6.png</file>
+        <file>images/cards/Spades/7.png</file>
+        <file>images/cards/Spades/8.png</file>
+        <file>images/cards/Spades/9.png</file>
+        <file>images/cards/Spades/10.png</file>
+        <file>images/cards/Spades/A.png</file>
+        <file>images/cards/Spades/J.png</file>
+        <file>images/cards/Spades/K.png</file>
+        <file>images/cards/Spades/Q.png</file>
+    </qresource>
+</RCC>

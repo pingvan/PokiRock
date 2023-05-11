@@ -29,13 +29,13 @@ find_package(OpenSSL REQUIRED)
 #add_executable(PokiRock client.cpp server.cpp game.cpp win_check.cpp ../main.cpp)
 
 #all project with graphic
-#add_executable(PokiRock  ../server/DataBase_connector.cpp ../client/Client.cpp ../server/Server.cpp ../server/Game.cpp ../server/Win_check.cpp ../qt_files/Registration_window.cpp ../qt_files/Game.cpp  ../qt_files/Main_menu.cpp  ../qt_files/First_window.cpp ../qt_files/Authorization_window.cpp  ../qt_files/main.cpp)
+#add_executable(PokiRock  ../server/DataBase_connector.cpp ../client/Client.cpp ../server/Server.cpp ../server/Game.cpp ../server/Win_check.cpp Registration_window.cpp Game.cpp  Main_menu.cpp  First_window.cpp Authorization_window.cpp  main.cpp)
 
 #only logic
 #add_executable(PokiRock  ../server/DataBase_connector.cpp ../client/client.cpp ../server/Game.cpp ../server/Server.cpp ../server/Win_check.cpp  ../server/Card.cpp ../main.cpp)
 
 #only graphic
-add_executable(PokiRock ../qt_files/Main_menu.cpp  ../qt_files/First_window.cpp ../qt_files/Authorization_window.cpp ../qt_files/Registration_window.cpp ../qt_files/game.cpp ../qt_files/main.cpp ../qt_files/labels.qrc ../qt_files/other.qrc ../qt_files/cover.qrc ../qt_files/clubs.qrc ../qt_files/spades.qrc  ../qt_files/diamonds.qrc ../qt_files/hearts.qrc)
+add_executable(PokiRock main_menu.cpp first_window.cpp authorization_window.cpp registration_window.cpp game.cpp main.cpp labels.qrc other.qrc cover.qrc clubs.qrc spades.qrc diamonds.qrc hearts.qrc)
 
 #only main
 #add_executable(PokiRock  ../server/DataBase_connector.cpp ../main.cpp)
@@ -47,14 +47,13 @@ target_include_directories(PokiRock PRIVATE
         ${BOOST_INCLUDE_DIRS}
         ${Qt5Widgets_INCLUDE_DIRS}
         ${PQXX_INCLUDE_DIRS}
-        ${OPENSSL_CRYPTO_LIBRARY}
         ${OPENSSL_INCLUDE_DIR}
 )
 
 target_link_libraries(PokiRock
         ${Boost_LIBRARIES}
         Threads::Threads
-        Qt${QT_VERSION}::Widgets
+        Qt5::Widgets
         ${PQXX_LIB}
         OpenSSL::Crypto
 )

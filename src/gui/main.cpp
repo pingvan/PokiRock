@@ -1,16 +1,27 @@
-//#include "../client/Client.h"
-//#include "../server/Server.h"
-#include <iostream>
-#include <pqxx/pqxx>
+#include <QApplication>
+#include <QLocale>
+#include <QTranslator>
+#include "window_manager.h"
 
-int main([[maybe_unused]]  int argc, [[maybe_unused]] char* argv[]) {
-    [[maybe_unused]] const std::string con_str = "postgres://postgres:stillloveher@localhost:5432/clients";
-    pqxx::connection con{"postgres://postgres:stillloveher@localhost:5432/clients"};
-    pqxx::work txn{con};
-     std::cout << con.username();
-    txn.exec("INSERT INTO clients (client_id, client_login, client_games, client_wins, client_balance)"
-             "VALUES ('2', 'player', '0', '0', '1000000')"
-             );
-//    txn.commit();
-    return 0;
+void magic_with_translator(QApplication* a) {
+    QTranslator translator;
+    const QStringList uiLanguages = QLocale::system().uiLanguages();
+    for (const QString &locale : uiLanguages) {
+        const QString baseName = "origin_" + QLocale(locale).name();
+        if (translator.load(":/i18n/" + baseName)) {
+            a->installTranslator(&translator);
+            break;
+        }
+    }
+}
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    magic_with_translator(&a);
+
+    WindowManager manager;
+    manager.start();
+
+    return a.exec();
 }
