@@ -27,6 +27,187 @@
 
 namespace game {
 
+class all_types_of_calls final {
+ public:
+  static constexpr char const* service_full_name() {
+    return "game.all_types_of_calls";
+  }
+  class StubInterface {
+   public:
+    virtual ~StubInterface() {}
+    std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::game::all_requests, ::game::all_responses>> PokerFunc(::grpc::ClientContext* context) {
+      return std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::game::all_requests, ::game::all_responses>>(PokerFuncRaw(context));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::game::all_requests, ::game::all_responses>> AsyncPokerFunc(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::game::all_requests, ::game::all_responses>>(AsyncPokerFuncRaw(context, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::game::all_requests, ::game::all_responses>> PrepareAsyncPokerFunc(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::game::all_requests, ::game::all_responses>>(PrepareAsyncPokerFuncRaw(context, cq));
+    }
+    class async_interface {
+     public:
+      virtual ~async_interface() {}
+      virtual void PokerFunc(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::game::all_requests,::game::all_responses>* reactor) = 0;
+    };
+    typedef class async_interface experimental_async_interface;
+    virtual class async_interface* async() { return nullptr; }
+    class async_interface* experimental_async() { return async(); }
+   private:
+    virtual ::grpc::ClientReaderWriterInterface< ::game::all_requests, ::game::all_responses>* PokerFuncRaw(::grpc::ClientContext* context) = 0;
+    virtual ::grpc::ClientAsyncReaderWriterInterface< ::game::all_requests, ::game::all_responses>* AsyncPokerFuncRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderWriterInterface< ::game::all_requests, ::game::all_responses>* PrepareAsyncPokerFuncRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) = 0;
+  };
+  class Stub final : public StubInterface {
+   public:
+    Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
+    std::unique_ptr< ::grpc::ClientReaderWriter< ::game::all_requests, ::game::all_responses>> PokerFunc(::grpc::ClientContext* context) {
+      return std::unique_ptr< ::grpc::ClientReaderWriter< ::game::all_requests, ::game::all_responses>>(PokerFuncRaw(context));
+    }
+    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::game::all_requests, ::game::all_responses>> AsyncPokerFunc(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::game::all_requests, ::game::all_responses>>(AsyncPokerFuncRaw(context, cq, tag));
+    }
+    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::game::all_requests, ::game::all_responses>> PrepareAsyncPokerFunc(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::game::all_requests, ::game::all_responses>>(PrepareAsyncPokerFuncRaw(context, cq));
+    }
+    class async final :
+      public StubInterface::async_interface {
+     public:
+      void PokerFunc(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::game::all_requests,::game::all_responses>* reactor) override;
+     private:
+      friend class Stub;
+      explicit async(Stub* stub): stub_(stub) { }
+      Stub* stub() { return stub_; }
+      Stub* stub_;
+    };
+    class async* async() override { return &async_stub_; }
+
+   private:
+    std::shared_ptr< ::grpc::ChannelInterface> channel_;
+    class async async_stub_{this};
+    ::grpc::ClientReaderWriter< ::game::all_requests, ::game::all_responses>* PokerFuncRaw(::grpc::ClientContext* context) override;
+    ::grpc::ClientAsyncReaderWriter< ::game::all_requests, ::game::all_responses>* AsyncPokerFuncRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReaderWriter< ::game::all_requests, ::game::all_responses>* PrepareAsyncPokerFuncRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) override;
+    const ::grpc::internal::RpcMethod rpcmethod_PokerFunc_;
+  };
+  static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
+
+  class Service : public ::grpc::Service {
+   public:
+    Service();
+    virtual ~Service();
+    virtual ::grpc::Status PokerFunc(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::game::all_responses, ::game::all_requests>* stream);
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_PokerFunc : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_PokerFunc() {
+      ::grpc::Service::MarkMethodAsync(0);
+    }
+    ~WithAsyncMethod_PokerFunc() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status PokerFunc(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::game::all_responses, ::game::all_requests>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestPokerFunc(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::game::all_responses, ::game::all_requests>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncBidiStreaming(0, context, stream, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_PokerFunc<Service > AsyncService;
+  template <class BaseClass>
+  class WithCallbackMethod_PokerFunc : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_PokerFunc() {
+      ::grpc::Service::MarkMethodCallback(0,
+          new ::grpc::internal::CallbackBidiHandler< ::game::all_requests, ::game::all_responses>(
+            [this](
+                   ::grpc::CallbackServerContext* context) { return this->PokerFunc(context); }));
+    }
+    ~WithCallbackMethod_PokerFunc() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status PokerFunc(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::game::all_responses, ::game::all_requests>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerBidiReactor< ::game::all_requests, ::game::all_responses>* PokerFunc(
+      ::grpc::CallbackServerContext* /*context*/)
+      { return nullptr; }
+  };
+  typedef WithCallbackMethod_PokerFunc<Service > CallbackService;
+  typedef CallbackService ExperimentalCallbackService;
+  template <class BaseClass>
+  class WithGenericMethod_PokerFunc : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_PokerFunc() {
+      ::grpc::Service::MarkMethodGeneric(0);
+    }
+    ~WithGenericMethod_PokerFunc() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status PokerFunc(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::game::all_responses, ::game::all_requests>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_PokerFunc : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_PokerFunc() {
+      ::grpc::Service::MarkMethodRaw(0);
+    }
+    ~WithRawMethod_PokerFunc() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status PokerFunc(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::game::all_responses, ::game::all_requests>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestPokerFunc(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncBidiStreaming(0, context, stream, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_PokerFunc : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_PokerFunc() {
+      ::grpc::Service::MarkMethodRawCallback(0,
+          new ::grpc::internal::CallbackBidiHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context) { return this->PokerFunc(context); }));
+    }
+    ~WithRawCallbackMethod_PokerFunc() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status PokerFunc(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::game::all_responses, ::game::all_requests>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerBidiReactor< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* PokerFunc(
+      ::grpc::CallbackServerContext* /*context*/)
+      { return nullptr; }
+  };
+  typedef Service StreamedUnaryService;
+  typedef Service SplitStreamedService;
+  typedef Service StreamedService;
+};
+
 class lobby final {
  public:
   static constexpr char const* service_full_name() {
@@ -56,6 +237,15 @@ class lobby final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::search_a_game_response>> PrepareAsyncFindGame(::grpc::ClientContext* context, const ::game::search_a_game_request& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::search_a_game_response>>(PrepareAsyncFindGameRaw(context, request, cq));
     }
+    std::unique_ptr< ::grpc::ClientReaderInterface< ::game::game_>> MakeGame(::grpc::ClientContext* context, const ::game::game_parameters& request) {
+      return std::unique_ptr< ::grpc::ClientReaderInterface< ::game::game_>>(MakeGameRaw(context, request));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::game::game_>> AsyncMakeGame(::grpc::ClientContext* context, const ::game::game_parameters& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::game::game_>>(AsyncMakeGameRaw(context, request, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::game::game_>> PrepareAsyncMakeGame(::grpc::ClientContext* context, const ::game::game_parameters& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::game::game_>>(PrepareAsyncMakeGameRaw(context, request, cq));
+    }
     class async_interface {
      public:
       virtual ~async_interface() {}
@@ -65,6 +255,7 @@ class lobby final {
       virtual void Register(::grpc::ClientContext* context, const ::game::register_request* request, ::game::register_response* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       virtual void FindGame(::grpc::ClientContext* context, const ::game::search_a_game_request* request, ::game::search_a_game_response* response, std::function<void(::grpc::Status)>) = 0;
       virtual void FindGame(::grpc::ClientContext* context, const ::game::search_a_game_request* request, ::game::search_a_game_response* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void MakeGame(::grpc::ClientContext* context, const ::game::game_parameters* request, ::grpc::ClientReadReactor< ::game::game_>* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
@@ -76,6 +267,9 @@ class lobby final {
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::register_response>* PrepareAsyncRegisterRaw(::grpc::ClientContext* context, const ::game::register_request& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::search_a_game_response>* AsyncFindGameRaw(::grpc::ClientContext* context, const ::game::search_a_game_request& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::search_a_game_response>* PrepareAsyncFindGameRaw(::grpc::ClientContext* context, const ::game::search_a_game_request& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientReaderInterface< ::game::game_>* MakeGameRaw(::grpc::ClientContext* context, const ::game::game_parameters& request) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::game::game_>* AsyncMakeGameRaw(::grpc::ClientContext* context, const ::game::game_parameters& request, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::game::game_>* PrepareAsyncMakeGameRaw(::grpc::ClientContext* context, const ::game::game_parameters& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
@@ -101,6 +295,15 @@ class lobby final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::search_a_game_response>> PrepareAsyncFindGame(::grpc::ClientContext* context, const ::game::search_a_game_request& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::search_a_game_response>>(PrepareAsyncFindGameRaw(context, request, cq));
     }
+    std::unique_ptr< ::grpc::ClientReader< ::game::game_>> MakeGame(::grpc::ClientContext* context, const ::game::game_parameters& request) {
+      return std::unique_ptr< ::grpc::ClientReader< ::game::game_>>(MakeGameRaw(context, request));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::game::game_>> AsyncMakeGame(::grpc::ClientContext* context, const ::game::game_parameters& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::game::game_>>(AsyncMakeGameRaw(context, request, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::game::game_>> PrepareAsyncMakeGame(::grpc::ClientContext* context, const ::game::game_parameters& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::game::game_>>(PrepareAsyncMakeGameRaw(context, request, cq));
+    }
     class async final :
       public StubInterface::async_interface {
      public:
@@ -110,6 +313,7 @@ class lobby final {
       void Register(::grpc::ClientContext* context, const ::game::register_request* request, ::game::register_response* response, ::grpc::ClientUnaryReactor* reactor) override;
       void FindGame(::grpc::ClientContext* context, const ::game::search_a_game_request* request, ::game::search_a_game_response* response, std::function<void(::grpc::Status)>) override;
       void FindGame(::grpc::ClientContext* context, const ::game::search_a_game_request* request, ::game::search_a_game_response* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void MakeGame(::grpc::ClientContext* context, const ::game::game_parameters* request, ::grpc::ClientReadReactor< ::game::game_>* reactor) override;
      private:
       friend class Stub;
       explicit async(Stub* stub): stub_(stub) { }
@@ -127,9 +331,13 @@ class lobby final {
     ::grpc::ClientAsyncResponseReader< ::game::register_response>* PrepareAsyncRegisterRaw(::grpc::ClientContext* context, const ::game::register_request& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::game::search_a_game_response>* AsyncFindGameRaw(::grpc::ClientContext* context, const ::game::search_a_game_request& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::game::search_a_game_response>* PrepareAsyncFindGameRaw(::grpc::ClientContext* context, const ::game::search_a_game_request& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientReader< ::game::game_>* MakeGameRaw(::grpc::ClientContext* context, const ::game::game_parameters& request) override;
+    ::grpc::ClientAsyncReader< ::game::game_>* AsyncMakeGameRaw(::grpc::ClientContext* context, const ::game::game_parameters& request, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReader< ::game::game_>* PrepareAsyncMakeGameRaw(::grpc::ClientContext* context, const ::game::game_parameters& request, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_Login_;
     const ::grpc::internal::RpcMethod rpcmethod_Register_;
     const ::grpc::internal::RpcMethod rpcmethod_FindGame_;
+    const ::grpc::internal::RpcMethod rpcmethod_MakeGame_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -140,6 +348,7 @@ class lobby final {
     virtual ::grpc::Status Login(::grpc::ServerContext* context, const ::game::login_request* request, ::game::login_response* response);
     virtual ::grpc::Status Register(::grpc::ServerContext* context, const ::game::register_request* request, ::game::register_response* response);
     virtual ::grpc::Status FindGame(::grpc::ServerContext* context, const ::game::search_a_game_request* request, ::game::search_a_game_response* response);
+    virtual ::grpc::Status MakeGame(::grpc::ServerContext* context, const ::game::game_parameters* request, ::grpc::ServerWriter< ::game::game_>* writer);
   };
   template <class BaseClass>
   class WithAsyncMethod_Login : public BaseClass {
@@ -201,7 +410,27 @@ class lobby final {
       ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_Login<WithAsyncMethod_Register<WithAsyncMethod_FindGame<Service > > > AsyncService;
+  template <class BaseClass>
+  class WithAsyncMethod_MakeGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_MakeGame() {
+      ::grpc::Service::MarkMethodAsync(3);
+    }
+    ~WithAsyncMethod_MakeGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MakeGame(::grpc::ServerContext* /*context*/, const ::game::game_parameters* /*request*/, ::grpc::ServerWriter< ::game::game_>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestMakeGame(::grpc::ServerContext* context, ::game::game_parameters* request, ::grpc::ServerAsyncWriter< ::game::game_>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(3, context, request, writer, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_Login<WithAsyncMethod_Register<WithAsyncMethod_FindGame<WithAsyncMethod_MakeGame<Service > > > > AsyncService;
   template <class BaseClass>
   class WithCallbackMethod_Login : public BaseClass {
    private:
@@ -283,7 +512,29 @@ class lobby final {
     virtual ::grpc::ServerUnaryReactor* FindGame(
       ::grpc::CallbackServerContext* /*context*/, const ::game::search_a_game_request* /*request*/, ::game::search_a_game_response* /*response*/)  { return nullptr; }
   };
-  typedef WithCallbackMethod_Login<WithCallbackMethod_Register<WithCallbackMethod_FindGame<Service > > > CallbackService;
+  template <class BaseClass>
+  class WithCallbackMethod_MakeGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_MakeGame() {
+      ::grpc::Service::MarkMethodCallback(3,
+          new ::grpc::internal::CallbackServerStreamingHandler< ::game::game_parameters, ::game::game_>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::game::game_parameters* request) { return this->MakeGame(context, request); }));
+    }
+    ~WithCallbackMethod_MakeGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MakeGame(::grpc::ServerContext* /*context*/, const ::game::game_parameters* /*request*/, ::grpc::ServerWriter< ::game::game_>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerWriteReactor< ::game::game_>* MakeGame(
+      ::grpc::CallbackServerContext* /*context*/, const ::game::game_parameters* /*request*/)  { return nullptr; }
+  };
+  typedef WithCallbackMethod_Login<WithCallbackMethod_Register<WithCallbackMethod_FindGame<WithCallbackMethod_MakeGame<Service > > > > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
   template <class BaseClass>
   class WithGenericMethod_Login : public BaseClass {
@@ -332,6 +583,23 @@ class lobby final {
     }
     // disable synchronous version of this method
     ::grpc::Status FindGame(::grpc::ServerContext* /*context*/, const ::game::search_a_game_request* /*request*/, ::game::search_a_game_response* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_MakeGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_MakeGame() {
+      ::grpc::Service::MarkMethodGeneric(3);
+    }
+    ~WithGenericMethod_MakeGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MakeGame(::grpc::ServerContext* /*context*/, const ::game::game_parameters* /*request*/, ::grpc::ServerWriter< ::game::game_>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -394,6 +662,26 @@ class lobby final {
     }
     void RequestFindGame(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_MakeGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_MakeGame() {
+      ::grpc::Service::MarkMethodRaw(3);
+    }
+    ~WithRawMethod_MakeGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MakeGame(::grpc::ServerContext* /*context*/, const ::game::game_parameters* /*request*/, ::grpc::ServerWriter< ::game::game_>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestMakeGame(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncWriter< ::grpc::ByteBuffer>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(3, context, request, writer, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -461,6 +749,28 @@ class lobby final {
     }
     virtual ::grpc::ServerUnaryReactor* FindGame(
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_MakeGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_MakeGame() {
+      ::grpc::Service::MarkMethodRawCallback(3,
+          new ::grpc::internal::CallbackServerStreamingHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const::grpc::ByteBuffer* request) { return this->MakeGame(context, request); }));
+    }
+    ~WithRawCallbackMethod_MakeGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status MakeGame(::grpc::ServerContext* /*context*/, const ::game::game_parameters* /*request*/, ::grpc::ServerWriter< ::game::game_>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerWriteReactor< ::grpc::ByteBuffer>* MakeGame(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/)  { return nullptr; }
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_Login : public BaseClass {
@@ -544,8 +854,35 @@ class lobby final {
     virtual ::grpc::Status StreamedFindGame(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::game::search_a_game_request,::game::search_a_game_response>* server_unary_streamer) = 0;
   };
   typedef WithStreamedUnaryMethod_Login<WithStreamedUnaryMethod_Register<WithStreamedUnaryMethod_FindGame<Service > > > StreamedUnaryService;
-  typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_Login<WithStreamedUnaryMethod_Register<WithStreamedUnaryMethod_FindGame<Service > > > StreamedService;
+  template <class BaseClass>
+  class WithSplitStreamingMethod_MakeGame : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithSplitStreamingMethod_MakeGame() {
+      ::grpc::Service::MarkMethodStreamed(3,
+        new ::grpc::internal::SplitServerStreamingHandler<
+          ::game::game_parameters, ::game::game_>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerSplitStreamer<
+                     ::game::game_parameters, ::game::game_>* streamer) {
+                       return this->StreamedMakeGame(context,
+                         streamer);
+                  }));
+    }
+    ~WithSplitStreamingMethod_MakeGame() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status MakeGame(::grpc::ServerContext* /*context*/, const ::game::game_parameters* /*request*/, ::grpc::ServerWriter< ::game::game_>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with split streamed
+    virtual ::grpc::Status StreamedMakeGame(::grpc::ServerContext* context, ::grpc::ServerSplitStreamer< ::game::game_parameters,::game::game_>* server_split_streamer) = 0;
+  };
+  typedef WithSplitStreamingMethod_MakeGame<Service > SplitStreamedService;
+  typedef WithStreamedUnaryMethod_Login<WithStreamedUnaryMethod_Register<WithStreamedUnaryMethod_FindGame<WithSplitStreamingMethod_MakeGame<Service > > > > StreamedService;
 };
 
 class game final {
@@ -563,11 +900,21 @@ class game final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::make_move_response>> PrepareAsyncMakeMove(::grpc::ClientContext* context, const ::game::make_move_request& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::make_move_response>>(PrepareAsyncMakeMoveRaw(context, request, cq));
     }
+    std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::game::move_request, ::game::move_response>> make_async_move(::grpc::ClientContext* context) {
+      return std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::game::move_request, ::game::move_response>>(make_async_moveRaw(context));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::game::move_request, ::game::move_response>> Asyncmake_async_move(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::game::move_request, ::game::move_response>>(Asyncmake_async_moveRaw(context, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::game::move_request, ::game::move_response>> PrepareAsyncmake_async_move(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::game::move_request, ::game::move_response>>(PrepareAsyncmake_async_moveRaw(context, cq));
+    }
     class async_interface {
      public:
       virtual ~async_interface() {}
       virtual void MakeMove(::grpc::ClientContext* context, const ::game::make_move_request* request, ::game::make_move_response* response, std::function<void(::grpc::Status)>) = 0;
       virtual void MakeMove(::grpc::ClientContext* context, const ::game::make_move_request* request, ::game::make_move_response* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void make_async_move(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::game::move_request,::game::move_response>* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
@@ -575,6 +922,9 @@ class game final {
    private:
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::make_move_response>* AsyncMakeMoveRaw(::grpc::ClientContext* context, const ::game::make_move_request& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::make_move_response>* PrepareAsyncMakeMoveRaw(::grpc::ClientContext* context, const ::game::make_move_request& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientReaderWriterInterface< ::game::move_request, ::game::move_response>* make_async_moveRaw(::grpc::ClientContext* context) = 0;
+    virtual ::grpc::ClientAsyncReaderWriterInterface< ::game::move_request, ::game::move_response>* Asyncmake_async_moveRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderWriterInterface< ::game::move_request, ::game::move_response>* PrepareAsyncmake_async_moveRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
@@ -586,11 +936,21 @@ class game final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::make_move_response>> PrepareAsyncMakeMove(::grpc::ClientContext* context, const ::game::make_move_request& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::make_move_response>>(PrepareAsyncMakeMoveRaw(context, request, cq));
     }
+    std::unique_ptr< ::grpc::ClientReaderWriter< ::game::move_request, ::game::move_response>> make_async_move(::grpc::ClientContext* context) {
+      return std::unique_ptr< ::grpc::ClientReaderWriter< ::game::move_request, ::game::move_response>>(make_async_moveRaw(context));
+    }
+    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::game::move_request, ::game::move_response>> Asyncmake_async_move(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::game::move_request, ::game::move_response>>(Asyncmake_async_moveRaw(context, cq, tag));
+    }
+    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::game::move_request, ::game::move_response>> PrepareAsyncmake_async_move(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::game::move_request, ::game::move_response>>(PrepareAsyncmake_async_moveRaw(context, cq));
+    }
     class async final :
       public StubInterface::async_interface {
      public:
       void MakeMove(::grpc::ClientContext* context, const ::game::make_move_request* request, ::game::make_move_response* response, std::function<void(::grpc::Status)>) override;
       void MakeMove(::grpc::ClientContext* context, const ::game::make_move_request* request, ::game::make_move_response* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void make_async_move(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::game::move_request,::game::move_response>* reactor) override;
      private:
       friend class Stub;
       explicit async(Stub* stub): stub_(stub) { }
@@ -604,7 +964,11 @@ class game final {
     class async async_stub_{this};
     ::grpc::ClientAsyncResponseReader< ::game::make_move_response>* AsyncMakeMoveRaw(::grpc::ClientContext* context, const ::game::make_move_request& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::game::make_move_response>* PrepareAsyncMakeMoveRaw(::grpc::ClientContext* context, const ::game::make_move_request& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientReaderWriter< ::game::move_request, ::game::move_response>* make_async_moveRaw(::grpc::ClientContext* context) override;
+    ::grpc::ClientAsyncReaderWriter< ::game::move_request, ::game::move_response>* Asyncmake_async_moveRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReaderWriter< ::game::move_request, ::game::move_response>* PrepareAsyncmake_async_moveRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_MakeMove_;
+    const ::grpc::internal::RpcMethod rpcmethod_make_async_move_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -613,6 +977,7 @@ class game final {
     Service();
     virtual ~Service();
     virtual ::grpc::Status MakeMove(::grpc::ServerContext* context, const ::game::make_move_request* request, ::game::make_move_response* response);
+    virtual ::grpc::Status make_async_move(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::game::move_response, ::game::move_request>* stream);
   };
   template <class BaseClass>
   class WithAsyncMethod_MakeMove : public BaseClass {
@@ -634,7 +999,27 @@ class game final {
       ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_MakeMove<Service > AsyncService;
+  template <class BaseClass>
+  class WithAsyncMethod_make_async_move : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_make_async_move() {
+      ::grpc::Service::MarkMethodAsync(1);
+    }
+    ~WithAsyncMethod_make_async_move() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status make_async_move(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::game::move_response, ::game::move_request>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void Requestmake_async_move(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::game::move_response, ::game::move_request>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncBidiStreaming(1, context, stream, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_MakeMove<WithAsyncMethod_make_async_move<Service > > AsyncService;
   template <class BaseClass>
   class WithCallbackMethod_MakeMove : public BaseClass {
    private:
@@ -662,7 +1047,30 @@ class game final {
     virtual ::grpc::ServerUnaryReactor* MakeMove(
       ::grpc::CallbackServerContext* /*context*/, const ::game::make_move_request* /*request*/, ::game::make_move_response* /*response*/)  { return nullptr; }
   };
-  typedef WithCallbackMethod_MakeMove<Service > CallbackService;
+  template <class BaseClass>
+  class WithCallbackMethod_make_async_move : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_make_async_move() {
+      ::grpc::Service::MarkMethodCallback(1,
+          new ::grpc::internal::CallbackBidiHandler< ::game::move_request, ::game::move_response>(
+            [this](
+                   ::grpc::CallbackServerContext* context) { return this->make_async_move(context); }));
+    }
+    ~WithCallbackMethod_make_async_move() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status make_async_move(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::game::move_response, ::game::move_request>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerBidiReactor< ::game::move_request, ::game::move_response>* make_async_move(
+      ::grpc::CallbackServerContext* /*context*/)
+      { return nullptr; }
+  };
+  typedef WithCallbackMethod_MakeMove<WithCallbackMethod_make_async_move<Service > > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
   template <class BaseClass>
   class WithGenericMethod_MakeMove : public BaseClass {
@@ -677,6 +1085,23 @@ class game final {
     }
     // disable synchronous version of this method
     ::grpc::Status MakeMove(::grpc::ServerContext* /*context*/, const ::game::make_move_request* /*request*/, ::game::make_move_response* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_make_async_move : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_make_async_move() {
+      ::grpc::Service::MarkMethodGeneric(1);
+    }
+    ~WithGenericMethod_make_async_move() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status make_async_move(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::game::move_response, ::game::move_request>* /*stream*/)  override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -702,6 +1127,26 @@ class game final {
     }
   };
   template <class BaseClass>
+  class WithRawMethod_make_async_move : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_make_async_move() {
+      ::grpc::Service::MarkMethodRaw(1);
+    }
+    ~WithRawMethod_make_async_move() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status make_async_move(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::game::move_response, ::game::move_request>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void Requestmake_async_move(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncBidiStreaming(1, context, stream, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
   class WithRawCallbackMethod_MakeMove : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
@@ -722,6 +1167,29 @@ class game final {
     }
     virtual ::grpc::ServerUnaryReactor* MakeMove(
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_make_async_move : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_make_async_move() {
+      ::grpc::Service::MarkMethodRawCallback(1,
+          new ::grpc::internal::CallbackBidiHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context) { return this->make_async_move(context); }));
+    }
+    ~WithRawCallbackMethod_make_async_move() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status make_async_move(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::game::move_response, ::game::move_request>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerBidiReactor< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* make_async_move(
+      ::grpc::CallbackServerContext* /*context*/)
+      { return nullptr; }
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_MakeMove : public BaseClass {

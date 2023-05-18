@@ -1,8 +1,30 @@
 #include "DataBase_connector.h"
 #include <future>
+#include <random>
+#include <openssl/sha.h>
 #include <pqxx/connection>
 
 namespace data {
+
+    void DataBase_connector::get_client_info(const std::string &client_login, game::player_info *player_info) {
+        try {
+            pqxx::connection con{conn_msg()};
+            pqxx::work txn{con};
+            pqxx::result const row = txn.exec("SELECT client_id, client_games, client_wins, client_balance "
+                                            "FROM clients "
+                                            "WHERE client_login =" + txn.quote(client_login));
+            for (auto r : row) {
+                player_info->set_client_id(r[0].as<int>());
+                player_info->set_client_games(r[1].as<int>());
+                player_info->set_client_wins(r[2].as<int>());
+                player_info->set_client_balance(r[3].as<int>());
+            }
+            txn.commit();
+            con.close();
+        } catch (std::exception &e) {
+            std::cerr << e.what() << '\n';
+        }
+    }
 
     void DataBase_connector::insert_new_client(const std::string &client_login, const std::string &salt, const std::string &hash) {
         try {
@@ -105,4 +127,34 @@ namespace data {
         return already_registered;
     }
 }
+
+    std::string data::DataBase_connector::sha_hash(const std::string &phrase) {
+        unsigned char hash[SHA256_DIGEST_LENGTH];
+        SHA256(
+            reinterpret_cast<const unsigned char *>(phrase.data()), phrase.length(),
+            hash
+        );
+        std::stringstream ss;
+        for (const unsigned char i : hash) {
+            ss << std::hex << std::setw(2) << std::setfill('0')
+               << static_cast<int>(i);
+        }
+        return ss.str();
+    }
+
+    std::string data::DataBase_connector::generate_salt(int length) {
+        static const std::string symbols = {
+            "0123456789!@#$%^&*"
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"};
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<> distrib(
+            0, static_cast<int>(symbols.size())
+        );
+        std::stringstream random_symbols;
+        for (int i = 0; i < length; i++) {
+            random_symbols << symbols[distrib(gen)];
+        }
+        return random_symbols.str();
+    }
 

@@ -4,24 +4,21 @@
 #include <iostream>
 #include <random>
 #include <sstream>
+#include <utility>
 
 
 client::client(std::shared_ptr<grpc::Channel> new_channel)
-    : channel_(new_channel), lobby_stub(game::lobby::NewStub(channel_)) {
+    : channel_(std::move(new_channel)), lobby_stub(game::lobby::NewStub(channel_)) {
 }
 
-void client::login(
-    const std::string &client_name,
-    const std::string &password
-) {
+void client::login(const std::string &client_name, const std::string &password) {
     grpc::ClientContext context_first;
     grpc::Status status_first;
     grpc::Status status_second;
     game::login_request request_first;
     auto *response_first = new game::login_response;
     request_first.set_name(client_name);
-    status_first =
-        lobby_stub->Login(&context_first, request_first, response_first);
+    status_first = lobby_stub->Login(&context_first, request_first, response_first);
     std::cout << "AFTER FIRST RESP\n";
     if (status_first.ok() && response_first->has_salt_hash()) {
         std::cout << "GET SALT_HASH\n";
@@ -41,8 +38,7 @@ void client::login(
             request_second.set_after_compare(false);
         }
         grpc::ClientContext context_second;
-        status_second =
-            lobby_stub->Login(&context_second, request_second, response_second);
+        status_second = lobby_stub->Login(&context_second, request_second, response_second);
         std::cout << "AFTER SECOND RESP\n";
         if (status_second.ok() && response_second->has_status_message()) {
             if (response_second->status_message().status()) {
@@ -57,10 +53,7 @@ void client::login(
     }
 }
 
-void client::registration(
-    const std::string &client_name,
-    const std::string &password
-) {
+void client::registration(const std::string &client_name, const std::string &password) {
     grpc::ClientContext context;
     const std::string salt = generate_salt(static_cast<int>(password.size()));
     const std::string hashed = sha_hash(salt + password);

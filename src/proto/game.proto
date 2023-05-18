@@ -2,17 +2,80 @@ syntax = "proto3";
 
 package game;
 
+service all_types_of_calls {
+    rpc PokerFunc(stream all_requests) returns (stream all_responses);
+}
+
 service lobby {
     rpc Login(login_request) returns (login_response);
     rpc Register(register_request) returns (register_response);
     rpc FindGame(search_a_game_request) returns (search_a_game_response);
+    rpc MakeGame(game_parameters) returns (stream game_);
 }
 
 service game {
     rpc MakeMove(make_move_request) returns (make_move_response);
+    rpc make_async_move(stream move_request) returns (stream move_response);
+}
+
+message all_requests { //here we create login as normal login
+    oneof requests {
+        login_request_ login_request = 1;
+        register_request register_request = 2;
+        create_game_request create_game_request = 3;
+        search_game_request search_game_request = 4;
+    }
+}
+
+message all_responses {
+    oneof responses {
+        login_response_ login_response = 1;
+        register_response register_response = 2;
+        create_game_response create_game_response = 3;
+        search_game_response search_game_response = 4;
+    }
+}
+
+message create_game_request {
+    string game_owner = 1;
+    game_parameters game_parameters = 2;
+}
+
+message create_game_response {
+    status_message status_message = 1;
+    repeated player players = 2;
+}
+
+message search_game_request {
+    player player = 1;
+    game_parameters game_parameters = 2;
+}
+
+message search_game_response {
+    status_message status_message = 1;
+    repeated player players = 2;
+}
+
+message move_request {
+
+}
+
+message move_response {
+
+}
+
+message login_request_ {
+    string name = 1;
+    string password = 2;
+}
+
+message login_response_ {
+    status_message status_message = 1;
+    optional player_info player_info = 2;
 }
 
 message login_request {
+    //send name and password by secure connection
     oneof login_events_request {
         string name = 1;
         bool after_compare = 2;
@@ -25,6 +88,7 @@ message login_response {
         status_message status_message = 2;
     }
 }
+
 
 message register_request {
     string name = 1;
@@ -71,8 +135,24 @@ message status_message {
     string message = 2;
 }
 
+message game_parameters {
+    int32 number_of_players = 1;
+    int32 minimal_bet = 2;
+}
+
+message game_ {
+    repeated player players = 1;
+}
+
 enum player_status {
     fold = 0;
     playing = 1;
     win = 2;
+}
+
+message player_info {
+    int32 client_id = 1;
+    int32 client_games = 2;
+    int32 client_wins = 3;
+    int32 client_balance = 4;
 }

@@ -16,6 +16,20 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DQT_NO_FOREACH")
 
 
+#[[set(SOURCES_server
+        ../server/grpc_server.cpp
+        ../server/DataBase_connector.cpp
+        ../proto/game.grpc.pb.cc
+        ../proto/game.pb.cc
+        )
+
+
+set(SOURCES_client
+        ../server/grpc_client.cpp
+        ../proto/game.grpc.pb.cc
+        ../proto/game.pb.cc
+        )]]
+
 #add_link_options(-fsanitize=address,undefined)
 #add_compile_options(-g -fsanitize=address,undefined)
 
@@ -44,9 +58,14 @@ find_package(gRPC CONFIG REQUIRED)
 
 #add_executable(PokiRock ../server/grpc_server.cpp ../server/grpc_server_main.cpp ../server/DataBase_connector.cpp ../server/Game.cpp ../server/grpc_client.cpp)
 
-add_executable(ser ../server/grpc_server.cpp ../server/DataBase_connector.cpp ../proto/game.grpc.pb.cc ../proto/game.pb.cc)
+add_executable(ser ../server/grpc_server_main.cpp  ../server/grpc_server.cpp ../server/DataBase_connector.cpp ../proto/game.grpc.pb.cc ../proto/game.pb.cc)
 
-add_executable(PokiRock ../server/grpc_client.cpp ../proto/game.grpc.pb.cc ../proto/game.pb.cc)
+add_executable(PokiRock ../proto/game.grpc.pb.cc ../proto/game.pb.cc)
+
+
+#add_library(server OBJECT ${SOURCES_server})
+
+#add_library(client OBJECT ${SOURCES_client})
 
 target_include_directories(PokiRock PRIVATE
         ${BOOST_INCLUDE_DIRS}

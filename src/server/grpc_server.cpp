@@ -4,7 +4,51 @@
 #include <string>
 #include "DataBase_connector.h"
 
-grpc::Status lobby_events::Login(
+server::server(const std::string &server_address) {
+    grpc::ServerBuilder builder;
+    lobby_events service;
+    builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
+    builder.RegisterService(&service);
+    server_ = builder.BuildAndStart();
+    std::cout << server_address << '\n';
+    server_->Wait();
+}
+
+grpc::Status all_types::PokerFunc(grpc::ServerContext *context, grpc::ServerReaderWriter<game::all_responses, game::all_requests> *stream) {
+    game::all_requests request;
+    while(stream->Read(&request)) {
+        game::all_responses response;
+        if (request.has_login_request()) {
+            auto *login_response = new game::login_response_;
+            auto *status_message = new game::status_message;
+            auto login = request.login_request().name();
+            auto password = request.login_request().password();
+            auto salt_hash_pair = data::DataBase_connector::log_in_client(login);
+            auto hash = salt_hash_pair.first;
+            auto salt = salt_hash_pair.second;
+            auto hashed_password = data::DataBase_connector::sha_hash(salt + password);
+            if (hash == hashed_password) {
+                status_message->set_status(true);
+                status_message->set_message("Password correct\n");
+                game::player_info *player_info = new game::player_info;
+                data::DataBase_connector::get_client_info(login, player_info);
+                login_response->set_allocated_player_info(player_info);
+            } else {
+                status_message->set_status(false);
+                status_message->set_message("Uncorrect password!\nTry again!\n");
+            }
+            login_response->set_allocated_status_message(status_message);
+            response.set_allocated_login_response(login_response);
+        } else if (request.has_register_request()) {
+            //TODO::copy register
+        } else { //if create game request
+
+        }
+    }
+    return grpc::Status::OK;
+}
+
+/*grpc::Status lobby_events::Login(
     [[maybe_unused]] grpc::ServerContext *context,
     const game::login_request *request,
     game::login_response *response
@@ -36,6 +80,7 @@ grpc::Status lobby_events::Login(
     return grpc::Status::OK;
 }
 
+
 grpc::Status lobby_events::Register(
     [[maybe_unused]] grpc::ServerContext *context,
     const game::register_request *request,
@@ -61,4 +106,4 @@ grpc::Status lobby_events::Register(
     }
     response->set_allocated_status_message(status_msg);
     return grpc::Status::OK;
-}
+}*/
