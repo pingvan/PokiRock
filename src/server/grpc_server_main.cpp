@@ -17,7 +17,7 @@ std::string read_from_files(const std::string &file_name) {
 
 void run_server() { //TODO::make the struct
     grpc::ServerBuilder builder;
-    lobby_events service;
+    Poker_server service;
     builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
     builder.RegisterService(&service);
     std::unique_ptr<grpc::Server> server_ = builder.BuildAndStart();

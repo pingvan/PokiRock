@@ -33,7 +33,6 @@ set(SOURCES_client
 #add_link_options(-fsanitize=address,undefined)
 #add_compile_options(-g -fsanitize=address,undefined)
 
-find_package(Boost REQUIRED)
 find_package(Threads REQUIRED)
 find_package(Qt6 COMPONENTS Widgets REQUIRED)
 find_package(PkgConfig REQUIRED)
@@ -67,8 +66,7 @@ add_executable(PokiRock ../proto/game.grpc.pb.cc ../proto/game.pb.cc)
 
 #add_library(client OBJECT ${SOURCES_client})
 
-target_include_directories(PokiRock PRIVATE
-        ${BOOST_INCLUDE_DIRS}
+include_directories(
         ${Qt6Widgets_INCLUDE_DIRS}
         ${PQ_INCLUDE_DIRS}
         ${OPENSSL_CRYPTO_LIBRARY}
@@ -77,8 +75,7 @@ target_include_directories(PokiRock PRIVATE
         ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-target_link_libraries(PokiRock
-        ${Boost_LIBRARIES}
+link_libraries(
         Threads::Threads
         Qt${QT_VERSION}::Widgets
         ${PQXX_LIB}
@@ -88,24 +85,3 @@ target_link_libraries(PokiRock
         gRPC::grpc++
 )
 
-
-target_include_directories(ser PRIVATE
-        ${BOOST_INCLUDE_DIRS}
-        ${Qt6Widgets_INCLUDE_DIRS}
-        ${PQ_INCLUDE_DIRS}
-        ${OPENSSL_CRYPTO_LIBRARY}
-        ${OPENSSL_INCLUDE_DIR}
-        ${PROTOBUF_INCLUDE_DIR}
-        ${CMAKE_CURRENT_BINARY_DIR}
-        )
-
-target_link_libraries(ser
-        ${Boost_LIBRARIES}
-        Threads::Threads
-        Qt${QT_VERSION}::Widgets
-        ${PQXX_LIB}
-        OpenSSL::Crypto
-        protobuf::libprotobuf
-        gRPC::grpc
-        gRPC::grpc++
-        )

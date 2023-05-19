@@ -3,6 +3,9 @@
 
 #include <unordered_map>
 #include <memory>
+#include <random>
+#include <grpcpp/grpcpp.h>
+
 #include "../client/client.h"
 #include "../proto/game.grpc.pb.h"
 #include "../proto/game.pb.h"
@@ -35,16 +38,21 @@ private:
 
 
     //new
-
-    std::string gama_owner;
-    int players_max;
-    int current_players;
-    int minimal_bet;
+    std::string game_name;
+    int game_owner_id_;
+    std::string game_owner_login_;
+    int players_max_;
+    int current_players_;
+    int minimal_bet_;
     std::mutex m_mutex;
     std::unordered_map<int, std::unique_ptr<grpc::ServerAsyncReaderWriter<game::move_request, game::move_response>>> players_;
+    std::unordered_map<int, std::pair<Card, Card>> players_cards;
+    std::unordered_map<int, int> players_balance;
 
 public:
     explicit Game(std::vector<client::Client> lobby);
+    explicit Game(int game_owner_id, const std::string &game_owner_login, int players_max, int minimal_bet);
+
     void bets();
     int next_position(int position);
     void preflop();
@@ -57,6 +65,7 @@ public:
     void who_won();
     void new_round();
 
+private:
     template <typename T>
     void increase_iterator(T &iterator) {
         iterator++;

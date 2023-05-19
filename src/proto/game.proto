@@ -2,34 +2,23 @@ syntax = "proto3";
 
 package game;
 
-service all_types_of_calls {
-    rpc PokerFunc(stream all_requests) returns (stream all_responses);
+service PokerGame {
+    rpc PokerFunc(stream Requests) returns (stream Responses);
 }
 
-service lobby {
-    rpc Login(login_request) returns (login_response);
-    rpc Register(register_request) returns (register_response);
-    rpc FindGame(search_a_game_request) returns (search_a_game_response);
-    rpc MakeGame(game_parameters) returns (stream game_);
-}
 
-service game {
-    rpc MakeMove(make_move_request) returns (make_move_response);
-    rpc make_async_move(stream move_request) returns (stream move_response);
-}
-
-message all_requests { //here we create login as normal login
+message Requests { //here we create login as normal login
     oneof requests {
-        login_request_ login_request = 1;
+        login_request login_request = 1;
         register_request register_request = 2;
         create_game_request create_game_request = 3;
         search_game_request search_game_request = 4;
     }
 }
 
-message all_responses {
+message Responses {
     oneof responses {
-        login_response_ login_response = 1;
+        login_response login_response = 1;
         register_response register_response = 2;
         create_game_response create_game_response = 3;
         search_game_response search_game_response = 4;
@@ -64,29 +53,14 @@ message move_response {
 
 }
 
-message login_request_ {
+message login_request {
     string name = 1;
     string password = 2;
 }
 
-message login_response_ {
+message login_response {
     status_message status_message = 1;
     optional player_info player_info = 2;
-}
-
-message login_request {
-    //send name and password by secure connection
-    oneof login_events_request {
-        string name = 1;
-        bool after_compare = 2;
-    }
-}
-
-message login_response {
-    oneof login_events_response {
-        salt_hash salt_hash = 1;
-        status_message status_message = 2;
-    }
 }
 
 
@@ -97,6 +71,7 @@ message register_request {
 
 message register_response {
     status_message status_message = 1;
+    optional player_info player_info = 2;
 }
 
 
@@ -136,8 +111,9 @@ message status_message {
 }
 
 message game_parameters {
-    int32 number_of_players = 1;
-    int32 minimal_bet = 2;
+    string game_name = 1;
+    int32 number_of_players = 2;
+    int32 minimal_bet = 3;
 }
 
 message game_ {

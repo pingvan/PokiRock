@@ -23,6 +23,13 @@ Game::Game(std::vector<client::Client> lobby)
     std::cout << "\n";
 }
 
+
+Game::Game(const int game_owner_id, const std::string &game_owner_login, const int players_max, const int minimal_bet)
+: game_owner_id_(game_owner_id), game_owner_login_(game_owner_login),
+      players_max_(players_max), current_players_(1), minimal_bet_(minimal_bet), m_mutex() {
+
+}
+
 void Game::preflop() {
     std::cout << "Preflop\n";
     for (const auto &player : players) {
