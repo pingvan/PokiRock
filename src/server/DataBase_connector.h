@@ -22,6 +22,8 @@ namespace data {
         static void get_client_info(const std::string &client_login, game::player_info *player_info);
         static void insert_new_client(const std::string &client_login, const std::string &salt, const std::string &hash);
         static std::pair<std::string, std::string> log_in_client(const std::string &client_login);
+        static std::string get_salt(const std::string &client_login);
+        static std::string get_hash(const std::string &client_login);
         static void insert_games(const std::string &client_login);
         static void insert_win(const std::string &client_login);
         static void update_balance(const std::string &client_login, const int &balance_delta);

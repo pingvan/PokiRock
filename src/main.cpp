@@ -1,10 +1,9 @@
-#include <boost/asio.hpp>
 #include <pqxx/pqxx>
 #include <iostream>
 //#include "client/client.h"
 //#include "server/Server.h"
 
-void clear_db() {
+/*void clear_db() {
     try {
         pqxx::connection con{
             "postgres://postgres:stillloveher@localhost:5432/clients"};
@@ -16,7 +15,7 @@ void clear_db() {
     } catch (std::exception &e) {
         std::cerr << e.what() << '\n';
     }
-}
+}*/
 
 int main(/*[[maybe_unused]] int argc, [[maybe_unused]] char *argv[]*/) {
     /*server::Server s1;

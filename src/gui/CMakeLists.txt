@@ -33,12 +33,20 @@ set(SOURCES_client
 #add_link_options(-fsanitize=address,undefined)
 #add_compile_options(-g -fsanitize=address,undefined)
 
+#set(PQXX /usr/local/include/pqxx)
+
+#find_library(PQXX_LIB pqxx)
+#find_library(PQ_LIB pq)
+
+
+find_package(Boost REQUIRED)
 find_package(Threads REQUIRED)
 find_package(Qt6 COMPONENTS Widgets REQUIRED)
 find_package(PkgConfig REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(protobuf CONFIG REQUIRED)
 find_package(gRPC CONFIG REQUIRED)
+
 
 #for LIMA
 #add_executable(PokiRock client.cpp server.cpp game.cpp win_check.cpp ../main.cpp)
@@ -53,29 +61,31 @@ find_package(gRPC CONFIG REQUIRED)
 #add_executable(PokiRock  ../qt_files/Main_menu.cpp  ../qt_files/First_window.cpp ../qt_files/Authorization_window.cpp  ../qt_files/main.cpp)
 
 #only main
-#add_executable(PokiRock  ../server/DataBase_connector.cpp ../main.cpp)
+#add_executable(PokiRock   ../main.cpp)
 
 #add_executable(PokiRock ../server/grpc_server.cpp ../server/grpc_server_main.cpp ../server/DataBase_connector.cpp ../server/Game.cpp ../server/grpc_client.cpp)
 
-add_executable(ser ../server/grpc_server_main.cpp  ../server/grpc_server.cpp ../server/DataBase_connector.cpp ../proto/game.grpc.pb.cc ../proto/game.pb.cc)
+add_executable(PokiRock ../server/grpc_server_main.cpp  ../server/grpc_server.cpp ../server/DataBase_connector.cpp ../proto/game.grpc.pb.cc ../proto/game.pb.cc)
 
-add_executable(PokiRock ../proto/game.grpc.pb.cc ../proto/game.pb.cc)
+#add_executable(PokiRock ../proto/game.grpc.pb.cc ../proto/game.pb.cc)
 
 
 #add_library(server OBJECT ${SOURCES_server})
 
 #add_library(client OBJECT ${SOURCES_client})
 
-include_directories(
+target_include_directories(PokiRock PRIVATE
+        ${BOOST_INCLUDE_DIRS}
         ${Qt6Widgets_INCLUDE_DIRS}
-        ${PQ_INCLUDE_DIRS}
+        ${PQXX_INCLUDE_DIRS}
         ${OPENSSL_CRYPTO_LIBRARY}
         ${OPENSSL_INCLUDE_DIR}
         ${PROTOBUF_INCLUDE_DIR}
         ${CMAKE_CURRENT_BINARY_DIR}
-)
+        )
 
-link_libraries(
+target_link_libraries(PokiRock
+        ${Boost_LIBRARIES}
         Threads::Threads
         Qt${QT_VERSION}::Widgets
         ${PQXX_LIB}
@@ -83,5 +93,26 @@ link_libraries(
         protobuf::libprotobuf
         gRPC::grpc
         gRPC::grpc++
-)
+        )
 
+
+#[[target_include_directories(ser PRIVATE
+        ${BOOST_INCLUDE_DIRS}
+        ${Qt6Widgets_INCLUDE_DIRS}
+        ${PQ_INCLUDE_DIRS}
+        ${OPENSSL_CRYPTO_LIBRARY}
+        ${OPENSSL_INCLUDE_DIR}
+        ${PROTOBUF_INCLUDE_DIR}
+        ${CMAKE_CURRENT_BINARY_DIR}
+        )
+
+target_link_libraries(ser
+        ${Boost_LIBRARIES}
+        Threads::Threads
+        Qt${QT_VERSION}::Widgets
+        ${PQXX_LIB}
+        OpenSSL::Crypto
+        protobuf::libprotobuf
+        gRPC::grpc
+        gRPC::grpc++
+        )]]

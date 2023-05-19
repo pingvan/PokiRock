@@ -44,24 +44,91 @@ namespace data {
         }
     }
 
-    std::pair<std::string, std::string> DataBase_connector::log_in_client(const std::string &client_login) {
+
+    std::string data::DataBase_connector::get_salt(const std::string &client_login) {
+        try {
             pqxx::connection con{conn_msg()};
             pqxx::work txn{con};
-            auto client_id = txn.query_value<uint32_t>("SELECT client_id "
-                                                       "FROM clients "
-                                                       "WHERE client_login =" + txn.quote(client_login));
-            pqxx::result const row = txn.exec("SELECT password_hashe, password_salt "
-                                                     "FROM id_to_password "
-                                                     "WHERE client_id = " + txn.quote(client_id));
+            auto client_id = txn.query_value<uint32_t>(
+                "SELECT client_id "
+                "FROM clients "
+                "WHERE client_login =" +
+                txn.quote(client_login)
+            );
+            pqxx::result const row = txn.exec(
+                "SELECT password_salt "
+                "FROM id_to_password "
+                "WHERE client_id = " +
+                txn.quote(client_id)
+            );
+            std::string salt;
+            for (auto r : row) {
+                salt = r[0].as<std::string>();
+            }
+            txn.commit();
+            con.close();
+            return salt;
+        } catch (std::exception &e) {
+            std::cerr << e.what() << '\n';
+        }
+    }
+
+    std::string data::DataBase_connector::get_hash(const std::string &client_login) {
+        try {
+            pqxx::connection con{conn_msg()};
+            pqxx::work txn{con};
+            auto client_id = txn.query_value<uint32_t>(
+                "SELECT client_id "
+                "FROM clients "
+                "WHERE client_login =" +
+                txn.quote(client_login)
+            );
+            pqxx::result const row = txn.exec(
+                "SELECT password_hashe "
+                "FROM id_to_password "
+                "WHERE client_id = " +
+                txn.quote(client_id)
+            );
+            std::string hash;
+            for (auto r : row) {
+                hash = r[0].as<std::string>();
+            }
+            txn.commit();
+            con.close();
+            return hash;
+        } catch (std::exception &e) {
+            std::cerr << e.what() << '\n';
+        }
+    }
+
+    std::pair<std::string, std::string> DataBase_connector::log_in_client(const std::string &client_login) {
+        try {
+            pqxx::connection con{conn_msg()};
+            pqxx::work txn{con};
+            auto client_id = txn.query_value<uint32_t>(
+                "SELECT client_id "
+                "FROM clients "
+                "WHERE client_login =" +
+                txn.quote(client_login)
+            );
+            pqxx::result const row = txn.exec(
+                "SELECT password_hashe, password_salt "
+                "FROM id_to_password "
+                "WHERE client_id = " +
+                txn.quote(client_id)
+            );
             std::string hase_tab;
             std::string salt_tab;
-            for (auto r: row) {
+            for (auto r : row) {
                 hase_tab = r[0].as<std::string>();
                 salt_tab = r[1].as<std::string>();
             }
             txn.commit();
             con.close();
             return std::make_pair(hase_tab, salt_tab);
+        } catch(std::exception &e) {
+            std::cerr << e.what() << '\n';
+        }
     }
 
     void DataBase_connector::insert_games(const std::string &client_login) {

@@ -54,11 +54,33 @@ message move_response {
 }
 
 message login_request {
-    string name = 1;
-    string password = 2;
+    oneof login_requests {
+        login_request_first login_request_first = 1;
+        login_request_second login_request_second = 2;
+    }
 }
 
 message login_response {
+    oneof login_responses {
+        login_response_first login_response_first = 1;
+        login_response_second login_response_second = 2;
+    }
+}
+
+message login_request_first {
+    string name = 1;
+}
+
+message login_request_second {
+    string hashed = 1;
+}
+
+message login_response_first {
+    string salt = 1;
+    status_message status_message = 2;
+}
+
+message login_response_second {
     status_message status_message = 1;
     optional player_info player_info = 2;
 }

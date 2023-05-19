@@ -9,26 +9,19 @@ grpc::Status Poker_server::PokerFunc(grpc::ServerContext *context, grpc::ServerR
     while(stream->Read(&request)) {
         game::Responses response;
         if (request.has_login_request()) {
+            const auto& login_request = request.login_request();
             auto *login_response = new game::login_response;
             auto *status_message = new game::status_message;
-            auto login = request.login_request().name();
-            auto password = request.login_request().password();
-            auto salt_hash_pair = data::DataBase_connector::log_in_client(login);
-            auto hash = salt_hash_pair.first;
-            auto salt = salt_hash_pair.second;
-            auto hashed_password = data::DataBase_connector::sha_hash(salt + password);
-            if (hash == hashed_password) {
+            if (login_request.has_login_request_first()) {
+                auto *login_response_first = new game::login_response_first;
+                auto client_login = login_request.login_request_first().name();
+                auto salt = data::DataBase_connector::get_salt(client_login); //
+                login_response_first->set_salt(salt);
                 status_message->set_status(true);
-                status_message->set_message("Password correct\n");
-                auto *player_info = new game::player_info;
-                data::DataBase_connector::get_client_info(login, player_info);
-                login_response->set_allocated_player_info(player_info);
+                status_message->set_message("User exists");
             } else {
-                status_message->set_status(false);
-                status_message->set_message("Uncorrect password!\nTry again!\n");
+
             }
-            login_response->set_allocated_status_message(status_message);
-            response.set_allocated_login_response(login_response);
         } else if (request.has_register_request()) {
             auto *register_response = new game::register_response;
             auto *status_message = new game::status_message;
