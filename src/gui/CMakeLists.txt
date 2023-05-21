@@ -65,7 +65,9 @@ find_package(gRPC CONFIG REQUIRED)
 
 #add_executable(PokiRock ../server/grpc_server.cpp ../server/grpc_server_main.cpp ../server/DataBase_connector.cpp ../server/Game.cpp ../server/grpc_client.cpp)
 
-add_executable(PokiRock ../server/grpc_server_main.cpp  ../server/grpc_server.cpp ../server/DataBase_connector.cpp ../proto/game.grpc.pb.cc ../proto/game.pb.cc)
+#add_executable(PokiRock ../server/grpc_server_main.cpp  ../server/grpc_server.cpp ../server/DataBase_connector.cpp ../proto/game.grpc.pb.cc ../proto/game.pb.cc)
+
+add_executable(PokiRock ../server/grpc_server_main.cpp  ../server/grpc_server.cpp ../server/DataBase_connector.cpp ../proto/game.grpc.pb.cc ../proto/game.pb.cc ../server/game_copy_for_server.cpp ../server/player.cpp ../client/grpc_client.cpp ../client/grpc_client_main.cpp)
 
 #add_executable(PokiRock ../proto/game.grpc.pb.cc ../proto/game.pb.cc)
 

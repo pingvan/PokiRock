@@ -26,7 +26,7 @@ namespace data {
         }
     }
 
-    void DataBase_connector::insert_new_client(const std::string &client_login, const std::string &salt, const std::string &hash) {
+    void DataBase_connector::insert_new_client(const std::string &client_login, const std::string &salt, const std::string &hash, game::player_info *player_info) {
         try {
             pqxx::connection con{conn_msg()};
             pqxx::work txn{con};
@@ -37,6 +37,10 @@ namespace data {
                                                        "WHERE client_login =" + txn.quote(client_login));
             txn.exec_params("INSERT INTO id_to_password (client_id, password_hashe, password_salt)"
                             "VALUES ($1, $2, $3)", client_id, hash, salt);
+            player_info->set_client_id(client_id);
+            player_info->set_client_balance(1000);
+            player_info->set_client_wins(0);
+            player_info->set_client_games(0);
             txn.commit();
             con.close();
         } catch (std::exception &e) {
@@ -44,8 +48,23 @@ namespace data {
         }
     }
 
+    unsigned int DataBase_connector::get_client_id(const std::string &client_login) {
+        pqxx::connection con{conn_msg()};
+        pqxx::work txn{con};
+        auto client_id = txn.query_value<uint32_t>(
+            "SELECT client_id "
+            "FROM clients "
+            "WHERE client_login =" +
+            txn.quote(client_login)
+        );
+        txn.commit();
+        con.close();
+        return client_id;
+    }
+
 
     std::string data::DataBase_connector::get_salt(const std::string &client_login) {
+        std::string salt = "";
         try {
             pqxx::connection con{conn_msg()};
             pqxx::work txn{con};
@@ -61,7 +80,6 @@ namespace data {
                 "WHERE client_id = " +
                 txn.quote(client_id)
             );
-            std::string salt;
             for (auto r : row) {
                 salt = r[0].as<std::string>();
             }
@@ -72,6 +90,33 @@ namespace data {
             std::cerr << e.what() << '\n';
         }
     }
+
+    void data::DataBase_connector::get_salt(const std::string &client_login, game::login_response_first *login_response_first, game::status_message *status_message) {
+        pqxx::connection con{conn_msg()};
+        pqxx::work txn{con};
+        auto client_id = txn.query_value<uint32_t>(
+            "SELECT client_id "
+            "FROM clients "
+            "WHERE client_login =" +
+            txn.quote(client_login)
+        );
+        pqxx::result const row = txn.exec(
+            "SELECT password_salt "
+            "FROM id_to_password "
+            "WHERE client_id = " +
+            txn.quote(client_id)
+        );
+        if (row.empty()) {
+            status_message->set_status(false);
+            status_message->set_message("NO CLIENT WITH THIS NAME");
+        }
+        std::string salt;
+        for (auto r : row) {
+            salt = r[0].as<std::string>();
+        }
+        login_response_first->set_salt(salt);
+    }
+
 
     std::string data::DataBase_connector::get_hash(const std::string &client_login) {
         try {
@@ -216,7 +261,7 @@ namespace data {
         std::random_device rd;
         std::mt19937 gen(rd());
         std::uniform_int_distribution<> distrib(
-            0, static_cast<int>(symbols.size())
+            5, static_cast<int>(symbols.size())
         );
         std::stringstream random_symbols;
         for (int i = 0; i < length; i++) {

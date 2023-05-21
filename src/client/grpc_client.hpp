@@ -8,12 +8,19 @@
 #include "../proto/game.pb.h"
 
 struct client {
-    client(std::shared_ptr<grpc::Channel> new_channel);
+    client(const std::shared_ptr<grpc::Channel>& new_channel);
     void login(const std::string &client_name, const std::string &password);
     void registration(const std::string &client_name, const std::string &password);
+
+    ~client() = default;
 private:
-    std::shared_ptr<grpc::Channel> channel_;
-    std::unique_ptr<game::lobby::Stub> lobby_stub;
+    std::unique_ptr<game::PokerGame::Stub> lobby_stub_;
+    std::shared_ptr<grpc::ClientAsyncReaderWriter<game::Requests, game::Responses>> stream;
+
+    uint32_t client_id;
+    uint32_t client_games;
+    uint32_t client_wins;
+    uint32_t client_balance;
 
     static std::string sha_hash(const std::string &phrase);
     static std::string generate_salt(int length);

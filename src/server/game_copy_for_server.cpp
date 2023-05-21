@@ -24,10 +24,45 @@ Game::Game(std::vector<client::Client> lobby)
 }
 
 
-Game::Game(const int game_owner_id, const std::string &game_owner_login, const int players_max, const int minimal_bet)
-: game_owner_id_(game_owner_id), game_owner_login_(game_owner_login),
-      players_max_(players_max), current_players_(1), minimal_bet_(minimal_bet), m_mutex() {
+Game::Game(uint32_t game_owner_id, const game::game_parameters *game_parameters,
+           std::unique_ptr<player> owner)
+:  condition(Waiting), game_owner_id_(game_owner_id), game_name_(game_parameters->game_name()), players_max_(game_parameters->number_of_players()), current_players_(0),
+minimal_bet_(game_parameters->minimal_bet()), game_enter_balance_(game_parameters->game_enter_balance()), m_mutex()
+{
+    const uint32_t owner_id = owner->player_id_;
+    std::unique_lock<std::mutex> lock(m_mutex); //TODO::maybe replace with std::lock_guard
+    class_players[owner_id] = std::move(owner);
+    current_players_++;
+    lock.unlock();
+}
 
+void Game::join_game(std::unique_ptr<player> player) {
+    const int player_id = player->player_id_;
+    std::unique_lock<std::mutex> lock(m_mutex);
+    if (condition != Waiting) {
+
+    }
+    class_players[player_id] = std::move(player);
+    current_players_++;
+    if (current_players_ == players_max_) {
+        //TODO::start game;
+        condition = Playing;
+    }
+    lock.unlock();
+}
+
+void Game::quit_game(int player_id) {
+    if (condition == Playing) {
+        //TODO::fold
+    }
+    std::unique_lock<std::mutex> lock(m_mutex);
+    class_players.erase(player_id);
+    //TODO::update DB data
+}
+
+void Game::start_game() {
+    preflop();
+    //TODO::
 }
 
 void Game::preflop() {
@@ -46,6 +81,14 @@ void Game::preflop() {
     }
     bets();
     flop();
+
+
+    for (auto &[id, player] : class_players) {
+        player->player_cards = {get_enum_card(), get_enum_card()}; //maybe separate setter functions which then will call graphic
+         //here we should do working on requests
+        //graphic buttons always working or separate function to process responses
+        //balance and cards will be always able on screen
+    }
 }
 
 void Game::flop() {
@@ -96,7 +139,7 @@ void Game::bets() {
 //    std::map<client::Client, int> have_betted;
     std::unordered_map<client::Client, int, client::ClientHash> have_betted;
     bool state = true;
-    std::size_t some_counter = 0;
+    std::size_t done_players_counter = 0;
     while (state) {
         for (auto it = round_players.begin() + next_position(last_player);;) {
             const auto &player = *it;
@@ -116,9 +159,9 @@ void Game::bets() {
                 }
             }
             if (balance[player] == 0) {
-                some_counter += 1;
+                done_players_counter += 1;
                 increase_iterator(it);
-                if (some_counter == round_players.size()) {
+                if (done_players_counter == round_players.size()) {
                     state = false;
                     break;
                 }
@@ -133,7 +176,7 @@ void Game::bets() {
                     const int bet_amount = must_bet - have_betted[player];
                     make_a_bet(player, bet_amount);
                     have_betted[player] = must_bet;
-                    some_counter += 1;
+                    done_players_counter += 1;
                     increase_iterator(it);
                     break;
                 } else if (move == "raise") {
@@ -144,13 +187,13 @@ void Game::bets() {
                     if (bet > balance[player]) {
                         std::cout << "A lack of money, operation denied.\n";
                     } else {
-                        some_counter = 1;
+                        done_players_counter = 1;
 
                         if (bet < must_bet) {
                             bet = must_bet;
-                            some_counter++;
+                            done_players_counter++;
                         } else {
-                            some_counter = 1;
+                            done_players_counter = 1;
                         }
                         must_bet = bet;
                         const int bet_amount =
@@ -163,7 +206,7 @@ void Game::bets() {
                 } else if (move == "all-in") {
                     auto bet = balance[player];
                     if (must_bet < bet) {
-                        some_counter = 1;
+                        done_players_counter = 1;
                         must_bet = bet;
                     }
                     make_a_bet(player, bet);
@@ -185,14 +228,14 @@ void Game::bets() {
                         std::cout
                             << "You can not check here, operation denied.\n";
                     } else {
-                        some_counter += 1;
+                        done_players_counter += 1;
                         increase_iterator(it);
                         break;
                     }
                 }
                 std::cout << "Incorrect input, try again\n";
             }
-            if (some_counter == round_players.size()) {
+            if (done_players_counter == round_players.size()) {
                 state = false;
                 break;
             }

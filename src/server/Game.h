@@ -19,7 +19,7 @@ private:
     Which_turn current_turn = Which_turn::Preflop;
     std::vector<client::Client> players;
     std::vector<client::Client> round_players;
-    int button;
+    int button; //who's first on before getting cards
     int last_player;
     Blinds blinds;
     std::unordered_map<client::Client, std::pair<Card, Card>, client::ClientHash> cards_enum;
@@ -44,6 +44,7 @@ public:
     void who_won();
     void new_round();
 
+private:
     template <typename T>
     void increase_iterator(T &iterator) {
         iterator++;

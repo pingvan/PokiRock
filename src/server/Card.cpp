@@ -7,6 +7,9 @@ Card::Card(Suit suit, Value value) : suit(suit), value(value) {
                           static_cast<int>(Value::VALUE_SIZE)) {
         throw std::runtime_error("too big card number");
     }
+    if (suit == Suit::SUIT_SIZE || value == Value::VALUE_SIZE) {
+        throw std::runtime_error("uncorrect card initialization");
+    }
 }
 
 Card::Card(int num)
@@ -14,6 +17,9 @@ Card::Card(int num)
     if (get_index() > static_cast<int>(Suit::SUIT_SIZE) *
                           static_cast<int>(Value::VALUE_SIZE)) {
         throw std::runtime_error("too big card number");
+    }
+    if (suit == Suit::SUIT_SIZE || value == Value::VALUE_SIZE) {
+        throw std::runtime_error("uncorrect card initialization");
     }
 }
 

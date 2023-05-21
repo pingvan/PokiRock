@@ -10,7 +10,7 @@ Game::Game(std::vector<client::Client> lobby)
     : players(std::move(lobby)),
       round_players(players),
       button(static_cast<int>(lobby.size()) - 1),
-      last_player(button),
+      last_player(button), //who's move //last player
       available_cards(52),
         total_of_bets(0) {
     std::iota(available_cards.begin(), available_cards.end(), 0);
@@ -88,7 +88,7 @@ void Game::bets() {
     bool small_blind_flag = false;
 //    std::map<client::Client, int> have_betted;
     std::unordered_map<client::Client, int, client::ClientHash> have_betted;
-    bool state = true;
+    bool state = true; //if all players did moves
     std::size_t some_counter = 0;
     while (state) {
         for (auto it = round_players.begin() + next_position(last_player);;) {
@@ -109,7 +109,7 @@ void Game::bets() {
                 }
             }
             if (balance[player] == 0) {
-                some_counter += 1;
+                some_counter += 1; //amount of players who did everything
                 increase_iterator(it);
                 if (some_counter == round_players.size()) {
                     state = false;

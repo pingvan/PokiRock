@@ -33,14 +33,15 @@ static_assert(static_cast<std::size_t>(Value::VALUE_SIZE) == 13UL);
 
 struct Card {
 private:
-    Suit suit;
-    Value value;
+    Suit suit = Suit::SUIT_SIZE;
+    Value value = Value::VALUE_SIZE;
 
     [[nodiscard]] std::string_view value_to_string() const;
 
     [[nodiscard]] std::string_view suit_to_string() const;
 
 public:
+    Card() = default;
     Card(Suit suit, Value value);
     explicit Card(int num);
 

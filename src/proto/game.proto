@@ -7,7 +7,7 @@ service PokerGame {
 }
 
 
-message Requests { //here we create login as normal login
+message Requests {
     oneof requests {
         login_request login_request = 1;
         register_request register_request = 2;
@@ -27,7 +27,8 @@ message Responses {
 
 message create_game_request {
     string game_owner = 1;
-    game_parameters game_parameters = 2;
+    player_info player_info = 2;
+    game_parameters game_parameters = 3;
 }
 
 message create_game_response {
@@ -36,8 +37,10 @@ message create_game_response {
 }
 
 message search_game_request {
-    player player = 1;
-    game_parameters game_parameters = 2;
+//    player player = 1;
+    string name = 1;
+    player_info player_info = 2;
+    game_parameters game_parameters = 3;
 }
 
 message search_game_response {
@@ -72,17 +75,28 @@ message login_request_first {
 }
 
 message login_request_second {
-    string hashed = 1;
+    string name = 1;
+    string hashed = 2;
 }
 
 message login_response_first {
-    string salt = 1;
-    status_message status_message = 2;
+    oneof login_responses_first {
+        string salt = 1;
+        error_message error_message = 2;
+        //        errors error = 2;
+    }
+    //    string salt = 1;
+    //    status_message status_message = 2;
 }
 
 message login_response_second {
-    status_message status_message = 1;
-    optional player_info player_info = 2;
+    oneof login_responses_second {
+        player_info player_info = 1;
+        error_message error_message = 2;
+        //        errors error = 2;
+    }
+    //    status_message status_message = 1;
+    //    optional player_info player_info = 2;
 }
 
 
@@ -92,8 +106,12 @@ message register_request {
 }
 
 message register_response {
-    status_message status_message = 1;
-    optional player_info player_info = 2;
+    oneof register_responses {
+        player_info player_info = 1;
+        error_message error_message = 2;
+    }
+    //     status_message status_message = 1;
+    //    optional player_info player_info = 2;
 }
 
 
@@ -132,10 +150,16 @@ message status_message {
     string message = 2;
 }
 
+message error_message {
+    errors error = 1;
+    optional string error_message = 2;
+}
+
 message game_parameters {
     string game_name = 1;
     int32 number_of_players = 2;
     int32 minimal_bet = 3;
+    int32 game_enter_balance = 4;
 }
 
 message game_ {
@@ -146,6 +170,13 @@ enum player_status {
     fold = 0;
     playing = 1;
     win = 2;
+}
+
+enum errors {
+    no_user_with_this_login = 0;
+    user_with_this_login_already_exists = 1;
+    uncorrect_password = 2;
+    exception = 3;
 }
 
 message player_info {
