@@ -23,12 +23,12 @@ const char *game::path(const char c, const std::string &card) {
     return ans.c_str();
 }
 
-const char *game::path_to_cover() {
+const char* game::path_to_cover() {
     return ":/cover/images/cards/Cover/black_cover.png";
 }
 
-const char *game::path_to_cover_T(
-) {  //суффикс "_T" - это тип транспонированный. Перевёрнутый на 90 градусов.
+const char* game::path_to_cover_T(
+) {
     return ":/cover/images/cards/Cover/black_cover_T.png";
 }
 
@@ -49,8 +49,6 @@ void game::setCoverCard_T(QLabel *place) {
 void game::initDillerCards() {
     setCoverCard(ui->diller_card_1);
     setCoverCard(ui->diller_card_2);
-    setCoverCard(ui->diller_card_3);
-    setCoverCard(ui->diller_card_4);
 }
 
 void game::initPlayer1Cards() {

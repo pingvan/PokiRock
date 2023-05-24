@@ -5,10 +5,7 @@
 first_window::first_window(QWidget *parent, WindowManager *manager_m)
     : QMainWindow(parent), ui(new Ui::first_window), manager(manager_m) {
     ui->setupUi(this);
-    QPixmap image(":/labels/images/labels/not_bad.png");
-    int width = ui->label->width();
-    int height = ui->label->height();
-    ui->label->setPixmap(image.scaled(width, height, Qt::KeepAspectRatio));
+    setImage(ui->label, ":/labels/images/labels/not_bad.png");
 }
 
 first_window::~first_window() {

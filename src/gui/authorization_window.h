@@ -27,6 +27,7 @@ private slots:
 private:
     Ui::authorization_window *ui;
     WindowManager *manager;
+    void show_authorization_warning();
 };
 
 #endif  // AUTHORIZATION_WINDOW_HPP

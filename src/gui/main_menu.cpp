@@ -6,25 +6,13 @@ main_menu::main_menu(QWidget *parent, WindowManager *manager_m)
     : QDialog(parent), ui(new Ui::main_menu), manager(manager_m) {
     ui->setupUi(this);
 
-    QPixmap image(":/other/images/garbage/better/pngegg (13).png");
-    int width = ui->image->width();
-    int height = ui->image->height();
-    ui->image->setPixmap(image.scaled(width, height, Qt::KeepAspectRatio));
 
-    QPixmap user_icon(":/other/images/other/user_icon.png");
-    int width_2 = ui->user_icon->width();
-    int height_2 = ui->user_icon->height();
-    ui->user_icon->setPixmap(
-        user_icon.scaled(width_2, height_2, Qt::KeepAspectRatio)
-    );
+    setImage(ui->image, ":/other/images/garbage/better/pngegg (13).png");
+    setImage(ui->user_icon, ":/other/images/other/user_icon.png");
 
-    QPixmap cards("D:/PokiRock/src/qt_files/images/garbage/better/pngegg (17)");
-    int width_3 = ui->right->width();
-    int height_3 = ui->right->height();
-    ui->right->setPixmap(cards.scaled(width_3, height_3, Qt::KeepAspectRatio));
 
     ui->name->setText(manager->user->get_name().c_str());
-    ui->balane->setText(std::to_string(manager->user->get_balance()).c_str());
+    ui->balance->setText(std::to_string(manager->user->get_balance()).c_str());
 }
 
 main_menu::~main_menu() {

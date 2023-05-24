@@ -1,15 +1,21 @@
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "cppcoreguidelines-owning-memory"
 #ifndef POKIROCK_WINDOW_MANAGER_H
 #define POKIROCK_WINDOW_MANAGER_H
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "cppcoreguidelines-owning-memory"
 
-#include <memory>
-#include "authorization_window.h"
 #include "first_window.h"
+#include "authorization_window.h"
 #include "game.h"
 #include "main_menu.h"
 #include "registration_window.h"
 #include "user.hpp"
+
+inline void setImage(QLabel* image, const std::string& path_to_image) {
+    QPixmap img(path_to_image.c_str());
+    int width = image->width();
+    int height = image->height();
+    image->setPixmap(img.scaled(width, height, Qt::KeepAspectRatio));
+}
 
 class WindowManager {
     first_window* startWindow = nullptr;
