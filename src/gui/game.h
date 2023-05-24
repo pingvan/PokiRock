@@ -2,8 +2,8 @@
 #define GAME_H
 
 #include <QDialog>
-#include <string>
 #include <QLabel>
+#include <string>
 
 namespace Ui {
 class game;
@@ -11,12 +11,11 @@ class game;
 
 class WindowManager;
 
-class game : public QDialog
-{
+class game : public QDialog {
     Q_OBJECT
 
 public:
-    game(QWidget *parent = nullptr, WindowManager* manager = nullptr);
+    game(QWidget *parent = nullptr, WindowManager *manager = nullptr);
     ~game();
 
 private slots:
@@ -28,12 +27,12 @@ private slots:
 
 private:
     Ui::game *ui;
-    WindowManager* manager;
-    static const char* path(char c, const std::string& card);
-    static const char* path_to_cover_T();
-    static const char* path_to_cover();
-    static void setCoverCard(QLabel* place);
-    static void setCoverCard_T(QLabel* place);
+    WindowManager *manager;
+    static const char *path(char c, const std::string &card);
+    static const char *path_to_cover_T();
+    static const char *path_to_cover();
+    static void setCoverCard(QLabel *place);
+    static void setCoverCard_T(QLabel *place);
     void initDillerCards();
     void initPlayer1Cards();
     void initPlayer2Cards();
@@ -41,4 +40,4 @@ private:
     void initPlayer4Cards();
 };
 
-#endif // GAME_H
+#endif  // GAME_H

@@ -17,12 +17,13 @@ SOURCES += \
     First_window.cpp
 
 HEADERS += \
-    Authorization_window.hpp \
-    First_window.hpp \
-    Main_menu.hpp \
-    Registration_window.hpp \
-    game.hpp \
-    user.hpp
+    Authorization_window.h \
+    First_window.h \
+    Main_menu.h \
+    Registration_window.h \
+    game.h \
+    user.hpp \
+    window_manager.h
 
 FORMS += \
     Authorization_window.ui \

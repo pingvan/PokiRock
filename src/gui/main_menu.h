@@ -2,12 +2,11 @@
 #define MAIN_MENU_H
 
 #include <QDialog>
-#include <QPixmap>
-#include <string>
 #include <QIcon>
-#include <QString>
 #include <QMessageBox>
-
+#include <QPixmap>
+#include <QString>
+#include <string>
 
 namespace Ui {
 class main_menu;
@@ -15,12 +14,11 @@ class main_menu;
 
 class WindowManager;
 
-class main_menu : public QDialog
-{
+class main_menu : public QDialog {
     Q_OBJECT
 
 public:
-    main_menu(QWidget *parent = nullptr, WindowManager* = nullptr);
+    main_menu(QWidget *parent = nullptr, WindowManager * = nullptr);
     ~main_menu();
 
 private slots:
@@ -30,8 +28,7 @@ private slots:
 
 private:
     Ui::main_menu *ui;
-    WindowManager* manager;
-
+    WindowManager *manager;
 };
 
-#endif // MAIN_MENU_H
+#endif  // MAIN_MENU_H

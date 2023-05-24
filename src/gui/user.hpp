@@ -2,24 +2,23 @@
 #define USER_H
 #include <string>
 #include <utility>
-struct User {
-private:
+class User {
     std::string name;
-    unsigned long long balance;
+    unsigned long long balance = 0;
 public:
-    User(std::string  login) : name(std::move(login)) {
-        updateBalane();
-    }
-    User() {};
+    User() = default;
 
     [[nodiscard]] const std::string& get_name() const {
         return name;
     }
+
     [[nodiscard]] uint64_t get_balance() const {
         return balance;
     }
-    void updateBalane() {
-        balance = 100;
+
+    void setData(const std::string& name_, unsigned long long balance_) {
+        name = name_;
+        balance = balance_;
     }
 };
 

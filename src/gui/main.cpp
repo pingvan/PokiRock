@@ -3,7 +3,7 @@
 #include <QTranslator>
 #include "window_manager.h"
 
-void magic_with_translator(QApplication* a) {
+void magic_with_translator(QApplication *a) {
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
     for (const QString &locale : uiLanguages) {
@@ -15,8 +15,7 @@ void magic_with_translator(QApplication* a) {
     }
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
     magic_with_translator(&a);
 
