@@ -22,7 +22,6 @@ struct Blinds {
 
 namespace server {
 struct Game {
-//    friend struct player;
 private:
     Which_turn current_turn = Which_turn::Preflop; //doesn't need to be replaced
 
@@ -31,9 +30,9 @@ private:
     int button; //doesn't need to be replaced
     int last_player; //doesn't need to be replaced
     Blinds blinds; //doesn't need to be replaced
-    std::unordered_map<client::Client, std::pair<Card, Card>, client::ClientHash> cards_enum; //now player class contains this info
+    std::unordered_map<client::Client, std::pair<Card, Card>, client::ClientHash> cards_enum; //now Player class contains this info
     //std::map<client::Client, std::pair<Card, Card>> cards_enum;
-    std::unordered_map<client::Client, int, client::ClientHash> balance; //now player class contains this info
+    std::unordered_map<client::Client, int, client::ClientHash> balance; //now Player class contains this info
 //    std::map<client::Client, int> balance;
     std::vector<int> available_cards;  //doesn't need to be replaced
     std::vector<Card> board_cards; //doesn't need to be replaced (I think)

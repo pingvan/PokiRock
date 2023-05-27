@@ -9,7 +9,7 @@ int main([[maybe_unused]]  int argc, [[maybe_unused]] char* argv[]) {
     pqxx::work txn{con};
      std::cout << con.username();
     txn.exec("INSERT INTO clients (client_id, client_login, client_games, client_wins, client_balance)"
-             "VALUES ('2', 'player', '0', '0', '1000000')"
+             "VALUES ('2', 'Player', '0', '0', '1000000')"
              );
 //    txn.commit();
     return 0;

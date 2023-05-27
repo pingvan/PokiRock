@@ -10,7 +10,7 @@ Game::Game(std::vector<client::Client> lobby)
     : players(std::move(lobby)),
       round_players(players),
       button(static_cast<int>(lobby.size()) - 1),
-      last_player(button), //who's move //last player
+      last_player(button), //who's move //last Player
       available_cards(52),
         total_of_bets(0) {
     std::iota(available_cards.begin(), available_cards.end(), 0);

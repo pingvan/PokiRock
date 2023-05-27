@@ -15,6 +15,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DQT_NO_FOREACH")
 
+set(OPENSSL_ROOT_DIR /opt/homebrew/Cellar/openssl@1.1/1.1.1t)
+
+#TODO::protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS foo.proto)
+#protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS EXPORT_MACRO DLL_EXPORT foo.proto)
+#protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS DESCRIPTORS PROTO_DESCS foo.proto)
+#protobuf_generate_python(PROTO_PY foo.proto)
+
+#TODO::fetch content
 
 #[[set(SOURCES_server
         ../server/grpc_server.cpp
@@ -69,8 +77,13 @@ find_package(gRPC CONFIG REQUIRED)
 
 add_executable(PokiRock ../server/grpc_server_main.cpp  ../server/grpc_server.cpp ../server/DataBase_connector.cpp ../proto/game.grpc.pb.cc ../proto/game.pb.cc ../server/game_copy_for_server.cpp ../server/player.cpp ../client/grpc_client.cpp ../client/grpc_client_main.cpp)
 
-#add_executable(PokiRock ../proto/game.grpc.pb.cc ../proto/game.pb.cc)
+add_executable(server ../proto/game.grpc.pb.cc ../proto/game.pb.cc ../client/grpc_client_main.cpp ../client/grpc_client.cpp)
 
+add_custom_target(poki)
+add_dependencies(poki
+    PokiRock
+    server
+)
 
 #add_library(server OBJECT ${SOURCES_server})
 
@@ -98,7 +111,7 @@ target_link_libraries(PokiRock
         )
 
 
-#[[target_include_directories(ser PRIVATE
+target_include_directories(server PRIVATE
         ${BOOST_INCLUDE_DIRS}
         ${Qt6Widgets_INCLUDE_DIRS}
         ${PQ_INCLUDE_DIRS}
@@ -108,7 +121,7 @@ target_link_libraries(PokiRock
         ${CMAKE_CURRENT_BINARY_DIR}
         )
 
-target_link_libraries(ser
+target_link_libraries(server
         ${Boost_LIBRARIES}
         Threads::Threads
         Qt${QT_VERSION}::Widgets
@@ -117,4 +130,5 @@ target_link_libraries(ser
         protobuf::libprotobuf
         gRPC::grpc
         gRPC::grpc++
-        )]]
+        )
+

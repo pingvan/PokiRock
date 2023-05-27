@@ -6,14 +6,14 @@
 
 const std::string server_address = "127.0.0.1:2912";
 
-std::string read_from_files(const std::string &file_name) {
+/*std::string read_from_files(const std::string &file_name) {
     std::ifstream file;
     file.open(file_name, std::ios_base::in);
     std::stringstream file_stringstream;
     file_stringstream << file.rdbuf();
     file.close();
     return file_stringstream.str();
-}
+}*/
 
 void run_server() { //TODO::make the struct
     grpc::ServerBuilder builder;

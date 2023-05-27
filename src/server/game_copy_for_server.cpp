@@ -6,7 +6,7 @@ int Game::next_position(int position) {
     return (position + 1) % static_cast<int>(round_players.size());
 }
 
-Game::Game(std::vector<client::Client> lobby)
+/*Game::Game(std::vector<client::Client> lobby)
     : players(std::move(lobby)),
       round_players(players),
       button(static_cast<int>(lobby.size()) - 1),
@@ -15,13 +15,13 @@ Game::Game(std::vector<client::Client> lobby)
         total_of_bets(0) {
     std::iota(available_cards.begin(), available_cards.end(), 0);
     std::cout << "Starting game with: ";
-    for (const client::Client &player : players) {
+    for (const client::Client &Player : players) {
         // demand to preflop
-        balance[player] = 100;
-        std::cout << player.name() << " ";
+        balance[Player] = 100;
+        std::cout << Player.name() << " ";
     }
     std::cout << "\n";
-}
+}*/
 
 
 Game::Game(uint32_t game_owner_id, const game::game_parameters *game_parameters,
@@ -30,15 +30,14 @@ Game::Game(uint32_t game_owner_id, const game::game_parameters *game_parameters,
 minimal_bet_(game_parameters->minimal_bet()), game_enter_balance_(game_parameters->game_enter_balance()), m_mutex()
 {
     const uint32_t owner_id = owner->player_id_;
-    std::unique_lock<std::mutex> lock(m_mutex); //TODO::maybe replace with std::lock_guard
+    auto lock = std::lock_guard(m_mutex); //TODO::maybe replace with std::lock_guard
     class_players[owner_id] = std::move(owner);
     current_players_++;
-    lock.unlock();
 }
 
 void Game::join_game(std::unique_ptr<player> player) {
-    const int player_id = player->player_id_;
-    std::unique_lock<std::mutex> lock(m_mutex);
+    auto player_id = player->player_id_;
+    auto lock = std::lock_guard(m_mutex);
     if (condition != Waiting) {
 
     }
@@ -48,14 +47,13 @@ void Game::join_game(std::unique_ptr<player> player) {
         //TODO::start game;
         condition = Playing;
     }
-    lock.unlock();
 }
 
-void Game::quit_game(int player_id) {
+void Game::quit_game(int player_id) { //TODO::replace with switch cases
     if (condition == Playing) {
         //TODO::fold
     }
-    std::unique_lock<std::mutex> lock(m_mutex);
+    auto lock = std::lock_guard(m_mutex);
     class_players.erase(player_id);
     //TODO::update DB data
 }

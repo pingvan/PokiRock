@@ -11,12 +11,8 @@ private:
     std::string nickname;
     int balance = 0;
     int client_id = 0;
-    boost::asio::io_context m_context;
-    boost::asio::ip::tcp::socket m_socket;
-    std::thread m_context_thread;
 public:
     Client();
-    ~Client();
 
     friend struct ClientHash;
 

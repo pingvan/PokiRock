@@ -2,186 +2,217 @@ syntax = "proto3";
 
 package game;
 
-service PokerGame {
-    rpc PokerFunc(stream Requests) returns (stream Responses);
+enum error {
+    ERROR_NO_USER_WITH_THIS_LOGIN = 0;
+    ERROR_USER_WITH_THIS_LOGIN_ALREADY_EXISTS = 1;
+    ERROR_UNCORRECT_PASSWORD = 2;
+    ERROR_EXCEPTION = 3;
 }
 
-
-message Requests {
-    oneof requests {
-        login_request login_request = 1;
-        register_request register_request = 2;
-        create_game_request create_game_request = 3;
-        search_game_request search_game_request = 4;
-    }
-}
-
-message Responses {
-    oneof responses {
-        login_response login_response = 1;
-        register_response register_response = 2;
-        create_game_response create_game_response = 3;
-        search_game_response search_game_response = 4;
-    }
-}
-
-message create_game_request {
-    string game_owner = 1;
-    player_info player_info = 2;
-    game_parameters game_parameters = 3;
-}
-
-message create_game_response {
-    status_message status_message = 1;
-    repeated player players = 2;
-}
-
-message search_game_request {
-//    player player = 1;
-    string name = 1;
-    player_info player_info = 2;
-    game_parameters game_parameters = 3;
-}
-
-message search_game_response {
-    status_message status_message = 1;
-    repeated player players = 2;
-}
-
-message move_request {
-
-}
-
-message move_response {
-
-}
-
-message login_request {
-    oneof login_requests {
-        login_request_first login_request_first = 1;
-        login_request_second login_request_second = 2;
-    }
-}
-
-message login_response {
-    oneof login_responses {
-        login_response_first login_response_first = 1;
-        login_response_second login_response_second = 2;
-    }
-}
-
-message login_request_first {
-    string name = 1;
-}
-
-message login_request_second {
-    string name = 1;
-    string hashed = 2;
-}
-
-message login_response_first {
-    oneof login_responses_first {
-        string salt = 1;
-        error_message error_message = 2;
-        //        errors error = 2;
-    }
-    //    string salt = 1;
-    //    status_message status_message = 2;
-}
-
-message login_response_second {
-    oneof login_responses_second {
-        player_info player_info = 1;
-        error_message error_message = 2;
-        //        errors error = 2;
-    }
-    //    status_message status_message = 1;
-    //    optional player_info player_info = 2;
-}
-
-
-message register_request {
-    string name = 1;
-    salt_hash salt_hash = 2;
-}
-
-message register_response {
-    oneof register_responses {
-        player_info player_info = 1;
-        error_message error_message = 2;
-    }
-    //     status_message status_message = 1;
-    //    optional player_info player_info = 2;
-}
-
-
-message salt_hash {
-    string salt = 1;
-    string hash = 2;
-}
-
-message search_a_game_request {
-    int32 number_of_players = 1;
-    int32 minimal_bet = 2;
-}
-
-message search_a_game_response {
-    status_message status_message = 1;
-}
-
-message make_move_request {
-    string client_name = 1;
-    int32 make_blind = 2;
-    bool fold = 3;
-}
-
-message make_move_response {
-    repeated player players = 1;
-}
-
-message player {
-    string name = 1;
-    player_status status = 2;
-    int32 balance = 3;
-}
-
-message status_message {
+message StatusMessage {
     bool status = 1;
     string message = 2;
 }
 
-message error_message {
-    errors error = 1;
-    optional string error_message = 2;
+message ErrorMessage {
+    error error = 1;
+    optional string message_string = 2;
 }
 
-message game_parameters {
+service Authorization {
+    rpc Login(LoginRequest) returns (LoginResponse);
+    rpc Registration(RegisterRequest) returns (RegisterResponse);
+}
+
+message LoginRequest {
+    oneof login_requests {
+        LoginRequestFirst login_request_first = 1;
+        LoginRequestSecond login_request_second = 2;
+    }
+}
+
+message LoginResponse {
+    oneof login_responses {
+        LoginResponseFirst login_response_first = 1;
+        LoginResponseSecond login_response_second = 2;
+    }
+}
+
+message LoginRequestFirst {
+    string name = 1;
+}
+
+message LoginRequestSecond {
+    string name = 1;
+    string hashed = 2;
+}
+
+message LoginResponseFirst {
+    oneof login_responses_first {
+        string salt = 1;
+        ErrorMessage msg = 2;
+    }
+}
+
+message LoginResponseSecond {
+    oneof login_responses_second {
+        PlayerInfo player_info = 1;
+        ErrorMessage msg = 2;
+    }
+}
+
+
+message RegisterRequest {
+    string name = 1;
+    SaltHash salt_hash = 2;
+}
+
+message RegisterResponse {
+    oneof register_responses {
+        PlayerInfo player_info = 1;
+        ErrorMessage msg = 2;
+    }
+}
+
+message SaltHash {
+    string salt = 1;
+    string hash = 2;
+}
+
+service Lobby {
+    rpc LobbyFunc(stream LobbyRequests) returns (stream LobbyResponses);
+}
+
+message Player {
+    string name = 1;
+    PlayerStatus status = 2;
+    int32 balance = 3;
+}
+
+message LobbyRequests {
+    oneof requests {
+        CreateGameRequest create_game_request = 1;
+        SearchGameRequest search_game_request = 2;
+    }
+}
+
+message LobbyResponses {
+    oneof responses {
+        CreateGameResponse create_game_response = 1;
+        SearchGameResponse search_game_response = 2;
+    }
+}
+
+message CreateGameRequest {
+    string game_owner = 1;
+    PlayerInfo player_info = 2;
+    GameParameters game_parameters = 3;
+}
+
+message CreateGameResponse {
+    StatusMessage status_message = 1;
+    repeated Player players = 2;
+}
+
+message SearchGameRequest {
+    string name = 1;
+    PlayerInfo player_info = 2;
+    GameParameters game_parameters = 3;
+}
+
+message SearchGameResponse {
+    StatusMessage status_message = 1;
+    repeated Player players = 2;
+    //I'm really not sure
+    //Probably we should send game_state or smt like this
+}
+
+message GameParameters {
     string game_name = 1;
     int32 number_of_players = 2;
     int32 minimal_bet = 3;
     int32 game_enter_balance = 4;
 }
 
-message game_ {
-    repeated player players = 1;
+
+enum PlayerStatus {
+    PLAYER_STATUS_FOLD = 0;
+    PLAYER_STATUS_PLAYING = 1;
+    PLAYER_STATUS_WIN = 2;
 }
 
-enum player_status {
-    fold = 0;
-    playing = 1;
-    win = 2;
-}
-
-enum errors {
-    no_user_with_this_login = 0;
-    user_with_this_login_already_exists = 1;
-    uncorrect_password = 2;
-    exception = 3;
-}
-
-message player_info {
+message PlayerInfo {
     int32 client_id = 1;
     int32 client_games = 2;
     int32 client_wins = 3;
     int32 client_balance = 4;
+}
+
+
+service PokerGame {
+    rpc GameFunc(stream GameRequests) returns (stream GameResponses);
+}
+
+
+message GameRequests {
+    oneof requests {
+        MakeMoveRequest make_move_request = 1;
+    }
+}
+
+message GameResponses {
+    oneof responses {
+        MakeMoveResponse make_move_response = 1;
+        GameState game_state = 2;
+    }
+}
+
+message GameState { //everything optional depends on what changed
+    repeated Card board_cards = 1;
+    repeated Player players = 2;
+}
+
+message MakeMoveRequest {
+    int32 player_id = 1;
+    MoveType move_type = 2;
+    optional int32 blind_size = 3;
+}
+
+message MakeMoveResponse {
+
+}
+
+enum MoveType {
+    MOVE_TYPE_FOLD = 0;
+    MOVE_TYPE_ALL_IN = 1;
+    MOVE_TYPE_CHECK = 2;
+    MOVE_TYPE_RAISE_BLIND = 3;
+}
+
+message Card {
+    Suits suit = 1;
+    Values value = 2;
+}
+
+enum Suits {
+    SUITS_DIAMONDS = 0;
+    SUITS_HEARTS = 1;
+    SUITS_CLUBS = 2;
+    SUITS_SPADES = 3;
+}
+
+enum Values {
+    VALUES_TWO = 0;
+    VALUES_THREE = 1;
+    VALUES_FOUR = 2;
+    VALUES_FIVE = 3;
+    VALUES_SIX = 4;
+    VALUES_SEVEN = 5;
+    VALUES_EIGHT = 6;
+    VALUES_NINE = 7;
+    VALUES_TEN = 8;
+    VALUES_JACK = 9;
+    VALUES_QUEEN = 10;
+    VALUES_KING = 11;
+    VALUES_ACE = 12;
 }

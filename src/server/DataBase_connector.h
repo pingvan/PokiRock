@@ -28,7 +28,7 @@ namespace data {
         static std::string get_hash(const std::string &client_login);
 
         static void get_salt(const std::string &client_login, game::login_response_first *login_response_first, game::status_message *status_message);
-//        static void get_hash(game::login_response_first *login_response_first, game::status_message *status_message);
+//        static void get_hash(game::LoginResponseFirst *LoginResponseFirst, game::StatusMessage *StatusMessage);
 
         static void insert_games(const std::string &client_login);
         static void insert_win(const std::string &client_login);

@@ -18,9 +18,9 @@ enum status {
 };
 
 struct player {
-//    player(std::string player_name, int player_id, int in_game_balance, int current_balance);
-    player(const std::string& player_name, const game::player_info *player_info, int game_enter_balance,
-           grpc::ServerReaderWriter<game::Responses, game::Requests> *stream);
+//    Player(std::string player_name, int player_id, int in_game_balance, int current_balance);
+    player(std::string  player_name, const game::PlayerInfo *player_info, int game_enter_balance,
+           grpc::ServerReaderWriter<game::GameResponses, game::GameRequests> *stream);
 
     void process_responses();
 
@@ -34,5 +34,5 @@ private:
     uint32_t current_balance_;
     status player_status; //maybe we don't need it
     std::pair<Card, Card> player_cards;
-    std::shared_ptr<grpc::ServerReaderWriter<game::Responses, game::Requests>> stream_;
+    std::shared_ptr<grpc::ServerReaderWriter<game::GameResponses, game::GameRequests>> stream_;
 };
