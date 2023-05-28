@@ -45,156 +45,156 @@ StickersCollection::~StickersCollection()
 void StickersCollection::on_pushButton_1_clicked()
 {
     manager->gameWindow->show_sticker(1);
-    this->close();
+    this->hide();
 }
 
 void StickersCollection::on_pushButton_2_clicked()
 {
     manager->gameWindow->show_sticker(2);
-    this->close();
+    this->hide();
 }
 
 
 void StickersCollection::on_pushButton_3_clicked()
 {
     manager->gameWindow->show_sticker(3);
-    this->close();
+    this->hide();
 }
 
 
 void StickersCollection::on_pushButton_4_clicked()
 {
     manager->gameWindow->show_sticker(4);
-    this->close();
+    this->hide();
 }
 
 
 void StickersCollection::on_pushButton_5_clicked()
 {
     manager->gameWindow->show_sticker(5);
-    this->close();
+    this->hide();
 }
 
 
 void StickersCollection::on_pushButton_6_clicked()
 {
     manager->gameWindow->show_sticker(6);
-    this->close();
+    this->hide();
 }
 
 void StickersCollection::on_pushButton_7_clicked()
 {
     manager->gameWindow->show_sticker(7);
-    this->close();
+    this->hide();
 }
 
 
 void StickersCollection::on_pushButton_8_clicked()
 {
     manager->gameWindow->show_sticker(8);
-    this->close();
+    this->hide();
 }
 
 
 void StickersCollection::on_pushButton_9_clicked()
 {
     manager->gameWindow->show_sticker(9);
-    this->close();
+    this->hide();
 }
 
 void StickersCollection::on_pushButton_10_clicked()
 {
     manager->gameWindow->show_sticker(10);
-    this->close();
+    this->hide();
 }
 
 void StickersCollection::on_pushButton_11_clicked()
 {
     manager->gameWindow->show_sticker(11);
-    this->close();
+    this->hide();
 }
 
 void StickersCollection::on_pushButton_12_clicked()
 {
     manager->gameWindow->show_sticker(12);
-    this->close();
+    this->hide();
 }
 
 void StickersCollection::on_pushButton_13_clicked()
 {
     manager->gameWindow->show_sticker(13);
-    this->close();
+    this->hide();
 }
 void StickersCollection::on_pushButton_14_clicked()
 {
     manager->gameWindow->show_sticker(14);
-    this->close();
+    this->hide();
 }
 
 void StickersCollection::on_pushButton_15_clicked()
 {
     manager->gameWindow->show_sticker(15);
-    this->close();
+    this->hide();
 }
 
 void StickersCollection::on_pushButton_16_clicked()
 {
     manager->gameWindow->show_sticker(16);
-    this->close();
+    this->hide();
 }
 
 void StickersCollection::on_pushButton_17_clicked()
 {
     manager->gameWindow->show_sticker(17);
-    this->close();
+    this->hide();
 }
 
 void StickersCollection::on_pushButton_18_clicked()
 {
     manager->gameWindow->show_sticker(18);
-    this->close();
+    this->hide();
 }
 
 void StickersCollection::on_pushButton_19_clicked()
 {
     manager->gameWindow->show_sticker(19);
-    this->close();
+    this->hide();
 }
 
 void StickersCollection::on_pushButton_20_clicked()
 {
     manager->gameWindow->show_sticker(20);
-    this->close();
+    this->hide();
 }
 
 void StickersCollection::on_pushButton_21_clicked()
 {
     manager->gameWindow->show_sticker(21);
-    this->close();
+    this->hide();
 }
 
 void StickersCollection::on_pushButton_22_clicked()
 {
     manager->gameWindow->show_sticker(22);
-    this->close();
+    this->hide();
 }
 
 void StickersCollection::on_pushButton_23_clicked()
 {
     manager->gameWindow->show_sticker(23);
-    this->close();
+    this->hide();
 }
 
 void StickersCollection::on_pushButton_24_clicked()
 {
     manager->gameWindow->show_sticker(24);
-    this->close();
+    this->hide();
 }
 
 void StickersCollection::on_pushButton_25_clicked()
 {
     manager->gameWindow->show_sticker(25);
-    this->close();
+    this->hide();
 }
 
 void StickersCollection::initSticker(QPushButton* button, int num) {

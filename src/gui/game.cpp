@@ -70,6 +70,20 @@ void game::initPlayer4Cards() {
     setCoverCard(ui->player4_card_2);
 }
 
+void game::show_sticker(int sticker_number) {
+    std::string num = "";
+    if (sticker_number < 10)
+        num += "0";
+    num += std::to_string(sticker_number);
+    const std::string path_to_sticker = ":/stickers/images/stickers/chpic.su_-_duraktndrch_0" + num + ".png";
+    if (sticker_number == 7) {
+        ui->player2_icon->setIcon(QIcon(path_to_sticker.c_str()));
+    } else {
+        ui->player1_icon->setIcon(QIcon(path_to_sticker.c_str()));
+    }
+}
+
+
 game::game(QWidget *parent, WindowManager *manager_m)
     : QDialog(parent), ui(new Ui::game), manager(manager_m) {
     ui->setupUi(this);
@@ -80,12 +94,20 @@ game::game(QWidget *parent, WindowManager *manager_m)
     initPlayer3Cards();
     initPlayer4Cards();
 
-    ui->player1_sticker->setIconSize(QSize(200, 200));
-
     ui->choose_sticker->setIcon(QIcon(":/stickers/images/stickers/chpic.su_-_duraktndrch_006.png"));
-    ui->choose_sticker->setIconSize(QSize(50, 50));
+    ui->choose_sticker->setIconSize(QSize(40, 40));
 
+    ui->player1_icon->setIcon(QIcon(":/other/images/other/user_icon.png"));
+    ui->player1_icon->setIconSize(QSize(120, 120));
 
+    ui->player2_icon->setIcon(QIcon(":/other/images/other/user_icon.png"));
+    ui->player2_icon->setIconSize(QSize(120, 120));
+
+    ui->player3_icon->setIcon(QIcon(":/other/images/other/user_icon.png"));
+    ui->player3_icon->setIconSize(QSize(120, 120));
+
+    ui->player4_icon->setIcon(QIcon(":/other/images/other/user_icon.png"));
+    ui->player4_icon->setIconSize(QSize(120, 120));
 
     ui->verticalSlider->setRange(
         1, static_cast<int>(manager->user->get_balance())
@@ -100,7 +122,10 @@ game::~game() {
 }
 
 void game::on_verticalSlider_valueChanged(int value) {
+    QFont font = ui->value->font();
+    font.setPixelSize(20);
     ui->value->setText(QString(std::to_string(value).c_str()));
+    ui->value->setFont(font);
 }
 
 void game::on_raise_clicked() {
@@ -120,17 +145,24 @@ void game::on_choose_sticker_clicked()
    manager->show_stickers();
 }
 
-void game::on_player1_sticker_clicked()
+void game::on_player1_icon_clicked()
 {
-    ui->player1_sticker->setIcon(QIcon());
+    ui->player1_icon->setIcon(QIcon(":/other/images/other/user_icon.png"));
 }
 
-void game::show_sticker(int sticker_number) {
-    std::string num = "";
-    if (sticker_number < 10)
-        num += "0";
-    num += std::to_string(sticker_number);
-    const std::string path_to_sticker = ":/stickers/images/stickers/chpic.su_-_duraktndrch_0" + num + ".png";
-    ui->player1_sticker->setIcon(QIcon(path_to_sticker.c_str()));
+void game::on_player2_icon_clicked()
+{
+    ui->player2_icon->setIcon(QIcon(":/other/images/other/user_icon.png"));
 }
+
+void game::on_player3_icon_clicked()
+{
+    ui->player3_icon->setIcon(QIcon(":/other/images/other/user_icon.png"));
+}
+
+void game::on_player4_icon_clicked()
+{
+    ui->player4_icon->setIcon(QIcon(":/other/images/other/user_icon.png"));
+}
+
 

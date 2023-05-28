@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1239</width>
+    <width>1254</width>
     <height>953</height>
    </rect>
   </property>
@@ -36,6 +36,22 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
+      <spacer name="horizontalSpacer_10">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>140</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
       <spacer name="horizontalSpacer_7">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -54,30 +70,131 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
-        <widget class="QLabel" name="player4_card_1">
-         <property name="minimumSize">
-          <size>
-           <width>150</width>
-           <height>200</height>
-          </size>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="player4_card_2">
-         <property name="minimumSize">
-          <size>
-           <width>150</width>
-           <height>200</height>
-          </size>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <widget class="QLabel" name="player4_card_1">
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>200</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="player4_card_2">
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>200</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_13">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_10">
+           <item>
+            <spacer name="verticalSpacer_17">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="player4_icon">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>120</width>
+               <height>120</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton{
+border-color: black;
+background-image: url(&quot;:/other/images/other/sukno.png&quot;);
+}</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_9">
+             <item>
+              <widget class="QLabel" name="player4_name">
+               <property name="styleSheet">
+                <string notr="true">color: white;
+font-size: 15px;</string>
+               </property>
+               <property name="text">
+                <string>Player4</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="player4_balance">
+               <property name="styleSheet">
+                <string notr="true">color: white;
+font-size: 15px;</string>
+               </property>
+               <property name="text">
+                <string>Balance</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_16">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+        </layout>
        </item>
       </layout>
      </item>
@@ -115,38 +232,129 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <layout class="QHBoxLayout" name="player2">
        <item>
-        <widget class="QLabel" name="player2_card_1">
-         <property name="minimumSize">
-          <size>
-           <width>200</width>
-           <height>150</height>
-          </size>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
+        <layout class="QVBoxLayout" name="verticalLayout_8">
+         <item>
+          <widget class="QLabel" name="player2_card_1">
+           <property name="minimumSize">
+            <size>
+             <width>200</width>
+             <height>150</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="player2_card_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>200</width>
+             <height>150</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
-        <widget class="QLabel" name="player2_card_2">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>200</width>
-           <height>150</height>
-          </size>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <spacer name="verticalSpacer_13">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="player2_icon">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>120</width>
+             <height>120</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+border-color: black;
+background-image: url(&quot;:/other/images/other/sukno.png&quot;);
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="player2_info">
+           <item>
+            <widget class="QLabel" name="player2_name">
+             <property name="styleSheet">
+              <string notr="true">color: white;
+font-size: 15px;</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="text">
+              <string>Player2</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="player2_balance">
+             <property name="styleSheet">
+              <string notr="true">color: white;
+font-size: 15px;</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="text">
+              <string>Balance</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_12">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </item>
       </layout>
      </item>
@@ -167,7 +375,7 @@
       </spacer>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_6">
+      <layout class="QHBoxLayout" name="diller">
        <item>
         <widget class="QLabel" name="diller_card_1">
          <property name="minimumSize">
@@ -239,32 +447,117 @@
       </spacer>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
+      <layout class="QHBoxLayout" name="player3">
        <item>
-        <widget class="QLabel" name="player3_card_1">
-         <property name="minimumSize">
-          <size>
-           <width>200</width>
-           <height>150</height>
-          </size>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
+        <layout class="QVBoxLayout" name="verticalLayout_9">
+         <item>
+          <spacer name="verticalSpacer_14">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="player3_icon">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>120</width>
+             <height>120</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+border-color: black;
+background-image: url(&quot;:/other/images/other/sukno.png&quot;);
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="player3_info">
+           <item>
+            <widget class="QLabel" name="player3_name">
+             <property name="styleSheet">
+              <string notr="true">color: white;
+font-size: 15px;</string>
+             </property>
+             <property name="text">
+              <string>Player3</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="player3_balance">
+             <property name="styleSheet">
+              <string notr="true">color: white;
+font-size: 15px;</string>
+             </property>
+             <property name="text">
+              <string>Balance</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_15">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </item>
        <item>
-        <widget class="QLabel" name="player3_card_2">
-         <property name="minimumSize">
-          <size>
-           <width>200</width>
-           <height>150</height>
-          </size>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QLabel" name="player3_card_1">
+           <property name="minimumSize">
+            <size>
+             <width>200</width>
+             <height>150</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="player3_card_2">
+           <property name="minimumSize">
+            <size>
+             <width>200</width>
+             <height>150</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </item>
@@ -311,7 +604,7 @@
             <enum>Qt::Horizontal</enum>
            </property>
            <property name="sizeType">
-            <enum>QSizePolicy::Preferred</enum>
+            <enum>QSizePolicy::Expanding</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -325,9 +618,61 @@
           <widget class="QSlider" name="verticalSlider">
            <property name="minimumSize">
             <size>
-             <width>30</width>
+             <width>40</width>
              <height>100</height>
             </size>
+           </property>
+           <property name="cursor">
+            <cursorShape>ClosedHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QSlider::groove:horizontal {
+     border: 1px solid #999999;
+     height: 8px; /* по умолчанию бороздка расширяется до размеров ползунка. задав высоту она принимает фиксированный размер */
+     background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #B1B1B1, stop:1 #c4c4c4);
+     margin: 2px 0;
+ }
+
+ QSlider::handle:horizontal {
+     background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #b4b4b4, stop:1 #8f8f8f);
+     border: 1px solid #5c5c5c;
+     width: 18px;
+     margin: -2px 0; /* рукоятка располагается по умолчанию в прямоугольнике содержимого бороздки. Расширяется наружу от бороздки */
+     border-radius: 3px;
+ }
+
+/*Если вы хотите изменить цвет частей ползунка до и после рукоятки, можете использовать субэлементы управления add-page и sub-page. Например, для вертикального ползунка:*/
+
+ QSlider::groove:vertical {
+     background: red;
+	 width: 12px;
+     position: absolute; /* абсолютная позиция в 4px слева и справа от виджета. установка полей виджета также будет работать... */
+     left: 8px; right: 8px;
+ }
+
+ QSlider::handle:vertical {
+     height: 10px;
+	width: 20px;
+
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+
+     background: rgba(255, 120, 31, 1);
+     margin: 0 -20px; /* расширяется наружу от бороздки */
+ }
+
+ QSlider::add-page:vertical {
+     background: rgba(240, 140, 80, 1);
+ }
+
+ QSlider::sub-page:vertical {
+     background: rgba(180, 105, 80, 0.8);
+ }</string>
            </property>
            <property name="singleStep">
             <number>10</number>
@@ -343,7 +688,7 @@
             <enum>Qt::Horizontal</enum>
            </property>
            <property name="sizeType">
-            <enum>QSizePolicy::Preferred</enum>
+            <enum>QSizePolicy::Expanding</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -365,7 +710,7 @@
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>70</width>
+           <width>80</width>
            <height>20</height>
           </size>
          </property>
@@ -478,12 +823,15 @@ QPushButton:pressed {
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: white;
-color: black;
-</string>
+            <string notr="true">color: black;
+margin-right: 3%;
+margin-top: 5px;
+padding: 5px 9px;
+font-size: 1.2em;
+background-color: rgba(200, 101, 80, 1);</string>
            </property>
            <property name="text">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -510,6 +858,9 @@ color: black;
              <weight>75</weight>
              <bold>true</bold>
             </font>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="styleSheet">
             <string notr="true">QPushButton {
@@ -604,27 +955,101 @@ QPushButton:pressed {
       </layout>
      </item>
      <item>
-      <widget class="QPushButton" name="player1_sticker">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+      <layout class="QVBoxLayout" name="verticalLayout_11">
+       <item>
+        <spacer name="verticalSpacer_19">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="player1_icon">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>125</width>
+           <height>125</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+border-color: black;
+background-image: url(&quot;:/other/images/other/sukno.png&quot;);
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_10">
+         <item>
+          <widget class="QLabel" name="player1_name">
+           <property name="styleSheet">
+            <string notr="true">color: white;
+font-size: 15px;</string>
+           </property>
+           <property name="text">
+            <string>Player1</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="player1_balance">
+           <property name="styleSheet">
+            <string notr="true">color: white;
+font-size: 15px;</string>
+           </property>
+           <property name="text">
+            <string>Balance</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_18">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_14">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
-       <property name="minimumSize">
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
         <size>
-         <width>205</width>
-         <height>205</height>
+         <width>75</width>
+         <height>20</height>
         </size>
        </property>
-       <property name="styleSheet">
-        <string notr="true">background-image: url(&quot;:/other/images/other/sukno.png&quot;);
-border: none; </string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
+      </spacer>
      </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -651,8 +1076,8 @@ border: none; </string>
          </property>
          <property name="minimumSize">
           <size>
-           <width>135</width>
-           <height>65</height>
+           <width>175</width>
+           <height>70</height>
           </size>
          </property>
          <property name="font">
@@ -730,8 +1155,8 @@ QPushButton:pressed {
          </property>
          <property name="minimumSize">
           <size>
-           <width>135</width>
-           <height>65</height>
+           <width>175</width>
+           <height>70</height>
           </size>
          </property>
          <property name="font">
@@ -821,7 +1246,7 @@ QPushButton:pressed {
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>90</width>
+         <width>93</width>
          <height>20</height>
         </size>
        </property>
@@ -843,18 +1268,60 @@ QPushButton:pressed {
         </spacer>
        </item>
        <item>
-        <widget class="QToolButton" name="choose_sticker">
+        <widget class="QPushButton" name="choose_sticker">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
-           <width>50</width>
-           <height>50</height>
+           <width>40</width>
+           <height>40</height>
           </size>
          </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
          <property name="styleSheet">
-          <string notr="true">border: none;</string>
+          <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
          </property>
          <property name="text">
           <string/>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
          </property>
         </widget>
        </item>

@@ -27,7 +27,13 @@ private slots:
 
     void on_choose_sticker_clicked();
 
-    void on_player1_sticker_clicked();
+    void on_player1_icon_clicked();
+
+    void on_player2_icon_clicked();
+
+    void on_player4_icon_clicked();
+
+    void on_player3_icon_clicked();
 
 private:
     friend StickersCollection;
@@ -45,6 +51,7 @@ private:
     void initPlayer4Cards();
     void show_sticker(int sticker_number);
     bool isStickerShown = false;
+    friend StickersCollection;
 };
 
 #endif  // GAME_H

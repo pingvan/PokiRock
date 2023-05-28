@@ -45,31 +45,37 @@ public:
     WindowManager operator=(WindowManager&&) = delete;
 
     void show_authorization_window() {
-        authorizationWindow = new authorization_window(nullptr, this);
+        if (!authorizationWindow)
+            authorizationWindow = new authorization_window(nullptr, this);
         authorizationWindow->show();
     }
 
     void show_registration_window() {
-        registrationWindow = new registration_window(nullptr, this);
+        if (!registrationWindow)
+            registrationWindow = new registration_window(nullptr, this);
         authorizationWindow->close();
         registrationWindow->show();
     }
 
     void show_main_menu() {
-        mainMenu = new main_menu(nullptr, this);
+        if (!mainMenu)
+            mainMenu = new main_menu(nullptr, this);
         startWindow->close();
         authorizationWindow->close();
         mainMenu->showFullScreen();
     }
 
     void show_game_window() {
-        gameWindow = new game(nullptr, this);
+        if (!gameWindow)
+            gameWindow = new game(nullptr, this);
         mainMenu->close();
         gameWindow->showFullScreen();
     }
 
     void show_stickers() {
-        if (!stickers) stickers = new StickersCollection(nullptr, this);
+        if (!stickers)
+            stickers = new StickersCollection(nullptr, this);
+        stickers->hide();
         stickers->show();
     }
 
