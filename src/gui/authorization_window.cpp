@@ -24,6 +24,7 @@ void authorization_window::on_authorizate_clicked() {
     if (isUserCorrect) {
         manager->setClient(user_login.toStdString());
         manager->show_main_menu();
+        this->close();
     } else {
         show_authorization_warning();
     }

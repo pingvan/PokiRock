@@ -1,0 +1,1177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>StickersCollection</class>
+ <widget class="QDialog" name="StickersCollection">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>751</width>
+    <height>457</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget[objectName=&quot;StickersCollection&quot;]{ background-image: url(&quot;:/other/images/other/sukno.png&quot;) no-repeat right bottom; } </string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="5" column="1">
+    <widget class="QPushButton" name="pushButton_22">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QPushButton" name="pushButton_12">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}
+
+
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QPushButton" name="pushButton_11">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QPushButton" name="pushButton_1">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="4">
+    <widget class="QPushButton" name="pushButton_15">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="4">
+    <widget class="QPushButton" name="pushButton_10">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="3">
+    <widget class="QPushButton" name="pushButton_19">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QPushButton" name="pushButton_21">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="4">
+    <widget class="QPushButton" name="pushButton_25">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QPushButton" name="pushButton_6">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QPushButton" name="pushButton_16">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3">
+    <widget class="QPushButton" name="pushButton_9">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="3">
+    <widget class="QPushButton" name="pushButton_4">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="4">
+    <widget class="QPushButton" name="pushButton_20">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="4">
+    <widget class="QPushButton" name="pushButton_5">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2">
+    <widget class="QPushButton" name="pushButton_3">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="3">
+    <widget class="QPushButton" name="pushButton_14">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QPushButton" name="pushButton_7">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="QPushButton" name="pushButton_8">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <widget class="QPushButton" name="pushButton_13">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="2">
+    <widget class="QPushButton" name="pushButton_18">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="3">
+    <widget class="QPushButton" name="pushButton_24">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="2">
+    <widget class="QPushButton" name="pushButton_23">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QPushButton" name="pushButton_17">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>85</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  background-color:rgba(230,110,80,1);
+  border-bottom: 4px solid rgba(200, 91, 72, 1);
+}
+
+QPushButton:hover {
+  background-color: rgba(240, 140, 80, 1);
+  border-left: 2px solid rgba(210, 105, 80, 1);
+   border-right: 2px solid rgba(210, 105, 80, 1);
+   border-bottom: 6px solid rgba(210, 105, 80, 1);
+}
+QPushButton:pressed {
+  background-color: rgba(200, 101, 80, 1);
+  border-left: 1px solid rgba(180, 90, 80, 1);
+  border-right: -1px solid rgba(180, 90, 80, 1);
+  border-top: 5px solid rgba(180, 90, 80, 1);
+  padding-top: 3px;  
+  border-bottom: none;  
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

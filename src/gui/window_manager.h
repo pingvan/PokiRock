@@ -9,6 +9,7 @@
 #include "main_menu.h"
 #include "registration_window.h"
 #include "user.hpp"
+#include "stickers_collection.h"
 
 inline void setImage(QLabel* image, const std::string& path_to_image) {
     QPixmap img(path_to_image.c_str());
@@ -23,6 +24,8 @@ class WindowManager {
     main_menu* mainMenu = nullptr;
     registration_window* registrationWindow = nullptr;
     game* gameWindow = nullptr;
+    StickersCollection* stickers = nullptr;
+    friend StickersCollection;
 public:
     User* user; // NOLINT(cppcoreguidelines-non-private-member-variables-in-classes,misc-non-private-member-variables-in-classes)
 
@@ -35,6 +38,7 @@ public:
     void start() {
         startWindow->showFullScreen();
     }
+
     WindowManager(const WindowManager& other) = delete;
     WindowManager(WindowManager&& other) = delete;
     WindowManager operator=(const WindowManager&) = delete;
@@ -64,6 +68,11 @@ public:
         gameWindow->showFullScreen();
     }
 
+    void show_stickers() {
+        if (!stickers) stickers = new StickersCollection(nullptr, this);
+        stickers->show();
+    }
+
     ~WindowManager() {
         delete user;
         delete startWindow;
@@ -71,6 +80,7 @@ public:
         delete registrationWindow;
         delete mainMenu;
         delete gameWindow;
+        delete stickers;
     };
 
     static void game_exit() {

@@ -18,7 +18,7 @@ class main_menu : public QDialog {
     Q_OBJECT
 
 public:
-    main_menu(QWidget *parent = nullptr, WindowManager * = nullptr);
+    main_menu(QWidget *parent = nullptr, WindowManager* manager_ = nullptr);
     ~main_menu();
 
 private slots:

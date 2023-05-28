@@ -6,10 +6,8 @@ main_menu::main_menu(QWidget *parent, WindowManager *manager_m)
     : QDialog(parent), ui(new Ui::main_menu), manager(manager_m) {
     ui->setupUi(this);
 
-
     setImage(ui->image, ":/other/images/garbage/better/pngegg (13).png");
     setImage(ui->user_icon, ":/other/images/other/user_icon.png");
-
 
     ui->name->setText(manager->user->get_name().c_str());
     ui->balance->setText(std::to_string(manager->user->get_balance()).c_str());
@@ -26,4 +24,5 @@ void main_menu::on_exit_clicked() {
 void main_menu::on_play_clicked() {
     QMessageBox::information(this, "Подключение...", "Игра найдена!");
     manager->show_game_window();
+    this->close();
 }

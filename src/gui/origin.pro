@@ -14,7 +14,8 @@ SOURCES += \
     Registration_window.cpp \
     game.cpp \
     main.cpp \
-    First_window.cpp
+    First_window.cpp \
+    stickers_collection.cpp
 
 HEADERS += \
     Authorization_window.h \
@@ -22,6 +23,7 @@ HEADERS += \
     Main_menu.h \
     Registration_window.h \
     game.h \
+    stickers_collection.h \
     user.hpp \
     window_manager.h
 
@@ -30,7 +32,8 @@ FORMS += \
     First_window.ui \
     Main_menu.ui \
     Registration_window.ui \
-    game.ui
+    game.ui \
+    stickers_collection.ui
 
 TRANSLATIONS += \
     origin_ru_RU.ts
@@ -49,7 +52,8 @@ RESOURCES += \
     hearts.qrc \
     labels.qrc \
     other.qrc \
-    spades.qrc
+    spades.qrc \
+    stickers.qrc
 
 DISTFILES += \
     images/labels/Prob-transformed.png \

@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <QLabel>
 #include <string>
-
+class StickersCollection;
 namespace Ui {
 class game;
 }
@@ -25,8 +25,13 @@ private slots:
 
     void on_setValue_clicked();
 
+    void on_choose_sticker_clicked();
+
+    void on_player1_sticker_clicked();
+
 private:
-    Ui::game *ui;
+    friend StickersCollection;
+    Ui::game* ui;
     WindowManager *manager;
     static const char *path(char c, const std::string &card);
     static const char *path_to_cover_T();
@@ -38,6 +43,8 @@ private:
     void initPlayer2Cards();
     void initPlayer3Cards();
     void initPlayer4Cards();
+    void show_sticker(int sticker_number);
+    bool isStickerShown = false;
 };
 
 #endif  // GAME_H

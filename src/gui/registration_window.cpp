@@ -23,26 +23,38 @@ bool addUser(const std::string &name, const std::string &password) {
     return !name.empty() && !password.empty();
 }
 
+void registration_window::show_registration_warning() {
+    QMessageBox::warning(
+        this, "Ошибка", "Некорректное имя пользователя или пароль"
+    );
+}
+
+void registration_window::show_warning_of_different_passwords() {
+    QMessageBox::warning(this, "Ошибка", "Пароли не совпадают");
+}
+
+void registration_window::show_success() {
+    QMessageBox::information(
+        this, "Успех", "Вы успешно зарегистрировались!"
+    );
+}
+
 void registration_window::on_registration_clicked() {
     QString user_login = ui->name->text();
     QString user_password = ui->password->text();
     QString user_password2 = ui->password2->text();
     if (user_password != user_password2) {
-        QMessageBox::warning(this, "Ошибка", "Пароли не совпадают");
+        show_warning_of_different_passwords();
     } else {
         bool isUserCorrect =
             addUser(user_login.toStdString(), user_password.toStdString());
         if (isUserCorrect) {
-            QMessageBox::information(
-                this, "Успех", "Вы успешно зарегистрировались!"
-            );
+            show_success();
             manager->setClient(user_login.toStdString());
             manager->show_main_menu();
             this->close();
         } else {
-            QMessageBox::warning(
-                this, "Ошибка", "Некорректное имя пользователя или пароль"
-            );
+            show_registration_warning();
         }
     }
 }

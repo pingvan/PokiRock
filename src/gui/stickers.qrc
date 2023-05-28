@@ -1,0 +1,29 @@
+<RCC>
+    <qresource prefix="/stickers">
+        <file>images/stickers/chpic.su_-_duraktndrch_001.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_002.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_003.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_004.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_005.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_006.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_007.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_008.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_009.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_010.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_011.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_012.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_013.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_014.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_015.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_016.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_017.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_018.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_019.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_020.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_021.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_022.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_023.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_024.png</file>
+        <file>images/stickers/chpic.su_-_duraktndrch_025.png</file>
+    </qresource>
+</RCC>

@@ -26,4 +26,5 @@ private:
     Ui::first_window *ui;
     WindowManager *manager;
 };
+
 #endif  // FIRST_WINDOW_H
