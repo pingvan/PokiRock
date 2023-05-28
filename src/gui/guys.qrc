@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/boys">
+        <file>images/boys/alexei.png</file>
+        <file>images/boys/dmitriy.png</file>
+        <file>images/boys/egor.png</file>
+        <file>images/boys/ilia.png</file>
+    </qresource>
+</RCC>

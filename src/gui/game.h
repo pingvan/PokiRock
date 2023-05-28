@@ -31,9 +31,9 @@ private slots:
 
     void on_player2_icon_clicked();
 
-    void on_player4_icon_clicked();
+//    void on_player4_icon_clicked();
 
-    void on_player3_icon_clicked();
+//    void on_player3_icon_clicked();
 
 private:
     friend StickersCollection;

@@ -97,16 +97,16 @@ game::game(QWidget *parent, WindowManager *manager_m)
     ui->choose_sticker->setIcon(QIcon(":/stickers/images/stickers/chpic.su_-_duraktndrch_006.png"));
     ui->choose_sticker->setIconSize(QSize(40, 40));
 
-    ui->player1_icon->setIcon(QIcon(":/other/images/other/user_icon.png"));
+    ui->player1_icon->setIcon(QIcon(":/boys/images/boys/dmitriy.png"));
     ui->player1_icon->setIconSize(QSize(120, 120));
 
-    ui->player2_icon->setIcon(QIcon(":/other/images/other/user_icon.png"));
+    ui->player2_icon->setIcon(QIcon(":/boys/images/boys/egor.png"));
     ui->player2_icon->setIconSize(QSize(120, 120));
 
-    ui->player3_icon->setIcon(QIcon(":/other/images/other/user_icon.png"));
+    ui->player3_icon->setIcon(QIcon(":/boys/images/boys/alexei.png"));
     ui->player3_icon->setIconSize(QSize(120, 120));
 
-    ui->player4_icon->setIcon(QIcon(":/other/images/other/user_icon.png"));
+    ui->player4_icon->setIcon(QIcon(":/boys/images/boys/ilia.png"));
     ui->player4_icon->setIconSize(QSize(120, 120));
 
     ui->verticalSlider->setRange(
@@ -147,22 +147,22 @@ void game::on_choose_sticker_clicked()
 
 void game::on_player1_icon_clicked()
 {
-    ui->player1_icon->setIcon(QIcon(":/other/images/other/user_icon.png"));
+    ui->player1_icon->setIcon(QIcon(":/boys/images/boys/dmitriy.png"));
 }
 
 void game::on_player2_icon_clicked()
 {
-    ui->player2_icon->setIcon(QIcon(":/other/images/other/user_icon.png"));
+    ui->player2_icon->setIcon(QIcon(":/boys/images/boys/egor.png"));
 }
 
-void game::on_player3_icon_clicked()
-{
-    ui->player3_icon->setIcon(QIcon(":/other/images/other/user_icon.png"));
-}
+//void game::on_player3_icon_clicked()
+//{
+//    ui->player3_icon->setIcon(QIcon(":/other/images/other/user_icon.png"));
+//}
 
-void game::on_player4_icon_clicked()
-{
-    ui->player4_icon->setIcon(QIcon(":/other/images/other/user_icon.png"));
-}
+//void game::on_player4_icon_clicked()
+//{
+//    ui->player4_icon->setIcon(QIcon(":/other/images/other/user_icon.png"));
+//}
 
 
