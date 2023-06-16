@@ -7,11 +7,7 @@ enum error {
     ERROR_USER_WITH_THIS_LOGIN_ALREADY_EXISTS = 1;
     ERROR_UNCORRECT_PASSWORD = 2;
     ERROR_EXCEPTION = 3;
-}
-
-message StatusMessage {
-    bool status = 1;
-    string message = 2;
+    ERROR_GAME_NOT_FOUND = 4;
 }
 
 message ErrorMessage {
@@ -86,7 +82,7 @@ service Lobby {
 message Player {
     string name = 1;
     PlayerStatus status = 2;
-    int32 balance = 3;
+    uint32 balance = 3;
 }
 
 message LobbyRequests {
@@ -104,34 +100,39 @@ message LobbyResponses {
 }
 
 message CreateGameRequest {
-    string game_owner = 1;
-    PlayerInfo player_info = 2;
-    GameParameters game_parameters = 3;
+    uint32 game_owner_id = 1;
+    //PlayerInfo player_info = 2;
+    GameParameters game_parameters = 2;
 }
 
 message CreateGameResponse {
-    StatusMessage status_message = 1;
-    repeated Player players = 2;
+    oneof responses {
+        uint32 game_id = 1;
+        ErrorMessage msg = 2;
+    }
+//    repeated Player players = 3;
 }
 
 message SearchGameRequest {
-    string name = 1;
-    PlayerInfo player_info = 2;
-    GameParameters game_parameters = 3;
+//    string name = 1;
+    uint32 id = 1;
+    //PlayerInfo player_info = 2;
+    GameParameters game_parameters = 2;
 }
 
 message SearchGameResponse {
-    StatusMessage status_message = 1;
-    repeated Player players = 2;
-    //I'm really not sure
-    //Probably we should send game_state or smt like this
+    oneof responses {
+        uint32 game_id = 1;
+        ErrorMessage msg = 2;
+    }
+//    repeated Player players = 2;
 }
 
 message GameParameters {
     string game_name = 1;
-    int32 number_of_players = 2;
-    int32 minimal_bet = 3;
-    int32 game_enter_balance = 4;
+    uint32 number_of_players = 2;
+    uint32 minimal_bet = 3;
+    uint32 game_enter_balance = 4;
 }
 
 
@@ -142,10 +143,10 @@ enum PlayerStatus {
 }
 
 message PlayerInfo {
-    int32 client_id = 1;
-    int32 client_games = 2;
-    int32 client_wins = 3;
-    int32 client_balance = 4;
+    uint32 client_id = 1;
+    uint32 client_games = 2;
+    uint32 client_wins = 3;
+    uint32 client_balance = 4;
 }
 
 
@@ -157,6 +158,8 @@ service PokerGame {
 message GameRequests {
     oneof requests {
         MakeMoveRequest make_move_request = 1;
+        JoinGameRequest join_game_request = 2;
+        JoinGameAsOwnerRequest join_game_as_owner_request = 3;
     }
 }
 
@@ -164,18 +167,43 @@ message GameResponses {
     oneof responses {
         MakeMoveResponse make_move_response = 1;
         GameState game_state = 2;
+        JoinGameResponse join_game_response = 3;
+        JoinGameAsOwnerResponse join_game_as_owner_response = 4;
     }
 }
 
+message JoinGameRequest {
+    uint32 game_id = 1;
+    string player_name = 2;
+    PlayerInfo player_info = 3;
+}
+
+message JoinGameResponse {
+    GameState game_state = 1;
+    ErrorMessage msg = 2;
+}
+
+message JoinGameAsOwnerRequest {
+    uint32 game_id = 1;
+    string player_name = 2;
+    PlayerInfo player_info = 3;
+}
+
+message JoinGameAsOwnerResponse {
+    GameState game_state = 1;
+    ErrorMessage msg = 2;
+}
+
 message GameState { //everything optional depends on what changed
-    repeated Card board_cards = 1;
-    repeated Player players = 2;
+    repeated Card player_cards = 1;
+    repeated Card board_cards = 2;
+    repeated Player players = 3;
 }
 
 message MakeMoveRequest {
-    int32 player_id = 1;
+    uint32 player_id = 1;
     MoveType move_type = 2;
-    optional int32 blind_size = 3;
+    optional uint32 blind_size = 3; //TODO::study English
 }
 
 message MakeMoveResponse {

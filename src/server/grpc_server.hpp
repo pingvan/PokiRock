@@ -17,30 +17,28 @@ struct authorization_service final : public game::Authorization::Service {
 
 struct lobby_service final : public game::Lobby::Service {
     grpc::Status LobbyFunc(grpc::ServerContext *context, grpc::ServerReaderWriter<game::LobbyResponses, game::LobbyRequests> *stream) override;
+
+    [[nodiscard]] static bool compare_parameters(const game::GameParameters &game_params_lhs, const game::GameParameters &game_params_rhs);
 private:
-    int generate_id();
+    static int generate_id();
+    static std::unordered_map<uint32_t, std::unique_ptr<grpc::ServerAsyncReaderWriter<game::LobbyResponses, game::LobbyRequests>>> clients_online;
 };
 
 struct game_service final : public game::PokerGame::Service {
     grpc::Status GameFunc(grpc::ServerContext *context, grpc::ServerReaderWriter<game::GameResponses, game::GameRequests> *stream) override;
 private:
     friend struct lobby_service;
-    static std::mutex m_mutex;
-    static std::unordered_map<int, std::unique_ptr<server::Game>> all_games;
+
+    //TODO::maybe shit...
+
+    static std::mutex &get_mutex() {
+        static std::mutex m_mutex;
+        return m_mutex;
+    }
+
+    static std::unordered_map<uint32_t, std::unique_ptr<server::Game>> &get_all_games() {
+        static std::unordered_map<uint32_t, std::unique_ptr<server::Game>> all_games;
+        return all_games;
+    }
 };
 
-
-
-struct Poker_server final : public game::PokerGame::Service {
-    grpc::Status PokerFunc([[maybe_unused]] grpc::ServerContext *context, grpc::ServerReaderWriter<game::Responses, game::Requests> *stream) override;
-private:
-
-
-    int generate_id();
-
-    std::mutex m_mutex;
-    std::unordered_map<int, std::unique_ptr<server::Game>> all_games;
-    std::unordered_map<int, game::game_parameters> game_id_to_parameter;
-
-    std::unordered_map<int, std::unique_ptr<grpc::ServerAsyncReaderWriter<game::Responses, game::Requests>>> clients_online;
-};

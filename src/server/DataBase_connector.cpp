@@ -6,7 +6,7 @@
 
 namespace data {
 
-    void DataBase_connector::get_client_info(const std::string &client_login, game::player_info *player_info) {
+    void DataBase_connector::get_client_info(const std::string &client_login, game::PlayerInfo *player_info) {
         try {
             pqxx::connection con{conn_msg()};
             pqxx::work txn{con};
@@ -26,7 +26,7 @@ namespace data {
         }
     }
 
-    void DataBase_connector::insert_new_client(const std::string &client_login, const std::string &salt, const std::string &hash, game::player_info *player_info) {
+    void DataBase_connector::insert_new_client(const std::string &client_login, const std::string &salt, const std::string &hash, game::PlayerInfo *player_info) {
         try {
             pqxx::connection con{conn_msg()};
             pqxx::work txn{con};
@@ -89,9 +89,10 @@ namespace data {
         } catch (std::exception &e) {
             std::cerr << e.what() << '\n';
         }
+        return "";
     }
 
-    void data::DataBase_connector::get_salt(const std::string &client_login, game::login_response_first *login_response_first, game::status_message *status_message) {
+    void data::DataBase_connector::get_salt(const std::string &client_login, game::LoginResponseFirst *login_response_first, game::ErrorMessage *error_message) {
         pqxx::connection con{conn_msg()};
         pqxx::work txn{con};
         auto client_id = txn.query_value<uint32_t>(
@@ -107,8 +108,7 @@ namespace data {
             txn.quote(client_id)
         );
         if (row.empty()) {
-            status_message->set_status(false);
-            status_message->set_message("NO CLIENT WITH THIS NAME");
+            error_message->set_error(game::error::ERROR_NO_USER_WITH_THIS_LOGIN);
         }
         std::string salt;
         for (auto r : row) {
@@ -144,6 +144,7 @@ namespace data {
         } catch (std::exception &e) {
             std::cerr << e.what() << '\n';
         }
+        return "";
     }
 
     std::pair<std::string, std::string> DataBase_connector::log_in_client(const std::string &client_login) {
@@ -174,6 +175,7 @@ namespace data {
         } catch(std::exception &e) {
             std::cerr << e.what() << '\n';
         }
+        return {"", ""};
     }
 
     void DataBase_connector::insert_games(const std::string &client_login) {

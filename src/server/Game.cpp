@@ -43,9 +43,9 @@ void Game::preflop() {
 
 void Game::flop() {
     current_turn = Flop;
-    for (const auto &c : players) {
+/*    for (const auto &c : players) {
         data::DataBase_connector::insert_games(c.name());
-    }
+    }*/
     if (players.size() > 1) {
         std::cout << "Flop\n";
         for (int i = 0; i < 3; i++) {

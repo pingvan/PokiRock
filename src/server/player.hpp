@@ -18,11 +18,8 @@ enum status {
 };
 
 struct player {
-//    Player(std::string player_name, int player_id, int in_game_balance, int current_balance);
-    player(std::string  player_name, const game::PlayerInfo *player_info, int game_enter_balance,
+    player(std::string player_name, const game::PlayerInfo *player_info, uint32_t game_enter_balance,
            grpc::ServerReaderWriter<game::GameResponses, game::GameRequests> *stream);
-
-    void process_responses();
 
     friend struct server::Game;
 private:

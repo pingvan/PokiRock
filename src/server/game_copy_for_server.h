@@ -6,7 +6,6 @@
 #include <grpcpp/grpcpp.h>
 
 #include "player.hpp"
-#include "../client/client.h"
 #include "../proto/game.grpc.pb.h"
 #include "../proto/game.pb.h"
 #include "Card.hpp"
@@ -23,24 +22,20 @@ struct Blinds {
 namespace server {
 struct Game {
 private:
-    Which_turn current_turn = Which_turn::Preflop; //doesn't need to be replaced
+    Which_turn current_turn = Which_turn::Preflop;
 
-    std::vector<client::Client> players; //replaced with class_players
-    std::vector<client::Client> round_players; //replaced with map of round_players
-    int button; //doesn't need to be replaced
-    int last_player; //doesn't need to be replaced
-    Blinds blinds; //doesn't need to be replaced
-    std::unordered_map<client::Client, std::pair<Card, Card>, client::ClientHash> cards_enum; //now Player class contains this info
-    //std::map<client::Client, std::pair<Card, Card>> cards_enum;
-    std::unordered_map<client::Client, int, client::ClientHash> balance; //now Player class contains this info
-//    std::map<client::Client, int> balance;
-    std::vector<int> available_cards;  //doesn't need to be replaced
-    std::vector<Card> board_cards; //doesn't need to be replaced (I think)
-    int total_of_bets; //doesn't need to be replaced
+
+    uint32_t button;
+    uint32_t last_player;
+    Blinds blinds;
+
+
+    std::vector<int> available_cards;
+    std::vector<Card> board_cards;
+    uint32_t total_of_bets;
 
 
 
-    //new
     game_condition condition;
 
     const uint32_t game_owner_id_;
@@ -49,42 +44,51 @@ private:
     uint32_t current_players_;
     const uint32_t minimal_bet_;
     const uint32_t game_enter_balance_;
-    mutable std::mutex m_mutex;
-//    std::unordered_map<int, std::unique_ptr<grpc::ServerAsyncReaderWriter<game::move_request, game::move_response>>> players_;
-//    std::unordered_map<int, std::pair<Card, Card>> players_cards;
-//    std::unordered_map<int, int> players_balance;
 
-    //TODO::map with players on this round
-    std::unordered_map<uint32_t, std::shared_ptr<player>> class_players;
-    std::unordered_map<uint32_t, std::shared_ptr<player>> round_players_;
+    bool owner_connected;
+
+    mutable std::mutex m_mutex;
+
+    std::unordered_map<uint32_t, std::shared_ptr<player>> players_in_room_;
+    std::unordered_map<uint32_t, std::shared_ptr<player>> players_in_round_;
 
 public:
-    explicit Game(std::vector<client::Client> lobby);
-    explicit Game(uint32_t game_owner_id, const game::game_parameters *game_parameters, std::unique_ptr<player> owner);
+    explicit Game(uint32_t game_owner_id, const game::GameParameters *game_parameters);
 
+    void join_game_as_owner(std::unique_ptr<player> owner);
     void join_game(std::unique_ptr<player> player);
-    void quit_game(int player_id);
+    void quit_game(uint32_t player_id);
 
     void start_game();
 
     void bets();
-    int next_position(int position);
+    uint32_t next_position(uint32_t position);
     void preflop();
     void flop();
-    void make_a_bet(const client::Client &player, int bet_amount);
+    void make_a_bet(uint32_t player_id, uint32_t bet_amount);
     void turn();
     void river();
     Card get_enum_card();
-    void print_cards();
     void who_won();
     void new_round();
 
-private:
+//private:
+    game::GameParameters get_game_parameters() const;
+    bool is_owner_connected() const;
+    uint32_t get_game_enter_balance() const;
+
+    void cards_to_proto(Card &card, game::Card *first);
+    void suit_to_proto(Suit &suit, game::Card *card);
+    void value_to_proto(Value &value, game::Card *card);
+
+    void broadcast_for_all_players_in_lobby(game::GameResponses *response);
+    void broadcast_for_round(game::GameResponses *response);
+
     template <typename T>
     void increase_iterator(T &iterator) {
         iterator++;
-        if (iterator == round_players.end()) {
-            iterator = round_players.begin();
+        if (iterator == players_in_round_.end()) {
+            iterator = players_in_round_.begin();
         }
     }
 };

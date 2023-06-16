@@ -1,8 +1,8 @@
-#ifndef WIN_CHECK_H
-#define WIN_CHECK_H
+#pragma once
 
 #include <utility>
 #include <vector>
+
 #include "Card.hpp"
 
 namespace server {
@@ -16,4 +16,3 @@ struct Win_check {
 };
 }  // namespace server
 
-#endif  // WIN_CHECK_H

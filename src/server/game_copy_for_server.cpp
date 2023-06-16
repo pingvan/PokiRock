@@ -2,104 +2,186 @@
 #include "Win_check.h"
 
 namespace server {
-int Game::next_position(int position) {
-    return (position + 1) % static_cast<int>(round_players.size());
+
+uint32_t Game::next_position(uint32_t position) {
+    return (position + 1) % static_cast<uint32_t>(players_in_round_.size());
 }
 
-/*Game::Game(std::vector<client::Client> lobby)
-    : players(std::move(lobby)),
-      round_players(players),
-      button(static_cast<int>(lobby.size()) - 1),
-      last_player(button),
-      available_cards(52),
-        total_of_bets(0) {
-    std::iota(available_cards.begin(), available_cards.end(), 0);
-    std::cout << "Starting game with: ";
-    for (const client::Client &Player : players) {
-        // demand to preflop
-        balance[Player] = 100;
-        std::cout << Player.name() << " ";
+
+void Game::suit_to_proto(Suit &suit, game::Card *card) {
+    switch (suit) {
+        case Suit::DIAMONDS:
+            card->set_suit(game::Suits::SUITS_DIAMONDS);
+            break;
+        case Suit::HEARTS:
+            card->set_suit(game::Suits::SUITS_HEARTS);
+            break;
+        case Suit::CLUBS:
+            card->set_suit(game::Suits::SUITS_CLUBS);
+            break;
+        case Suit::SPADES:
+            card->set_suit(game::Suits::SUITS_SPADES);
+            break;
+        default:
+            assert(false);
     }
-    std::cout << "\n";
-}*/
+}
+
+void Game::value_to_proto(Value &value, game::Card *card) {
+    switch (value) {
+        case Value::TWO:
+            card->set_value(game::Values::VALUES_TWO);
+            break;
+        case Value::THREE:
+            card->set_value(game::Values::VALUES_THREE);
+            break;
+        case Value::FOUR:
+            card->set_value(game::Values::VALUES_FOUR);
+            break;
+        case Value::FIVE:
+            card->set_value(game::Values::VALUES_FIVE);
+            break;
+        case Value::SIX:
+            card->set_value(game::Values::VALUES_SIX);
+            break;
+        case Value::SEVEN:
+            card->set_value(game::Values::VALUES_SEVEN);
+            break;
+        case Value::EIGHT:
+            card->set_value(game::Values::VALUES_EIGHT);
+            break;
+        case Value::NINE:
+            card->set_value(game::Values::VALUES_NINE);
+            break;
+        case Value::TEN:
+            card->set_value(game::Values::VALUES_TEN);
+            break;
+        case Value::JACK:
+            card->set_value(game::Values::VALUES_JACK);
+            break;
+        case Value::QUEEN:
+            card->set_value(game::Values::VALUES_QUEEN);
+            break;
+        case Value::KING:
+            card->set_value(game::Values::VALUES_KING);
+            break;
+        case Value::ACE:
+            card->set_value(game::Values::VALUES_ACE);
+            break;
+        default:
+            assert(false);
+    }
+}
+
+void Game::cards_to_proto(Card &card, game::Card *first) {
+    auto suit = card.get_suit();
+    auto value = card.get_value();
+
+    suit_to_proto(suit, first);
+    value_to_proto(value, first);
+}
+
+game::GameParameters Game::get_game_parameters() const {
+    game::GameParameters game_parameters;
+    game_parameters.set_game_name(game_name_);
+    game_parameters.set_number_of_players(players_max_);
+    game_parameters.set_minimal_bet(minimal_bet_);
+    game_parameters.set_game_enter_balance(game_enter_balance_);
+    return game_parameters;
+}
 
 
-Game::Game(uint32_t game_owner_id, const game::game_parameters *game_parameters,
-           std::unique_ptr<player> owner)
+Game::Game(const uint32_t game_owner_id, const game::GameParameters *game_parameters)
 :  condition(Waiting), game_owner_id_(game_owner_id), game_name_(game_parameters->game_name()), players_max_(game_parameters->number_of_players()), current_players_(0),
-minimal_bet_(game_parameters->minimal_bet()), game_enter_balance_(game_parameters->game_enter_balance()), m_mutex()
+minimal_bet_(game_parameters->minimal_bet()), game_enter_balance_(game_parameters->game_enter_balance()), owner_connected(false), m_mutex(),
+   available_cards(52), last_player(button), button(players_max_), total_of_bets(0)
 {
-    const uint32_t owner_id = owner->player_id_;
-    auto lock = std::lock_guard(m_mutex); //TODO::maybe replace with std::lock_guard
-    class_players[owner_id] = std::move(owner);
+    std::iota(available_cards.begin(), available_cards.end(), 0);
+}
+
+void Game::broadcast_for_all_players_in_lobby(game::GameResponses *response) {
+    for (const auto &[id, player] : players_in_room_) {
+        player->stream_->Write(*response);
+    }
+}
+
+void Game::broadcast_for_round(game::GameResponses *response) {
+    for (const auto &[id, player] : players_in_round_) {
+        player->stream_->Write(*response);
+    }
+}
+
+[[nodiscard]] uint32_t Game::get_game_enter_balance() const {
+    return game_enter_balance_;
+}
+
+[[nodiscard]] bool Game::is_owner_connected() const {
+    return owner_connected;
+}
+
+void Game::join_game_as_owner(std::unique_ptr<player> owner) {
+    auto lock = std::lock_guard(m_mutex);
+    players_in_room_[game_owner_id_] = std::move(owner);
     current_players_++;
+    owner_connected = true;
 }
 
 void Game::join_game(std::unique_ptr<player> player) {
     auto player_id = player->player_id_;
     auto lock = std::lock_guard(m_mutex);
-    if (condition != Waiting) {
-
+    if (condition != Waiting) { //TODO::is players > max
+        players_in_room_[player_id] = std::move(player);
+        return;
     }
-    class_players[player_id] = std::move(player);
     current_players_++;
     if (current_players_ == players_max_) {
-        //TODO::start game;
-        condition = Playing;
+        start_game();
     }
 }
 
-void Game::quit_game(int player_id) { //TODO::replace with switch cases
+void Game::quit_game(uint32_t player_id) { //TODO::replace with switch cases
     if (condition == Playing) {
         //TODO::fold
     }
     auto lock = std::lock_guard(m_mutex);
-    class_players.erase(player_id);
+    players_in_room_.erase(player_id);
     //TODO::update DB data
 }
 
 void Game::start_game() {
+    condition = Playing;
+    players_in_round_ = players_in_room_;
     preflop();
-    //TODO::
 }
 
 void Game::preflop() {
-    std::cout << "Preflop\n";
-    for (const auto &player : players) {
-        auto [iter, created] = cards_enum.emplace(
-            std::piecewise_construct, std::forward_as_tuple(player),
-            std::forward_as_tuple(get_enum_card(), get_enum_card())
-        );
-        auto optional_move = player.optional_move();
-        if (optional_move == "balance") {
-            std::cout << "Your balance is: " << balance[player] << "\n";
-        } else if (optional_move == "cards") {
-            std::cout << iter->second.first << " " << iter->second.second << '\n';
-        }
+    for (auto &[id, player] : players_in_room_) {
+        game::GameResponses response;
+        auto *game_state = new game::GameState;
+        player->player_cards = {get_enum_card(), get_enum_card()}; //maybe separate setter functions which then will call graphic
+        auto *player_card_first = game_state->add_player_cards();
+        auto *player_card_second = game_state->add_player_cards();
+        cards_to_proto(player->player_cards.first, player_card_first);
+        cards_to_proto(player->player_cards.second, player_card_second);
+        response.set_allocated_game_state(game_state);
+        player->stream_->Write(response);
     }
     bets();
     flop();
-
-
-    for (auto &[id, player] : class_players) {
-        player->player_cards = {get_enum_card(), get_enum_card()}; //maybe separate setter functions which then will call graphic
-         //here we should do working on requests
-        //graphic buttons always working or separate function to process responses
-        //balance and cards will be always able on screen
-    }
 }
 
 void Game::flop() {
     current_turn = Flop;
-    for (const auto &c : players) {
-        data::DataBase_connector::insert_games(c.name());
-    }
-    if (players.size() > 1) {
-        std::cout << "Flop\n";
+    game::GameResponses response;
+    auto *game_state = new game::GameState;
+    if (players_in_round_.size() > 1) {
         for (int i = 0; i < 3; i++) {
             board_cards.push_back(get_enum_card());
+            auto *new_board_card = game_state->add_board_cards();
+            cards_to_proto(board_cards.back(), new_board_card);
         }
-        print_cards();
+        response.set_allocated_game_state(game_state);
+        broadcast_for_all_players_in_lobby(&response);
         bets();
     }
     turn();
@@ -107,22 +189,30 @@ void Game::flop() {
 
 void Game::turn() {
     current_turn = Turn;
-    if (players.size() > 1) {
-        std::cout << "Turn\n";
+    game::GameResponses response;
+    auto *game_state = new game::GameState;
+    if (players_in_round_.size() > 1) {
         board_cards.push_back(get_enum_card());
-        print_cards();
+        auto *new_board_card = game_state->add_board_cards();
+        cards_to_proto(board_cards.back(), new_board_card);
+        response.set_allocated_game_state(game_state);
+        broadcast_for_all_players_in_lobby(&response);
         bets();
     }
+
     river();
 }
 
 void Game::river() {
     current_turn = River;
-    if (players.size() > 1) {
-        std::cout << "River\n";
+    game::GameResponses response;
+    auto *game_state = new game::GameState;
+    if (players_in_round_.size() > 1) {
         board_cards.push_back(get_enum_card());
-        print_cards();
-        bets();
+        auto *new_board_card = game_state->add_board_cards();
+        cards_to_proto(board_cards.back(), new_board_card);
+        response.set_allocated_game_state(game_state);
+        broadcast_for_all_players_in_lobby(&response);
     }
     who_won();
 }
@@ -134,8 +224,9 @@ void Game::bets() {
     }
     bool big_blind_flag = false;
     bool small_blind_flag = false;
-//    std::map<client::Client, int> have_betted;
     std::unordered_map<client::Client, int, client::ClientHash> have_betted;
+
+    std::unordered_map<int, int> have_betted_; //id to ...
     bool state = true;
     std::size_t done_players_counter = 0;
     while (state) {
@@ -168,6 +259,7 @@ void Game::bets() {
                 }
                 continue;
             }
+            some_func();
             while (true) {
                 auto move = player.move(balance[player]);
                 if (move == "call") {
@@ -254,12 +346,6 @@ Card Game::get_enum_card() {
     return Card(card);
 }
 
-void Game::print_cards() {
-    for (auto num_of_card : board_cards) {
-        std::cout << num_of_card << " " << num_of_card << " ";
-    }
-    std::cout << "\n";
-}
 
 void Game::who_won() {
     if (round_players.size() == 1) {
@@ -354,14 +440,14 @@ void Game::new_round() {
         available_cards.push_back(i);
     }
     board_cards.clear();
-    round_players = players;
+    players_in_round_ = players_in_room_;
     last_player = button;
     total_of_bets = 0;
     preflop();
 }
 
-void Game::make_a_bet(const client::Client &player, int bet_amount) {
-    balance[player] -= bet_amount;
+void Game::make_a_bet(const uint32_t player_id, uint32_t bet_amount) {
+    players_in_round_[player_id]->in_game_balance_ -= bet_amount;
     total_of_bets += bet_amount;
 }
 
