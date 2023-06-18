@@ -50,7 +50,7 @@ private:
     mutable std::mutex m_mutex;
 
     std::unordered_map<uint32_t, std::shared_ptr<player>> players_in_room_;
-    std::unordered_map<uint32_t, std::shared_ptr<player>> players_in_round_;
+    std::vector<uint32_t> players_in_round_;
 
 public:
     explicit Game(uint32_t game_owner_id, const game::GameParameters *game_parameters);
