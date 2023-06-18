@@ -31,6 +31,8 @@ private:
 
     //TODO::maybe shit...
 
+    static inline std::mutex m_mu;
+
     static std::mutex &get_mutex() {
         static std::mutex m_mutex;
         return m_mutex;

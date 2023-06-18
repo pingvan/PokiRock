@@ -124,6 +124,7 @@ void Game::join_game_as_owner(std::unique_ptr<player> owner) {
     players_in_room_[game_owner_id_] = std::move(owner);
     current_players_++;
     owner_connected = true;
+    std::cout << "owner joined the game\n";
 }
 
 void Game::join_game(std::unique_ptr<player> player) {
@@ -166,7 +167,7 @@ void Game::preflop() {
         response.set_allocated_game_state(game_state);
         player->stream_->Write(response);
     }
-    bets();
+//    bets();
     flop();
 }
 
@@ -182,7 +183,7 @@ void Game::flop() {
         }
         response.set_allocated_game_state(game_state);
         broadcast_for_all_players_in_lobby(&response);
-        bets();
+//        bets();
     }
     turn();
 }
@@ -197,7 +198,7 @@ void Game::turn() {
         cards_to_proto(board_cards.back(), new_board_card);
         response.set_allocated_game_state(game_state);
         broadcast_for_all_players_in_lobby(&response);
-        bets();
+//        bets();
     }
 
     river();
@@ -214,7 +215,7 @@ void Game::river() {
         response.set_allocated_game_state(game_state);
         broadcast_for_all_players_in_lobby(&response);
     }
-    who_won();
+//    who_won();
 }
 
 void Game::bets() {
@@ -224,13 +225,12 @@ void Game::bets() {
     }
     bool big_blind_flag = false;
     bool small_blind_flag = false;
-    std::unordered_map<client::Client, int, client::ClientHash> have_betted;
 
-    std::unordered_map<int, int> have_betted_; //id to ...
+    std::unordered_map<uint32_t, uint32_t> have_betted_; //id to ...
     bool state = true;
     std::size_t done_players_counter = 0;
     while (state) {
-        for (auto it = round_players.begin() + next_position(last_player);;) {
+        for (auto it = players_in_round_.begin() + next_position(last_player);;) {
             const auto &player = *it;
             if (current_turn == Which_turn::Preflop) {
                 if (!small_blind_flag) {
@@ -347,7 +347,7 @@ Card Game::get_enum_card() {
 }
 
 
-void Game::who_won() {
+/*void Game::who_won() {
     if (round_players.size() == 1) {
         const auto &player = *round_players.begin();
         balance[player] += total_of_bets;
@@ -415,9 +415,9 @@ void Game::who_won() {
         }
     }
     new_round();
-}
+}*/
 
-void Game::new_round() {
+/*void Game::new_round() {
     current_turn = Preflop;
     button = next_position(button);
     for (auto it = players.begin(); it != players.end();) {
@@ -444,7 +444,7 @@ void Game::new_round() {
     last_player = button;
     total_of_bets = 0;
     preflop();
-}
+}*/
 
 void Game::make_a_bet(const uint32_t player_id, uint32_t bet_amount) {
     players_in_round_[player_id]->in_game_balance_ -= bet_amount;

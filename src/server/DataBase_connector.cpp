@@ -29,6 +29,7 @@ namespace data {
     void DataBase_connector::insert_new_client(const std::string &client_login, const std::string &salt, const std::string &hash, game::PlayerInfo *player_info) {
         try {
             pqxx::connection con{conn_msg()};
+            std::cout << "connected\n";
             pqxx::work txn{con};
             txn.exec_params("INSERT INTO clients (client_login, client_games, client_wins, client_balance)"
                             "VALUES ($1, $2, $3, $4)", client_login, 0, 0, 1000);
@@ -43,7 +44,9 @@ namespace data {
             player_info->set_client_games(0);
             txn.commit();
             con.close();
+            std::cout << "inserted\n";
         } catch (std::exception &e) {
+            std::cout << "exception\n";
             std::cerr << e.what() << '\n';
         }
     }
@@ -223,8 +226,10 @@ namespace data {
 
     bool DataBase_connector::check_login_correctness(const std::string &client_login) {
         bool already_registered = false;
+        std::cout << "checking\n";
         try {
             pqxx::connection con{conn_msg()};
+            std::cout << "connected\n";
             pqxx::work txn{con};
 
             auto result = txn.exec_params("SELECT client_id "
@@ -238,6 +243,7 @@ namespace data {
         } catch (std::exception &e) {
             std::cerr << e.what() << '\n';
         }
+        std::cout << "is alredy: " << already_registered << '\n';
         return already_registered;
     }
 }

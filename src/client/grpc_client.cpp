@@ -5,9 +5,10 @@
 
 #include "salt_hash.hpp"
 
+//we can't move channel
 
-client::client(std::shared_ptr<grpc::Channel> new_channel)
-: channel_(std::move(new_channel)),
+client::client(const std::shared_ptr<grpc::Channel>& new_channel)
+: channel_(new_channel),
       authorization_stub_(game::Authorization::NewStub(new_channel))
 {}
 
@@ -94,17 +95,20 @@ void client::lobby_init() {
     lobby_stream_ = lobby_stub_->LobbyFunc(lobby_context_);
     std::thread reader(&client::process_lobby_responses, this);
     reader.detach();
+    std::cout << "lobby inited\n";
 }
 
 void client::make_lobby_requests(client::lobby_requests request_type, const std::string &game_name, const uint32_t number_of_players, const uint32_t minimal_bet, const uint32_t game_enter_balance) { //will be called in GUI
     game::LobbyRequests request;
     if (request_type == CREATE_GAME) {
+        std::cout << "creating\n";
         auto *create_request = new game::CreateGameRequest;
         auto *game_parameters = new game::GameParameters;
         init_proto_game_parameters(game_parameters,game_name, number_of_players, minimal_bet, game_enter_balance);
         create_request->set_allocated_game_parameters(game_parameters);
         request.set_allocated_create_game_request(create_request);
     } else {
+        std::cout << "searching\n";
         auto *search_request = new game::SearchGameRequest;
         auto *game_parameters = new game::GameParameters;
         init_proto_game_parameters(game_parameters,game_name, number_of_players, minimal_bet, game_enter_balance);
@@ -112,16 +116,21 @@ void client::make_lobby_requests(client::lobby_requests request_type, const std:
         request.set_allocated_search_game_request(search_request);
     }
     lobby_stream_->Write(request);
+    std::cout << "WRITTEN LOBBY\n";
 }
 
 
 void client::process_lobby_responses() {
     game::LobbyResponses response;
+    std::cout << "THREAD STARTED\n";
     while(lobby_stream_->Read(&response)) {
+        std::cout << "READ LOBBY\n";
         if (response.has_create_game_response()) {
+            std::cout << "HAS GAME RESPONSE\n";
             if (response.create_game_response().has_msg()) {
-
+                std::cout << "has msg\n";
             } else {
+                std::cout << "STARTING GAME INIT\n";
                 auto game_id_to_connect = response.create_game_response().game_id();
                 game_init();
                 make_game_requests(client::game_requests::JOIN_GAME_AS_OWNER, game_id_to_connect);
@@ -140,12 +149,14 @@ void client::process_lobby_responses() {
 
 
 void client::game_init() {
+    std::cout << "calling game init\n";
     poker_game_stub_ = game::PokerGame::NewStub(channel_);
     poker_game_context = new grpc::ClientContext;
     poker_game_stream = poker_game_stub_->GameFunc(poker_game_context);
     in_game = true;
     std::thread reader(&client::process_game_responses, this);
     reader.detach();
+    std::cout << "game inited\n";
 }
 
 void client::make_game_requests(client::game_requests request_type, const uint32_t game_id) { //will be called in GUI
@@ -186,6 +197,7 @@ void client::make_game_requests(client::game_requests request_type, const uint32
 void client::process_game_responses() {
     game::GameResponses response;
     while (poker_game_stream->Read(&response)) {
+        std::cout << "READ GAME\n";
         if (response.has_game_state()) {
             //update graphic
         } else if (response.has_join_game_response()) {
@@ -214,6 +226,7 @@ void client::login(const std::string &client_login, const std::string &password)
     //TODO::know about release
     auto salt = login_response->login_response_first().salt();
     auto hashed_password = salt_hash::sha_hash(salt + password);
+    std::cout << "hashed " << hashed_password << '\n';
     {
         grpc::ClientContext context_second;
         auto login_request_second = new game::LoginRequestSecond;
@@ -237,6 +250,7 @@ void client::registration(const std::string &client_login, const std::string &pa
     salt_hash->set_salt(salt); salt_hash->set_hash(hashed_password);
     register_request.set_allocated_salt_hash(salt_hash);
     grpc::ClientContext context;
+    std::cout << "send to server\n";
     grpc::Status status = authorization_stub_->Registration(&context, register_request, register_response);
     handle_error_for_each_type(status, register_response);
     init_player_info(register_response->player_info());

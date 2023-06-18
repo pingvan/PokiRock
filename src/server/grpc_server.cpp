@@ -8,6 +8,7 @@
 
 grpc::Status authorization_service::Login(grpc::ServerContext *context, const game::LoginRequest *request, game::LoginResponse *response) {
     if (request->has_login_request_first()) {
+        std::cout << "first_iter\n";
         bool error = false;
         auto *login_response_first = new game::LoginResponseFirst;
         auto *error_message = new game::ErrorMessage;
@@ -32,6 +33,7 @@ grpc::Status authorization_service::Login(grpc::ServerContext *context, const ga
         }
         response->set_allocated_login_response_first(login_response_first);
     } else {
+        std::cout << "second_iter\n";
         auto *login_response_second = new game::LoginResponseSecond;
         auto *error_message = new game::ErrorMessage;
         auto client_login = request->login_request_second().name();
@@ -70,26 +72,32 @@ grpc::Status authorization_service::Login(grpc::ServerContext *context, const ga
 
 
 grpc::Status authorization_service::Registration(grpc::ServerContext *context, const game::RegisterRequest *request, game::RegisterResponse *response) {
+    std::cout << "regist called\n";
     auto *error_message = new game::ErrorMessage;
     bool error = false;
-    if (!data::DataBase_connector::check_login_correctness(request->name())) {
+    if (data::DataBase_connector::check_login_correctness(request->name())) {
         error = true;
+        std::cout << "Unccorrect\n";
         error_message->set_error(game::error::ERROR_USER_WITH_THIS_LOGIN_ALREADY_EXISTS);
     }
     if (!error) {
         delete error_message;
         auto *player_info = new game::PlayerInfo;
+        std::cout << "new client\n";
         data::DataBase_connector::insert_new_client(request->name(), request->salt_hash().salt(), request->salt_hash().hash(), player_info);
         response->set_allocated_player_info(player_info);
     } else {
+        std::cout << "send error\n";
         response->set_allocated_msg(error_message);
     }
+    std::cout << "end\n";
     return grpc::Status::OK;
 }
 
 
 grpc::Status lobby_service::LobbyFunc(grpc::ServerContext *context, grpc::ServerReaderWriter<game::LobbyResponses, game::LobbyRequests> *stream) {
     game::LobbyRequests request;
+    std::cout << "in lobby\n";
     while (stream->Read(&request)) {
         game::LobbyResponses response;
         if (request.has_create_game_request()) {
@@ -110,6 +118,7 @@ grpc::Status lobby_service::LobbyFunc(grpc::ServerContext *context, grpc::Server
 
             response.set_allocated_create_game_response(create_game_response);
             stream->Write(response);
+            std::cout << "game created\n";
 
         } else { //if it has search game request
             auto *search_game_response = new game::SearchGameResponse;
@@ -138,11 +147,13 @@ grpc::Status lobby_service::LobbyFunc(grpc::ServerContext *context, grpc::Server
             stream->Write(response);
         }
     }
+    std::cout << "END OF LOBBY FUNC\n";
     return grpc::Status::OK;
 }
 
 grpc::Status game_service::GameFunc(grpc::ServerContext *context, grpc::ServerReaderWriter<game::GameResponses, game::GameRequests> *stream) {
     game::GameRequests request;
+    std::cout << "in game\n";
     while (stream->Read(&request)) {
         if (request.has_make_move_request()) {
 
@@ -181,7 +192,7 @@ int lobby_service::generate_id() {
     std::uniform_int_distribution<> distrib(0, 291203);
     auto new_game_id = distrib(gen);
     std::unique_lock<std::mutex> lock(game_service::get_mutex());
-    while (game_service::get_all_games().find(new_game_id) == game_service::get_all_games().end()) {
+    while (game_service::get_all_games().find(new_game_id) != game_service::get_all_games().end()) {
         new_game_id = distrib(gen);
     }
     lock.unlock();
