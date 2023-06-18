@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/cards">
+        <file>images/cards/Hearts/2.png</file>
+        <file>images/cards/Hearts/3.png</file>
+        <file>images/cards/Hearts/4.png</file>
+        <file>images/cards/Hearts/5.png</file>
+        <file>images/cards/Hearts/6.png</file>
+        <file>images/cards/Hearts/7.png</file>
+        <file>images/cards/Hearts/8.png</file>
+        <file>images/cards/Hearts/9.png</file>
+        <file>images/cards/Hearts/10.png</file>
+        <file>images/cards/Hearts/A.png</file>
+        <file>images/cards/Hearts/J.png</file>
+        <file>images/cards/Hearts/K.png</file>
+        <file>images/cards/Hearts/Q.png</file>
+    </qresource>
+</RCC>
