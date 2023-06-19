@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1254</width>
-    <height>953</height>
+    <width>1341</width>
+    <height>957</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -45,7 +45,7 @@
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>140</width>
+         <width>160</width>
          <height>20</height>
         </size>
        </property>
@@ -144,9 +144,24 @@
              </property>
              <property name="styleSheet">
               <string notr="true">QPushButton{
-border-color: black;
 background-image: url(&quot;:/other/images/other/sukno.png&quot;);
-}</string>
+border-bottom: 0px;
+
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  border-bottom: 0px;
+}
+
+QPushButton:hover {
+  border-left: 0px;
+   border-right: 0px;
+   border-bottom: 0px;
+}
+</string>
              </property>
              <property name="text">
               <string/>
@@ -300,9 +315,24 @@ font-size: 15px;</string>
            </property>
            <property name="styleSheet">
             <string notr="true">QPushButton{
-border-color: black;
 background-image: url(&quot;:/other/images/other/sukno.png&quot;);
-}</string>
+border-bottom: 0px;
+
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  border-bottom: 0px;
+}
+
+QPushButton:hover {
+  border-left: 0px;
+   border-right: 0px;
+   border-bottom: 0px;
+}
+</string>
            </property>
            <property name="text">
             <string/>
@@ -479,9 +509,24 @@ font-size: 15px;</string>
            </property>
            <property name="styleSheet">
             <string notr="true">QPushButton{
-border-color: black;
 background-image: url(&quot;:/other/images/other/sukno.png&quot;);
-}</string>
+border-bottom: 0px;
+
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  border-bottom: 0px;
+}
+
+QPushButton:hover {
+  border-left: 0px;
+   border-right: 0px;
+   border-bottom: 0px;
+}
+</string>
            </property>
            <property name="text">
             <string/>
@@ -782,9 +827,13 @@ font-size: 15px;</string>
   border-radius: 8px;
   padding: 5px 9px;
   font-size: 1.2em;
-  background-color:rgba(230,110,80,1);
+
+  background-color:rgba(255,120,31, 1);
   border-bottom: 4px solid rgba(200, 91, 72, 1);
 }
+
+
+
 
 QPushButton:hover {
   background-color: rgba(240, 140, 80, 1);
@@ -985,9 +1034,24 @@ QPushButton:pressed {
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton{
-border-color: black;
 background-image: url(&quot;:/other/images/other/sukno.png&quot;);
-}</string>
+border-bottom: 0px;
+
+	color: black;
+  margin-right: 3%;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 1.2em;
+  border-bottom: 0px;
+}
+
+QPushButton:hover {
+  border-left: 0px;
+   border-right: 0px;
+   border-bottom: 0px;
+}
+</string>
          </property>
          <property name="text">
           <string/>

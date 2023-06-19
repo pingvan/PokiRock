@@ -15,10 +15,7 @@ class registration_window : public QDialog {
     Q_OBJECT
 
 public:
-    registration_window(
-        QWidget *parent = nullptr,
-        WindowManager *manager = nullptr
-    );
+    registration_window(WindowManager *manager_m, QWidget *parent = nullptr);
     ~registration_window();
     WindowManager *manager;
 private slots:

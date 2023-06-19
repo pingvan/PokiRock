@@ -13,6 +13,13 @@
   <property name="windowTitle">
    <string>PokiRock</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget[objectName=&quot;main_menu&quot;]{
+	border-image: url(&quot;C:/Users/iliaa/Downloads/p1&quot;) 0 0 0 0;
+	background-repeat: no-repeat;
+}
+</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <spacer name="verticalSpacer_6">
@@ -387,21 +394,22 @@
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {
-  color: black;
+	color: black;
   margin-right: 3%;
   margin-top: 5px;
   border-radius: 8px;
   padding: 5px 9px;
   font-size: 1.2em;
-  background-color:rgba(230,150,80,1);
+
+  background-color:rgba(250,130,31, 1);
   border-bottom: 4px solid rgba(200, 91, 72, 1);
 }
 
 QPushButton:hover {
-  background-color: rgba(240, 140, 80, 1);
-  border-left: 2px solid rgba(210, 105, 80, 1);
-   border-right: 2px solid rgba(210, 105, 80, 1);
-   border-bottom: 6px solid rgba(210, 105, 80, 1);
+  background-color: rgba(250, 170, 80, 1);
+  border-left: 2px solid rgba(210, 125, 80, 1);
+   border-right: 2px solid rgba(210, 125, 80, 1);
+   border-bottom: 6px solid rgba(210, 125, 80, 1);
 }
 QPushButton:pressed {
   background-color: rgba(200, 101, 80, 1);
@@ -460,21 +468,22 @@ QPushButton:pressed {
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {
-  color: black;
+	color: black;
   margin-right: 3%;
   margin-top: 5px;
   border-radius: 8px;
   padding: 5px 9px;
   font-size: 1.2em;
-  background-color:rgba(230,140,80,1);
+
+  background-color:rgba(250,130,31, 1);
   border-bottom: 4px solid rgba(200, 91, 72, 1);
 }
 
 QPushButton:hover {
-  background-color: rgba(240, 140, 80, 1);
-  border-left: 2px solid rgba(210, 105, 80, 1);
-   border-right: 2px solid rgba(210, 105, 80, 1);
-   border-bottom: 6px solid rgba(210, 105, 80, 1);
+  background-color: rgba(250, 170, 80, 1);
+  border-left: 2px solid rgba(210, 125, 80, 1);
+   border-right: 2px solid rgba(210, 125, 80, 1);
+   border-bottom: 6px solid rgba(210, 125, 80, 1);
 }
 QPushButton:pressed {
   background-color: rgba(200, 101, 80, 1);
@@ -533,21 +542,22 @@ QPushButton:pressed {
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {
-  color: black;
+	color: black;
   margin-right: 3%;
   margin-top: 5px;
   border-radius: 8px;
   padding: 5px 9px;
   font-size: 1.2em;
-  background-color:rgba(230,110,80,1);
+
+  background-color:rgba(250,130,31, 1);
   border-bottom: 4px solid rgba(200, 91, 72, 1);
 }
 
 QPushButton:hover {
-  background-color: rgba(240, 140, 80, 1);
-  border-left: 2px solid rgba(210, 105, 80, 1);
-   border-right: 2px solid rgba(210, 105, 80, 1);
-   border-bottom: 6px solid rgba(210, 105, 80, 1);
+  background-color: rgba(250, 170, 80, 1);
+  border-left: 2px solid rgba(210, 125, 80, 1);
+   border-right: 2px solid rgba(210, 125, 80, 1);
+   border-bottom: 6px solid rgba(210, 125, 80, 1);
 }
 QPushButton:pressed {
   background-color: rgba(200, 101, 80, 1);
@@ -606,21 +616,22 @@ QPushButton:pressed {
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {
-  color: black;
+	color: black;
   margin-right: 3%;
   margin-top: 5px;
   border-radius: 8px;
   padding: 5px 9px;
   font-size: 1.2em;
-  background-color:rgba(230,110,80,1);
+
+  background-color:rgba(250,130,31, 1);
   border-bottom: 4px solid rgba(200, 91, 72, 1);
 }
 
 QPushButton:hover {
-  background-color: rgba(240, 140, 80, 1);
-  border-left: 2px solid rgba(210, 105, 80, 1);
-   border-right: 2px solid rgba(210, 105, 80, 1);
-   border-bottom: 6px solid rgba(210, 105, 80, 1);
+  background-color: rgba(250, 170, 80, 1);
+  border-left: 2px solid rgba(210, 125, 80, 1);
+   border-right: 2px solid rgba(210, 125, 80, 1);
+   border-bottom: 6px solid rgba(210, 125, 80, 1);
 }
 QPushButton:pressed {
   background-color: rgba(200, 101, 80, 1);

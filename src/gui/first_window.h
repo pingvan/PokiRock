@@ -17,7 +17,7 @@ class first_window : public QMainWindow {
     Q_OBJECT
 
 public:
-    first_window(QWidget *parent = nullptr, WindowManager *manager = nullptr);
+    first_window(WindowManager *manager_m, QWidget *parent = nullptr);
     ~first_window();
 private slots:
     void on_start_clicked() const;

@@ -15,6 +15,7 @@ SOURCES += \
     game.cpp \
     main.cpp \
     First_window.cpp \
+    profile_window.cpp \
     stickers_collection.cpp
 
 HEADERS += \
@@ -23,6 +24,7 @@ HEADERS += \
     Main_menu.h \
     Registration_window.h \
     game.h \
+    profile_window.h \
     stickers_collection.h \
     user.hpp \
     window_manager.h
@@ -33,6 +35,7 @@ FORMS += \
     Main_menu.ui \
     Registration_window.ui \
     game.ui \
+    profile_window.ui \
     stickers_collection.ui
 
 TRANSLATIONS += \
@@ -46,10 +49,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    boys.qrc \
     clubs.qrc \
     cover.qrc \
     diamonds.qrc \
+    guys.qrc \
     hearts.qrc \
     labels.qrc \
     other.qrc \

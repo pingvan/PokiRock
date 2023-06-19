@@ -7,14 +7,17 @@
     <x>0</x>
     <y>0</y>
     <width>751</width>
-    <height>457</height>
+    <height>475</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget[objectName=&quot;StickersCollection&quot;]{ background-image: url(&quot;:/other/images/other/sukno.png&quot;) no-repeat right bottom; } </string>
+   <string notr="true">QWidget[objectName=&quot;StickersCollection&quot;]{ 
+	background-image: url(&quot;:/other/images/other/sukno.png&quot;) 
+	no-repeat right bottom; 
+} </string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="5" column="1">

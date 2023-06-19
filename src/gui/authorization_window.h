@@ -15,10 +15,7 @@ class authorization_window : public QDialog {
     Q_OBJECT
 
 public:
-    authorization_window(
-        QWidget *parent = nullptr,
-        WindowManager *manager = nullptr
-    );
+    authorization_window(WindowManager *manager_m, QWidget *parent = nullptr);
     ~authorization_window();
 private slots:
     void on_authorizate_clicked();

@@ -5,10 +5,7 @@
 //#include "../server/DataBase_connector.h"
 #include "window_manager.h"
 
-registration_window::registration_window(
-    QWidget *parent,
-    WindowManager *manager_m
-)
+registration_window::registration_window(WindowManager *manager_m, QWidget *parent)
     : QDialog(parent), manager(manager_m), ui(new Ui::registration_window) {
     ui->setupUi(this);
     ui->password->setEchoMode(QLineEdit::Password);

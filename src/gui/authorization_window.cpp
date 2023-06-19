@@ -5,8 +5,7 @@
 #include "window_manager.h"
 
 authorization_window::authorization_window(
-    QWidget *parent,
-    WindowManager *manager_m
+        WindowManager *manager_m, QWidget *parent
 )
     : QDialog(parent), ui(new Ui::authorization_window), manager(manager_m) {
     ui->setupUi(this);

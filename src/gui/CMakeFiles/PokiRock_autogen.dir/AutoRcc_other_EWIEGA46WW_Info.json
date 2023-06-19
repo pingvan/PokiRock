@@ -1,0 +1,31 @@
+{
+	"BUILD_DIR" : "/mnt/d/PokiRock/src/gui/PokiRock_autogen",
+	"CMAKE_BINARY_DIR" : "/mnt/d/PokiRock/src/gui",
+	"CMAKE_CURRENT_BINARY_DIR" : "/mnt/d/PokiRock/src/gui",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/mnt/d/PokiRock/src/gui",
+	"CMAKE_SOURCE_DIR" : "/mnt/d/PokiRock/src/gui",
+	"INCLUDE_DIR" : "/mnt/d/PokiRock/src/gui/PokiRock_autogen/include",
+	"INPUTS" : 
+	[
+		"/mnt/d/PokiRock/src/gui/images/garbage/better/pngegg (13).png",
+		"/mnt/d/PokiRock/src/gui/images/other/ok.png",
+		"/mnt/d/PokiRock/src/gui/images/other/ok (2).png",
+		"/mnt/d/PokiRock/src/gui/images/other/four_cards.png",
+		"/mnt/d/PokiRock/src/gui/images/other/people.png",
+		"/mnt/d/PokiRock/src/gui/images/other/more_cards.png",
+		"/mnt/d/PokiRock/src/gui/images/other/sukno.png",
+		"/mnt/d/PokiRock/src/gui/images/other/pasians.png",
+		"/mnt/d/PokiRock/src/gui/images/other/token.png",
+		"/mnt/d/PokiRock/src/gui/images/other/user_icon.png"
+	],
+	"LOCK_FILE" : "/mnt/d/PokiRock/src/gui/CMakeFiles/PokiRock_autogen.dir/AutoRcc_other_EWIEGA46WW_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "-name", "other" ],
+	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
+	"OUTPUT_NAME" : "qrc_other.cpp",
+	"RCC_EXECUTABLE" : "/usr/lib/qt5/bin/rcc",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "/mnt/d/PokiRock/src/gui/CMakeFiles/PokiRock_autogen.dir/AutoRcc_other_EWIEGA46WW_Used.txt",
+	"SOURCE" : "/mnt/d/PokiRock/src/gui/other.qrc",
+	"VERBOSITY" : 0
+}

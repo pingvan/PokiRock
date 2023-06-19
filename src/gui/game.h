@@ -15,7 +15,7 @@ class game : public QDialog {
     Q_OBJECT
 
 public:
-    game(QWidget *parent = nullptr, WindowManager *manager = nullptr);
+    game(WindowManager *manager_m, QWidget *parent = nullptr);
     ~game();
 
 private slots:

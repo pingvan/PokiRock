@@ -2,6 +2,7 @@
 #define STICKERS_COLLECTION_H
 
 #include <QDialog>
+#include <thread>
 
 namespace Ui {
 class StickersCollection;
@@ -14,7 +15,7 @@ class StickersCollection : public QDialog
     Q_OBJECT
 
 public:
-    StickersCollection(QWidget *parent = nullptr, WindowManager* manager = nullptr);
+    StickersCollection(WindowManager* manager_m, QWidget *parent = nullptr);
     ~StickersCollection();
 
 private slots:

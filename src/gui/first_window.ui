@@ -14,7 +14,11 @@
    <string>PokiRock</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget[objectName=&quot;first_window&quot;]{ background-color: white;} </string>
+   <string notr="true">QWidget[objectName=&quot;first_window&quot;]{
+	border-image: url(&quot;C:/Users/iliaa/Downloads/p1&quot;) 0 0 0 0;
+	background-repeat: no-repeat;
+}
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -30,7 +34,7 @@
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>80</width>
+          <width>70</width>
           <height>20</height>
          </size>
         </property>

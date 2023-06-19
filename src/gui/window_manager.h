@@ -1,7 +1,5 @@
 #ifndef POKIROCK_WINDOW_MANAGER_H
 #define POKIROCK_WINDOW_MANAGER_H
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "cppcoreguidelines-owning-memory"
 
 #include "first_window.h"
 #include "authorization_window.h"
@@ -11,6 +9,12 @@
 #include "user.hpp"
 #include "stickers_collection.h"
 
+using FirstWindow = first_window;
+using AuthorizationWindow = authorization_window;
+using RegistrationWindow = registration_window;
+using MainMenu = main_menu;
+using Game = game;
+
 inline void setImage(QLabel* image, const std::string& path_to_image) {
     QPixmap img(path_to_image.c_str());
     int width = image->width();
@@ -19,74 +23,83 @@ inline void setImage(QLabel* image, const std::string& path_to_image) {
 }
 
 class WindowManager {
-    first_window* startWindow = nullptr;
-    authorization_window* authorizationWindow = nullptr;
-    main_menu* mainMenu = nullptr;
-    registration_window* registrationWindow = nullptr;
-    game* gameWindow = nullptr;
-    StickersCollection* stickers = nullptr;
+    FirstWindow* firstWindow_var = nullptr;
+    AuthorizationWindow* authorizationWindow_var = nullptr;
+    MainMenu* mainMenu_var = nullptr;
+    RegistrationWindow* registrationWindow_var = nullptr;
+    Game* gameWindow_var = nullptr;
+    StickersCollection* stickers_var = nullptr;
     friend StickersCollection;
+    friend MainMenu;
+    friend Game;
+    User* user;
 public:
-    User* user; // NOLINT(cppcoreguidelines-non-private-member-variables-in-classes,misc-non-private-member-variables-in-classes)
 
     void setClient(const std::string& name) const {
         user->setData(name, 1000);
     }
 
-    WindowManager() : startWindow(new first_window(nullptr, this)), user(new User()) {};
+    WindowManager() : firstWindow_var(new FirstWindow(this)), user(new User()) {};
 
     void start() {
-        startWindow->showFullScreen();
+        firstWindow_var->showFullScreen();
+        if (!authorizationWindow_var) authorizationWindow_var = new AuthorizationWindow(this);
     }
 
     WindowManager(const WindowManager& other) = delete;
-    WindowManager(WindowManager&& other) = delete;
-    WindowManager operator=(const WindowManager&) = delete;
-    WindowManager operator=(WindowManager&&) = delete;
+    WindowManager(WindowManager&& other) noexcept = default;
+    WindowManager &operator=(const WindowManager&) = delete;
+    WindowManager &operator=(WindowManager&&) noexcept = default;
 
     void show_authorization_window() {
-        if (!authorizationWindow)
-            authorizationWindow = new authorization_window(nullptr, this);
-        authorizationWindow->show();
+        if (!mainMenu_var) mainMenu_var = new MainMenu(this);
+
+        if (authorizationWindow_var->isVisible()){
+            authorizationWindow_var->hide();
+        } else {
+            authorizationWindow_var->show();
+        }
     }
 
     void show_registration_window() {
-        if (!registrationWindow)
-            registrationWindow = new registration_window(nullptr, this);
-        authorizationWindow->close();
-        registrationWindow->show();
+        if (!registrationWindow_var) registrationWindow_var = new RegistrationWindow(this);
+        authorizationWindow_var->close();
+        registrationWindow_var->show();
     }
 
     void show_main_menu() {
-        if (!mainMenu)
-            mainMenu = new main_menu(nullptr, this);
-        startWindow->close();
-        authorizationWindow->close();
-        mainMenu->showFullScreen();
+        if (!mainMenu_var)
+            mainMenu_var = new MainMenu(this);
+        firstWindow_var->close();
+        authorizationWindow_var->close();
+        mainMenu_var->showFullScreen();
     }
 
     void show_game_window() {
-        if (!gameWindow)
-            gameWindow = new game(nullptr, this);
-        mainMenu->close();
-        gameWindow->showFullScreen();
+        if (!gameWindow_var)
+            gameWindow_var = new Game(this);
+        mainMenu_var->close();
+        gameWindow_var->showFullScreen();
     }
 
     void show_stickers() {
-        if (!stickers)
-            stickers = new StickersCollection(nullptr, this);
-        stickers->hide();
-        stickers->show();
+        if (!stickers_var)
+            stickers_var = new StickersCollection(this);
+        if (stickers_var->isVisible()){
+            stickers_var->hide();
+        } else {
+            stickers_var->show();
+        }
     }
 
     ~WindowManager() {
         delete user;
-        delete startWindow;
-        delete authorizationWindow;
-        delete registrationWindow;
-        delete mainMenu;
-        delete gameWindow;
-        delete stickers;
+        delete firstWindow_var;
+        delete authorizationWindow_var;
+        delete registrationWindow_var;
+        delete mainMenu_var;
+        delete gameWindow_var;
+        delete stickers_var;
     };
 
     static void game_exit() {
@@ -94,5 +107,3 @@ public:
     }
 };
 #endif  // POKIROCK_WINDOW_MANAGER_H
-
-#pragma clang diagnostic pop

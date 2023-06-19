@@ -1,0 +1,4 @@
+/mnt/d/PokiRock/src/gui/CMakeFiles/PokiRock.dir
+/mnt/d/PokiRock/src/gui/CMakeFiles/edit_cache.dir
+/mnt/d/PokiRock/src/gui/CMakeFiles/rebuild_cache.dir
+/mnt/d/PokiRock/src/gui/CMakeFiles/PokiRock_autogen.dir

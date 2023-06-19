@@ -1,0 +1,34 @@
+{
+	"BUILD_DIR" : "/mnt/d/PokiRock/src/gui/PokiRock_autogen",
+	"CMAKE_BINARY_DIR" : "/mnt/d/PokiRock/src/gui",
+	"CMAKE_CURRENT_BINARY_DIR" : "/mnt/d/PokiRock/src/gui",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/mnt/d/PokiRock/src/gui",
+	"CMAKE_SOURCE_DIR" : "/mnt/d/PokiRock/src/gui",
+	"INCLUDE_DIR" : "/mnt/d/PokiRock/src/gui/PokiRock_autogen/include",
+	"INPUTS" : 
+	[
+		"/mnt/d/PokiRock/src/gui/images/cards/Spades/2.png",
+		"/mnt/d/PokiRock/src/gui/images/cards/Spades/6.png",
+		"/mnt/d/PokiRock/src/gui/images/cards/Spades/10.png",
+		"/mnt/d/PokiRock/src/gui/images/cards/Spades/K.png",
+		"/mnt/d/PokiRock/src/gui/images/cards/Spades/5.png",
+		"/mnt/d/PokiRock/src/gui/images/cards/Spades/9.png",
+		"/mnt/d/PokiRock/src/gui/images/cards/Spades/J.png",
+		"/mnt/d/PokiRock/src/gui/images/cards/Spades/A.png",
+		"/mnt/d/PokiRock/src/gui/images/cards/Spades/4.png",
+		"/mnt/d/PokiRock/src/gui/images/cards/Spades/8.png",
+		"/mnt/d/PokiRock/src/gui/images/cards/Spades/Q.png",
+		"/mnt/d/PokiRock/src/gui/images/cards/Spades/3.png",
+		"/mnt/d/PokiRock/src/gui/images/cards/Spades/7.png"
+	],
+	"LOCK_FILE" : "/mnt/d/PokiRock/src/gui/CMakeFiles/PokiRock_autogen.dir/AutoRcc_spades_EWIEGA46WW_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "-name", "spades" ],
+	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
+	"OUTPUT_NAME" : "qrc_spades.cpp",
+	"RCC_EXECUTABLE" : "/usr/lib/qt5/bin/rcc",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "/mnt/d/PokiRock/src/gui/CMakeFiles/PokiRock_autogen.dir/AutoRcc_spades_EWIEGA46WW_Used.txt",
+	"SOURCE" : "/mnt/d/PokiRock/src/gui/spades.qrc",
+	"VERBOSITY" : 0
+}
