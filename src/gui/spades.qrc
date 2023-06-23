@@ -13,5 +13,18 @@
         <file>images/cards/Spades/J.png</file>
         <file>images/cards/Spades/K.png</file>
         <file>images/cards/Spades/Q.png</file>
+        <file>images/cards/Spades/2_T.png</file>
+        <file>images/cards/Spades/3_T.png</file>
+        <file>images/cards/Spades/4_T.png</file>
+        <file>images/cards/Spades/5_T.png</file>
+        <file>images/cards/Spades/6_T.png</file>
+        <file>images/cards/Spades/7_T.png</file>
+        <file>images/cards/Spades/8_T.png</file>
+        <file>images/cards/Spades/9_T.png</file>
+        <file>images/cards/Spades/10_T.png</file>
+        <file>images/cards/Spades/A_T.png</file>
+        <file>images/cards/Spades/J_T.png</file>
+        <file>images/cards/Spades/K_T.png</file>
+        <file>images/cards/Spades/Q_T.png</file>
     </qresource>
 </RCC>

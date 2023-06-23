@@ -1,44 +1,32 @@
+#include "window_manager.h"
 #include "game.h"
 #include "ui_game.h"
-#include "window_manager.h"
+
 #include <QIcon>
 #include <string>
 #include <iostream>
 #include <thread>
 
-const char* game::path(const char c, const std::string &card) {
+const char* game::path(const Card& card, bool T) {
+    if (card.m == 0) {
+        std::string ans = ":/cover/images/cards/Cover/main_cover" + (std::string)(T ? "_T" : "") + ".png";
+        return ans.c_str();
+    }
     std::string suit;
     std::string upperSuit;
-    if (c == 'd') {
+    if (card.m == 'd') {
         suit = "diamonds";
-    } else if (c == 'h') {
+    } else if (card.m == 'h') {
         suit = "hearts";
-    } else if (c == 'c') {
+    } else if (card.m == 'c') {
         suit = "clubs";
-    } else if (c == 's') {
+    } else if (card.m == 's') {
         suit = "spades";
     }
     upperSuit = suit;
     upperSuit[0] = toupper(upperSuit[0]);
-    std::string ans = ":/" + suit + "/images/cards/" + upperSuit + "/" + card + ".png";
+    std::string ans = ":/" + suit + "/images/cards/" + upperSuit + "/" + std::to_string(card.value) + (T ? "_T" : "") + ".png";
     return ans.c_str();
-}
-
-const char* game::path_to_cover() {
-    return ":/cover/images/cards/Cover/main_cover.png";
-}
-
-const char* game::path_to_cover_T(
-) {
-    return ":/cover/images/cards/Cover/main_cover_T.png";
-}
-
-void game::setCoverCard(QLabel* label) {
-    setImage(label, path_to_cover());
-}
-
-void game::setCoverCard_T(QLabel* label) {
-    setImage(label, path_to_cover_T());
 }
 
 void game::show_sticker(int sticker_number) {
@@ -48,15 +36,36 @@ void game::show_sticker(int sticker_number) {
             num += "0";
         num += std::to_string(sticker_number);
         const std::string path_to_sticker = ":/stickers/images/stickers/chpic.su_-_duraktndrch_0" + num + ".png";
-        if (sticker_number == 7) {
-            ui->player2_icon->setIcon(QIcon(path_to_sticker.c_str()));
-        } else {
-            ui->player1_icon->setIcon(QIcon(path_to_sticker.c_str()));
-        }
+        ui->player1_icon->setIcon(QIcon(path_to_sticker.c_str()));
+
         std::this_thread::sleep_for(std::chrono::nanoseconds(2000000000));
         ui->player1_icon->setIcon(QIcon(":/boys/images/boys/dmitriy.png"));
     });
     t.detach();
+}
+
+void game::setContext(const std::vector<Player>& all_players_m, const Diller& diller_m) {
+    all_players = all_players_m;
+    diller = diller_m;
+}
+
+void game::update_graphic() {
+    setImage(ui->diller_card_1, path(diller.cards[0], 0));
+    setImage(ui->diller_card_2, path(diller.cards[1], 0));
+    setImage(ui->diller_card_3, path(diller.cards[2], 0));
+    setImage(ui->diller_card_4, path(diller.cards[3], 0));
+
+    setImage(ui->player1_card_1, path(all_players[0].cards[0], 0));
+    setImage(ui->player1_card_2, path(all_players[0].cards[1], 0));
+
+    setImage(ui->player2_card_1, path(all_players[1].cards[0], 1));
+    setImage(ui->player2_card_2, path(all_players[1].cards[1], 1));
+
+    setImage(ui->player3_card_1, path(all_players[2].cards[0], 1));
+    setImage(ui->player3_card_2, path(all_players[2].cards[1], 1));
+
+    setImage(ui->player4_card_1, path(all_players[3].cards[0], 0));
+    setImage(ui->player4_card_2, path(all_players[3].cards[1], 0));
 }
 
 
@@ -65,22 +74,11 @@ game::game(WindowManager *manager_m, QWidget *parent)
     ui->setupUi(this);
 
 
-    setCoverCard(ui->diller_card_1);
-    setCoverCard(ui->diller_card_2);
-    setCoverCard(ui->diller_card_3);
-    setCoverCard(ui->diller_card_4);
+    std::vector<Player> all_players_m = {Player(Card(3, 'd'), Card(2, 'd')), Player(), Player(), Player()};
+    Diller diller_m;
+    setContext(all_players_m, diller_m);
 
-    setCoverCard(ui->player1_card_1);
-    setCoverCard(ui->player1_card_2);
-
-    setCoverCard_T(ui->player2_card_1);
-    setCoverCard_T(ui->player2_card_2);
-
-    setCoverCard_T(ui->player3_card_1);
-    setCoverCard_T(ui->player3_card_2);
-
-    setCoverCard(ui->player4_card_1);
-    setCoverCard(ui->player4_card_2);
+    update_graphic();
 
     ui->choose_sticker->setIcon(QIcon(":/stickers/images/stickers/chpic.su_-_duraktndrch_006.png"));
     ui->choose_sticker->setIconSize(QSize(40, 40));
@@ -97,9 +95,7 @@ game::game(WindowManager *manager_m, QWidget *parent)
     ui->player4_icon->setIcon(QIcon(":/boys/images/boys/ilia.png"));
     ui->player4_icon->setIconSize(QSize(120, 120));
 
-    ui->verticalSlider->setRange(
-        1, static_cast<int>(manager->user->get_balance())
-    );
+    ui->verticalSlider->setRange(1, static_cast<int>(manager->user->get_balance()));
     ui->setValue->hide();
     ui->verticalSlider->hide();
     ui->value->hide();

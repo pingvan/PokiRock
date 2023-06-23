@@ -13,5 +13,18 @@
         <file>images/cards/Clubs/J.png</file>
         <file>images/cards/Clubs/K.png</file>
         <file>images/cards/Clubs/Q.png</file>
+        <file>images/cards/Clubs/2_T.png</file>
+        <file>images/cards/Clubs/3_T.png</file>
+        <file>images/cards/Clubs/4_T.png</file>
+        <file>images/cards/Clubs/5_T.png</file>
+        <file>images/cards/Clubs/6_T.png</file>
+        <file>images/cards/Clubs/7_T.png</file>
+        <file>images/cards/Clubs/8_T.png</file>
+        <file>images/cards/Clubs/9_T.png</file>
+        <file>images/cards/Clubs/10_T.png</file>
+        <file>images/cards/Clubs/A_T.png</file>
+        <file>images/cards/Clubs/J_T.png</file>
+        <file>images/cards/Clubs/K_T.png</file>
+        <file>images/cards/Clubs/Q_T.png</file>
     </qresource>
 </RCC>

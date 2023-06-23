@@ -1,9 +1,0 @@
-# Hashes of file build rules.
-b9e0d8892f698dc6e6559deaef9c5e6d CMakeFiles/PokiRock_autogen
-8190853b5d63108e15d301c89308f737 PokiRock_autogen/EWIEGA46WW/qrc_clubs.cpp
-570d17ac7753eb6ee4289ad7935ae9c4 PokiRock_autogen/EWIEGA46WW/qrc_cover.cpp
-73b2e078562bc946802a2f79c038b2cc PokiRock_autogen/EWIEGA46WW/qrc_diamonds.cpp
-b4d9255ac30abb0e12e8997d2bc4ef6b PokiRock_autogen/EWIEGA46WW/qrc_hearts.cpp
-67e8c627099779fddf71d7041ca0eb37 PokiRock_autogen/EWIEGA46WW/qrc_labels.cpp
-0eb995f651ef2627e4d865007973cb9d PokiRock_autogen/EWIEGA46WW/qrc_other.cpp
-e5b3d0fa352610ced6d37a58bfd8adbd PokiRock_autogen/EWIEGA46WW/qrc_spades.cpp

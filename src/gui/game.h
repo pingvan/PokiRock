@@ -4,12 +4,31 @@
 #include <QDialog>
 #include <QLabel>
 #include <string>
+
+struct Card {
+    std::size_t value;
+    char m;
+    Card(std::size_t value_m, char m_m) : value(value_m), m(m_m){};
+    Card() : Card(0, 0){};
+};
+
+struct Player {
+    std::vector<Card> cards = {Card(), Card()};
+    Player(const Card& first, const Card& second){ cards = {first, second}; };
+    Player() : Player(Card(), Card()) {};
+};
+
+struct Diller {
+    std::vector<Card> cards = {Card(), Card(), Card(), Card()};
+};
+
 class StickersCollection;
 namespace Ui {
 class game;
 }
 
 class WindowManager;
+class GameState;
 
 class game : public QDialog {
     Q_OBJECT
@@ -37,9 +56,12 @@ private slots:
 
 private:
     friend StickersCollection;
+    friend GameState;
     Ui::game* ui;
     WindowManager *manager;
-    static const char *path(char c, const std::string &card);
+    std::vector<Player> all_players;
+    Diller diller;
+    static const char *path(const Card& card, bool T);
     static const char *path_to_cover_T();
     static const char *path_to_cover();
     static void setCoverCard(QLabel *place);
@@ -50,6 +72,8 @@ private:
     void initPlayer3Cards();
     void initPlayer4Cards();
     void show_sticker(int sticker_number);
+    void setContext(const std::vector<Player>& all_players_m, const Diller& diller_m);
+    void update_graphic();
     bool isStickerShown = false;
     friend StickersCollection;
 };

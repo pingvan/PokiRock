@@ -13,5 +13,18 @@
         <file>images/cards/Diamonds/J.png</file>
         <file>images/cards/Diamonds/K.png</file>
         <file>images/cards/Diamonds/Q.png</file>
+        <file>images/cards/Diamonds/2_T.png</file>
+        <file>images/cards/Diamonds/3_T.png</file>
+        <file>images/cards/Diamonds/4_T.png</file>
+        <file>images/cards/Diamonds/5_T.png</file>
+        <file>images/cards/Diamonds/6_T.png</file>
+        <file>images/cards/Diamonds/7_T.png</file>
+        <file>images/cards/Diamonds/8_T.png</file>
+        <file>images/cards/Diamonds/9_T.png</file>
+        <file>images/cards/Diamonds/10_T.png</file>
+        <file>images/cards/Diamonds/A_T.png</file>
+        <file>images/cards/Diamonds/J_T.png</file>
+        <file>images/cards/Diamonds/K_T.png</file>
+        <file>images/cards/Diamonds/Q_T.png</file>
     </qresource>
 </RCC>

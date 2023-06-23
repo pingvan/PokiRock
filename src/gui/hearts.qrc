@@ -13,5 +13,18 @@
         <file>images/cards/Hearts/J.png</file>
         <file>images/cards/Hearts/K.png</file>
         <file>images/cards/Hearts/Q.png</file>
+        <file>images/cards/Hearts/2_T.png</file>
+        <file>images/cards/Hearts/3_T.png</file>
+        <file>images/cards/Hearts/4_T.png</file>
+        <file>images/cards/Hearts/5_T.png</file>
+        <file>images/cards/Hearts/6_T.png</file>
+        <file>images/cards/Hearts/7_T.png</file>
+        <file>images/cards/Hearts/8_T.png</file>
+        <file>images/cards/Hearts/9_T.png</file>
+        <file>images/cards/Hearts/10_T.png</file>
+        <file>images/cards/Hearts/A_T.png</file>
+        <file>images/cards/Hearts/J_T.png</file>
+        <file>images/cards/Hearts/K_T.png</file>
+        <file>images/cards/Hearts/Q_T.png</file>
     </qresource>
 </RCC>
