@@ -6,7 +6,7 @@
 #include <string>
 
 struct Card {
-    std::size_t value;
+    char value;
     char m;
     Card(std::size_t value_m, char m_m) : value(value_m), m(m_m){};
     Card() : Card(0, 0){};
@@ -20,6 +20,11 @@ struct Player {
 
 struct Diller {
     std::vector<Card> cards = {Card(), Card(), Card(), Card()};
+};
+
+struct GameContext {
+    std::vector<Player> all_players;
+    Diller diller;
 };
 
 class StickersCollection;
@@ -59,8 +64,7 @@ private:
     friend GameState;
     Ui::game* ui;
     WindowManager *manager;
-    std::vector<Player> all_players;
-    Diller diller;
+    GameContext game_context;
     static const char *path(const Card& card, bool T);
     static const char *path_to_cover_T();
     static const char *path_to_cover();
@@ -72,7 +76,7 @@ private:
     void initPlayer3Cards();
     void initPlayer4Cards();
     void show_sticker(int sticker_number);
-    void setContext(const std::vector<Player>& all_players_m, const Diller& diller_m);
+    void setContext(const GameContext& new_game_context);
     void update_graphic();
     bool isStickerShown = false;
     friend StickersCollection;

@@ -25,7 +25,7 @@ const char* game::path(const Card& card, bool T) {
     }
     upperSuit = suit;
     upperSuit[0] = toupper(upperSuit[0]);
-    std::string ans = ":/" + suit + "/images/cards/" + upperSuit + "/" + std::to_string(card.value) + (T ? "_T" : "") + ".png";
+    std::string ans = ":/" + suit + "/images/cards/" + upperSuit + "/" + card.value + (T ? "_T" : "") + ".png";
     return ans.c_str();
 }
 
@@ -44,28 +44,27 @@ void game::show_sticker(int sticker_number) {
     t.detach();
 }
 
-void game::setContext(const std::vector<Player>& all_players_m, const Diller& diller_m) {
-    all_players = all_players_m;
-    diller = diller_m;
+void game::setContext(const GameContext& new_game_context) {
+    game_context = new_game_context;
 }
 
 void game::update_graphic() {
-    setImage(ui->diller_card_1, path(diller.cards[0], 0));
-    setImage(ui->diller_card_2, path(diller.cards[1], 0));
-    setImage(ui->diller_card_3, path(diller.cards[2], 0));
-    setImage(ui->diller_card_4, path(diller.cards[3], 0));
+    setImage(ui->diller_card_1, path(game_context.diller.cards[0], 0));
+    setImage(ui->diller_card_2, path(game_context.diller.cards[1], 0));
+    setImage(ui->diller_card_3, path(game_context.diller.cards[2], 0));
+    setImage(ui->diller_card_4, path(game_context.diller.cards[3], 0));
 
-    setImage(ui->player1_card_1, path(all_players[0].cards[0], 0));
-    setImage(ui->player1_card_2, path(all_players[0].cards[1], 0));
+    setImage(ui->player1_card_1, path(game_context.all_players[0].cards[0], 0));
+    setImage(ui->player1_card_2, path(game_context.all_players[0].cards[1], 0));
 
-    setImage(ui->player2_card_1, path(all_players[1].cards[0], 1));
-    setImage(ui->player2_card_2, path(all_players[1].cards[1], 1));
+    setImage(ui->player2_card_1, path(game_context.all_players[1].cards[0], 1));
+    setImage(ui->player2_card_2, path(game_context.all_players[1].cards[1], 1));
 
-    setImage(ui->player3_card_1, path(all_players[2].cards[0], 1));
-    setImage(ui->player3_card_2, path(all_players[2].cards[1], 1));
+    setImage(ui->player3_card_1, path(game_context.all_players[2].cards[0], 1));
+    setImage(ui->player3_card_2, path(game_context.all_players[2].cards[1], 1));
 
-    setImage(ui->player4_card_1, path(all_players[3].cards[0], 0));
-    setImage(ui->player4_card_2, path(all_players[3].cards[1], 0));
+    setImage(ui->player4_card_1, path(game_context.all_players[3].cards[0], 0));
+    setImage(ui->player4_card_2, path(game_context.all_players[3].cards[1], 0));
 }
 
 
@@ -73,10 +72,10 @@ game::game(WindowManager *manager_m, QWidget *parent)
     : QDialog(parent), ui(new Ui::game), manager(manager_m) {
     ui->setupUi(this);
 
-
-    std::vector<Player> all_players_m = {Player(Card(3, 'd'), Card(2, 'd')), Player(), Player(), Player()};
+    std::vector<Player> all_players_m = {Player(Card('J', 'd'), Card('2', 'd')), Player(), Player(), Player()};
     Diller diller_m;
-    setContext(all_players_m, diller_m);
+    GameContext new_game_context{all_players_m, diller_m};
+    setContext(new_game_context);
 
     update_graphic();
 
@@ -122,6 +121,12 @@ void game::on_setValue_clicked() {
     ui->setValue->hide();
     ui->verticalSlider->hide();
     ui->value->hide();
+    std::vector<Player> all_players_m = {Player(Card('J', 'd'), Card('2', 'd')), Player(), Player(), Player()};
+
+    Diller diller_m = Diller{{Card('A', 'c'), Card(), Card(), Card()}};
+    GameContext new_game_context{all_players_m, diller_m};
+    setContext(new_game_context);
+    update_graphic();
 }
 
 void game::on_choose_sticker_clicked()
