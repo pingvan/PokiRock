@@ -438,16 +438,14 @@ void Game::new_round() {
         }
     }
     available_cards.clear();
-    for (int i = 0; i < 52; i++) {
-        available_cards.push_back(i);
-    }
+    std::iota(available_cards.begin(), available_cards.end(), 0);
     board_cards.clear();
     lock.unlock();
     for (const auto& [key, value] : players_in_room_){
-        players_in_round_.emplace_back(key);
         if (players_in_round_.size() == players_max_){
             break;
         }
+        players_in_round_.emplace_back(key);
     }
     last_player = button;
     total_of_bets = 0;

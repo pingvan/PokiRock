@@ -84,11 +84,16 @@ std::string_view Card::suit_to_string() const {
     }
 }
 
-bool Card::operator<(const Card &card) const {
-    return value < card.value;
+bool Card::operator>=(const Card &card) const {
+    return get_index() >= card.get_index();
 }
 
 std::ostream &operator<<(std::ostream &os, const Card &card) {
     os << card.value_to_string() << "_of_" << card.suit_to_string();
     return os;
+}
+
+void Card::vector_sort(std::vector<Card> &cards) {
+    return void(cards);
+    //TODO
 }

@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <iosfwd>
 #include <string_view>
+#include <vector>
 
 enum class Suit : std::size_t {
     DIAMONDS = 0,
@@ -50,8 +51,11 @@ public:
 
     [[nodiscard]] Value get_value() const;
 
-    bool operator<(const Card &card) const;
+    bool operator>=(const Card &card) const;
+
+    Card& operator=(const Card &card) = default;
 
     friend std::ostream &operator<<(std::ostream &os, const Card &card);
+    static void vector_sort(std::vector<Card>& cards);
 };
 
