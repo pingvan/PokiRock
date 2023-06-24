@@ -1,5 +1,7 @@
 #include "game_copy_for_server.h"
 #include "Win_check.h"
+#include "Win_probability.h"
+#include <assert.h>
 
 namespace server {
 
@@ -92,9 +94,9 @@ game::GameParameters Game::get_game_parameters() const {
 
 
 Game::Game(const uint32_t game_owner_id, const game::GameParameters *game_parameters)
-:  condition(Waiting), game_owner_id_(game_owner_id), game_name_(game_parameters->game_name()), players_max_(game_parameters->number_of_players()), current_players_(0),
-minimal_bet_(game_parameters->minimal_bet()), game_enter_balance_(game_parameters->game_enter_balance()), owner_connected(false), m_mutex(),
-   available_cards(52), button(players_max_) ,last_player(button), total_of_bets(0)
+:  players_max_(game_parameters->number_of_players()), button(players_max_), last_player(button), available_cards(52), total_of_bets(0),
+condition(Waiting), game_owner_id_(game_owner_id), game_name_(game_parameters->game_name()), current_players_(0),
+   minimal_bet_(game_parameters->minimal_bet()), game_enter_balance_(game_parameters->game_enter_balance()) ,owner_connected(false), m_mutex()
 {
     std::iota(available_cards.begin(), available_cards.end(), 0);
 }
@@ -220,7 +222,7 @@ void Game::river() {
 }
 
 void Game::bets() {
-    int must_bet = 0;
+    uint32_t must_bet = 0;
     if (current_turn == Preflop) {
         must_bet = blinds.big_blind;
     }
@@ -262,7 +264,7 @@ void Game::bets() {
             //some_func();
             //player_move start:
             while (true) {
-                auto move = player_id.move(balance[player_id]); // тут получаем ответ от игрока
+                auto move = player_id.move( players_in_room_[player_id]->in_game_balance_); // тут получаем ответ от игрока
                 if (move == "call") {
                     const int bet_amount = must_bet - have_betted[player_id];
                     make_a_bet(player_id, bet_amount);
@@ -272,9 +274,9 @@ void Game::bets() {
                     break;
                 } else if (move == "raise") {
                     std::cout << "How much would you like to bet?\n";
-                    int bet = 0;
+                    uint32_t bet = 0;
                     std::cin >> bet;
-                    if (bet > balance[player_id]) {
+                    if (bet >  players_in_room_[player_id]->in_game_balance_) {
                         std::cout << "A lack of money, operation denied.\n";
                     } else {
                         done_players_counter = 1;
@@ -293,7 +295,7 @@ void Game::bets() {
                         break;
                     }
                 } else if (move == "all-in") {
-                    auto bet = balance[player_id];
+                    auto bet =  players_in_room_[player_id]->in_game_balance_;
                     if (must_bet < bet) {
                         done_players_counter = 1;
                         must_bet = bet;
@@ -350,56 +352,14 @@ Card Game::get_enum_card() {
 void Game::who_won() {
     if (players_in_round_.size() == 1) {
         const auto &winner_id = *players_in_round_.begin();
-        players_in_room_[winner_id]->in_game_balance_  // send cash to winner
+        players_in_room_[winner_id]->in_game_balance_ += total_of_bets ; // send cash to winner
         //std::cout << "Player " << player_id.name() << " have won!!!\n";
     } else {
-        uint32_t winner_id = 0;
-        std::pair<int, int> winning_combination;
-        std::vector<int> winning_combination_cards;
+        std::map<uint32_t, std::pair<Card, Card>> players_club;
         for (const auto &player_id : players_in_round_) {
-            std::pair<int, int> best_combination;
-            std::vector<int> best_combination_cards;
-            for (int i = 0; i < 6; i++) {
-                for (int j = i; j < 6; j++) {
-                    if (j == i) {
-                        j = 0;
-                    }
-                    std::vector<int> combination_cards;
-                    for (int q = 1; q < 6; q++) {
-                        if (q == i) {
-                            combination_cards.push_back(
-                                cards_enum.at(player_id).first.get_index()
-                            );
-                        } else if (q == j) {
-                            combination_cards.push_back(
-                                cards_enum.at(player_id).second.get_index()
-                            );
-                        } else {
-                            combination_cards.push_back(
-                                board_cards[q - 1].get_index()
-                            );
-                        }
-                    }
-                    std::sort(
-                        combination_cards.begin(), combination_cards.end(),
-                        std::greater<>()
-                    );
-                    auto combination = Win_check::check(combination_cards);
-                    if (best_combination < combination) {
-                        best_combination = combination;
-                        best_combination_cards = combination_cards;
-                    }
-                    if (j == 0){
-                        j = i;
-                    }
-                }
-            }
-            if (winning_combination < best_combination) {
-                winning_combination = best_combination;
-                winning_combination_cards = best_combination_cards;
-                winner = &player_id;
-            }
+            players_club[player_id] = players_in_room_[player_id]->player_cards;
         }
+        uint32_t winner_id = Win_chance::decide_winner(players_club, board_cards);
         players_in_room_[winner_id]->in_game_balance_ += total_of_bets; // send cash to winner
         //std::cout << "Player " << winner_id->name() << " have won!!!\n";
         //data::DataBase_connector::insert_win(winner_id->name());
@@ -423,7 +383,7 @@ void Game::new_round() {
     current_turn = Preflop;
     button = next_position(button);
     for (auto it = players_in_round_.begin(); it != players_in_round_.end();) {
-        if (balance[*it] == 0) {
+        if (players_in_room_[*it]->in_game_balance_ == 0) {
             if (it - players_in_round_.begin() <= button) {
                 button--;
                 if (button < 0) {
@@ -454,7 +414,7 @@ void Game::new_round() {
 }
 
 void Game::make_a_bet(const uint32_t player_id, uint32_t bet_amount) {
-    players_in_round_[player_id]->in_game_balance_ -= bet_amount;
+    players_in_room_[player_id]->in_game_balance_ -= bet_amount;
     total_of_bets += bet_amount;
 }
 

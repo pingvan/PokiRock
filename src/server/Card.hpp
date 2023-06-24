@@ -53,7 +53,7 @@ public:
 
     bool operator>=(const Card &card) const;
 
-    Card& operator=(const Card &card) = default;
+//    Card& operator=(const Card &card) = default;
 
     friend std::ostream &operator<<(std::ostream &os, const Card &card);
     static void vector_sort(std::vector<Card>& cards);

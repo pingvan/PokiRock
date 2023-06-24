@@ -24,6 +24,7 @@ struct player {
     friend struct server::Game;
 private:
     std::string player_name_;
+    uint32_t stream_; //TODO type
     uint32_t player_id_;
     uint32_t player_games_;
     uint32_t player_wins_;

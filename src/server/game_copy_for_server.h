@@ -4,6 +4,7 @@
 #include <memory>
 #include <random>
 #include <grpcpp/grpcpp.h>
+#include <mutex>
 
 #include "player.hpp"
 #include "../proto/game.grpc.pb.h"
@@ -22,25 +23,25 @@ struct Blinds {
 namespace server {
 struct Game {
 private:
+    const uint32_t players_max_ = 4;
+
+
     Which_turn current_turn = Which_turn::Preflop;
-
-
     uint32_t button;
     uint32_t last_player;
+
+
     Blinds blinds;
-
-
     std::vector<int> available_cards;
     std::vector<Card> board_cards;
+
+
+
     uint32_t total_of_bets;
 
-
-
     game_condition condition;
-
     const uint32_t game_owner_id_;
     const std::string game_name_;
-    const uint32_t players_max_;
     uint32_t current_players_;
     const uint32_t minimal_bet_;
     const uint32_t game_enter_balance_;
