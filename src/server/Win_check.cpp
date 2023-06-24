@@ -206,31 +206,26 @@ std::pair<int, int> Win_check::check(const std::vector<int> &combination) {
         return {2, secondary_comparator};
     }
 
-    {  // pair checking
-
-        if (is_pair(cards)) {
-            const int id = pair_id(cards);
-            int secondary_comparator = 0;
-            int multiplier = 1;
-            for (int i = 4; i >= 0; i--) {
-                if (i != id && i != id + 1) {
-                    secondary_comparator += values[i] * multiplier;
-                    multiplier *= 13;
-                }
-            }
-            secondary_comparator += values[id] * multiplier;
-            return {1, secondary_comparator};
-        }
-    }  // pair checking_end
-    {  // high_card
+    if (is_pair(cards)) {
+        const int id = pair_id(cards);
         int secondary_comparator = 0;
         int multiplier = 1;
         for (int i = 4; i >= 0; i--) {
-            secondary_comparator += values[i] * multiplier;
-            multiplier *= 13;
+            if (i != id && i != id + 1) {
+                secondary_comparator += values[i] * multiplier;
+                multiplier *= 13;
+            }
         }
-        return {0, secondary_comparator};
-    }  // high_card end
+        secondary_comparator += values[id] * multiplier;
+        return {1, secondary_comparator};
+    }
+    int secondary_comparator = 0;
+    int multiplier = 1;
+    for (int i = 4; i >= 0; i--) {
+        secondary_comparator += values[i] * multiplier;
+        multiplier *= 13;
+    }
+    return {0, secondary_comparator};
 }
 
 }  // namespace server
