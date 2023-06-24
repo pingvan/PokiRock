@@ -12,24 +12,25 @@ Card Win_chance::get_enum_card() {
     return Card(card);
 }
 
-std::vector<double> Win_chance::chances_for_players(const std::vector<std::pair<Card, Card>> players, const std::vector<Card> board_cards) {
+std::vector<double> Win_chance::chances_for_players(const std::vector<std::pair<Card, Card>>& players, const std::vector<Card>& board_cards) {
     std::vector<double> results(players.size());
     std::map<uint32_t, std::pair<Card, Card>> players_club;
     uint32_t cnt = 0;
-    for (auto &[card1, card2] : players){
+    for (const auto &[card1, card2] : players){
         players_club[cnt] = {card1, card2};
         cnt++;
         available_cards.erase(std::find(available_cards.begin(), available_cards.end(), card1.get_index()));
         available_cards.erase(std::find(available_cards.begin(), available_cards.end(), card2.get_index()));
     }
-    for (auto &card: board_cards){
+    for (const auto &card: board_cards){
         available_cards.erase(std::find(available_cards.begin(), available_cards.end(), card.get_index()));
     }
     std::vector<Card> board_card_simulations;
-    for (Card card : board_cards){
+    board_card_simulations.reserve(board_cards.size());
+for (Card const card : board_cards){
         board_card_simulations.emplace_back(card);
     }
-    uint32_t cards_missing_in_board_cards = 5 - board_cards.size();
+    uint32_t const cards_missing_in_board_cards = 5 - board_cards.size();
     for (uint32_t i = 0; i < amount_of_repetitions; i++){
         for(uint32_t j = 0; j < cards_missing_in_board_cards; j++){
             board_card_simulations.emplace_back(get_enum_card());
@@ -45,10 +46,8 @@ std::vector<double> Win_chance::chances_for_players(const std::vector<std::pair<
 uint32_t Win_chance::decide_winner(std::map<uint32_t, std::pair<Card, Card>> &players, const std::vector<Card> board_cards) {
     uint32_t winner_id = 0;
     std::pair<int, int> winning_combination;
-    //std::vector<int> winning_combination_cards;
     for (const auto &[player_id, cards] : players) {
         std::pair<int, int> best_combination;
-       // std::vector<int> best_combination_cards;
         for (int i = 0; i < 6; i++) {
             for (int j = i; j < 6; j++) {
                 if (j == i) {
@@ -77,7 +76,6 @@ uint32_t Win_chance::decide_winner(std::map<uint32_t, std::pair<Card, Card>> &pl
                 auto combination = Win_check::check(combination_cards);
                 if (best_combination < combination) {
                     best_combination = combination;
-                    //best_combination_cards = combination_cards;
                 }
                 if (j == 0){
                     j = i;
@@ -86,7 +84,6 @@ uint32_t Win_chance::decide_winner(std::map<uint32_t, std::pair<Card, Card>> &pl
         }
         if (winning_combination < best_combination) {
             winning_combination = best_combination;
-            //winning_combination_cards = best_combination_cards;
             winner_id = player_id;
         }
     }
