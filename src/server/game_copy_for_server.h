@@ -10,6 +10,7 @@
 #include "../proto/game.grpc.pb.h"
 #include "../proto/game.pb.h"
 #include "Card.hpp"
+#include "unfair_plays.h"
 #include "DataBase_connector.h"
 
 enum Which_turn { Preflop, Flop, Turn, River };

@@ -97,3 +97,7 @@ void Card::vector_sort(std::vector<Card> &cards) {
     return void(cards);
     //TODO
 }
+
+bool Card::operator==(const Card &card) const {
+    return (value == card.value) && (suit == card.suit);
+}

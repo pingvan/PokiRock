@@ -31,7 +31,7 @@ enum class Value : std::size_t {
 static_assert(static_cast<std::size_t>(Suit::SUIT_SIZE) == 4UL);
 static_assert(static_cast<std::size_t>(Value::VALUE_SIZE) == 13UL);
 
-struct Card {
+struct Card  {
 private:
     Suit suit = Suit::SUIT_SIZE;
     Value value = Value::VALUE_SIZE;
@@ -52,6 +52,8 @@ public:
     [[nodiscard]] Value get_value() const;
 
     bool operator>=(const Card &card) const;
+
+    bool operator==(const Card &card) const;
 
 //    Card& operator=(const Card &card) = default;
 

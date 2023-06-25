@@ -11,13 +11,15 @@
 
 namespace server {
     struct Game;
+    struct unfair_plays;
 }
+
 
 enum status {
     waiting, fold, playing, win
 };
-
 struct player {
+    friend server::unfair_plays;
     player(std::string player_name, const game::PlayerInfo *player_info, uint32_t game_enter_balance,
            grpc::ServerReaderWriter<game::GameResponses, game::GameRequests> *stream);
 
