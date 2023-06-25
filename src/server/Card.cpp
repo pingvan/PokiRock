@@ -8,7 +8,7 @@ Card::Card(Suit suit, Value value) : suit(suit), value(value) {
         throw std::runtime_error("too big card number");
     }
     if (suit == Suit::SUIT_SIZE || value == Value::VALUE_SIZE) {
-        throw std::runtime_error("uncorrect card initialization");
+        throw std::runtime_error("incorrect card initialization");
     }
 }
 
@@ -19,7 +19,7 @@ Card::Card(int num)
         throw std::runtime_error("too big card number");
     }
     if (suit == Suit::SUIT_SIZE || value == Value::VALUE_SIZE) {
-        throw std::runtime_error("uncorrect card initialization");
+        throw std::runtime_error("incorrect card initialization");
     }
 }
 

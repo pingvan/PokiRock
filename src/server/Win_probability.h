@@ -13,7 +13,7 @@ struct Win_chance {
         std::iota(available_cards.begin(), available_cards.end(), 0);
     }
 private:
-    const uint32_t amount_of_repetitions = 10000;
+    const uint32_t amount_of_repetitions = 1000;
     std::vector<int> available_cards;
 public:
      std::vector<double> chances_for_players(
