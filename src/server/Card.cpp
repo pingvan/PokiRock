@@ -7,6 +7,9 @@ Card::Card(Suit suit, Value value) : suit(suit), value(value) {
                           static_cast<int>(Value::VALUE_SIZE)) {
         throw std::runtime_error("too big card number");
     }
+    if (suit == Suit::SUIT_SIZE || value == Value::VALUE_SIZE) {
+        throw std::runtime_error("incorrect card initialization");
+    }
 }
 
 Card::Card(int num)
@@ -14,6 +17,9 @@ Card::Card(int num)
     if (get_index() > static_cast<int>(Suit::SUIT_SIZE) *
                           static_cast<int>(Value::VALUE_SIZE)) {
         throw std::runtime_error("too big card number");
+    }
+    if (suit == Suit::SUIT_SIZE || value == Value::VALUE_SIZE) {
+        throw std::runtime_error("incorrect card initialization");
     }
 }
 
@@ -78,11 +84,20 @@ std::string_view Card::suit_to_string() const {
     }
 }
 
-bool Card::operator<(const Card &card) const {
-    return value < card.value;
+bool Card::operator>=(const Card &card) const {
+    return get_index() >= card.get_index();
 }
 
 std::ostream &operator<<(std::ostream &os, const Card &card) {
     os << card.value_to_string() << "_of_" << card.suit_to_string();
     return os;
+}
+
+void Card::vector_sort(std::vector<Card> &cards) {
+    return void(cards);
+    //TODO
+}
+
+bool Card::operator==(const Card &card) const {
+    return (value == card.value) && (suit == card.suit);
 }

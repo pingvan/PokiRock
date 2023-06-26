@@ -14,5 +14,8 @@ add_executable(test
         server/test_card.cpp
         ../server/Card.cpp
         server/test_win_check.cpp
+        server/test_define_combination.cpp
+        server/test_win_probability.cpp
         ../server/Win_check.cpp
+        ../server/Win_probability.cpp
 )

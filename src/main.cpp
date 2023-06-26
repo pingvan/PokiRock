@@ -1,9 +1,9 @@
-#include <boost/asio.hpp>
-#include "../sources.h"
-#include "client/client.h"
-#include "server/Server.h"
+#include <pqxx/pqxx>
+#include <iostream>
+//#include "client/client.h"
+//#include "server/Server.h"
 
-void clear_db() {
+/*void clear_db() {
     try {
         pqxx::connection con{
             "postgres://postgres:stillloveher@localhost:5432/clients"};
@@ -15,10 +15,10 @@ void clear_db() {
     } catch (std::exception &e) {
         std::cerr << e.what() << '\n';
     }
-}
+}*/
 
 int main(/*[[maybe_unused]] int argc, [[maybe_unused]] char *argv[]*/) {
-    server::Server s1;
+    /*server::Server s1;
     client::Client p1;
     client::Client p2;
     client::Client p3;
@@ -28,5 +28,27 @@ int main(/*[[maybe_unused]] int argc, [[maybe_unused]] char *argv[]*/) {
     s1.add(p1);
     s1.add(p2);
     s1.add(p3);
-    s1.start_game();
+    s1.start_game();*/
+
+    std::string login;
+    std::cin >> login;
+
+    try {
+        pqxx::connection con{
+            "postgres://postgres:stillloveher@localhost:5432/clients"};
+        pqxx::work txn{con};
+
+        auto res = txn.exec_params("SELECT client_id "
+                        "FROM clients "
+                        "WHERE client_login = $1 ", login);
+
+        std::cout << res.size() << '\n';
+        txn.commit();
+        con.close();
+    } catch (pqxx::plpgsql_no_data_found &ee) {
+        std::cerr << ee.what() << '\n';
+        std::cerr << "NO DATA WITH THIS PARAMS" << '\n';
+    } catch (std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
 }

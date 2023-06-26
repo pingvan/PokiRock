@@ -8,7 +8,7 @@ TEST_CASE("test_card") {
         SUBCASE(std::to_string(num).c_str()) {
             const Card card(num);
             ss << card;
-            CHECK_EQ(ss.str(), value + " of " + suit);
+            CHECK_EQ(ss.str(), value + "_of_" + suit);
             CHECK_EQ(card.get_index(), num);
         }
     };
