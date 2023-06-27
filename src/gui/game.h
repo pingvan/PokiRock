@@ -4,7 +4,6 @@
 #include <QDialog>
 #include <QLabel>
 #include <string>
-#include <mutex>
 #include "../server/Card.hpp"
 #include "../server/player.hpp"
 
@@ -75,6 +74,7 @@ private:
     void show_sticker(int sticker_number);
     void setContext(const GameContext& new_game_context);
     void update_graphic();
+    void win();
     bool isStickerShown = false;
     friend StickersCollection;
     void update_turn_info();

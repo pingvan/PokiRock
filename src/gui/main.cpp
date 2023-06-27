@@ -4,8 +4,6 @@
 #include "window_manager.h"
 #include <condition_variable>
 
-using namespace std::literals::chrono_literals;
-
 void magic_with_translator(QApplication *a) {
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
@@ -18,14 +16,16 @@ void magic_with_translator(QApplication *a) {
     }
 }
 
+const std::string server_address = "127.0.0.1:2912";
+
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
     magic_with_translator(&a);
-//    client this_client(grpc::CreateChannel(server_address, grpc::InsecureChannelCredentials()));
-    WindowManager manager/*(this_client)*/;
+
+    client this_client(grpc::CreateChannel(server_address, grpc::InsecureChannelCredentials()));
+    WindowManager manager(this_client);
     manager.start();
 
     a.exec();
-
     return 0;
 }

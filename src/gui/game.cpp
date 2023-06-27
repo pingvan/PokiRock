@@ -208,8 +208,9 @@ void game::on_check_clicked()
     ui->bank->setText((std::to_string(bank) + "k").c_str());
 }
 
-//QMessageBox::information(this, "Вы победили!", ("Выигрыш: " + std::to_string(bank)).c_str());
-
+void game::win() {
+    QMessageBox::information(this, "Вы победили!", ("Выигрыш: " + std::to_string(bank)).c_str());
+}
 void game::on_value_textEdited(const QString &val)
 {
     try {
