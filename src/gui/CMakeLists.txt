@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.22.1)
 project(PokiRock LANGUAGES CXX)
 
 include(FetchContent)
@@ -21,7 +21,7 @@ set(OPENSSL_ROOT_DIR /opt/homebrew/Cellar/openssl@1.1/1.1.1t)
 
 find_package(Boost REQUIRED)
 find_package(Threads REQUIRED)
-find_package(Qt6 COMPONENTS Widgets REQUIRED)
+find_package(Qt5 COMPONENTS Widgets REQUIRED)
 find_package(PkgConfig REQUIRED)
 #find_package(PostgreSQL REQUIRED)
 find_package(OpenSSL REQUIRED)
@@ -36,13 +36,13 @@ add_executable(client ${PROTOS} ../client/grpc_client_main.cpp ../client/grpc_cl
 
 add_custom_target(PokiRock)
 add_dependencies(PokiRock
-    client
-    server
-)
+        client
+        server
+        )
 
 
 target_include_directories(client PRIVATE
-        ${Qt6Widgets_INCLUDE_DIRS}
+        ${Qt5Widgets_INCLUDE_DIRS}
         ${OPENSSL_CRYPTO_LIBRARY}
         ${OPENSSL_INCLUDE_DIR}
         ${PROTOBUF_INCLUDE_DIR}
@@ -61,7 +61,7 @@ target_link_libraries(client
 target_link_options(server PRIVATE -L/opt/homebrew/Cellar/libpqxx/7.7.5/lib -lpqxx)
 
 target_include_directories(server PRIVATE
-        ${Qt6Widgets_INCLUDE_DIRS}
+        ${Qt5Widgets_INCLUDE_DIRS}
         ${PQXX_INCLUDE_DIRS}
         ${OPENSSL_CRYPTO_LIBRARY}
         ${OPENSSL_INCLUDE_DIR}

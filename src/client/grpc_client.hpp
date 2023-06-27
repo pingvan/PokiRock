@@ -46,6 +46,8 @@ struct client {
 
     template <typename response_type>
     bool handle_error(const response_type *response);
+    std::string client_name;
+    uint32_t client_balance;
 private:
     std::shared_ptr<grpc::Channel> channel_;
 
@@ -59,11 +61,8 @@ private:
     std::shared_ptr<grpc::ClientReaderWriter<game::LobbyRequests, game::LobbyResponses>> lobby_stream_;
     std::shared_ptr<grpc::ClientReaderWriter<game::GameRequests, game::GameResponses>> poker_game_stream;
 
-    std::string client_name;
     uint32_t client_id;
     uint32_t client_games;
     uint32_t client_wins;
-    uint32_t client_balance;
-
     bool in_game = false;
 };

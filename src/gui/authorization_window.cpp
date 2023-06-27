@@ -1,7 +1,7 @@
 #include "authorization_window.h"
 #include <QMessageBox>
 #include "ui_Authorization_window.h"
-//#include "../server/DataBase_connector.h"
+#include "../server/DataBase_connector.h"
 #include "window_manager.h"
 
 authorization_window::authorization_window(
@@ -19,8 +19,7 @@ authorization_window::~authorization_window() {
 void authorization_window::on_authorizate_clicked() {
     QString user_login = ui->Login->text();
     QString user_password = ui->Password->text();
-    bool isUserCorrect = true;
-    if (isUserCorrect) {
+    if (this_client.login(user_login, user_password);) {
         manager->setClient(user_login.toStdString());
         manager->show_main_menu();
         this->close();

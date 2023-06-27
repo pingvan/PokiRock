@@ -2,7 +2,7 @@
 
 #include <cstdint>
 #include <iosfwd>
-#include <string_view>
+#include <string>
 #include <vector>
 
 enum class Suit : std::size_t {
@@ -35,11 +35,6 @@ struct Card  {
 private:
     Suit suit = Suit::SUIT_SIZE;
     Value value = Value::VALUE_SIZE;
-
-    [[nodiscard]] std::string_view value_to_string() const;
-
-    [[nodiscard]] std::string_view suit_to_string() const;
-
 public:
     Card() = default;
     Card(Suit suit, Value value);
@@ -50,6 +45,10 @@ public:
     [[nodiscard]] Suit get_suit() const;
 
     [[nodiscard]] Value get_value() const;
+
+    [[nodiscard]] std::string value_to_string() const;
+
+    [[nodiscard]] std::string suit_to_string() const;
 
     bool operator>=(const Card &card) const;
 

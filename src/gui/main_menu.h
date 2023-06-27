@@ -19,6 +19,7 @@ class main_menu : public QDialog {
 
 public:
     main_menu(WindowManager* manager_m, QWidget *parent = nullptr);
+    void set_user_info();
     ~main_menu();
 
 private slots:

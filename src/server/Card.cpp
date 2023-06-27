@@ -2,15 +2,7 @@
 #include <iostream>
 #include <stdexcept>
 
-Card::Card(Suit suit, Value value) : suit(suit), value(value) {
-    if (get_index() > static_cast<int>(Suit::SUIT_SIZE) *
-                          static_cast<int>(Value::VALUE_SIZE)) {
-        throw std::runtime_error("too big card number");
-    }
-    if (suit == Suit::SUIT_SIZE || value == Value::VALUE_SIZE) {
-        throw std::runtime_error("incorrect card initialization");
-    }
-}
+Card::Card(Suit suit, Value value) : suit(suit), value(value) {}
 
 Card::Card(int num)
     : suit(static_cast<Suit>(num % 4)), value(static_cast<Value>(num / 4)) {
@@ -36,7 +28,7 @@ Value Card::get_value() const {
     return value;
 }
 
-std::string_view Card::value_to_string() const {
+std::string Card::value_to_string() const {
     switch (value) {
         case Value::TWO:
             return "2";
@@ -65,11 +57,11 @@ std::string_view Card::value_to_string() const {
         case Value::ACE:
             return "Ace";
         default:
-            throw std::runtime_error("too big card number");
+            return "ABOBA";
     }
 }
 
-std::string_view Card::suit_to_string() const {
+std::string Card::suit_to_string() const {
     switch (suit) {
         case Suit::HEARTS:
             return "HEARTS";

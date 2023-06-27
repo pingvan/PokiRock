@@ -4,27 +4,25 @@
 #include <QDialog>
 #include <QLabel>
 #include <string>
+#include <mutex>
+#include "../server/Card.hpp"
+#include "../server/player.hpp"
 
-struct Card {
-    char value;
-    char m;
-    Card(std::size_t value_m, char m_m) : value(value_m), m(m_m){};
-    Card() : Card(0, 0){};
-};
-
-struct Player {
-    std::vector<Card> cards = {Card(), Card()};
-    Player(const Card& first, const Card& second){ cards = {first, second}; };
-    Player() : Player(Card(), Card()) {};
-};
-
-struct Diller {
-    std::vector<Card> cards = {Card(), Card(), Card(), Card()};
+struct Diller : player {
+    std::vector<Card> cards = {Card(), Card(), Card(), Card(), Card()};
 };
 
 struct GameContext {
-    std::vector<Player> all_players;
+    std::vector<player> all_players;
     Diller diller;
+    uint32_t player1_balance;
+    uint32_t player2_balance;
+    uint32_t player3_balance;
+    uint32_t player4_balance;
+    std::string player1_turn;
+    std::string player2_turn;
+    std::string player3_turn;
+    std::string player4_turn;
 };
 
 class StickersCollection;
@@ -44,20 +42,19 @@ public:
 
 private slots:
     void on_verticalSlider_valueChanged(int value);
-
-    void on_raise_clicked();
-
-    void on_setValue_clicked();
+    void on_value_textEdited(const QString &arg1);
 
     void on_choose_sticker_clicked();
 
     void on_player1_icon_clicked();
 
-    void on_player2_icon_clicked();
+    void on_fold_clicked();
 
-//    void on_player4_icon_clicked();
+    void on_check_clicked();
 
-//    void on_player3_icon_clicked();
+    void on_raise_clicked();
+
+    void on_setValue_clicked();
 
 private:
     friend StickersCollection;
@@ -80,6 +77,18 @@ private:
     void update_graphic();
     bool isStickerShown = false;
     friend StickersCollection;
+    void update_turn_info();
+    int cur_bet = 0;
+    int bank = 0;
+    void rebalance(QLabel* label, int val);
+
+    void fold(int player_number);
+    void raise(int value);
+    void egor_check();
+    void ilia_check();
+
+    void ilia_raise(int bet);
+
 };
 
 #endif  // GAME_H

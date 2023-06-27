@@ -28,46 +28,6 @@ bool client::handle(const T *response) {
     return false;
 }
 
-template <>
-bool client::handle<game::LoginResponseFirst>(const game::LoginResponseFirst *response) {
-    if (!response->has_salt()) {
-
-    }
-    handle_error(response);
-    return true;
-}
-
-template<>
-bool client::handle<game::LoginResponseSecond>(const game::LoginResponseSecond *response) {
-    if (!response->has_player_info()) {
-
-    }
-    handle_error(response);
-    return true;
-}
-
-template<>
-bool client::handle<game::RegisterResponse>(const game::RegisterResponse *response) {
-    if (!response->has_player_info()) {
-
-    }
-    handle_error(response);
-    return true;
-}
-
-
-template<typename response_type>
-bool client::handle_error(const response_type *response) {
-    if (response->has_msg()) {
-        if (response->msg().has_message_string()) {
-            //handle exception
-        } else {
-            //handle custom error
-        }
-    }
-    return true;
-}
-
 void client::init_player_info(const game::PlayerInfo &player_info) {
     client_id = player_info.client_id();
     client_games = player_info.client_games();
@@ -95,20 +55,20 @@ void client::lobby_init() {
     lobby_stream_ = lobby_stub_->LobbyFunc(lobby_context_);
     std::thread reader(&client::process_lobby_responses, this);
     reader.detach();
-    std::cout << "lobby inited\n";
+    //lobby inited
 }
 
 void client::make_lobby_requests(client::lobby_requests request_type, const std::string &game_name, const uint32_t number_of_players, const uint32_t minimal_bet, const uint32_t game_enter_balance) { //will be called in GUI
     game::LobbyRequests request;
     if (request_type == CREATE_GAME) {
-        std::cout << "creating\n";
+        //creating
         auto *create_request = new game::CreateGameRequest;
         auto *game_parameters = new game::GameParameters;
         init_proto_game_parameters(game_parameters,game_name, number_of_players, minimal_bet, game_enter_balance);
         create_request->set_allocated_game_parameters(game_parameters);
         request.set_allocated_create_game_request(create_request);
     } else {
-        std::cout << "searching\n";
+        //searching
         auto *search_request = new game::SearchGameRequest;
         auto *game_parameters = new game::GameParameters;
         init_proto_game_parameters(game_parameters,game_name, number_of_players, minimal_bet, game_enter_balance);
@@ -116,37 +76,8 @@ void client::make_lobby_requests(client::lobby_requests request_type, const std:
         request.set_allocated_search_game_request(search_request);
     }
     lobby_stream_->Write(request);
-    std::cout << "WRITTEN LOBBY\n";
+    //WRITTEN LOBBY
 }
-
-
-void client::process_lobby_responses() {
-    game::LobbyResponses response;
-    std::cout << "THREAD STARTED\n";
-    while(lobby_stream_->Read(&response)) {
-        std::cout << "READ LOBBY\n";
-        if (response.has_create_game_response()) {
-            std::cout << "HAS GAME RESPONSE\n";
-            if (response.create_game_response().has_msg()) {
-                std::cout << "has msg\n";
-            } else {
-                std::cout << "STARTING GAME INIT\n";
-                auto game_id_to_connect = response.create_game_response().game_id();
-                game_init();
-                make_game_requests(client::game_requests::JOIN_GAME_AS_OWNER, game_id_to_connect);
-            }
-        } else { //if it has search game response
-            if (response.search_game_response().has_msg()) {
-
-            } else {
-                auto game_id_to_connect = response.search_game_response().game_id();
-                game_init();
-                make_game_requests(client::game_requests::JOIN_GAME, game_id_to_connect);
-            }
-        }
-    }
-}
-
 
 void client::game_init() {
     std::cout << "calling game init\n";
@@ -199,18 +130,57 @@ void client::process_game_responses() {
     while (poker_game_stream->Read(&response)) {
         std::cout << "READ GAME\n";
         if (response.has_game_state()) {
-            //update graphic
+            update_graphic();
         } else if (response.has_join_game_response()) {
-
-        } else if (response.has_join_game_as_owner_response()) {
-
-        } else { //has make_move response
-
+            poker_game_stream->Write(request);
+        } else {
+            throw std::exception();
         }
     }
 }
 
+template <>
+bool client::handle<game::LoginResponseFirst>(const game::LoginResponseFirst *response) {
+    if (!response->has_salt()) {
+        handle_error(response);
+    }
+    return true;
+}
 
+void client::process_lobby_responses() {
+    game::LobbyResponses response;
+    //THREAD STARTED
+    while(lobby_stream_->Read(&response)) {
+        //"READ LOBBY
+        if (response.has_create_game_response()) {
+            //HAS GAME RESPONSE
+                //STARTING GAME INIT
+            auto game_id_to_connect = response.create_game_response().game_id();
+            game_init();
+            make_game_requests(client::game_requests::JOIN_GAME_AS_OWNER, game_id_to_connect);
+        } else {
+            auto game_id_to_connect = response.search_game_response().game_id();
+            game_init();
+            make_game_requests(client::game_requests::JOIN_GAME, game_id_to_connect);
+        }
+    }
+}
+
+template<>
+bool client::handle<game::LoginResponseSecond>(const game::LoginResponseSecond *response) {
+    if (response->has_player_info()) {
+        handle_error(response);
+    }
+    return true;
+}
+
+template<>
+bool client::handle<game::RegisterResponse>(const game::RegisterResponse *response) {
+    if (response->has_player_info()) {
+        handle_error(response);
+    }
+    return true;
+}
 
 void client::login(const std::string &client_login, const std::string &password) {
     game::LoginRequest login_request;
@@ -223,10 +193,9 @@ void client::login(const std::string &client_login, const std::string &password)
         grpc::Status status = authorization_stub_->Login(&context_first, login_request, login_response);
         handle_error_for_each_type(status, login_response);
     }
-    //TODO::know about release
     auto salt = login_response->login_response_first().salt();
     auto hashed_password = salt_hash::sha_hash(salt + password);
-    std::cout << "hashed " << hashed_password << '\n';
+    // hashed -> hashed_password
     {
         grpc::ClientContext context_second;
         auto login_request_second = new game::LoginRequestSecond;
@@ -240,6 +209,16 @@ void client::login(const std::string &client_login, const std::string &password)
     lobby_init();
 }
 
+template<typename response_type>
+bool client::handle_error(const response_type *response) {
+    if (response->has_msg()) {
+        if (response->msg().has_message_string()) {
+            throw std::exception();
+        }
+    }
+    return true;
+}
+
 void client::registration(const std::string &client_login, const std::string &password) {
     game::RegisterRequest register_request;
     auto *register_response = new game::RegisterResponse;
@@ -250,7 +229,7 @@ void client::registration(const std::string &client_login, const std::string &pa
     salt_hash->set_salt(salt); salt_hash->set_hash(hashed_password);
     register_request.set_allocated_salt_hash(salt_hash);
     grpc::ClientContext context;
-    std::cout << "send to server\n";
+    // send to server
     grpc::Status status = authorization_stub_->Registration(&context, register_request, register_response);
     handle_error_for_each_type(status, register_response);
     init_player_info(register_response->player_info());

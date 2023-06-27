@@ -79,7 +79,7 @@ service Lobby {
     rpc LobbyFunc(stream LobbyRequests) returns (stream LobbyResponses);
 }
 
-message Player {
+message player {
     string name = 1;
     PlayerStatus status = 2;
     uint32 balance = 3;
@@ -110,7 +110,7 @@ message CreateGameResponse {
         uint32 game_id = 1;
         ErrorMessage msg = 2;
     }
-//    repeated Player players = 3;
+//    repeated player players = 3;
 }
 
 message SearchGameRequest {
@@ -125,7 +125,7 @@ message SearchGameResponse {
         uint32 game_id = 1;
         ErrorMessage msg = 2;
     }
-//    repeated Player players = 2;
+//    repeated player players = 2;
 }
 
 message GameParameters {
@@ -197,7 +197,7 @@ message JoinGameAsOwnerResponse {
 message GameState { //everything optional depends on what changed
     repeated Card player_cards = 1;
     repeated Card board_cards = 2;
-    repeated Player players = 3;
+    repeated player players = 3;
 }
 
 message MakeMoveRequest {

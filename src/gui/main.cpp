@@ -2,6 +2,9 @@
 #include <QLocale>
 #include <QTranslator>
 #include "window_manager.h"
+#include <condition_variable>
+
+using namespace std::literals::chrono_literals;
 
 void magic_with_translator(QApplication *a) {
     QTranslator translator;
@@ -18,9 +21,11 @@ void magic_with_translator(QApplication *a) {
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
     magic_with_translator(&a);
-
-    WindowManager manager;
+//    client this_client(grpc::CreateChannel(server_address, grpc::InsecureChannelCredentials()));
+    WindowManager manager/*(this_client)*/;
     manager.start();
 
-    return a.exec();
+    a.exec();
+
+    return 0;
 }

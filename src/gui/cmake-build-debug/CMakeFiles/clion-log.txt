@@ -1,0 +1,16 @@
+C:\Windows\system32\wsl.exe --distribution Ubuntu-22.04 --exec /bin/bash -c "export CMAKE_COLOR_DIAGNOSTICS=ON && export CLION_IDE=TRUE && export JETBRAINS_IDE=TRUE && cd /mnt/d/PokiRock/src/gui && /usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G 'CodeBlocks - Unix Makefiles' -S /mnt/d/PokiRock/src/gui -B /mnt/d/PokiRock/src/gui"
+CMake Error at CMakeLists.txt:28 (find_package):
+  Could not find a package configuration file provided by "protobuf" with any
+  of the following names:
+
+    protobufConfig.cmake
+    protobuf-config.cmake
+
+  Add the installation prefix of "protobuf" to CMAKE_PREFIX_PATH or set
+  "protobuf_DIR" to a directory containing one of the above files.  If
+  "protobuf" provides a separate development package or SDK, be sure it has
+  been installed.
+
+
+-- Configuring incomplete, errors occurred!
+See also "/mnt/d/PokiRock/src/gui/CMakeFiles/CMakeOutput.log".

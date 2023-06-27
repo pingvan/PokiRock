@@ -7,8 +7,5 @@ int main() {
     //new_client.registration("test", "testpwd");
     new_client.login("test", "testpwd");
     new_client.make_lobby_requests(client::lobby_requests::CREATE_GAME, "aa", 10, 2, 3);
-    while (true) {
-
-    }
     return 0;
 }

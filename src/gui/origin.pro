@@ -16,7 +16,8 @@ SOURCES += \
     main.cpp \
     First_window.cpp \
     profile_window.cpp \
-    stickers_collection.cpp
+    stickers_collection.cpp \
+    ../server/Card.cpp
 
 HEADERS += \
     Authorization_window.h \
@@ -27,7 +28,8 @@ HEADERS += \
     profile_window.h \
     stickers_collection.h \
     user.hpp \
-    window_manager.h
+    window_manager.h \
+    ../server/Card.hpp
 
 FORMS += \
     Authorization_window.ui \

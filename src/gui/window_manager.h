@@ -8,6 +8,7 @@
 #include "registration_window.h"
 #include "user.hpp"
 #include "stickers_collection.h"
+#include "../client/grpc_client.hpp"
 
 using FirstWindow = first_window;
 using AuthorizationWindow = authorization_window;
@@ -32,14 +33,9 @@ class WindowManager {
     friend StickersCollection;
     friend MainMenu;
     friend Game;
-    User* user;
+    client* this_client;
 public:
-
-    void setClient(const std::string& name) const {
-        user->setData(name, 1000);
-    }
-
-    WindowManager() : firstWindow_var(new FirstWindow(this)), user(new User()) {};
+    WindowManager() : firstWindow_var(new FirstWindow(this)) {};
 
     void start() {
         firstWindow_var->showFullScreen();
@@ -70,6 +66,7 @@ public:
     void show_main_menu() {
         if (!mainMenu_var)
             mainMenu_var = new MainMenu(this);
+        mainMenu_var->set_user_info();
         firstWindow_var->close();
         authorizationWindow_var->close();
         mainMenu_var->showFullScreen();
@@ -93,7 +90,7 @@ public:
     }
 
     ~WindowManager() {
-        delete user;
+        delete this_client;
         delete firstWindow_var;
         delete authorizationWindow_var;
         delete registrationWindow_var;
