@@ -14,26 +14,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -v")
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DQT_NO_FOREACH")
 
 set(OPENSSL_ROOT_DIR /opt/homebrew/Cellar/openssl@1.1/1.1.1t)
-
-#TODO::fetch content
-
-#[[set(SOURCES_server
-        ../server/grpc_server.cpp
-        ../server/DataBase_connector.cpp
-        ../proto/game.grpc.pb.cc
-        ../proto/game.pb.cc
-        )
-
-
-set(SOURCES_client
-        ../server/grpc_client.cpp
-        ../proto/game.grpc.pb.cc
-        ../proto/game.pb.cc
-        )]]
 
 find_package(Boost REQUIRED)
 find_package(Threads REQUIRED)

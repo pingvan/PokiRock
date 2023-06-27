@@ -18,7 +18,7 @@ struct client {
     enum game_requests {JOIN_GAME, JOIN_GAME_AS_OWNER};
 //    enum responses {LOGIN_RESPONSE_FIRST, LOGIN_RESPONSE_SECOND, REGISTER_RESPONSE};
 
-    explicit client(std::shared_ptr<grpc::Channel> new_channel);
+    explicit client(const std::shared_ptr<grpc::Channel>& new_channel);
 
     void init_player_info(const game::PlayerInfo &player_info);
     void init_proto_player_info_message(game::PlayerInfo *player_info) const;
