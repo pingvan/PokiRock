@@ -29,7 +29,7 @@ find_package(gRPC CONFIG REQUIRED)
 
 set(PROTOS ../proto/game.grpc.pb.cc ../proto/game.pb.cc)
 
-add_executable(server ${PROTOS} ../server/grpc_server_main.cpp  ../server/grpc_server.cpp ../server/DataBase_connector.cpp ../server/game_copy_for_server.cpp ../server/player.cpp ../server/Card.cpp ../server/Win_check.cpp)
+add_executable(server ${PROTOS} ../server/grpc_server.cpp ../server/DataBase_connector.cpp ../server/game_copy_for_server.cpp ../server/player.cpp ../server/Card.cpp ../server/Win_check.cpp)
 
 add_executable(client ${PROTOS} ../client/grpc_client.cpp ../client/salt_hash.cpp)
 
